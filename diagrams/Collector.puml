@@ -1,0 +1,11 @@
+@startuml
+:Main Admin: as User
+
+User -down-> (setSetting)
+User -right-> (loadAndReadFile)
+User -down-> (getAllPrimaryColumns)
+User -left-> (getItem)
+User -up-> (AppendItem)
+
+
+@enduml
