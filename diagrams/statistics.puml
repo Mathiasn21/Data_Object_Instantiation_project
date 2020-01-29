@@ -1,0 +1,16 @@
+@startuml
+:Main User: as User
+(calcAverageMean)
+(calcMedian)
+(calcAverageMode)
+
+
+User -right-> calcAverageMean
+User -right-> calcMedian
+User -right-> calcAverageMode
+User -right-> calcAverageMean
+User -right-> calcAverageMean
+User -right-> calcAverageMean
+User -right-> calcAverageMean
+
+@enduml
