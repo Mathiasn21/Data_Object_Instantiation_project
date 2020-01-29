@@ -1,16 +1,21 @@
 @startuml
 :Main User: as User
+
 (calcAverageMean)
 (calcMedian)
 (calcAverageMode)
+(calcAverageMidRange)
+(calcStdDeviation)
+(calcPopulationVariance)
+(calcSampleVariance)
 
-
-User -right-> calcAverageMean
-User -right-> calcMedian
-User -right-> calcAverageMode
-User -right-> calcAverageMean
-User -right-> calcAverageMean
-User -right-> calcAverageMean
-User -right-> calcAverageMean
+left to right direction
+User -down-> calcAverageMean
+User -down-> calcMedian
+User -down-> calcAverageMode
+User -down-> calcAverageMidRange
+User -down-> calcStdDeviation
+User -down-> calcPopulationVariance
+User -down-> calcSampleVariance
 
 @enduml
