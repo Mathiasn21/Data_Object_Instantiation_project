@@ -1,0 +1,2 @@
+public class CollectorTest {
+}
