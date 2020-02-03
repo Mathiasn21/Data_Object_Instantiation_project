@@ -3,22 +3,22 @@ package framework.dataCollection;
 /**
  * Class for collecting data given a single file
  */
-public class Collector implements ICollector{
+public class CSVCollector implements ICollector{
     private final String fileName;
-    private final String format;
+    private final String delimiter;
+    private String columns;
 
 
-    public Collector(String fileName) {
-        this(fileName, FILE_FORMAT);
+    public CSVCollector(String fileName) {
+        this(fileName, ",");
     }
 
-    public Collector(String fileName, String format) {
+    public CSVCollector(String fileName, String delimiter) {
         this.fileName = fileName;
-        this.format = format;
+        this.delimiter = delimiter;
     }
 
     public void getAllPrimaryColumns() {
-
 
     }
 
@@ -33,6 +33,6 @@ public class Collector implements ICollector{
 
     @Override
     public String toString() {
-        return "Collector";
+        return "CSVCollector";
     }
 }
