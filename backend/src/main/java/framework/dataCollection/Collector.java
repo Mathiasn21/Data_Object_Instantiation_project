@@ -1,4 +1,4 @@
 package framework.dataCollection;
 
-public class thing {
+public class Collector {
 }
