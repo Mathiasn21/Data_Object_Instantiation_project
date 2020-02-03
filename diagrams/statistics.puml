@@ -17,5 +17,6 @@ User -down-> calcAverageMidRange
 User -down-> calcStdDeviation
 User -down-> calcPopulationVariance
 User -down-> calcSampleVariance
+User -down-> calcSampleVariance
 
 @enduml
