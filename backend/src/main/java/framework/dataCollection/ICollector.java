@@ -1,6 +1,7 @@
 package framework.dataCollection;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 
 public interface ICollector {
@@ -8,7 +9,7 @@ public interface ICollector {
 
     void getAllFilledColumns();
 
-    void loadAndReadFile(String fileName);
+    void loadAndReadFile(String fileName) throws IOException;
 
     void loadAndReadFile(File file);
 

@@ -21,17 +21,6 @@ public abstract class Collector implements ICollector{
 
     }
 
-
-    @Override
-    public void loadAndReadFile(String fileName) {
-
-    }
-
-    @Override
-    public void loadAndReadFile(File file) {
-
-    }
-
     @Override
     public void getCategoryBy(String name) {
 
