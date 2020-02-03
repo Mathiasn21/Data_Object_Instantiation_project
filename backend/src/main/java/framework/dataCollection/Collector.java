@@ -1,5 +1,6 @@
 package framework.dataCollection;
 
+import java.io.File;
 import java.util.Collection;
 
 public abstract class Collector implements ICollector{
@@ -20,8 +21,14 @@ public abstract class Collector implements ICollector{
 
     }
 
+
     @Override
-    public void loadAndReadFile() {
+    public void loadAndReadFile(String fileName) {
+
+    }
+
+    @Override
+    public void loadAndReadFile(File file) {
 
     }
 

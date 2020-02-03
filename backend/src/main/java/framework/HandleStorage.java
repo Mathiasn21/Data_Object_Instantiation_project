@@ -1,6 +1,5 @@
 package framework;
 
-import framework.dataCollection.Collector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +38,6 @@ public class HandleStorage {
     /**
      * Standard reading from a file. Utilizes a relative path given filename.extension.
      * Files must exist in the top level directory.
-     *
      * @param fName String
      * @return String
      * @throws IOException IOException {@link IOException}
