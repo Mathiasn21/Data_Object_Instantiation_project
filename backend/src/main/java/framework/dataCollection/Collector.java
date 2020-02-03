@@ -4,8 +4,13 @@ package framework.dataCollection;
  * Class for collecting data given a single file
  */
 public class Collector implements ICollector{
-    public Collector() {
-        
+    private final String fileName;
+    private final String format;
+
+    public Collector(String fileName, String format) {
+
+        this.fileName = fileName;
+        this.format = format;
     }
 
     public void getAllPrimaryColumns() {
