@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="stilarkView2.css"/>
+  <script src="node_modules/chart.js/Chart.min.js"></script>
+  <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+</head>
+
+<body>
+<header>
+  <h1>You're viewing {filename}</h1>
+</header>
+
+
+</br>
+</br>
+
+
+<main>
+  <div id="scrollArea" ng-controller="ScrollController">
+    <a ng-click="gotoBottom()">Go to bottom</a>
+    <a id="bottom"></a> You're at the bottom!
+  </div>
+  <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
+  </canvas>
+</main>
+
+
+</br>
+</br>
+
+
+<footer>
+  <p>&copy; Robert Alexander Dankertsen, Mathias Nilsen &amp; Maria Pedersen</p>
+</footer>
+</body>
+
+
