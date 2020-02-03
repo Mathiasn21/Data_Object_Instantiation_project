@@ -1,0 +1,19 @@
+@startuml
+:Main User: as User
+
+(loadFile)
+(saveFile)
+(addItem)
+(removeItem)
+(compareItems)
+(alterItem)
+
+left to right direction
+User -down-> loadFile
+User -down-> saveFile
+User -down-> addItem
+User -down-> removeItem
+User -down-> compareItems
+User -down-> alterItem
+
+@enduml
