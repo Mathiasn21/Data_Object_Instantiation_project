@@ -7,8 +7,12 @@ public class Collector implements ICollector{
     private final String fileName;
     private final String format;
 
-    public Collector(String fileName, String format) {
 
+    public Collector(String fileName) {
+        this(fileName, FILE_FORMAT);
+    }
+
+    public Collector(String fileName, String format) {
         this.fileName = fileName;
         this.format = format;
     }
