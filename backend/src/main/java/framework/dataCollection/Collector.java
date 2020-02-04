@@ -1,34 +1,38 @@
 package framework.dataCollection;
 
-/**
- * Class for collecting data given a single file
- */
-public class Collector implements ICollector{
-    private final String fileName;
-    private final String format;
+import java.io.File;
+import java.util.Collection;
 
-    public Collector(String fileName, String format) {
+public abstract class Collector implements ICollector{
+    private Collection<Object> columns;
 
-        this.fileName = fileName;
-        this.format = format;
+
+    protected void setPrimaryColumns(Collection<Object> columns){
+        this.columns = columns;
     }
 
+    @Override
     public void getAllPrimaryColumns() {
 
-
     }
 
+    @Override
     public void getAllFilledColumns() {
 
     }
 
+    @Override
     public void getCategoryBy(String name) {
 
     }
 
+    @Override
+    public void setSetting(Setting setting) {
+
+    }
 
     @Override
-    public String toString() {
-        return "Collector";
+    public void setSettings(Collection<Setting> settingCollection) {
+
     }
 }

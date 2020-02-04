@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="stilarkView2.css"/>
+  <script src="node_modules/chart.js/Chart.min.js"></script>
+  <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+  <script src="view2.js"></script>
+</head>
+
+<body>
+<header class="w3-display-container w3-content w3-center">
+  <div class="w3-padding-large w3-border w3-wide w3-center">
+  <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">You're viewing</h1>
+  <h3 class="w3-hide-medium w3-hide-small">{FILENAME}</h3>
+  </div>
+</header>
+
+
+</br>
+</br>
+
+
+<main>
+  <div id="scrollArea" ng-controller="ScrollController" style="float: left">
+    <a ng-click="gotoBottom()">Go to bottom</a>
+    <a id="bottom"></a> You're at the bottom!
+  </div>
+  <div id="chartArea" ng-controller="BarController" style="float: left">
+    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+  </div>
+</main>
+
+<footer style="clear: both" class="w3-center w3-border">
+  <p>&copy; Robert Alexander Dankertsen, Mathias Nilsen &amp; Maria Pedersen</p>
+</footer>
+</body>
+
+
