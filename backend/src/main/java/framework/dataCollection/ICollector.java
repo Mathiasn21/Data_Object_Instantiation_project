@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 public interface ICollector {
-    void getAllPrimaryColumns();
+    String[] getAllPrimaryColumns();
 
     void getAllFilledColumns();
 

@@ -1,19 +1,16 @@
 package framework.dataCollection;
 
-import java.io.File;
 import java.util.Collection;
 
 public abstract class Collector implements ICollector{
-    private Collection<Object> columns;
+    private String[] primaryColumns;
 
 
-    protected void setPrimaryColumns(Collection<Object> columns){
-        this.columns = columns;
-    }
+    protected void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
 
     @Override
-    public void getAllPrimaryColumns() {
-
+    public String[] getAllPrimaryColumns() {
+        return primaryColumns;
     }
 
     @Override
