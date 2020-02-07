@@ -1,21 +1,13 @@
 package framework.dataCollection;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 
 public interface ICollector {
     String[] getAllPrimaryColumns();
 
-    void getAllFilledColumns();
+    String[][] getAllColumns();
 
-    void loadAndReadFile(String fileName) throws IOException;
-
-    void loadAndReadFile(File file);
-
+    void loadAndReadFile() throws IOException;
     void getCategoryBy(String name);
-
-    void setSetting(Setting setting);
-
-    void setSettings(Collection<Setting> settingCollection);
+    void setSetting(Setting key, String value);
 }

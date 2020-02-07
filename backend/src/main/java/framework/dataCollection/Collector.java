@@ -1,11 +1,13 @@
 package framework.dataCollection;
 
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Collector implements ICollector{
     private String[] primaryColumns;
+    private final Map<Setting, String> settings = new HashMap<>();
 
-
+    //initialize properties
     protected void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
 
     @Override
@@ -14,22 +16,21 @@ public abstract class Collector implements ICollector{
     }
 
     @Override
-    public void getAllFilledColumns() {
-
-    }
-
-    @Override
     public void getCategoryBy(String name) {
 
     }
 
     @Override
-    public void setSetting(Setting setting) {
-
+    public void setSetting(Setting key, String value) {
+        settings.put(key, value);
     }
 
-    @Override
-    public void setSettings(Collection<Setting> settingCollection) {
 
+    protected final void setAllSettings(Map<Setting, String> settings){
+        this.settings.putAll(settings);
+    }
+
+    protected final String getSetting(Setting setting){
+        return settings.get(setting);
     }
 }

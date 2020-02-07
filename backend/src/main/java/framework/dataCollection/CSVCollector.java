@@ -8,30 +8,43 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
  * Class for collecting data given a single file
  */
-public class CSVCollector extends Collector{
+public class CSVCollector extends Collector {
     private final String fileName;
-    private final String delimiter;
-    private Collection<String[]> rows;
+    private final static Map<Setting, String> settings = new HashMap<>();
+    private List<String[]> informationalRows = new ArrayList<>();
+    private List<String[]> rows;
 
-
-    public CSVCollector(String fileName) {
-        this(fileName, ",");
+    //Initiating default settings
+    static {
+        settings.put(Setting.DELIMITER, ",");
     }
 
-    public CSVCollector(String fileName, String delimiter) {
+    public CSVCollector(@NotNull File file) {
+        this(file.getName());
+    }
+
+    public CSVCollector(@NotNull String fileName) {
         this.fileName = fileName;
-        this.delimiter = delimiter;
+        initialize();
+    }
+
+
+    private void initialize() {
+        setAllSettings(settings);
     }
 
     @NotNull
     @Contract(pure = true)
     private String[] splitLineOn(@NotNull String line){
+        String delimiter = getSetting(Setting.DELIMITER);
         return line.split(delimiter);
     }
 
@@ -41,10 +54,28 @@ public class CSVCollector extends Collector{
     }
 
     @Override
-    public void loadAndReadFile(String fileName) throws IOException {
+    public String[][] getAllColumns() {
+        String[] primaryColumns = getAllPrimaryColumns();
+        int columnLength = primaryColumns.length;
+        int rowLength = rows.size();
+        String[][] columns = new String[rowLength][columnLength];
+        columns[0] = primaryColumns;
+        for(int row = 1; row < rowLength; row++){
+            columns[row] = rows.get(row);
+        }
+        return columns;
+    }
+
+    public List<String[]> getInformationalRows() {
+        return informationalRows;
+    }
+
+
+    @Override
+    public void loadAndReadFile() throws IOException {
         String line;
         BufferedReader bufferedReader = HandleStorage.readFromFile(fileName);
-        Collection<String[]> rows = new ArrayList<>();
+        List<String[]> rows = new ArrayList<>();
         boolean foundPrimarycolumns = false;
         while ((line = bufferedReader.readLine()) != null) {
             String[] r = splitLineOn(line);
@@ -52,21 +83,22 @@ public class CSVCollector extends Collector{
                 setPrimaryColumns(r);
                 foundPrimarycolumns = true;
                 continue;
+            }else if(!foundPrimarycolumns){
+                informationalRows.add(r);
+                continue;
             }
             rows.add(r);
         }
         this.rows = rows;
     }
 
-    @Override
-    public void loadAndReadFile(File file) {
-
-    }
 
     @Contract(pure = true)
     private static boolean calcPRowContainsPrimaryColumns(@NotNull String[] row){
         //TODO: Delegate settings to config file
         //TODO: Change out this method with one that utilizes probability instead
+
+        if(row.length == 0){return false;}
         String isNumber = "^-?\\d*\\.{0,1}\\d+$";
         final Pattern digitPattern = Pattern.compile(isNumber, Pattern.MULTILINE);
         for(String str : row) {
