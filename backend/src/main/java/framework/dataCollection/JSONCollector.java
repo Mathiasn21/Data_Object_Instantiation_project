@@ -1,14 +1,23 @@
 package framework.dataCollection;
 
+import framework.HandleStorage;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.*;
 
 public class JSONCollector extends Collector {
-    private final String[] keys;
+    private final String filename;
+    private final static Map<Setting, String> settings = new HashMap<>();
+    private List<String[]> informationalRows = new ArrayList<>();
+    private List<String[]> rows;
 
-    public JSONCollector(String[] identifiers, String fileName) {
-        this.keys = identifiers;
+    public JSONCollector(@NotNull String filename) {
+        this.filename = filename;
+    }
+    public JSONCollector(@NotNull File file) {
+        this(file.getName());
     }
 
     @Override
@@ -18,7 +27,7 @@ public class JSONCollector extends Collector {
 
     @Override
     public void loadAndReadFile() throws IOException {
-
+        String jsonStr = HandleStorage.readFromJSONFile(filename);
     }
 
     @Override

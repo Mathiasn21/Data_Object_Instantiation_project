@@ -1,7 +1,6 @@
 package framework;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.lang.reflect.Array;
@@ -71,5 +70,19 @@ public class HandleStorage {
     private static String toJson(List<String> list) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(list);
+    }
+
+    public static String readFromJSONFile(String filename) throws IOException {
+        BufferedReader bufferedReader = readFromFile(filename);
+        StringBuilder textFromFile = new StringBuilder();
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
+            textFromFile.append(line);
+        }
+
+        JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
+        return jsonObject.getAsString();
+
     }
 }
