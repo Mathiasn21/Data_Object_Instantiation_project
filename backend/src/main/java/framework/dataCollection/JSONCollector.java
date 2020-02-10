@@ -18,6 +18,7 @@ public class JSONCollector extends Collector {
     public JSONCollector(@NotNull String filename) {
         this.filename = filename;
     }
+
     public JSONCollector(@NotNull File file) {
         this(file.getName());
     }
@@ -30,8 +31,17 @@ public class JSONCollector extends Collector {
     @Override
     public void loadAndReadFile() throws IOException {
         JsonArray jsonStr = HandleStorage.readFromJSONFile(filename);
-        jsonStr.iterator().forEachRemaining((element) -> System.out.println(element.toString()));
-        //TODO: Get 
+        jsonStr.iterator().forEachRemaining((element) -> {
+
+            System.out.println(element.getAsJsonObject());
+        });
+
+
+
+
+
+        //TODO: Get primary columns
+        //TODO: Get informational columns
     }
 
     @Override
