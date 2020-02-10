@@ -1,7 +1,6 @@
 package framework.dataCollection;
 
 import java.io.IOException;
-import java.util.List;
 
 public interface ICollector {
     String[] getAllPrimaryColumns();

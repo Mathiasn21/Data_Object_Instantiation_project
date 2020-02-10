@@ -21,4 +21,9 @@ public class JSONCollector extends Collector {
 
     }
 
+    @Override
+    public Item[] getCategoryBy(String name) {
+        return new Item[0];
+    }
+
 }

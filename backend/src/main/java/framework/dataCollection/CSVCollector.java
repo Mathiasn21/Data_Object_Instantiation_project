@@ -70,6 +70,14 @@ public class CSVCollector extends Collector {
         return informationalRows;
     }
 
+    /**
+     * @param name String
+     * @return
+     */
+    @Override
+    public Item[] getCategoryBy(String name) {
+        return new Item[0];
+    }
 
     @Override
     public void loadAndReadFile() throws IOException {

@@ -20,12 +20,6 @@ public abstract class Collector implements ICollector{
         return primaryColumns;
     }
 
-    /**
-     * @param name String
-     */
-    @Override
-    public void getCategoryBy(String name) {
-    }
 
     /**
      * @param key   Setting Setting
