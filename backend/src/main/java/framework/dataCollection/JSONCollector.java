@@ -25,5 +25,4 @@ public class JSONCollector extends Collector {
     public Item[] getCategoryBy(String name) {
         return new Item[0];
     }
-
 }
