@@ -19,7 +19,7 @@ public class JSONCollector extends Collector {
     public JSONCollector(@NotNull String filename) {
         this.filename = filename;
     }
-///
+//
     public JSONCollector(@NotNull File file) {
         this(file.getName());
     }
