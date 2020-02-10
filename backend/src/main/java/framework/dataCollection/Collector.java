@@ -17,7 +17,6 @@ public abstract class Collector implements ICollector{
 
     @Override
     public void getCategoryBy(String name) {
-
     }
 
     @Override
