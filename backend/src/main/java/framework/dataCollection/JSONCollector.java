@@ -1,5 +1,7 @@
 package framework.dataCollection;
 
+import com.google.gson.JsonArray;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import framework.HandleStorage;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +29,9 @@ public class JSONCollector extends Collector {
 
     @Override
     public void loadAndReadFile() throws IOException {
-        String jsonStr = HandleStorage.readFromJSONFile(filename);
+        JsonArray jsonStr = HandleStorage.readFromJSONFile(filename);
+        jsonStr.iterator().forEachRemaining((element) -> System.out.println(element.toString()));
+        //TODO: Get 
     }
 
     @Override

@@ -72,7 +72,7 @@ public class HandleStorage {
         return gson.toJson(list);
     }
 
-    public static String readFromJSONFile(String filename) throws IOException {
+    public static JsonArray readFromJSONFile(String filename) throws IOException {
         BufferedReader bufferedReader = readFromFile(filename);
         StringBuilder textFromFile = new StringBuilder();
         String line;
@@ -82,7 +82,6 @@ public class HandleStorage {
         }
 
         JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
-        return jsonObject.getAsString();
-
+        return jsonObject.getAsJsonArray();
     }
 }
