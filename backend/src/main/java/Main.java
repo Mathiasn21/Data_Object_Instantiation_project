@@ -1,5 +1,6 @@
 import framework.dataCollection.CSVCollector;
 import framework.dataCollection.ICollector;
+import framework.dataCollection.JSONCollector;
 import framework.dataCollection.Setting;
 
 import java.io.IOException;
@@ -19,5 +20,10 @@ public class Main {
             if(column.length == 0)continue;
             System.out.println(Arrays.toString(column));
         }
+
+
+
+        ICollector collector2 = new JSONCollector("testingJSONFile.json");
+        collector2.loadAndReadFile();
     }
 }
