@@ -1,6 +1,7 @@
 package framework.dataCollection;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface ICollector {
     String[] getAllPrimaryColumns();
@@ -12,10 +13,12 @@ public interface ICollector {
      */
     void loadAndReadFile() throws IOException;
 
+
     /**
      * @param name String
+     * @return Item[]
      */
-    void getCategoryBy(String name);
+    Item[] getCategoryBy(String name);
 
     /**
      * @param key Setting
