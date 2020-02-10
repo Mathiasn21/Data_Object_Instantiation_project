@@ -1,23 +1,25 @@
 package framework.dataCollection;
 
 import com.google.gson.JsonArray;
-import com.google.gson.internal.bind.util.ISO8601Utils;
+import com.google.gson.JsonObject;
 import framework.HandleStorage;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JSONCollector extends Collector {
     private final String filename;
     private final static Map<Setting, String> settings = new HashMap<>();
-    private List<String[]> informationalRows = new ArrayList<>();
-    private List<String[]> rows;
+    private String[] jsonKeys;
+    private JsonObject jsonObject;
 
     public JSONCollector(@NotNull String filename) {
         this.filename = filename;
     }
+
     public JSONCollector(@NotNull File file) {
         this(file.getName());
     }
@@ -30,8 +32,17 @@ public class JSONCollector extends Collector {
     @Override
     public void loadAndReadFile() throws IOException {
         JsonArray jsonStr = HandleStorage.readFromJSONFile(filename);
-        jsonStr.iterator().forEachRemaining((element) -> System.out.println(element.toString()));
-        //TODO: Get 
+        jsonStr.iterator().forEachRemaining((element) -> {
+
+            System.out.println(element.getAsJsonObject());
+        });
+
+
+
+
+
+        //TODO: Get primary columns
+        //TODO: Get informational columns
     }
 
     @Override
