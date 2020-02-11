@@ -21,9 +21,14 @@ public class Main {
             System.out.println(Arrays.toString(column));
         }
 
+        System.out.println("\n\n");
+        String[] primaryKeys = {"", ""};
+        String primaryKey = "column";
+        ICollector collector2 = new JSONCollector("testingJSONFile.json", primaryKey);
 
-
-        ICollector collector2 = new JSONCollector("testingJSONFile.json");
         collector2.loadAndReadFile();
+
+        System.out.println(Arrays.toString(collector2.getAllPrimaryColumns()));
+        System.out.println(Arrays.deepToString(collector2.getAllColumns()));
     }
 }

@@ -1,11 +1,20 @@
 package framework.dataCollection;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Collector implements ICollector{
     private String[] primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
+
+
+    protected void setPrimaryColumns(@NotNull List<String> list) {
+        setPrimaryColumns(list.toArray(new String[0]));
+    }
 
     /**
      * @param primaryColumns String[]
