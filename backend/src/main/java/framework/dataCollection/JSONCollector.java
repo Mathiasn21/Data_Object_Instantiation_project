@@ -19,18 +19,12 @@ public class JSONCollector extends Collector {
     public JSONCollector(@NotNull String filename, String ...primaryKeys) {
         this.filename = filename;
         this.primaryKeys = Arrays.asList(primaryKeys);
+        setPrimaryColumns(primaryKeys);
     }
     public JSONCollector(@NotNull File file, String ...primaryKeys) {
         this(file.getName(), primaryKeys);
     }
 
-    public JSONCollector(@NotNull String filename) {
-        this(filename, (String) null);
-    }
-
-    public JSONCollector(@NotNull File file) {
-        this(file.getName());
-    }
 
     @Override
     public String[][] getAllColumns() {
@@ -45,36 +39,17 @@ public class JSONCollector extends Collector {
                 String column = primaryColumns[j];
                 rows[i][j] = String.valueOf(jsonObject.get(column));
             }
-
         }
-        return new String[0][];
+        return rows;
     }
 
-    private boolean notFound = false;
     @Override
     public void loadAndReadFile() throws IOException {
         JsonArray jsonStr = HandleStorage.readFromJSONFile(filename);
         jsonObjectValues = new ArrayList<>();
         jsonStr.iterator().forEachRemaining((element) -> {
-            if(primaryKeys.size() == 1 && notFound){
-                 setPrimaryColumns(getPrimaryColumnsWithKey(primaryKeys.get(0), element.getAsJsonObject()));
-                 notFound = false;
-            }else if(primaryKeys.size() == 0) {
-
-            }else{
-                jsonObjectValues.add(element.getAsJsonObject());
-            }
+            jsonObjectValues.add(element.getAsJsonObject());
         });
-    }
-
-    @NotNull
-    @Contract(value = "_, _ -> new", pure = true)
-    private List<String> getPrimaryColumnsWithKey(String primaryKey, JsonObject jsonObject) {
-        List<String> res = new ArrayList<>();
-        if(jsonObject.has(primaryKey)){
-            res.add(jsonObject.get(primaryKey).toString());
-        }
-        return res;
     }
 
     @Override
