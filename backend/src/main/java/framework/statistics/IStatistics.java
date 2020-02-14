@@ -3,11 +3,13 @@ package framework.statistics;
 public interface IStatistics {
 
     double calcAverageMean();
-    /*double calcMedian();
+    double calcMedian();
     double calcAverageMode();
     double calcAverageMidRange();
-    double calcStandardDeviation();
+    double calcSampleVariance();
+    /*
     double calcPopulationVariance();
-    double calcSampleVariance();*/
+    double calcStandardDeviation();
+    */
 
 }

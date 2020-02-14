@@ -4,10 +4,12 @@ package framework.statistics;
 
 public class Statistics implements IStatistics {
 
-    double[] data;
+    private final double[] data;
+    private final int length;
 
     public Statistics(double[] data){
         this.data = data;
+        this.length = data.length;
     }
 
     public double calcAverageMean() {
@@ -17,9 +19,58 @@ public class Statistics implements IStatistics {
         for(double i : values){
             total += i;
         }
-        double averageMean = total / values.length;
+        return total / values.length;
+    }
 
-        return averageMean;
+    @Override
+    public double calcMedian() {
+        double calcMid = length >> 1;
+        int lowerBound = (int)(calcMid -1);
+        int upperBound = (int)calcMid;
+        if (length % 2 == 0){
+           return (data[lowerBound] + data[upperBound]) / 2;}
+        return data[upperBound];
+    }
+
+    @Override
+    public double calcAverageMode() {
+        double maxValue = 0, maxCount = 0;
+        int i, j;
+
+        for (i = 0; i < length; ++i) {
+            int count = 0;
+            for (j = 0; j < length; ++j) {
+                if (data[j] == data[i])
+                    ++count;
+            }
+            if (count > maxCount) {
+                maxCount = count;
+                maxValue = data[i];
+            }
+        }
+        return maxValue;
+    }
+
+    @Override
+    public double calcAverageMidRange() {
+        double minValue = data[0];
+        double maxValue = data[length - 1];
+        return (minValue + maxValue) / 2;
+    }
+
+
+    //helt på bærtur
+    @Override
+    public double calcSampleVariance() {
+        double sum = 0;
+        double avg = sum / length;
+        for (int i = 0; i < length; i++)
+        {
+            double diff = i - avg;
+            diff *= diff;
+            sum += diff;
+        }
+        return sum  / (length-1);
     }
 
     @Override
