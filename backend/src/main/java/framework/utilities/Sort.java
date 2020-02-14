@@ -1,13 +1,16 @@
 package framework.utilities;
 
 /* TO DO:
-        * Default: Sort by ascending              |    DONE: YES
+        * Sort by ascending                       |    DONE: YES
         * Sort strings by length                  |    DONE: YES
         * Sort by letters                         |    DONE: YES
         * Sort descending (display in reverse)    |    DONE: YES
         * Sort by weight                          |    DONE: YES
         * Sort by group?                          |    DONE: NO
+        * Sort randomly (Just for fun)            |    DONE: YES
 */
+
+import java.util.Random;
 
 /** Class for sorting the collected data
  * @author Robert Alexander Dankertsen
@@ -22,7 +25,7 @@ public abstract class Sort {
      * @return Returns the ascended or descended string depending on what the user previously wanted.
      */
     public static String sortAlphabetically(String string, String string2, boolean Ascending){
-        int length = Math.min(string.length(), string2.length());
+        int length = sortByLength(string, string2, true).length();
 
         String sortedString = "";
 
@@ -74,5 +77,21 @@ public abstract class Sort {
             sortedWeight = lowToHigh ? weight2 : weight;
         }
         return sortedWeight;
+    }
+
+    /* WILL BE SET AS "?" UNTIL WE DECIDE TO SORT BY GROUP OR NOT
+    public static ? sortByGroup(? group, ? group2, boolean Ascending){
+        return;
+    }
+    */
+
+    /**
+     * @param string The first string you want to compare.
+     * @param string2 The second string you will compare the first string to.
+     * @return Returns a random string.
+     */
+    public static String sortRandomly(String string, String string2){
+        Random random = new Random();
+        return random.nextInt(100) <= 50 ? string : string2;
     }
 }

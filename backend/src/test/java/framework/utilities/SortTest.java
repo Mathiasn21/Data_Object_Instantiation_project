@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Sorter tests: ")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SortTest {
-
     /** A stream of arguments that belongs to the parameterized test which sorts alpabetically in ascending order
      * @return Returns the expected outcome, the first variable and second variable
      */
@@ -87,7 +86,7 @@ public class SortTest {
     @Order(1)
     @Tag("Alphabetical")
     @Tag("Ascending")
-    @DisplayName("Simple Test: Sorts ascending alphabetically and by length")
+    @DisplayName("Simple Test: Sorts ascending alphabetically")
     void sortAlpabeticallyTest(){
         assertEquals("Abc", Sort.sortAlphabetically("Abc","Bcd", true));
     }
@@ -95,7 +94,7 @@ public class SortTest {
     @Order(2)
     @Tag("Alphabetical")
     @Tag("Ascending")
-    @DisplayName("Parameterized Test: Sorts ascending alphabetically and by length")
+    @DisplayName("Parameterized Test: Sorts ascending alphabetically")
     @MethodSource("CompareStrings")
     void sortAlpabeticallyParameterizedTest(String expected, String input1, String input2){
         assertEquals(expected, Sort.sortAlphabetically(input1,input2,true));
@@ -106,7 +105,7 @@ public class SortTest {
     @Order(3)
     @Tag("Alphabetical")
     @Tag("Descending")
-    @DisplayName("Simple Test: Sorts descending alphabetically and by length")
+    @DisplayName("Simple Test: Sorts descending alphabetically")
     void sortAlpabeticallyDescendingTest(){
         assertEquals("Bcd", Sort.sortAlphabetically("Abc","Bcd",false));
     }
@@ -114,7 +113,7 @@ public class SortTest {
     @Order(4)
     @Tag("Alphabetical")
     @Tag("Descending")
-    @DisplayName("Parameterized Test: Sorts descending alphabetically and by length")
+    @DisplayName("Parameterized Test: Sorts descending alphabetically")
     @MethodSource("CompareStringsDescending")
     void sortAlphabeticallyDescendingParameterizedTest(String expected, String input1, String input2) {
         assertEquals(expected, Sort.sortAlphabetically(input1,input2,false));
@@ -197,5 +196,5 @@ public class SortTest {
         System.out.println(expected + " is the highest weight of " + input1 + " and " + input2);
     }
 
-}
 
+}
