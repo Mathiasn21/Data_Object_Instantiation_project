@@ -47,7 +47,7 @@ public abstract class Sort {
     }
 
     //Sorts by weight (lowest to highest = boolean true, highest to lowest = boolean false)
-    public static double sortWeight(double weight, double weight2, boolean lowToHigh){
+    public static double sortByWeight(double weight, double weight2, boolean lowToHigh){
         double sortedWeight = 0;
 
         if(weight <= weight2) {
