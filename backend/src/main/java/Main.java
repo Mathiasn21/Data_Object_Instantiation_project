@@ -9,6 +9,10 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        testCollectors();
+    }
+
+    private static void testCollectors() throws IOException {
         ICollector collector = new CSVCollector("testingFileCSV.csv");
         collector.setSetting(Setting.DELIMITER, ";");
         collector.loadAndReadFile();
