@@ -9,11 +9,18 @@ package framework.utilities;
         * Sort by group?                          |    DONE: NO
 */
 
-/**
- * Class for sorting the collected data
+/** Class for sorting the collected data
+ * @author Robert Alexander Dankertsen
+ * @author Github: Yeti-Programing @ https://github.com/yeti-programing
+ * @version 1.0
  */
 public abstract class Sort {
-    //Sorts by alphabetically (Ascending order = boolean true, Descending order = boolean false)
+    /**
+     * @param string The first string you want to compare.
+     * @param string2 The second string that will be compared to the first string.
+     * @param Ascending A boolean that checks if you want to return ascended or descended order (true = ascending, false = descending).
+     * @return Returns the ascended or descended string depending on what the user previously wanted.
+     */
     public static String sortAlphabetically(String string, String string2, boolean Ascending){
         int length = Math.min(string.length(), string2.length());
 
@@ -33,7 +40,12 @@ public abstract class Sort {
         return sortedString;
     }
 
-    //Sorts by length of word (Shortest to longest = boolean true, longest to shortest = boolean false)
+    /**
+     * @param string The first string you want to compare.
+     * @param string2 The second string that will be compared to the first string.
+     * @param shortestToLongest A boolean that checks if you want to return the shortest or longest word (true = shortest, false = longest).
+     * @return Returns the shortest or longest word, depending on what the user previously wanted.
+     */
     public static String sortByLength(String string, String string2, boolean shortestToLongest){
         String sortedString;
 
@@ -46,7 +58,12 @@ public abstract class Sort {
         return sortedString;
     }
 
-    //Sorts by weight (lowest to highest = boolean true, highest to lowest = boolean false)
+    /**
+     * @param weight The first weight you want to compare.
+     * @param weight2 The second weight that will be compared to the first string.
+     * @param lowToHigh A boolean that checks if you want to return the lowest og highest weigth (true = lowest, false = highest).
+     * @return Returns the lowest or highest weight, depending on what the user perviously wanted.
+     */
     public static double sortByWeight(double weight, double weight2, boolean lowToHigh){
         double sortedWeight = 0;
 
