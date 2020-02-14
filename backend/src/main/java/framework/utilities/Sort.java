@@ -1,10 +1,10 @@
 package framework.utilities;
 
 // TO DO
-//Default: Sort by ascending            CHECK
-//Sort strings by length                CHECK
-//Sort by letters                       CHECK
-//Sort descending (display in reverse)
+//Default: Sort by ascending              |    DONE: YES
+//Sort strings by length                  |    DONE: YES
+//Sort by letters                         |    DONE: YES
+//Sort descending (display in reverse)    |    DONE: YES
 
 /**
  * Class for sorting the collected data
