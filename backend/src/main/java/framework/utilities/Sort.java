@@ -36,6 +36,7 @@ public abstract class Sort {
     //Sorts by length of word (Shortest to longest = boolean true, longest to shortest = boolean false)
     public static String sortByLength(String string, String string2, boolean shortestToLongest){
         String sortedString;
+
         if(string.length() <= string2.length()){
             sortedString = shortestToLongest ? string : string2;
         }
