@@ -1,13 +1,18 @@
 package framework.utilities;
 
 /* TO DO:
-        * Sort by ascending                       |    DONE: YES
-        * Sort strings by length                  |    DONE: YES
-        * Sort by letters                         |    DONE: YES
-        * Sort descending (display in reverse)    |    DONE: YES
+
+    * Sort type:
+        * Sort by length                          |    DONE: YES
+        * Sort by alpabetically                   |    DONE: YES
         * Sort by weight                          |    DONE: YES
         * Sort by group?                          |    DONE: NO
         * Sort randomly (Just for fun)            |    DONE: YES
+
+    * Sort order:
+        * Sort by ascending/lowest/shortest       |    DONE: YES
+        * Sort descending/highest/longest         |    DONE: YES
+
 */
 
 import java.util.Random;
