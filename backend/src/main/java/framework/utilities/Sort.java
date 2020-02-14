@@ -2,7 +2,7 @@ package framework.utilities;
 
 /* TO DO:
         * Default: Sort by ascending              |    DONE: YES
-        * Sort strings by length                  |    DONE: NO
+        * Sort strings by length                  |    DONE: YES
         * Sort by letters                         |    DONE: YES
         * Sort descending (display in reverse)    |    DONE: YES
         * Sort by weight                          |    DONE: YES
