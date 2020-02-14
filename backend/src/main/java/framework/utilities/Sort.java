@@ -4,10 +4,9 @@ import java.util.Random;
 /* TO DO:
 
     * Sort type:
-        * Sort by length                          |    DONE: YES
         * Sort by alpabetically                   |    DONE: YES
+        * Sort by length                          |    DONE: YES
         * Sort by weight                          |    DONE: YES
-        * Sort by group?                          |    DONE: NO
         * Sort randomly (Just for fun)            |    DONE: YES
 
     * Sort order:
@@ -82,12 +81,6 @@ public abstract class Sort {
         }
         return sortedWeight;
     }
-
-    /* WILL BE SET AS "?" UNTIL WE DECIDE TO SORT BY GROUP OR NOT
-    public static ? sortByGroup(? group, ? group2, boolean Ascending){
-        return;
-    }
-    */
 
     /**
      * @param string The first string you want to compare.
