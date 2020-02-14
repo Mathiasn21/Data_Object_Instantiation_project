@@ -1,4 +1,5 @@
 package framework.utilities;
+import java.util.Random;
 
 /* TO DO:
 
@@ -14,8 +15,6 @@ package framework.utilities;
         * Sort descending/highest/longest         |    DONE: YES
 
 */
-
-import java.util.Random;
 
 /** Class for sorting the collected data
  * @author Robert Alexander Dankertsen
