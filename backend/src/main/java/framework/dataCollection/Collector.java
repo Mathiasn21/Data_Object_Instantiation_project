@@ -1,38 +1,57 @@
 package framework.dataCollection;
 
-import java.io.File;
-import java.util.Collection;
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class Collector implements ICollector{
-    private Collection<Object> columns;
+    private String[] primaryColumns;
+    private final Map<Setting, String> settings = new HashMap<>();
 
 
-    protected void setPrimaryColumns(Collection<Object> columns){
-        this.columns = columns;
+    protected void setPrimaryColumns(@NotNull List<String> list) {
+        setPrimaryColumns(list.toArray(new String[0]));
     }
 
-    @Override
-    public void getAllPrimaryColumns() {
+    /**
+     * @param primaryColumns String[]
+     */
+    protected void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
 
+    /**
+     * @return String[]
+     */
+    @Override
+    public String[] getAllPrimaryColumns() {
+        return primaryColumns;
     }
 
-    @Override
-    public void getAllFilledColumns() {
 
+    /**
+     * @param key   Setting Setting
+     * @param value String String
+     */
+    @Override
+    public void setSetting(Setting key, String value) {
+        settings.put(key, value);
     }
 
-    @Override
-    public void getCategoryBy(String name) {
 
+    /**
+     * @param settings Map String String
+     */
+    protected final void setAllSettings(Map<Setting, String> settings){
+        this.settings.putAll(settings);
     }
 
-    @Override
-    public void setSetting(Setting setting) {
-
-    }
-
-    @Override
-    public void setSettings(Collection<Setting> settingCollection) {
-
+    /**
+     * @param setting Setting
+     * @return String
+     */
+    protected final String getSetting(Setting setting){
+        return settings.get(setting);
     }
 }
