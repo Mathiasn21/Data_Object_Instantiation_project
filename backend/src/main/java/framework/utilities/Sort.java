@@ -1,21 +1,47 @@
 package framework.utilities;
 
 // TO DO
-//Default: Sort by ascending
-//Sort strings by length
-//Sort by letters
+//Default: Sort by ascending            CHECK
+//Sort strings by length                CHECK
+//Sort by letters                       CHECK
 //Sort descending (display in reverse)
 
+/**
+ * Class for sorting the collected data
+ */
 public abstract class Sort {
     public static String sort(String s, String s2){
         int length = Math.min(s.length(), s2.length());
+
         String sortedString = "";
+
+        byte[] sBytes = s.getBytes();
+        byte[] s2Bytes = s2.getBytes();
+
         for(int i = 0; i <= (length-1); i++){
-            if(s.getBytes()[i] <= s2.getBytes()[i]){
+            if(sBytes[i] <= s2Bytes[i]){
                 sortedString = s;
             }
-            else if(s.getBytes()[i] > s2.getBytes()[i]){
+            else if(sBytes[i] > s2Bytes[i]){
                 sortedString = s2;
+            }
+        }
+        return sortedString;
+    }
+    public static String sortDescending(String s, String s2){
+        int length = Math.min(s.length(), s2.length());
+
+        String sortedString = "";
+
+        byte[] sBytes = s.getBytes();
+        byte[] s2Bytes = s2.getBytes();
+
+        for(int i = 0; i <= (length-1); i++){
+            if(sBytes[i] <= s2Bytes[i]){
+                sortedString = s2;
+            }
+            else if(sBytes[i] > s2Bytes[i]){
+                sortedString = s;
             }
         }
         return sortedString;
