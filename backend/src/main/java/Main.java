@@ -28,7 +28,6 @@ public class Main {
         System.out.println("\n\n");
         String[] primaryKeys = {"Institusjonskode", "Institusjonsnavn"};
         ICollector collector2 = new JSONCollector("20200210-123-Registrerte studenter.json", primaryKeys);
-
         collector2.loadAndReadFile();
 
         String primaryJSONColumns = Arrays.toString(collector2.getAllPrimaryColumns());

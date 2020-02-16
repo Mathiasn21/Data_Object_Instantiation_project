@@ -16,10 +16,12 @@ public abstract class Collector implements ICollector{
         setPrimaryColumns(list.toArray(new String[0]));
     }
 
+
     /**
      * @param primaryColumns String[]
      */
     protected void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
+
 
     /**
      * @return String[]
@@ -46,6 +48,7 @@ public abstract class Collector implements ICollector{
     protected final void setAllSettings(Map<Setting, String> settings){
         this.settings.putAll(settings);
     }
+
 
     /**
      * @param setting Setting
