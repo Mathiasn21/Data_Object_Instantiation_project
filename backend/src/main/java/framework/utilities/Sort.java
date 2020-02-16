@@ -1,8 +1,9 @@
 package framework.utilities;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 /* TO DO:
-
     * Sort type:
         * Sort by alpabetically                   |    DONE: YES
         * Sort by length                          |    DONE: YES
@@ -20,14 +21,14 @@ import java.util.Random;
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
  * @version 1.0
  */
-public abstract class Sort {
+public abstract class Sort implements ISort{
     /**
      * @param string The first string you want to compare.
      * @param string2 The second string that will be compared to the first string.
-     * @param Ascending A boolean that checks if you want to return ascended or descended order (true = ascending, false = descending).
+     * @param Ascending A boolean that describes the sorting order
      * @return Returns the ascended or descended string depending on what the user previously wanted.
      */
-    public static String sortAlphabetically(String string, String string2, boolean Ascending){
+    public String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending){
         int length = sortByLength(string, string2, true).length();
 
         String sortedString = "";
@@ -38,8 +39,7 @@ public abstract class Sort {
         for(int i = 0; i <= (length-1); i++){
             if(stringBytes[i] <= string2Bytes[i]){
                 sortedString = Ascending ? string : string2;
-            }
-            else if(stringBytes[i] > string2Bytes[i]){
+            } else if(stringBytes[i] > string2Bytes[i]){
                 sortedString = Ascending ? string2 : string;
             }
         }
@@ -52,7 +52,7 @@ public abstract class Sort {
      * @param shortestToLongest A boolean that checks if you want to return the shortest or longest word (true = shortest, false = longest).
      * @return Returns the shortest or longest word, depending on what the user previously wanted.
      */
-    public static String sortByLength(String string, String string2, boolean shortestToLongest){
+    public String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest){
         String sortedString;
 
         if(string.length() <= string2.length()){
@@ -70,7 +70,7 @@ public abstract class Sort {
      * @param lowToHigh A boolean that checks if you want to return the lowest og highest weigth (true = lowest, false = highest).
      * @return Returns the lowest or highest weight, depending on what the user perviously wanted.
      */
-    public static double sortByWeight(double weight, double weight2, boolean lowToHigh){
+    public double sortByWeight(@NotNull double weight, @NotNull double weight2, boolean lowToHigh){
         double sortedWeight = 0;
 
         if(weight <= weight2) {
@@ -87,7 +87,7 @@ public abstract class Sort {
      * @param string2 The second string you will compare the first string to.
      * @return Returns a random string.
      */
-    public static String sortRandomly(String string, String string2){
+    public String sortRandomly(@NotNull String string, @NotNull String string2){
         Random random = new Random();
         return random.nextInt(100) <= 50 ? string : string2;
     }

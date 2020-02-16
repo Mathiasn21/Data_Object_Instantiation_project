@@ -13,8 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/**
- * Class for collecting data given a single file
+/** Class for collecting data
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
  */
 public class CSVCollector extends Collector {
     private final String fileName;
