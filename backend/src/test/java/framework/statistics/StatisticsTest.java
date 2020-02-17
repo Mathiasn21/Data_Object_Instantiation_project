@@ -19,8 +19,15 @@ public class StatisticsTest {
     Statistics statistics2 = new Statistics(data2);
 
     @Test
+    public void calcSum(){
+        double sum = statistics.calcSum();
+        assertTrue(33.0 == sum);
+    }
+
+    @Test
     public void averageMeanTest(){
         double averageMean = statistics.averageMean();
+        System.out.println(averageMean);
         assertTrue(4.125 == averageMean);
         assertFalse(6 == averageMean);
     }
