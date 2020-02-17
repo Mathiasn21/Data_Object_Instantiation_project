@@ -5,7 +5,7 @@ import framework.dataCollection.Item;
 
 /* TO DO:
 
-    * Get neccesary data form Collector                 |   DONE: NO
+    * Get necessary data from Collector                 |   DONE: NO
     * Display necessary data in a chart                 |   DONE: NO
     * Get detailed information of a selected item       |   DONE: NO
     * Compare two separate items                        |   DONE: NO
