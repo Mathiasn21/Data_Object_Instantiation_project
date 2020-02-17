@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /** Class for sorting the collected data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @author Robert Alexander Dankertsen Github: Yeti-Programing @ https://github.com/yeti-programing
- * @version 1.0
+ * @version 1.0.0
  */
 public interface ISort {
     String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending);
