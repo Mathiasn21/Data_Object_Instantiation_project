@@ -58,19 +58,9 @@ public class Statistics implements IStatistics {
         return (minValue + maxValue) / 2;
     }
 
-
-    //helt på bærtur
     @Override
     public double calcSampleVariance() {
-        double sum = 0;
-        double avg = sum / length;
-        for (int i = 0; i < length; i++)
-        {
-            double diff = i - avg;
-            diff *= diff;
-            sum += diff;
-        }
-        return sum  / (length-1);
+        return 0;
     }
 
     @Override
