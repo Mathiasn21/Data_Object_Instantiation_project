@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Contract;
  */
 public enum Setting {
     DELIMITER("DELIMITER");
-
     public final String key;
+
 
     /**
      * @param key String
