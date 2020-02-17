@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /** Testing class for "Sort.java"
  * @author Robert Alexander Dankertsen
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
- * @version 1.0
+ * @version 1.0.0
  */
 @DisplayName("Sorter tests: ")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

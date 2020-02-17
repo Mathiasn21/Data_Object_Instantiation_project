@@ -18,7 +18,8 @@ import java.util.Random;
 /** Class for sorting the collected data
  * @author Robert Alexander Dankertsen
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
- * @version 1.0
+ * @version 1.0.1
+ * @since 1.0.0
  */
 public class Sort implements ISort{
     /**
