@@ -1,7 +1,5 @@
 package framework.statistics;
 
-
-
 public class Statistics implements IStatistics {
 
     private final double[] data;
@@ -12,7 +10,7 @@ public class Statistics implements IStatistics {
         this.length = data.length;
     }
 
-    public double calcAverageMean() {
+    public double averageMean() {
         double[] values = data;
         double total = 0;
 
@@ -33,7 +31,7 @@ public class Statistics implements IStatistics {
     }
 
     @Override
-    public double calcAverageMode() {
+    public double averageMode() {
         double maxValue = 0, maxCount = 0;
         int i, j;
 
@@ -52,16 +50,50 @@ public class Statistics implements IStatistics {
     }
 
     @Override
-    public double calcAverageMidRange() {
+    public double averageMidRange() {
         double minValue = data[0];
         double maxValue = data[length - 1];
         return (minValue + maxValue) / 2;
     }
 
     @Override
-    public double calcSampleVariance() {
-        return 0;
+    public double sampleVariance() {
+        double sum = 0;
+        double average = averageMean();
+        for (double value : data)
+        {
+            double diff = value - average;
+            diff *= diff;
+            sum += diff;
+        }
+        return sum  / (length -1);
     }
+
+    @Override
+    public double populationVariance() {
+        double sumDiffsSquared = 0.0;
+        double average = averageMean();
+        for (double value : data)
+        {
+            double diff = value - average;
+            diff *= diff;
+            sumDiffsSquared += diff;
+        }
+        return sumDiffsSquared  / length;
+    }
+
+    @Override
+    public double standardDeviationFromSample() {
+        double variance = sampleVariance();
+        return Math.sqrt(variance);
+    }
+
+    @Override
+    public double standardDeviationFromPopulation() {
+        double variance = populationVariance();
+        return Math.sqrt(variance);
+    }
+
 
     @Override
     public String toString() {

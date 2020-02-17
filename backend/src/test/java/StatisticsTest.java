@@ -12,8 +12,8 @@ public class StatisticsTest {
     Statistics statistics2 = new Statistics(data2);
 
     @Test
-    public void calcAverageMeanTest(){
-        double averageMean = statistics.calcAverageMean();
+    public void averageMeanTest(){
+        double averageMean = statistics.averageMean();
         assertTrue(4.125 == averageMean);
         assertFalse(6 == averageMean);
     }
@@ -30,25 +30,46 @@ public class StatisticsTest {
     }
 
     @Test
-    public void calcAverageMode(){
-        double averageMode = statistics.calcAverageMode();
-        double averageMode2 = statistics2.calcAverageMode();
+    public void averageModeTest(){
+        double averageMode = statistics.averageMode();
+        double averageMode2 = statistics2.averageMode();
 
         assertTrue(6 == averageMode);
         assertTrue(7 == averageMode2);
     }
 
     @Test
-    public void calcMidRange(){
-        double midRange = statistics.calcAverageMidRange();
+    public void midRangeTest(){
+        double midRange = statistics.averageMidRange();
         assertTrue(3.5 == midRange);
     }
 
     @Test
-    public void calcSampleVariance(){
-        double sampleVariance = statistics.calcSampleVariance();
+    public void sampleVarianceTest(){
+        double sampleVariance = statistics.sampleVariance();
         System.out.println(sampleVariance);
-        assertTrue(3.83928571429 == sampleVariance);
+        assertTrue(3.8392857142857144 == sampleVariance);
+    }
+
+    @Test
+    public void populationVarianceTest(){
+        double populationVariance = statistics.populationVariance();
+        System.out.println(populationVariance);
+        assertTrue(3.359375 == populationVariance);
+    }
+
+    @Test
+    public void standardDeviationFromSampleTest(){
+        double STD = statistics.standardDeviationFromSample();
+        System.out.println(STD);
+        assertTrue(1.9594095320493148 == STD);
+    }
+
+    @Test
+    public void standardDeviationFromPopulationTest(){
+        double STD = statistics.standardDeviationFromPopulation();
+        System.out.println(STD);
+        assertTrue(1.8328597873268975 == STD);
     }
 
 }
