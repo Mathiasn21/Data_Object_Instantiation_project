@@ -9,6 +9,7 @@ public interface IExtractor{
     /**
      * @param collector {@link ICollector}
      * @param columnName String
+     * @param <T> T extends ICollector
      * @return double[]
      */
     <T extends ICollector> double[] extractColumnDataFrom(T collector, String columnName);

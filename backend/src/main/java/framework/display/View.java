@@ -5,11 +5,10 @@ import framework.dataCollection.Item;
 
 /* TO DO:
 
-    * Get necessary data from Collector                 |   DONE: NO
+    * Get necessary data from API                       |   DONE: NO
     * Display necessary data in a chart                 |   DONE: NO
     * Get detailed information of a selected item       |   DONE: NO
     * Compare two separate items                        |   DONE: NO
-    * Edit the collected data                           |   DONE: NO
 
  */
 
@@ -32,10 +31,6 @@ public class View implements IView {
     }
 
     public String getAndShowComparison(Item item1, Item item2){
-        return null; //return null = placeholder
-    }
-
-    public String editInformation(){
         return null; //return null = placeholder
     }
 
