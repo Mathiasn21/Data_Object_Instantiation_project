@@ -11,7 +11,7 @@ public class Statistics implements IStatistics {
     private final int length;
 
     /**
-     * @param data
+     * @param data double[]
      */
     public Statistics(double[] data){
         this.data = data;
