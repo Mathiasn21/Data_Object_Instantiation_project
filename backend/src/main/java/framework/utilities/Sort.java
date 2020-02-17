@@ -28,7 +28,7 @@ public abstract class Sort implements ISort{
      * @param Ascending A boolean that describes the sorting order
      * @return Returns the ascended or descended string depending on what the user previously wanted.
      */
-    public String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending){
+    public static String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending){
         int length = sortByLength(string, string2, true).length();
 
         String sortedString = "";
@@ -52,7 +52,7 @@ public abstract class Sort implements ISort{
      * @param shortestToLongest A boolean that checks if you want to return the shortest or longest word (true = shortest, false = longest).
      * @return Returns the shortest or longest word, depending on what the user previously wanted.
      */
-    public String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest){
+    public static String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest){
         String sortedString;
 
         if(string.length() <= string2.length()){
@@ -70,7 +70,7 @@ public abstract class Sort implements ISort{
      * @param lowToHigh A boolean that checks if you want to return the lowest og highest weigth (true = lowest, false = highest).
      * @return Returns the lowest or highest weight, depending on what the user perviously wanted.
      */
-    public double sortByWeight(@NotNull double weight, @NotNull double weight2, boolean lowToHigh){
+    public static double sortByWeight(@NotNull double weight, @NotNull double weight2, boolean lowToHigh){
         double sortedWeight = 0;
 
         if(weight <= weight2) {
@@ -87,7 +87,7 @@ public abstract class Sort implements ISort{
      * @param string2 The second string you will compare the first string to.
      * @return Returns a random string.
      */
-    public String sortRandomly(@NotNull String string, @NotNull String string2){
+    public static String sortRandomly(@NotNull String string, @NotNull String string2){
         Random random = new Random();
         return random.nextInt(100) <= 50 ? string : string2;
     }
