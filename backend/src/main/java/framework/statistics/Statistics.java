@@ -18,6 +18,9 @@ public class Statistics implements IStatistics {
         this.length = data.length;
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double calcSum() {
         double sum = 0;
