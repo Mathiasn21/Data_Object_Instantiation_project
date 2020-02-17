@@ -1,6 +1,6 @@
 package framework.display;
 
-/** Class for the diffrent charts that the data will be displayed by
+/** Class for the different charts that the data will be displayed by
  * @author Robert Alexander Dankertsen
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
  * @version 1.0.0
