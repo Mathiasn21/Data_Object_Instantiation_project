@@ -79,4 +79,9 @@ public class JSONCollector extends Collector {
     public Item[] getCategoryBy(String name) {
         return new Item[0];
     }
+
+    @Override
+    public String[] getColumnBy(String columnName) {
+        return new String[0];
+    }
 }

@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Sorter tests: ")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SortTest {
+    Sort sort = new Sort();
     /** A stream of arguments that belongs to the parameterized test which sorts alpabetically in ascending order
      * @return Returns the expected outcome, the first variable and second variable
      */
@@ -88,7 +89,7 @@ public class SortTest {
     @Tag("Ascending")
     @DisplayName("Simple Test: Sorts ascending alphabetically")
     void sortAlpabeticallyTest(){
-        assertEquals("Abc", Sort.sortAlphabetically("Abc","Bcd", true));
+        assertEquals("Abc", sort.sortAlphabetically("Abc","Bcd", true));
     }
     @ParameterizedTest
     @Order(2)
@@ -97,7 +98,7 @@ public class SortTest {
     @DisplayName("Parameterized Test: Sorts ascending alphabetically")
     @MethodSource("CompareStrings")
     void sortAlpabeticallyParameterizedTest(String expected, String input1, String input2){
-        assertEquals(expected, Sort.sortAlphabetically(input1,input2,true));
+        assertEquals(expected, sort.sortAlphabetically(input1,input2,true));
         System.out.println(expected + " is the first of: " + input1 + " and " + input2);
     }
 
@@ -107,7 +108,7 @@ public class SortTest {
     @Tag("Descending")
     @DisplayName("Simple Test: Sorts descending alphabetically")
     void sortAlpabeticallyDescendingTest(){
-        assertEquals("Bcd", Sort.sortAlphabetically("Abc","Bcd",false));
+        assertEquals("Bcd", sort.sortAlphabetically("Abc","Bcd",false));
     }
     @ParameterizedTest
     @Order(4)
@@ -116,7 +117,7 @@ public class SortTest {
     @DisplayName("Parameterized Test: Sorts descending alphabetically")
     @MethodSource("CompareStringsDescending")
     void sortAlphabeticallyDescendingParameterizedTest(String expected, String input1, String input2) {
-        assertEquals(expected, Sort.sortAlphabetically(input1,input2,false));
+        assertEquals(expected, sort.sortAlphabetically(input1,input2,false));
         System.out.println(expected + " is the last of: " + input1 + " and " + input2);
     }
 
@@ -126,7 +127,7 @@ public class SortTest {
     @Tag("Ascending")
     @DisplayName("Simple Test: Sorts shortest to longest word")
     void sortLengthTest(){
-        assertEquals("To", Sort.sortByLength("To","Tre",true));
+        assertEquals("To", sort.sortByLength("To","Tre",true));
     }
     @ParameterizedTest
     @Order(6)
@@ -135,7 +136,7 @@ public class SortTest {
     @DisplayName("Parameterized Test: Sorts shortest to longest word")
     @MethodSource("CompareLength")
     void sortLengthParameterizedTest(String expected, String input1, String input2){
-        assertEquals(expected,Sort.sortByLength(input1,input2,true));
+        assertEquals(expected, sort.sortByLength(input1,input2,true));
         System.out.println(expected + " is the shortest word of: " + input1 + " and " + input2);
     }
 
@@ -145,7 +146,7 @@ public class SortTest {
     @Tag("Descending")
     @DisplayName("Simple Test: Sorts longest to shortest word")
     void sortLengthLongestTest(){
-        assertEquals("Tre", Sort.sortByLength("To","Tre",false));
+        assertEquals("Tre", sort.sortByLength("To","Tre",false));
     }
     @ParameterizedTest
     @Order(8)
@@ -154,7 +155,7 @@ public class SortTest {
     @DisplayName("Parameterized Test: Sorts longest to shortest word")
     @MethodSource("CompareLengthLongest")
     void sortLengthLongestParameterizedTest(String expected, String input1, String input2){
-        assertEquals(expected,Sort.sortByLength(input1,input2,false));
+        assertEquals(expected, sort.sortByLength(input1,input2,false));
         System.out.println(expected + " is the longest word of: " + input1 + " and " + input2);
     }
 
@@ -164,7 +165,7 @@ public class SortTest {
     @Tag("Ascending")
     @DisplayName("Simple Test: Sorts weight from lowest to highest")
     void sortWeightLowToHighTest(){
-        assertEquals(2.55, Sort.sortByWeight(2.55,3.8, true));
+        assertEquals(2.55, sort.sortByWeight(2.55,3.8, true));
     }
     @ParameterizedTest
     @Order(10)
@@ -173,7 +174,7 @@ public class SortTest {
     @DisplayName("Parameterized Test: Sorts weight from lowest to highest")
     @MethodSource("CompareWeight")
     void sortWeightLowToHighParameterizedTest(double expected, double input1, double input2){
-        assertEquals(expected, Sort.sortByWeight(input1,input2, true));
+        assertEquals(expected, sort.sortByWeight(input1,input2, true));
         System.out.println(expected + " is the lowest weight of " + input1 + " and " + input2);
     }
 
@@ -183,7 +184,7 @@ public class SortTest {
     @Tag("Descending")
     @DisplayName("Simple Test: Sorts weight from highest to lowest")
     void sortWeightLowToHighHighestTest(){
-        assertEquals(3.8, Sort.sortByWeight(2.55,3.8, false));
+        assertEquals(3.8, sort.sortByWeight(2.55,3.8, false));
     }
     @ParameterizedTest
     @Order(12)
@@ -192,7 +193,7 @@ public class SortTest {
     @DisplayName("Parameterized Test: Sorts weight from highest to lowest")
     @MethodSource("CompareWeightHighest")
     void sortWeightLowToHighHighestParameterizedTest(double expected, double input1, double input2){
-        assertEquals(expected, Sort.sortByWeight(input1,input2, false));
+        assertEquals(expected, sort.sortByWeight(input1,input2, false));
         System.out.println(expected + " is the highest weight of " + input1 + " and " + input2);
     }
 

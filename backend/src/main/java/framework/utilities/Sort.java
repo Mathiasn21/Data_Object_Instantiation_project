@@ -13,7 +13,6 @@ import java.util.Random;
     * Sort order:
         * Sort by ascending/lowest/shortest       |    DONE: YES
         * Sort descending/highest/longest         |    DONE: YES
-
 */
 
 /** Class for sorting the collected data
@@ -21,14 +20,14 @@ import java.util.Random;
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
  * @version 1.0
  */
-public abstract class Sort implements ISort{
+public class Sort implements ISort{
     /**
      * @param string The first string you want to compare.
      * @param string2 The second string that will be compared to the first string.
      * @param Ascending A boolean that describes the sorting order
      * @return Returns the ascended or descended string depending on what the user previously wanted.
      */
-    public static String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending){
+    public String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending){
         int length = sortByLength(string, string2, true).length();
 
         String sortedString = "";
@@ -52,7 +51,7 @@ public abstract class Sort implements ISort{
      * @param shortestToLongest A boolean that checks if you want to return the shortest or longest word (true = shortest, false = longest).
      * @return Returns the shortest or longest word, depending on what the user previously wanted.
      */
-    public static String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest){
+    public String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest){
         String sortedString;
 
         if(string.length() <= string2.length()){
@@ -70,7 +69,7 @@ public abstract class Sort implements ISort{
      * @param lowToHigh A boolean that checks if you want to return the lowest og highest weigth (true = lowest, false = highest).
      * @return Returns the lowest or highest weight, depending on what the user perviously wanted.
      */
-    public static double sortByWeight(@NotNull double weight, @NotNull double weight2, boolean lowToHigh){
+    public double sortByWeight(double weight, double weight2, boolean lowToHigh){
         double sortedWeight = 0;
 
         if(weight <= weight2) {
@@ -87,8 +86,38 @@ public abstract class Sort implements ISort{
      * @param string2 The second string you will compare the first string to.
      * @return Returns a random string.
      */
-    public static String sortRandomly(@NotNull String string, @NotNull String string2){
+    public String sortRandomly(@NotNull String string, @NotNull String string2){
         Random random = new Random();
         return random.nextInt(100) <= 50 ? string : string2;
+    }
+
+    @Override
+    public void sort(int[] array) {
+
+    }
+
+    @Override
+    public void sort(double[] array) {
+
+    }
+
+    @Override
+    public void sort(float[] array) {
+
+    }
+
+    @Override
+    public void sort(char[] array) {
+
+    }
+
+    @Override
+    public void sort(long[] array) {
+
+    }
+
+    @Override
+    public void orderBy(boolean ascending) {
+
     }
 }

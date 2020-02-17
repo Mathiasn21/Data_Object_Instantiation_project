@@ -8,10 +8,10 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.0
  */
 public interface ISort {
-    //String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending);
-    //String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest);
-    //double sortByWeight(@NotNull double weight, @NotNull double weight2, boolean lowToHigh);
-    //String sortRandomly(@NotNull String string, @NotNull String string2);
+    String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending);
+    String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest);
+    double sortByWeight(double weight, double weight2, boolean lowToHigh);
+    String sortRandomly(@NotNull String string, @NotNull String string2);
 
 
     //Primitive sorting

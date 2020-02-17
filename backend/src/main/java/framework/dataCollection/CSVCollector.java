@@ -3,6 +3,7 @@ package framework.dataCollection;
 import framework.HandleStorage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,11 +38,24 @@ public class CSVCollector extends Collector {
         initialize();
     }
 
+    public CSVCollector(@NotNull String fileName, @NotNull String[] primaryColumns){
+        this(fileName);
+        setPrimaryColumns(primaryColumns);
+    }
+
+    public CSVCollector(@NotNull File file, @NotNull String[] primaryColumns){
+        this(file.getName(), primaryColumns);
+    }
+
 
     private void initialize() {
         setAllSettings(settings);
     }
 
+    /**
+     * @param line String
+     * @return String[]
+     */
     @NotNull
     @Contract(pure = true)
     private String[] splitLineOn(@NotNull String line){
@@ -49,11 +63,17 @@ public class CSVCollector extends Collector {
         return line.split(delimiter);
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "CSVCollector";
     }
 
+    /**
+     * @return String[][]
+     */
     @Override
     public String[][] getAllColumns() {
         String[] primaryColumns = getAllPrimaryColumns();
@@ -67,6 +87,9 @@ public class CSVCollector extends Collector {
         return columns;
     }
 
+    /**
+     * @return List<String[]>
+     */
     public List<String[]> getInformationalRows() {
         return informationalRows;
     }
@@ -80,6 +103,14 @@ public class CSVCollector extends Collector {
         return new Item[0];
     }
 
+    @Override
+    public String[] getColumnBy(String columnName) {
+        return new String[0];
+    }
+
+    /**
+     * @throws IOException {@link IOException} IOException
+     */
     @Override
     public void loadAndReadFile() throws IOException {
         String line;
@@ -102,6 +133,10 @@ public class CSVCollector extends Collector {
     }
 
 
+    /**
+     * @param row String[]
+     * @return boolean
+     */
     @Contract(pure = true)
     private static boolean calcPRowContainsPrimaryColumns(@NotNull String[] row){
         //TODO: Delegate settings to config file

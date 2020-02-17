@@ -1,7 +1,9 @@
 package framework.dataCollection;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,4 +65,13 @@ public abstract class Collector implements ICollector{
     protected final String getSetting(Setting setting){
         return settings.get(setting);
     }
+
+    /**
+     * Returns an unmodifiable map see {@link Collections}
+     * for more information
+     * @return Map {@link Setting}, String.
+     */
+    @NotNull
+    @Contract(pure = true)
+    public final Map<Setting, String> getSettings(){ return Collections.unmodifiableMap(settings); }
 }
