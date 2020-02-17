@@ -3,7 +3,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("View tests: ")
+@DisplayName("Chart tests: ")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ChartTest {
     Chart chart = new Chart();
