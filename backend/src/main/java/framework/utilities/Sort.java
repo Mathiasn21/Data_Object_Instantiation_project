@@ -13,7 +13,6 @@ import java.util.Random;
     * Sort order:
         * Sort by ascending/lowest/shortest       |    DONE: YES
         * Sort descending/highest/longest         |    DONE: YES
-
 */
 
 /** Class for sorting the collected data
