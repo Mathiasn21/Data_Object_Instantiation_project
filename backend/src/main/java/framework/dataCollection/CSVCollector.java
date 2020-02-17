@@ -88,7 +88,7 @@ public class CSVCollector extends Collector {
     }
 
     /**
-     * @return List<String[]>
+     * @return List String[]
      */
     public List<String[]> getInformationalRows() {
         return informationalRows;
@@ -96,7 +96,7 @@ public class CSVCollector extends Collector {
 
     /**
      * @param name String
-     * @return
+     * @return Item[]
      */
     @Override
     public Item[] getCategoryBy(String name) {
