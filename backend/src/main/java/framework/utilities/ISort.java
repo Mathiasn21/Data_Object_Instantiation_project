@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
  * @author Robert Alexander Dankertsen Github: Yeti-Programing @ https://github.com/yeti-programing
  * @version 1.0
  */
-public interface ISort{
+public interface ISort {
     String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending);
     String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest);
-    double sortByWeight(@NotNull double weight, @NotNull double weight2, boolean lowToHigh);
+    double sortByWeight(double weight, double weight2, boolean lowToHigh);
     String sortRandomly(@NotNull String string, @NotNull String string2);
 
 
@@ -18,34 +18,33 @@ public interface ISort{
     /**
      * @param array int[]
      */
-    int[] sort(int[] array);
+    void sort(int[] array);
 
     /**
      * @param array double[]
      */
-    double[] sort(double[] array);
+    void sort(double[] array);
 
     /**
      * @param array float[]
      */
-    float[] sort(float[] array);
+    void sort(float[] array);
 
     /**
      * @param array char[]
      */
-    char[] sort(char[] array);
+    void sort(char[] array);
 
     /**
      * @param array long[]
      */
-    long[] sort(long[] array);
+    void sort(long[] array);
 
     /**
      * @param ascending boolean
      */
     void orderBy(boolean ascending);
 
-    <C extends Comparable> int sort(C comparable);
 
 
 
