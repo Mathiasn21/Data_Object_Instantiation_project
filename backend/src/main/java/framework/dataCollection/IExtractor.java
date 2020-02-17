@@ -4,11 +4,12 @@ package framework.dataCollection;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
+@FunctionalInterface
 public interface IExtractor{
     /**
      * @param collector {@link ICollector}
      * @param columnName String
      * @return double[]
      */
-    double[] extractColumnDataFrom(ICollector collector, String columnName);
+    <T extends ICollector> double[] extractColumnDataFrom(T collector, String columnName);
 }

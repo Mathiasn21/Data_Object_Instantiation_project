@@ -103,6 +103,11 @@ public class CSVCollector extends Collector {
         return new Item[0];
     }
 
+    @Override
+    public String[] getColumnBy(String columnName) {
+
+    }
+
     /**
      * @throws IOException {@link IOException} IOException
      */

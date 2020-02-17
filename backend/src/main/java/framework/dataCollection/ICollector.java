@@ -34,4 +34,6 @@ public interface ICollector {
      * @param value String
      */
     void setSetting(Setting key, String value);
+
+    String[] getColumnBy(String columnName);
 }
