@@ -3,8 +3,13 @@ package framework.display;
 import framework.dataCollection.Collector;
 import framework.dataCollection.Item;
 
+/** Class for displaying data
+ * @author Robert Alexander Dankertsen
+ * @author Github: Yeti-Programing @ https://github.com/yeti-programing
+ * @version 1.0.0
+ */
 public class View implements IView {
-    public String getData(){
+    public String getData() {
         return null; //return null = placeholder
     }
 
