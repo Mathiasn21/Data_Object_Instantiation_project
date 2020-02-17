@@ -18,17 +18,20 @@ public class Statistics implements IStatistics {
         this.length = data.length;
     }
 
+    @Override
+    public double calcSum() {
+        double sum = 0;
+        for(double i : data){
+            sum += i;
+        }
+        return sum;
+    }
+
     /**
      * @return double
      */
     public double averageMean() {
-        double[] values = data;
-        double total = 0;
-
-        for(double i : values){
-            total += i;
-        }
-        return total / values.length;
+        return calcSum() / length;
     }
 
     /**
