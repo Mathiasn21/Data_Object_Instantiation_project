@@ -2,24 +2,32 @@ package framework.dataCollection;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/** Class for collecting data
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
 public abstract class Collector implements ICollector{
     private String[] primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
 
 
+    /**
+     * @param list {@link List}
+     */
     protected void setPrimaryColumns(@NotNull List<String> list) {
         setPrimaryColumns(list.toArray(new String[0]));
     }
+
 
     /**
      * @param primaryColumns String[]
      */
     protected void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
+
 
     /**
      * @return String[]
@@ -46,6 +54,7 @@ public abstract class Collector implements ICollector{
     protected final void setAllSettings(Map<Setting, String> settings){
         this.settings.putAll(settings);
     }
+
 
     /**
      * @param setting Setting
