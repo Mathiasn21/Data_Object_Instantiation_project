@@ -3,8 +3,7 @@ package framework.statistics;
 import framework.statistics.Statistics;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class for testing statistics functions
@@ -21,15 +20,15 @@ public class StatisticsTest {
     @Test
     public void calcSum(){
         double sum = statistics.calcSum();
-        assertTrue(33.0 == sum);
+        assertEquals(33.0, sum);
     }
 
     @Test
     public void averageMeanTest(){
         double averageMean = statistics.averageMean();
         System.out.println(averageMean);
-        assertTrue(4.125 == averageMean);
-        assertFalse(6 == averageMean);
+        assertEquals(4.125, averageMean);
+        assertNotEquals(6, averageMean, 0.0);
     }
 
     @Test
@@ -39,8 +38,8 @@ public class StatisticsTest {
 
         System.out.println(medianEven);
         System.out.println(medianOdd);
-        assertTrue(4.5 == medianEven);
-        assertTrue(7 == medianOdd);
+        assertEquals(4.5, medianEven);
+        assertEquals(7, medianOdd);
     }
 
     @Test
@@ -48,38 +47,38 @@ public class StatisticsTest {
         double averageMode = statistics.averageMode();
         double averageMode2 = statistics2.averageMode();
 
-        assertTrue(6 == averageMode);
-        assertTrue(7 == averageMode2);
+        assertEquals(6, averageMode);
+        assertEquals(7, averageMode2);
     }
 
     @Test
     public void midRangeTest(){
         double midRange = statistics.averageMidRange();
-        assertTrue(3.5 == midRange);
+        assertEquals(3.5, midRange);
     }
 
     @Test
     public void sampleVarianceTest(){
         double sampleVariance = statistics.sampleVariance();
-        assertTrue(3.8392857142857144 == sampleVariance);
+        assertEquals(3.8392857142857144, sampleVariance);
     }
 
     @Test
     public void populationVarianceTest(){
         double populationVariance = statistics.populationVariance();
-        assertTrue(3.359375 == populationVariance);
+        assertEquals(3.359375, populationVariance);
     }
 
     @Test
     public void standardDeviationFromSampleTest(){
         double STD = statistics.standardDeviationFromSample();
-        assertTrue(1.9594095320493148 == STD);
+        assertEquals(1.9594095320493148, STD);
     }
 
     @Test
     public void standardDeviationFromPopulationTest(){
         double STD = statistics.standardDeviationFromPopulation();
-        assertTrue(1.8328597873268975 == STD);
+        assertEquals(1.8328597873268975, STD);
     }
 
 }

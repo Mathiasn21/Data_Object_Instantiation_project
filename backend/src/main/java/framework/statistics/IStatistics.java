@@ -16,5 +16,4 @@ public interface IStatistics {
     double populationVariance();
     double standardDeviationFromSample();
     double standardDeviationFromPopulation();
-
 }
