@@ -80,6 +80,10 @@ public class JSONCollector extends Collector {
         return new Item[0];
     }
 
+    /**
+     * @param columnName String
+     * @return String[]
+     */
     @Override
     public String[] getColumnBy(String columnName) {
         return new String[0];
