@@ -1,9 +1,16 @@
+package framework.statistics;
+
 import framework.statistics.Statistics;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class for testing statistics functions
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
+ * @version 1.0
+ */
 public class StatisticsTest {
     double [] data = {1,2,3,4,5,6,6,6};
     double [] data2 = {2,5,6,7,7,8,9};
@@ -47,28 +54,24 @@ public class StatisticsTest {
     @Test
     public void sampleVarianceTest(){
         double sampleVariance = statistics.sampleVariance();
-        System.out.println(sampleVariance);
         assertTrue(3.8392857142857144 == sampleVariance);
     }
 
     @Test
     public void populationVarianceTest(){
         double populationVariance = statistics.populationVariance();
-        System.out.println(populationVariance);
         assertTrue(3.359375 == populationVariance);
     }
 
     @Test
     public void standardDeviationFromSampleTest(){
         double STD = statistics.standardDeviationFromSample();
-        System.out.println(STD);
         assertTrue(1.9594095320493148 == STD);
     }
 
     @Test
     public void standardDeviationFromPopulationTest(){
         double STD = statistics.standardDeviationFromPopulation();
-        System.out.println(STD);
         assertTrue(1.8328597873268975 == STD);
     }
 

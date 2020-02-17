@@ -1,15 +1,26 @@
 package framework.statistics;
 
+/**
+ * Class for calculating statistics from the data {@link IStatistics}
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
+ * @version 1.0
+ */
 public class Statistics implements IStatistics {
 
     private final double[] data;
     private final int length;
 
+    /**
+     * @param data
+     */
     public Statistics(double[] data){
         this.data = data;
         this.length = data.length;
     }
 
+    /**
+     * @return double
+     */
     public double averageMean() {
         double[] values = data;
         double total = 0;
@@ -20,6 +31,9 @@ public class Statistics implements IStatistics {
         return total / values.length;
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double calcMedian() {
         double calcMid = length >> 1;
@@ -30,6 +44,9 @@ public class Statistics implements IStatistics {
         return data[upperBound];
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double averageMode() {
         double maxValue = 0, maxCount = 0;
@@ -49,6 +66,9 @@ public class Statistics implements IStatistics {
         return maxValue;
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double averageMidRange() {
         double minValue = data[0];
@@ -56,6 +76,9 @@ public class Statistics implements IStatistics {
         return (minValue + maxValue) / 2;
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double sampleVariance() {
         double sum = 0;
@@ -69,6 +92,9 @@ public class Statistics implements IStatistics {
         return sum  / (length -1);
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double populationVariance() {
         double sumDiffsSquared = 0.0;
@@ -82,18 +108,23 @@ public class Statistics implements IStatistics {
         return sumDiffsSquared  / length;
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double standardDeviationFromSample() {
         double variance = sampleVariance();
         return Math.sqrt(variance);
     }
 
+    /**
+     * @return double
+     */
     @Override
     public double standardDeviationFromPopulation() {
         double variance = populationVariance();
         return Math.sqrt(variance);
     }
-
 
     @Override
     public String toString() {

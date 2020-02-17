@@ -16,7 +16,6 @@ public abstract class Collector implements ICollector{
     private String[] primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
 
-
     /**
      * @param list {@link List}
      */
