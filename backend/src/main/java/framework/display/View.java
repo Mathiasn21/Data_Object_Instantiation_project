@@ -3,6 +3,16 @@ package framework.display;
 import framework.dataCollection.Collector;
 import framework.dataCollection.Item;
 
+/* TO DO:
+
+    * Get neccesary data form Collector                 |   DONE: NO
+    * Display necessary data in a chart                 |   DONE: NO
+    * Get detailed information of a selected item       |   DONE: NO
+    * Compare two separate items                        |   DONE: NO
+    * Edit the collected data                           |   DONE: NO
+
+ */
+
 /** Class for displaying data
  * @author Robert Alexander Dankertsen
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
