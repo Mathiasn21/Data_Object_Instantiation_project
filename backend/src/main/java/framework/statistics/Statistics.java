@@ -11,7 +11,7 @@ public class Statistics implements IStatistics {
     private final int length;
 
     /**
-     * @param data
+     * @param data double[]
      */
     public Statistics(double[] data){
         this.data = data;
@@ -21,14 +21,20 @@ public class Statistics implements IStatistics {
     /**
      * @return double
      */
-    public double averageMean() {
-        double[] values = data;
-        double total = 0;
-
-        for(double i : values){
-            total += i;
+    @Override
+    public double calcSum() {
+        double sum = 0;
+        for(double i : data){
+            sum += i;
         }
-        return total / values.length;
+        return sum;
+    }
+
+    /**
+     * @return double
+     */
+    public double averageMean() {
+        return calcSum() / length;
     }
 
     /**
