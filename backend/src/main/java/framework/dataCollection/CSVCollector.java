@@ -105,7 +105,7 @@ public class CSVCollector extends Collector {
 
     @Override
     public String[] getColumnBy(String columnName) {
-
+        return new String[0];
     }
 
     /**
