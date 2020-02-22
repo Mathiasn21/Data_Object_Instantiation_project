@@ -11,8 +11,6 @@ public interface ISort {
     String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending);
     String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest);
     double sortByWeight(double weight, double weight2, boolean lowToHigh);
-    String sortRandomly(@NotNull String string, @NotNull String string2);
-
 
     //Primitive sorting
     /**

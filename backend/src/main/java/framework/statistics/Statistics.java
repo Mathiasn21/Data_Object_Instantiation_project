@@ -1,5 +1,8 @@
 package framework.statistics;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Class for calculating statistics from the data {@link IStatistics}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
@@ -14,7 +17,8 @@ public class Statistics implements IStatistics {
     /**
      * @param data double[]
      */
-    public Statistics(double[] data){
+    @Contract(pure = true)
+    public Statistics(@NotNull double[] data){
         this.data = data;
         this.length = data.length;
     }

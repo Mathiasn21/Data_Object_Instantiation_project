@@ -82,16 +82,6 @@ public class Sort implements ISort{
         return sortedWeight;
     }
 
-    /**
-     * @param string The first string you want to compare.
-     * @param string2 The second string you will compare the first string to.
-     * @return Returns a random string.
-     */
-    public String sortRandomly(@NotNull String string, @NotNull String string2){
-        Random random = new Random();
-        return random.nextInt(100) <= 50 ? string : string2;
-    }
-
     @Override
     public void sort(int[] array) {
 
