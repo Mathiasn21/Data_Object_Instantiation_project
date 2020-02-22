@@ -9,6 +9,7 @@ public class Statistics implements IStatistics {
 
     private final double[] data;
     private final int length;
+    private double sum = 0;
 
     /**
      * @param data double[]
@@ -34,7 +35,7 @@ public class Statistics implements IStatistics {
      * @return double
      */
     public double averageMean() {
-        return calcSum() / length;
+        return (sum == 0 ? calcSum() : sum) / length;
     }
 
     /**
