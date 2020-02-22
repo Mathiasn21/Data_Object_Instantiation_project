@@ -90,8 +90,7 @@ public class Statistics implements IStatistics {
     public double sampleVariance() {
         double sum = 0;
         double average = averageMean();
-        for (double value : data)
-        {
+        for (double value : data) {
             double diff = value - average;
             diff *= diff;
             sum += diff;
@@ -106,8 +105,7 @@ public class Statistics implements IStatistics {
     public double populationVariance() {
         double sumDiffsSquared = 0.0;
         double average = averageMean();
-        for (double value : data)
-        {
+        for (double value : data) {
             double diff = value - average;
             diff *= diff;
             sumDiffsSquared += diff;
