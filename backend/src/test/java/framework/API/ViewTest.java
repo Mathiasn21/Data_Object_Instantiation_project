@@ -1,17 +1,18 @@
-package framework.display;
+package framework.API;
 
+import API.MainHandler;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("View tests: ")
+@DisplayName("MainHandler tests: ")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ViewTest {
-    View view = new View();
+    MainHandler mainHandler = new MainHandler();
 
     @Test
     @Order(0)
     void nullTest(){
-        assertNull(view.getData());
+        assertNull(mainHandler.getData());
     }
 }

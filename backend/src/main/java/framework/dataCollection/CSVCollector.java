@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * @version 1.0
  */
 public class CSVCollector extends Collector {
-    private final String fileName;
+    private String fileName;
     private final static Map<Setting, String> settings = new HashMap<>();
     private List<String[]> informationalRows = new ArrayList<>();
     private List<String[]> rows;
@@ -27,6 +27,11 @@ public class CSVCollector extends Collector {
     //Initiating default settings
     static {
         settings.put(Setting.DELIMITER, ",");
+    }
+
+    public CSVCollector(){
+        initialize();
+        fileName = null;
     }
 
     public CSVCollector(@NotNull File file) {

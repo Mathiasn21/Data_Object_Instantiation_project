@@ -1,8 +1,8 @@
-package framework.display;
+package API;
 
 import framework.dataCollection.Item;
 
-public interface IView {
+public interface IMainHandler {
     String getData();
     String displayChart();
     String displayDetailedInformation(Item item);

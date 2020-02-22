@@ -10,7 +10,6 @@ public enum Setting {
     DELIMITER("DELIMITER");
     public final String key;
 
-
     /**
      * @param key String
      */

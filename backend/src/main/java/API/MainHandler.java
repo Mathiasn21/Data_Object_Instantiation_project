@@ -1,23 +1,19 @@
-package framework.display;
+package API;
 
-import framework.dataCollection.Collector;
 import framework.dataCollection.Item;
 
-/* TO DO:
-
-    * Get necessary data from API                       |   DONE: NO
-    * Display necessary data in a chart                 |   DONE: NO
-    * Get detailed information of a selected item       |   DONE: NO
-    * Compare two separate items                        |   DONE: NO
-
+/* TODO:
+    * Handle incoming requests                          |   DONE: NO
+    * Allow retrieval of data                           |   DONE: NO
+    * Retrieve detailed information given item          |   DONE: NO
  */
 
-/** Class for displaying data
+/** Class handling backend API requests
  * @author Robert Alexander Dankertsen
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
  * @version 1.0.0
  */
-public class View implements IView {
+public class MainHandler implements IMainHandler {
     public String getData() {
         return null; //return null = placeholder
     }

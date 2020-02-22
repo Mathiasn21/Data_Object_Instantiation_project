@@ -15,7 +15,7 @@ import java.util.*;
  * @version 1.0
  */
 public class JSONCollector extends Collector {
-    private final String filename;
+    private String filename;
     private final static Map<Setting, String> settings = new HashMap<>();
     private List<String> primaryKeys;
     private List<JsonObject> jsonObjectValues;
@@ -28,6 +28,10 @@ public class JSONCollector extends Collector {
         this.filename = filename;
         this.primaryKeys = Arrays.asList(primaryKeys);
         setPrimaryColumns(primaryKeys);
+    }
+
+    public JSONCollector(){
+        filename = null;
     }
 
     /**
