@@ -8,26 +8,33 @@ import framework.dataCollection.Item;
     * Retrieve detailed information given item          |   DONE: NO
  */
 
-/** Class handling backend API requests
+/** Main class for handling backend API requests
  * @author Robert Alexander Dankertsen
  * @author Github: Yeti-Programing @ https://github.com/yeti-programing
+ * @author Mahtias W. Nilsen
+ * @author Github: Mathiasn21@https://github.com/Mathiasn21
  * @version 1.0.0
  */
 public class MainHandler implements IMainHandler {
-    public String getData() {
+    /**
+     * @param item String
+     * @return String string
+     */
+    public String getDataWith(String item) {
         return null; //return null = placeholder
     }
 
-    public String displayChart(){
-        return null; //return null = placeholder
-    }
+    /**
+     * @param request String
+     * @return String
+     */
+    @Override
+    public String handleRequestFrom(String request) { return null; } //TODO: implement method
 
-    public String displayDetailedInformation(Item item){
-        return null; //return null = placeholder
-    }
-
-    public String getAndShowComparison(Item item1, Item item2){
-        return null; //return null = placeholder
-    }
-
+    /**
+     * @param item {@link Item}
+     * @return Stirng
+     */
+    @Override
+    public String retrieveInformationFrom(Item item) { return null; } //TODO: implement method
 }

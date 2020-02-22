@@ -30,6 +30,10 @@ public class JSONCollector extends Collector {
         setPrimaryColumns(primaryKeys);
     }
 
+    /**
+     * Default constructor with a no file related to it.
+     * Filename must be set if one wishes to further utilize this class
+     */
     public JSONCollector(){
         filename = null;
     }
