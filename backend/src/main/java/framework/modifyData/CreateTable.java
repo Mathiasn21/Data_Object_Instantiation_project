@@ -1,5 +1,4 @@
 package framework.modifyData;
 
-public class ChangeData {
-
+public class CreateTable {
 }
