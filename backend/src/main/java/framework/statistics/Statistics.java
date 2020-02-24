@@ -74,6 +74,16 @@ public class Statistics implements IStatistics {
     }
 
     @Override
+    public double covariance() {
+        return 0;
+    }
+
+    @Override
+    public double correlation() {
+        return 0;
+    }
+
+    @Override
     public String toString() {
         return "Statistics calculation";
     }
