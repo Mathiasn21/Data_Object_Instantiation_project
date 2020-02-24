@@ -1,4 +1,4 @@
-package framework.dataCollection;
+package framework.collectors;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

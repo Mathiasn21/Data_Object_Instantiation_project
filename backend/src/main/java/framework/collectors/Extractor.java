@@ -1,5 +1,6 @@
-package framework.dataCollection;
+package framework.collectors;
 
+import framework.extractors.IExtractor;
 import org.jetbrains.annotations.NotNull;
 
 public class Extractor implements IExtractor {

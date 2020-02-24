@@ -1,4 +1,6 @@
-package framework.dataCollection;
+package framework.extractors;
+
+import framework.collectors.ICollector;
 
 /** Class for extracting primitive data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

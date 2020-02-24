@@ -1,6 +1,6 @@
-package framework.dataCollection.factory;
+package framework.collectors.factory;
 
-import framework.dataCollection.ICollector;
+import framework.collectors.ICollector;
 
 public interface ICollectorFactory<T extends ICollector> {
     T createCollectorFrom(String fileExtension);

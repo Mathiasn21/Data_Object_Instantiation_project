@@ -1,4 +1,4 @@
-package framework.dataCollection;
+package framework.collectors;
 
 import java.io.IOException;
 

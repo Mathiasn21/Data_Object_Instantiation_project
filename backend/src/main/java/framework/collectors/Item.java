@@ -1,4 +1,4 @@
-package framework.dataCollection;
+package framework.collectors;
 
 /** General data item in a dataset
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

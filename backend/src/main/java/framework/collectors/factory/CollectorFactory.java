@@ -1,10 +1,9 @@
-package framework.dataCollection.factory;
+package framework.collectors.factory;
 
-import framework.dataCollection.CSVCollector;
-import framework.dataCollection.ICollector;
-import framework.dataCollection.JSONCollector;
+import framework.collectors.CSVCollector;
+import framework.collectors.ICollector;
+import framework.collectors.JSONCollector;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,6 @@
-package framework.dataCollection;
+package framework.collectors;
+
+import framework.extractors.IExtractor;
 
 /** Class for sorting the collected data
  * @author Mathias Walter Nilsen

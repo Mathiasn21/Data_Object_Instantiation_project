@@ -1,4 +1,4 @@
-package framework.dataCollection;
+package framework.collectors;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

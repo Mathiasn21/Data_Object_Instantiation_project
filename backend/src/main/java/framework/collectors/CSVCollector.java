@@ -1,9 +1,8 @@
-package framework.dataCollection;
+package framework.collectors;
 
 import framework.HandleStorage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.File;

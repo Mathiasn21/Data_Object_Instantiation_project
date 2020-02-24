@@ -1,8 +1,7 @@
-import framework.dataCollection.CSVCollector;
-import framework.dataCollection.ICollector;
-import framework.dataCollection.JSONCollector;
-import framework.dataCollection.Setting;
-import framework.utilities.Sort;
+import framework.collectors.CSVCollector;
+import framework.collectors.ICollector;
+import framework.collectors.JSONCollector;
+import framework.collectors.Setting;
 
 import java.io.IOException;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package framework.dataCollection;
+package framework.collectors;
 
 import org.junit.jupiter.api.Test;
 
