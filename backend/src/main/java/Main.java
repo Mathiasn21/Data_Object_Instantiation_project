@@ -2,6 +2,7 @@ import framework.collectors.CSVCollector;
 import framework.collectors.ICollector;
 import framework.collectors.JSONCollector;
 import framework.collectors.Setting;
+import framework.utilities.Search;
 
 import java.io.IOException;
 import java.util.Arrays;
