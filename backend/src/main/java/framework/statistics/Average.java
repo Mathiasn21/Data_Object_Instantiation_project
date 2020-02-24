@@ -1,9 +1,7 @@
 package framework.statistics;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 /**
- * Class for calculating average methods from the data {@link IStatistics}
+ * Class for calculating average methods from the data {@link IAverage}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
