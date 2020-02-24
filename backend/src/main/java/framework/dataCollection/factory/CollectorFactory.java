@@ -19,7 +19,15 @@ public class CollectorFactory implements ICollectorFactory<ICollector> {
 
     @Override
     public ICollector createCollectorFrom(String fileExtension) {
-        return null;
+        Class<? extends ICollector> collectorClazz = strMappedToCollectors.get(fileExtension);
+        ICollector collector = null;
+        if(collectorClazz == CSVCollector.class){
+            collector = new CSVCollector();
+        }else if(collectorClazz == JSONCollector.class){
+            collector = new JSONCollector();
+        }
+
+        return collector;
     }
 
     @Override
