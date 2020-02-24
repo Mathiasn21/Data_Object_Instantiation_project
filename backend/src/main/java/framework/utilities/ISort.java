@@ -12,7 +12,6 @@ public interface ISort {
     String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest);
     double sortByWeight(double weight, double weight2, boolean lowToHigh);
 
-    //Primitive sorting
     /**
      * @param array int[]
      */
