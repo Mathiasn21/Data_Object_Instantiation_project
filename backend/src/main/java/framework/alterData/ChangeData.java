@@ -1,4 +1,4 @@
-package framework.modifyData;
+package framework.alterData;
 
 public class ChangeData {
 

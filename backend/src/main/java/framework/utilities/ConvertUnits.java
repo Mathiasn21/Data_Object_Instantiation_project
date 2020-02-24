@@ -1,4 +1,4 @@
 package framework.utilities;
 
-public class ConvertUnits {
+public enum ConvertUnits {
 }
