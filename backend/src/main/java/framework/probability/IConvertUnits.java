@@ -1,4 +1,4 @@
-package framework.statistics;
+package framework.probability;
 
 public interface IConvertUnits {
 
