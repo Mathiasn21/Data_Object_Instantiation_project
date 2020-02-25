@@ -1,8 +1,6 @@
 package framework.utilities;
 
 import java.text.DecimalFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /** Class for converting data to select units
  * @author Robert Alexander Dankertsen
@@ -37,15 +35,5 @@ public class ConvertUnits {
      */
     public double round(double number){
         return Math.round(number);
-    }
-
-    /**
-     * @param fromUnit what unit it will be converted from (KM, Inch, CM)
-     * @param toUnit what unit it will be converted to (KM, Inch, CM)
-     * @param number the number of the unit that it wil be converted from (if km: 1000)
-     * @return
-     */
-    public double convertDistance(String fromUnit, String toUnit, double number){
-        return 0;
     }
 }

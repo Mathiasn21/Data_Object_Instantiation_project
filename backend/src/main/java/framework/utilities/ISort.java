@@ -12,29 +12,34 @@ public interface ISort {
     String sortByLength(@NotNull String string, @NotNull String string2);
     double sortByWeight(double weight, double weight2);
 
+
     /**
      * @param array int[]
      */
-    void sort(int[] array);
+    int sort(int[] array);
 
     /**
      * @param array double[]
      */
-    void sort(double[] array);
+    int sort(double[] array);
 
     /**
      * @param array float[]
      */
-    void sort(float[] array);
+    int sort(float[] array);
 
     /**
      * @param array char[]
      */
-    void sort(char[] array);
+    int sort(char[] array);
 
     /**
      * @param array long[]
      */
-    void sort(long[] array);
+    int sort(long[] array);
 
+    void reverse();
+
+
+    //sort with a given datastructure
 }
