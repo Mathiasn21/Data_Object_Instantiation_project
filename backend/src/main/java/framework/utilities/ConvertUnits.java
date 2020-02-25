@@ -15,7 +15,6 @@ public class ConvertUnits {
      */
     public String convertToThousandth(int number){
         DecimalFormat df = new DecimalFormat("#.###");
-
         return df.format(number);
     }
 
