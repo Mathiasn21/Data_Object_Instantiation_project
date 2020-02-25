@@ -64,7 +64,7 @@ public class ConvertUnits {
      * @param number the number of the unit that it wil be converted from (if km: 1000)
      * @return
      */
-    public double convertDistance(String fromUnit, String toUnit, double number){
+    public double convertFromUnitToUnit(String fromUnit, String toUnit, double number){
         return 0;
     }
 }
