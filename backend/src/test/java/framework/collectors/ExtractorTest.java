@@ -23,7 +23,7 @@ public class ExtractorTest implements IExtractor {
      * @return double[]
      */
     @Override
-    public double[] extractColumnDataFrom(ICollector collector, String columnName) {
+    public double[] extractColumnFrom(ICollector collector, String columnName) {
         return new double[0];
     }
 }

@@ -14,5 +14,5 @@ public interface IExtractor{
      * @param <T> T extends ICollector
      * @return double[]
      */
-    <T extends ICollector> double[] extractColumnDataFrom(T collector, String columnName);
+    <T extends ICollector> double[] extractColumnFrom(T collector, String columnName);
 }
