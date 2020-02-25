@@ -2,7 +2,11 @@ package framework.utilities;
 
 import framework.collectors.Item;
 
+/** Class for searching in a given dataset
+ * @version 1.0.
+ */
 public class Search {
+
     public Item searchBy(String string){
         //TODO: implement method
         return null;
