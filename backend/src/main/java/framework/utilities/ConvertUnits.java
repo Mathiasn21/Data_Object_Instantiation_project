@@ -1,6 +1,5 @@
 package framework.utilities;
 
-import java.text.DecimalFormat;
 
 /** Class for converting data to select units
  * @author Robert Alexander Dankertsen
@@ -13,9 +12,9 @@ public class ConvertUnits {
      * @param number number to be converted to thousandth
      * @return the thousandth of the number
      */
-    public Double convertToThousandth(int number){
+    public double convertToThousandth(int number){
         //TODO: implement method
-        return null;
+        return 0;
         /* DecimalFormat df = new DecimalFormat("#.###");
         return df.format(number);*/
     }
@@ -24,7 +23,7 @@ public class ConvertUnits {
      * @param number number to be converted to percent
      * @return the percentage
      */
-    public Double convertToPercent(double number){
+    public double convertToPercent(double number){
         return (number*100)/100;
     }
 
