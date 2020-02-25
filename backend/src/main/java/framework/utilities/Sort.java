@@ -83,9 +83,4 @@ public class Sort implements ISort{
     public void sort(long[] array) {
 
     }
-
-    @Override
-    public void orderBy(boolean ascending) {
-
-    }
 }

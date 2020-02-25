@@ -36,12 +36,8 @@ public interface ISort {
      * @param array long[]
      */
     void sort(long[] array);
-
-
-    /**
-     * @param ascending
-     */
-    void orderBy(boolean ascending);
+    
+    void reverse();
 
 
     //sort with a given datastructure
