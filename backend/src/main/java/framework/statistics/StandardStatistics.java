@@ -76,11 +76,13 @@ public class StandardStatistics implements IStatistics {
 
     @Override
     public double covariance() {
+        //TODO: implement method
         return 0;
     }
 
     @Override
     public double correlation() {
+        //TODO: implement method
         return 0;
     }
 
