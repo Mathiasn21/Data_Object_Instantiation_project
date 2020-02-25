@@ -1,5 +1,8 @@
 package framework.statistics;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Class for calculating average methods from the data {@link IAverage}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
@@ -14,7 +17,8 @@ public class Average implements IAverage{
     /**
      * @param data double[]
      */
-    public Average(double[] data){
+    @Contract(pure = true)
+    public Average(@NotNull double[] data){
         this.data = data;
         this.length = data.length;
     }
