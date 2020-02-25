@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.0.0
  */
 public interface ISort {
-    String sortAlphabetically(@NotNull String string, @NotNull String string2, boolean Ascending);
-    String sortByLength(@NotNull String string, @NotNull String string2, boolean shortestToLongest);
-    double sortByWeight(double weight, double weight2, boolean lowToHigh);
+    String sortAlphabetically(@NotNull String string, @NotNull String string2);
+    String sortByLength(@NotNull String string, @NotNull String string2);
+    double sortByWeight(double weight, double weight2);
 
     /**
      * @param array int[]
@@ -37,12 +37,11 @@ public interface ISort {
      */
     void sort(long[] array);
 
+
     /**
-     * @param ascending boolean
+     * @param ascending
      */
     void orderBy(boolean ascending);
-
-
 
 
     //sort with a given datastructure

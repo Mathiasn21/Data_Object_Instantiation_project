@@ -1,5 +1,6 @@
-package framework.collectors;
+package framework.extractors;
 
+import framework.collectors.ICollector;
 import framework.extractors.IExtractor;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,4 +10,5 @@ public class Extractor implements IExtractor {
         String[] data = collector.getColumnBy(columnName);
         return new double[0];
     }
+
 }
