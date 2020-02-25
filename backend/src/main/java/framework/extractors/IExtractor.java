@@ -18,4 +18,5 @@ public interface IExtractor{
     <T extends ICollector> double[] extractColumnFrom(T collector, String columnName);
 
     <T extends ICollector> Map<String, Integer> extractReportFom(T collector, String columnName);
+
 }
