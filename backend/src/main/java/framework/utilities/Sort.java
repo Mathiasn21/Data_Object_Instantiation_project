@@ -1,8 +1,6 @@
 package framework.utilities;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
 /* TO DO:
     * Sort type:
         * Sort by alpabetically                   |    DONE: YES
@@ -60,27 +58,32 @@ public class Sort implements ISort{
     }
 
     @Override
-    public void sort(int[] array) {
+    public int sort(int[] array) {
 
+        return 0;
     }
 
     @Override
-    public void sort(double[] array) {
+    public int sort(double[] array) {
 
+        return 0;
     }
 
     @Override
-    public void sort(float[] array) {
+    public int sort(float[] array) {
 
+        return 0;
     }
 
     @Override
-    public void sort(char[] array) {
+    public int sort(char[] array) {
 
+        return 0;
     }
 
     @Override
-    public void sort(long[] array) {
+    public int sort(long[] array) {
 
+        return 0;
     }
 }
