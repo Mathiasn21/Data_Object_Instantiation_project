@@ -86,4 +86,9 @@ public class Sort implements ISort{
 
         return 0;
     }
+
+    @Override
+    public void reverse() {
+        
+    }
 }
