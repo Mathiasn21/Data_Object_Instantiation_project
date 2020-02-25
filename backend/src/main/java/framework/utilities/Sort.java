@@ -83,5 +83,5 @@ public class Sort implements ISort{
     public void sort(long[] array) {
 
     }
-    
+
 }

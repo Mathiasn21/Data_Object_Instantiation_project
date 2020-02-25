@@ -37,12 +37,4 @@ public interface ISort {
      */
     void sort(long[] array);
 
-
-    /**
-     * @param ascending
-     */
-    void orderBy(boolean ascending);
-
-
-    //sort with a given datastructure
 }
