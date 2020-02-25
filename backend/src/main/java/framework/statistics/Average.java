@@ -82,4 +82,9 @@ public class Average implements IAverage{
         double maxValue = data[length - 1];
         return (minValue + maxValue) / 2;
     }
+
+    @Override
+    public String toString() {
+        return "Average calculation";
+    }
 }
