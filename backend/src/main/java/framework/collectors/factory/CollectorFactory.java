@@ -29,7 +29,7 @@ public class CollectorFactory implements ICollectorFactory<ICollector> {
         return collector;
     }
 
-    
+
     @Override
     public ICollector createCollectorFrom(Class<ICollector> clazz) {
         return null;
