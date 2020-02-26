@@ -19,14 +19,14 @@ public abstract class Collector implements ICollector{
     /**
      * @param list {@link List}
      */
-    protected void setPrimaryColumns(@NotNull List<String> list) {
+    protected final void setPrimaryColumns(@NotNull List<String> list) {
         setPrimaryColumns(list.toArray(new String[0]));
     }
 
     /**
      * @param primaryColumns String[]
      */
-    protected void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
+    protected final void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
 
     /**
      * @return String[]
@@ -41,7 +41,7 @@ public abstract class Collector implements ICollector{
      * @param value String String
      */
     @Override
-    public void setSetting(Setting key, String value) {
+    public final void setSetting(Setting key, String value) {
         settings.put(key, value);
     }
 
