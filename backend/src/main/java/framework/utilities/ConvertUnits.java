@@ -2,11 +2,10 @@ package framework.utilities;
 
 
 /** Class for converting data to select units
- * @author Robert Alexander Dankertsen
- * @author Github: Yeti-Programing @ https://github.com/yeti-programing
- * @version 1.0.+
+ * @author Robert Alexander Dankertsen @ Github: Yeti-Programing - https://github.com/yeti-programing
+ * @version 1.0.0
  */
-public class ConvertUnits {
+public class ConvertUnits implements IConvertUnits {
 
     /**
      * @param number number to be converted to thousandth
