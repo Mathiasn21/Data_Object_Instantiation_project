@@ -22,7 +22,7 @@ public class CollectorFactory implements ICollectorFactory<ICollector> {
         ICollector collector = null;
         if(collectorClazz == CSVCollector.class){
             collector = new CSVCollector();
-        }else if(collectorClazz == JSONCollector.class){
+        }else if(collectorClazz == JSONCollector.class) {
             collector = new JSONCollector();
         }
 
