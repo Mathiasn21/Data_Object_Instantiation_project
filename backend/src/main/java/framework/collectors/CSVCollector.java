@@ -24,7 +24,7 @@ public class CSVCollector extends Collector {
     private List<String[]> rows;
 
     //Initiating default settings
-    static {
+    {
         settings.put(Setting.DELIMITER, ",");
     }
 
@@ -37,16 +37,27 @@ public class CSVCollector extends Collector {
         this(file.getName());
     }
 
+    /**
+     * @param fileName String
+     */
     public CSVCollector(@NotNull String fileName) {
         this.fileName = fileName;
         initialize();
     }
 
+    /**
+     * @param fileName String
+     * @param primaryColumns String[]
+     */
     public CSVCollector(@NotNull String fileName, @NotNull String[] primaryColumns){
         this(fileName);
         setPrimaryColumns(primaryColumns);
     }
 
+    /**
+     * @param file {@link File}
+     * @param primaryColumns String[]
+     */
     public CSVCollector(@NotNull File file, @NotNull String[] primaryColumns){
         this(file.getName(), primaryColumns);
     }

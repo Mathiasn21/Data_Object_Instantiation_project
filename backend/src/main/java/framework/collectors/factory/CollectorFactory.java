@@ -25,7 +25,6 @@ public class CollectorFactory implements ICollectorFactory<ICollector> {
         }else if(collectorClazz == JSONCollector.class) {
             collector = new JSONCollector();
         }
-
         return collector;
     }
 

@@ -1,5 +1,7 @@
 package framework.collectors;
 
+import framework.collectors.factory.CollectorFactory;
+import framework.collectors.factory.ICollectorFactory;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -68,4 +70,10 @@ public abstract class Collector implements ICollector{
     @NotNull
     @Contract(pure = true)
     public final Map<Setting, String> getSettings(){ return Collections.unmodifiableMap(settings); }
+
+    @NotNull
+    public static ICollector createCollectorFromFileExtension(String extension){
+        ICollectorFactory factory = new CollectorFactory();
+        return factory.createCollectorFrom(extension);
+    }
 }
