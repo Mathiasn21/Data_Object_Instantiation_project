@@ -56,7 +56,7 @@ public abstract class Collector implements ICollector{
      * @param setting Setting
      * @return String
      */
-    protected final String getSetting(Setting setting){
+    protected final String getSetting(@NotNull Setting setting){
         return settings.get(setting);
     }
 
