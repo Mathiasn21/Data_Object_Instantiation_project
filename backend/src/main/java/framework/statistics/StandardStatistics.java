@@ -31,7 +31,7 @@ public class StandardStatistics implements IStatistics {
     @Override
     public double sampleVariance() {
         double sum = 0;
-        double avg = average.averageMean();
+        double avg = average.calcMean();
         for (double value : data) {
             double diff = value - avg;
             diff *= diff;
@@ -47,7 +47,7 @@ public class StandardStatistics implements IStatistics {
     @Override
     public double populationVariance() {
         double sumDiffsSquared = 0.0;
-        double avg = average.averageMean();
+        double avg = average.calcMean();
         for (double value : data) {
             double diff = value - avg;
             diff *= diff;

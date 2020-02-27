@@ -23,7 +23,7 @@ public class AverageTest {
     }
     @Test
     public void averageMeanTest(){
-        double averageMean = average.averageMean();
+        double averageMean = average.calcMean();
         System.out.println(averageMean);
         assertEquals(4.125, averageMean);
         assertNotEquals(6, averageMean, 0.0);
@@ -31,8 +31,8 @@ public class AverageTest {
 
     @Test
     public void calcMedianTest(){
-        double medianEven = average.median();
-        double medianOdd = average2.median();
+        double medianEven = average.calcMedian();
+        double medianOdd = average2.calcMedian();
 
         System.out.println(medianEven);
         System.out.println(medianOdd);
@@ -42,8 +42,8 @@ public class AverageTest {
 
     @Test
     public void averageModeTest(){
-        double averageMode = average.averageMode();
-        double averageMode2 = average2.averageMode();
+        double averageMode = average.calcMode();
+        double averageMode2 = average2.calcMode();
 
         assertEquals(6, averageMode);
         assertEquals(7, averageMode2);
@@ -51,7 +51,7 @@ public class AverageTest {
 
     @Test
     public void midRangeTest(){
-        double midRange = average.averageMidRange();
+        double midRange = average.calcMidRange();
         assertEquals(3.5, midRange);
     }
 

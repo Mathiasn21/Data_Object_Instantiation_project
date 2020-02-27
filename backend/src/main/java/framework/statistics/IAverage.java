@@ -7,8 +7,8 @@ package framework.statistics;
  */
 public interface IAverage {
     double calcSum();
-    double averageMean();
-    double median();
-    double averageMode();
-    double averageMidRange();
+    double calcMean();
+    double calcMedian();
+    double calcMode();
+    double calcMidRange();
 }

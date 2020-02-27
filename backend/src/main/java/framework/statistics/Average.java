@@ -39,7 +39,7 @@ public class Average implements IAverage{
     /**
      * @return double
      */
-    public double averageMean() {
+    public double calcMean() {
         return (sum == 0 ? calcSum() : sum) / length;
     }
 
@@ -47,7 +47,7 @@ public class Average implements IAverage{
      * @return double
      */
     @Override
-    public double median() {
+    public double calcMedian() {
         double calcMid = length >> 1;
         int lowerBound = (int)(calcMid -1);
         int upperBound = (int)calcMid;
@@ -60,7 +60,7 @@ public class Average implements IAverage{
      * @return double
      */
     @Override
-    public double averageMode() {
+    public double calcMode() {
         double maxValue = 0, maxCount = 0;
         int i, j;
 
@@ -82,7 +82,7 @@ public class Average implements IAverage{
      * @return double
      */
     @Override
-    public double averageMidRange() {
+    public double calcMidRange() {
         double minValue = data[0];
         double maxValue = data[length - 1];
         return (minValue + maxValue) / 2;
