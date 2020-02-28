@@ -2,6 +2,9 @@ package DTOs;
 
 import framework.annotations.DTO;
 
+/**
+ * Class representing usage for the DTO annotation
+ */
 @DTO
 public class DTOs {
     public String field1;

@@ -76,4 +76,14 @@ public abstract class Collector implements ICollector{
         ICollectorFactory factory = new CollectorFactory();
         return factory.createCollectorFrom(extension);
     }
+
+    
+    /**
+     * @param mb int
+     */
+    @Contract(pure = true)
+    @Override
+    public final void setMaxMemoryMB(int mb){
+        //TODO: implement setMaxMemoryMB()
+    }
 }

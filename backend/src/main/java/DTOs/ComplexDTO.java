@@ -3,7 +3,7 @@ package DTOs;
 import framework.annotations.DTOField;
 
 /**
- * ComplexDTO that contains various data fields that are not to be mapped to
+ * ComplexDTO that contains custom field that require mapping
  */
 public class ComplexDTO {
     @DTOField

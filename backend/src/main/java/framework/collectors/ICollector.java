@@ -36,4 +36,10 @@ public interface ICollector {
     void setSetting(Setting key, String value);
 
     String[] getColumnBy(String columnName);
+
+    /**
+     * @param mb int
+     */
+    void setMaxMemoryMB(int mb);
+
 }
