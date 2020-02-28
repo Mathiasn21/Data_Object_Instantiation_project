@@ -77,7 +77,7 @@ public abstract class Collector implements ICollector{
         return factory.createCollectorFrom(extension);
     }
 
-    
+
     /**
      * @param mb int
      */
