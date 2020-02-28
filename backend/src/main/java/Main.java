@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws IOException {
         testCollectors();
+
     }
 
     private static void testCollectors() throws IOException {
