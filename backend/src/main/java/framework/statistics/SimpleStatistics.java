@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public class StandardStatistics implements IStatistics {
+public class SimpleStatistics implements IStatistics {
 
     private final double[] data;
     private final int length;
@@ -18,7 +18,7 @@ public class StandardStatistics implements IStatistics {
      * @param data double[]
      */
     @Contract(pure = true)
-    public StandardStatistics(@NotNull double[] data){
+    public SimpleStatistics(@NotNull double[] data){
         this.data = data;
         this.length = data.length;
         this.average = new Average(data);
@@ -88,6 +88,6 @@ public class StandardStatistics implements IStatistics {
 
     @Override
     public String toString() {
-        return "StandardStatistics calculation";
+        return "SimpleStatistics calculation";
     }
 }

@@ -71,8 +71,12 @@ public abstract class Collector implements ICollector{
     @Contract(pure = true)
     public final Map<Setting, String> getSettings(){ return Collections.unmodifiableMap(settings); }
 
+    /**
+     * @param extension String
+     * @return ICollector {@link ICollector}
+     */
     @NotNull
-    public static ICollector createCollectorFromFileExtension(String extension){
+    public static ICollector fromFileExtension(String extension){
         ICollectorFactory factory = new CollectorFactory();
         return factory.createCollectorFrom(extension);
     }
