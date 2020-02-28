@@ -1,6 +1,6 @@
 package framework.database;
 
-/** Class representing valid settings
+/** Class interacting with a db
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */

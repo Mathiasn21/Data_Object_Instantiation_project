@@ -7,6 +7,10 @@ import framework.collectors.JSONCollector;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
 public class CollectorFactory implements ICollectorFactory<ICollector> {
     private static final Map<String, Class<? extends ICollector>> strMappedToCollectors = new HashMap<>();
     static{
