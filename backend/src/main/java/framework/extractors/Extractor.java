@@ -22,7 +22,7 @@ public class Extractor implements IExtractor {
      * @param columnName String
      * @param <T> T extends {@link ICollector}
      * @return T extends {@link ICollector}
-     */
+     */ gr
     @Override
     public <T extends ICollector> Map<String, Integer> extractReportFom(T collector, String columnName) {
         return null;
