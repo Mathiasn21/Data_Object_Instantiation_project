@@ -21,14 +21,16 @@ public abstract class Collector implements ICollector{
     /**
      * @param list {@link List}
      */
-    protected final void setPrimaryColumns(@NotNull List<String> list) {
+    @Override
+    public final void setPrimaryColumns(@NotNull List<String> list) {
         setPrimaryColumns(list.toArray(new String[0]));
     }
 
     /**
      * @param primaryColumns String[]
      */
-    protected final void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
+    @Override
+    public final void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
 
     /**
      * @return String[]
@@ -50,7 +52,8 @@ public abstract class Collector implements ICollector{
     /**
      * @param settings Map String String
      */
-    protected final void setAllSettings(Map<Setting, String> settings){
+    @Override
+    public final void setAllSettings(Map<Setting, String> settings){
         this.settings.putAll(settings);
     }
 
@@ -90,4 +93,5 @@ public abstract class Collector implements ICollector{
     public final void setMaxMemoryMB(int mb){
         //TODO: implement setMaxMemoryMB()
     }
+
 }

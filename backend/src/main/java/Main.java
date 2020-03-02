@@ -9,14 +9,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException {
         testCollectors();
-        Collector c = Collector.fromFileExtension("csv");
-        CBuilder b = new CBuilder();
-        Collector c2 = b
-                .setFileExtension()
-                .setMaxMemory(200, "MB")
-                .buildCollector();
-
-
+        ICollector c = Collector.fromFileExtension("csv");
+        CollectorBuilder b = new CollectorBuilder("csv");
+        ICollector c2 = b
+                .setMaxMemoryMB(200)
+                .build();
     }
 
     private static void testCollectors() throws IOException {
