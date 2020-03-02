@@ -17,13 +17,15 @@ public class DataObjectTest{
     private static final long field4 = 120322134;
 
     @Test
+    @SuppressWarnings("unchecked")
     void object_instantiation(){
         Reflections reflections = new Reflections("");
         Set<Class<?>> set = reflections.getTypesAnnotatedWith(DataObject.class);
         Object[] arr = set.toArray();
         System.out.println(arr[0].getClass().toString());
         Class<DataObjectStubb> object = (Class<DataObjectStubb>) arr[0].getClass().cast(DataObjectStubb.class);
-        System.out.println(arr[0].getClass().getCanonicalName());
+        Class<DataObject> test = (Class<DataObject>) arr[0].getClass().cast(DataObject.class);
+        System.out.println(Arrays.toString(test.getClasses()));
 
         try {
             Constructor<DataObjectStubb> constructor = object.getConstructor(String.class, int.class, float.class, long.class);
