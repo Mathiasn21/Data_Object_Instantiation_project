@@ -5,6 +5,7 @@ import framework.stubb.DataObjectStubb;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +21,9 @@ public class DataObjectTest{
         Reflections reflections = new Reflections("");
         Set<Class<?>> set = reflections.getTypesAnnotatedWith(DataObject.class);
         Object[] arr = set.toArray();
-        Class<DataObjectStubb> object = (Class<DataObjectStubb>) arr[0];
+        System.out.println(arr[0].getClass().toString());
+        Class<DataObjectStubb> object = (Class<DataObjectStubb>) arr[0].getClass().cast(DataObjectStubb.class);
+        System.out.println(arr[0].getClass().getCanonicalName());
 
         try {
             Constructor<DataObjectStubb> constructor = object.getConstructor(String.class, int.class, float.class, long.class);
@@ -31,7 +34,7 @@ public class DataObjectTest{
         } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        System.out.println(arr[0]);
+
     }
 
     @Test
