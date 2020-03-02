@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public final class CSVCollector extends Collector {
+final class CSVCollector extends Collector {
     private String fileName;
     private final static Map<Setting, String> settings = new HashMap<>();
     private List<String[]> informationalRows = new ArrayList<>();

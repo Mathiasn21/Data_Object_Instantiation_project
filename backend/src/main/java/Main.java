@@ -15,8 +15,6 @@ public class Main {
                 .setFileExtension()
                 .setMaxMemory(200, "MB")
                 .buildCollector();
-
-
     }
 
     private static void testCollectors() throws IOException {
