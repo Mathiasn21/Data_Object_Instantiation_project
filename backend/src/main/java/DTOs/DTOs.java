@@ -1,8 +1,12 @@
 package DTOs;
 
+import framework.annotations.DataObject;
+
+
 /**
  * Class representing usage for the DataObject annotation
  */
+@DataObject(fileName = "name")
 public class DTOs {
     public String field1;
     public int field2;
@@ -14,5 +18,15 @@ public class DTOs {
         this.field2 = field2;
         this.field3 = field3;
         this.field4 = field4;
+    }
+
+    @Override
+    public String toString() {
+        return "DTOs{" +
+                "field1='" + field1 + '\'' +
+                ", field2=" + field2 +
+                ", field3=" + field3 +
+                ", field4=" + field4 +
+                '}';
     }
 }
