@@ -7,4 +7,5 @@ package framework.annotations;
 
 public @interface DataObjectField {
     //TODO: implement functionality to map data to object fields
+
 }
