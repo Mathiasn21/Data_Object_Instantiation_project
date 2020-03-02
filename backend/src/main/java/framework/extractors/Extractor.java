@@ -17,6 +17,7 @@ public class Extractor implements IExtractor {
         return new double[0];
     }
 
+
     /**
      * @param collector {@link ICollector}
      * @param columnName String
