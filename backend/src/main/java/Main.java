@@ -3,13 +3,23 @@ import framework.collectors.ICollector;
 import framework.collectors.JSONCollector;
 import framework.collectors.Setting;
 import framework.datastructure.AVLTree;
+import framework.annotations.DTO;
+import framework.collectors.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         testCollectors();
+        Collector c = Collector.fromFileExtension("csv");
+        CBuilder b = new CBuilder();
+        Collector c2 = b
+                .setFileExtension()
+                .setMaxMemory(200, "MB")
+                .buildCollector();
         testAVL();
     }
 
@@ -60,6 +70,7 @@ public class Main {
             if(column.length == 0)continue;
             System.out.println(Arrays.toString(column));
         }
+
 
         System.out.println("\n\n");
         String[] primaryKeys = {"Institusjonskode", "Institusjonsnavn"};
