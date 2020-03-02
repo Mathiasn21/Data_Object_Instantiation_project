@@ -1,7 +1,7 @@
 package DTOs;
 
 /**
- * Class representing usage for the DTO annotation
+ * Class representing usage for the DataObject annotation
  */
 public class DTOs {
     public String field1;
