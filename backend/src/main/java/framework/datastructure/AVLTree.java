@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AVLTree {
+
+    private static final int MAX_HALF_LENGTH = 4;
+
     public static class Node {
         private Node left, right;
         private int height = 1;
@@ -101,7 +104,6 @@ public class AVLTree {
         return current;
     }
 
-    @SuppressWarnings("unused")
     public Node deleteNode(Node root, int value) {
         if (root == null)
             return null;
@@ -157,22 +159,19 @@ public class AVLTree {
             return;
         }
 
-        int height = root.height,
-                width = (int)Math.pow(2, height-1);
+        int height = root.height, width = (int)Math.pow(2, height-1);
 
-        List<Node> current = new ArrayList<>(1),
-                next = new ArrayList<>(2);
+        List<Node> current = new ArrayList<>(1), next = new ArrayList<>(2);
         current.add(root);
 
-        final int maxHalfLength = 4;
         int elements = 1;
 
-        StringBuilder sb = new StringBuilder(maxHalfLength*width);
-        sb.append(" ".repeat(Math.max(0, maxHalfLength * width)));
+        StringBuilder sb = new StringBuilder(MAX_HALF_LENGTH *width);
+        sb.append(" ".repeat(Math.max(0, MAX_HALF_LENGTH * width)));
         String textBuffer;
 
         for(int i = 0; i < height; i++) {
-            sb.setLength(maxHalfLength * ((int)Math.pow(2, height-1-i) - 1));
+            sb.setLength(MAX_HALF_LENGTH * ((int)Math.pow(2, height-1-i) - 1));
             textBuffer = sb.toString();
             for(Node n : current) {
                 System.out.print(textBuffer);
