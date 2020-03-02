@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AVLTree {
     public static class Node {
-        private Node left, right, parent;
+        private Node left, right;
         private int height = 1;
         private int value;
 
@@ -64,36 +64,36 @@ public class AVLTree {
         return node;
     }
 
-    public Node rightRotate(Node y) {
-        Node x = y.left;
+    public Node rightRotate(Node node) {
+        Node x = node.left;
         Node T2 = x.right;
 
         // Perform rotation
-        x.right = y;
-        y.left = T2;
+        x.right = node;
+        node.left = T2;
 
         // Update heights
-        y.height = Math.max(height(y.left), height(y.right))+1;
+        node.height = Math.max(height(node.left), height(node.right))+1;
         x.height = Math.max(height(x.left), height(x.right))+1;
 
         // Return new root
         return x;
     }
 
-    public Node leftRotate(Node x) {
-        Node y = x.right;
-        Node T2 = y.left;
+    public Node leftRotate(Node node) {
+        Node node2 = node.right;
+        Node T2 = node2.left;
 
         // Perform rotation
-        y.left = x;
-        x.right = T2;
+        node2.left = node;
+        node.right = T2;
 
         //  Update heights
-        x.height = Math.max(height(x.left), height(x.right))+1;
-        y.height = Math.max(height(y.left), height(y.right))+1;
+        node.height = Math.max(height(node.left), height(node.right))+1;
+        node2.height = Math.max(height(node2.left), height(node2.right))+1;
 
         // Return new root
-        return y;
+        return node2;
     }
 
     // Get Balance factor of Node N
@@ -103,6 +103,7 @@ public class AVLTree {
         return height(N.left) - height(N.right);
     }
 
+    @SuppressWarnings("unused")
     public void preOrder(Node root) {
         if (root != null) {
             preOrder(root.left);
@@ -119,11 +120,12 @@ public class AVLTree {
         return current;
     }
 
+    @SuppressWarnings("unused")
     public Node deleteNode(Node root, int value) {
         // STEP 1: PERFORM STANDARD BST DELETE
 
         if (root == null)
-            return root;
+            return null;
 
         // If the value to be deleted is smaller than the root's value,
         // then it lies in left subtree
