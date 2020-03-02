@@ -23,7 +23,7 @@ public class Main {
         testAVL();
     }
 
-    private static  void testAVL() throws IOException{
+    private static  void testAVL(){
         System.out.println("\n\nAVL-TREE:");
         AVLTree tree = new AVLTree();
         AVLTree.Node node = new AVLTree.Node(5);
