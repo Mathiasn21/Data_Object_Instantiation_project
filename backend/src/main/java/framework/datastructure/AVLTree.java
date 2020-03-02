@@ -96,7 +96,7 @@ public class AVLTree {
         return y;
     }
 
-    // Get Balance factor of node N
+    // Get Balance factor of Node N
     public int getBalance(Node N) {
         if (N == null)
             return 0;
