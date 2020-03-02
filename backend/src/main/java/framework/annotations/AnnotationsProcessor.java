@@ -1,7 +1,6 @@
 package framework.annotations;
 
 import framework.exceptions.NoSuchConstructor;
-import framework.stubb.DataObjectStubb;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
@@ -12,16 +11,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class AnnotationsProcessor {
-    private final List<Class<?>> primtiveClasses = new ArrayList<>();
+    private final List<Class<?>> primitiveClasses = new ArrayList<>();
 
     public AnnotationsProcessor(List<Class<?>> primitives) {
-        primtiveClasses.addAll((primitives));
+        primitiveClasses.addAll((primitives));
     }
 
+
+    /**
+     * @param clazz &lt;? extends {@link Annotation}&gt;
+     * @return Set&lt;Class&lt;?&gt;&gt;
+     */
     protected final Set<Class<?>> grabAllClassesAnnotatedWith(Class<? extends Annotation> clazz){
         Reflections reflections = new Reflections("");
         return reflections.getTypesAnnotatedWith(clazz);
     }
+
 
     /**
      * @param dataObjectSet Set&ltClass&lt?&gt&gt
@@ -37,7 +42,7 @@ public class AnnotationsProcessor {
 
                 for(int i = 0; i < params.length; i++){
                     Class<?> param = params[i];
-                    if(param != primtiveClasses.get(i)){
+                    if(param != primitiveClasses.get(i)){
                         continue constructorLoop;
                     }
                 }
@@ -47,10 +52,11 @@ public class AnnotationsProcessor {
         throw new NoSuchConstructor();
     }
 
+
     /**
      * @param initArgs ...Object
      * @return Object
-     * @throws InstantiationException {@link InstantiationException}
+     * @throws InstantiationException {@link InstantiationException} InstantiateException
      */
     @NotNull
     @Contract(value = "_-> new")
