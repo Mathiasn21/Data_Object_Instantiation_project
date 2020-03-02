@@ -2,7 +2,7 @@ package framework.collectors;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import framework.HandleStorage;
+import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
