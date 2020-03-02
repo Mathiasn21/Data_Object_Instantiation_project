@@ -1,20 +1,26 @@
 package DTOs;
 
+import coll.test.PrimaryColumn;
 import framework.annotations.DataObjectField;
 
 /**
  * ComplexDTO that contains custom field that require mapping
  */
 public class ComplexDTO {
+
     @DataObjectField
+    @PrimaryColumn
     private String string;
+
+    @PrimaryColumn
     @DataObjectField
     private int integer;
+
+    @PrimaryColumn
     @DataObjectField
     private double doubles;
 
     private String thing;
-
     public ComplexDTO(String string, int integer, double doubles) {
         this.string = string;
         this.integer = integer;

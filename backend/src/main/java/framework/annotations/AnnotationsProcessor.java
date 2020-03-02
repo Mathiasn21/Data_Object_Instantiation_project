@@ -10,9 +10,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+
 public class AnnotationsProcessor {
     private final List<Class<?>> primitiveClasses = new ArrayList<>();
 
+    /**
+     * @param primitives List&lt;Class&lt;?&gt;&gt
+     */
     public AnnotationsProcessor(List<Class<?>> primitives) {
         primitiveClasses.addAll((primitives));
     }
