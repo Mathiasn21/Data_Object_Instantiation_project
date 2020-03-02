@@ -1,18 +1,11 @@
-import framework.collectors.CSVCollector;
-import framework.collectors.ICollector;
-import framework.collectors.JSONCollector;
-import framework.collectors.Setting;
-
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        testCollectors();
-
+    public static void main(String[] args) {
     }
 
     private static void testCollectors() throws IOException {
+        /*
         ICollector collector = new CSVCollector("testingFileCSV.csv");
         collector.setSetting(Setting.DELIMITER, ";");
         collector.loadAndReadFile();
@@ -38,5 +31,7 @@ public class Main {
             System.out.println(Arrays.toString(column));
         }
         System.out.println(primaryJSONColumns);
+
+         */
     }
 }

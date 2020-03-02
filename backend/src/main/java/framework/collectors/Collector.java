@@ -77,7 +77,7 @@ public abstract class Collector implements ICollector{
      */
     @NotNull
     public static ICollector fromFileExtension(String extension){
-        ICollectorFactory factory = new CollectorFactory();
+        ICollectorFactory<ICollector> factory = new CollectorFactory();
         return factory.createCollectorFrom(extension);
     }
 

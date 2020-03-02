@@ -13,7 +13,6 @@ import java.util.List;
  * @version 1.0
  */
 public class HandleStorage {
-
     /**
      * Standard method for writing data to a given file.
      * This method does not append but overwrites!
