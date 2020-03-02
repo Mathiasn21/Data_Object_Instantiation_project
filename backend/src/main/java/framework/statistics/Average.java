@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public class Average implements IAverage{
+public final class Average implements IAverage{
 
     //TODO: get this to work with integer/float/long
     private final double[] data;
