@@ -1,6 +1,6 @@
 package DTOs;
 
-import coll.test.PrimaryColumn;
+import framework.annotations.PrimaryColumn;
 import framework.annotations.DataObjectField;
 
 /**

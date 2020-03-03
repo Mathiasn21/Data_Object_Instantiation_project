@@ -1,4 +1,4 @@
-package coll.test;
+package framework.annotations;
 
 public @interface PrimaryColumns {
 }

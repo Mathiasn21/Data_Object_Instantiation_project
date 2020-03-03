@@ -1,7 +1,7 @@
 package DTOs;
 
-import coll.test.PrimaryColumn;
-import coll.test.PrimaryColumns;
+import framework.annotations.PrimaryColumn;
+import framework.annotations.PrimaryColumns;
 
 public class DTOTest {
 
