@@ -40,7 +40,7 @@ public class AnnotationsProcessor {
     private Constructor<?> getCorrespondingConstructor(@NotNull Set<Class<?>> dataObjectSet) {
         for(Class<?> clazz : dataObjectSet){
             Constructor<?>[] constructors = clazz.getConstructors();
-
+            
             constructorLoop: for (Constructor<?> constructor : constructors) {
                 Class<?>[] params = constructor.getParameterTypes();
 
