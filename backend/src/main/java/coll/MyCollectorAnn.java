@@ -5,6 +5,8 @@ import coll.test.Loader;
 import framework.annotations.DataObject;
 
 @Collector(file = "FileName", fileType = "FileName", dataClass = DataObject.class)
+
+//Alternative: @Collector(dataType = "extension", dataClass = DataObject.class)
 public class MyCollectorAnn {
     public MyCollectorAnn() {
     }
