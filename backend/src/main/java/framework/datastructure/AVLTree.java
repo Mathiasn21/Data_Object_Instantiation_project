@@ -15,6 +15,7 @@ public class AVLTree {
             this.value = val;
         }
     }
+
     public int height (Node N) {
         if (N == null)
             return 0;

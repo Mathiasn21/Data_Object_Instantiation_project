@@ -20,5 +20,4 @@ public class DTOTest {
     private String anString3 = "";
     @PrimaryColumn
     private String anString4 = "";
-
 }
