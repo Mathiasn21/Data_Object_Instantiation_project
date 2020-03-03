@@ -15,7 +15,7 @@ public class AnnotationsProcessor {
     private final List<Class<?>> primitiveClasses = new ArrayList<>();
 
     /**
-     * @param primitives List&lt;Class&lt;?&gt;&gt
+     * @param primitives List&lt;Class&lt;?&gt;&gt;
      */
     public AnnotationsProcessor(List<Class<?>> primitives) {
         primitiveClasses.addAll((primitives));
@@ -33,8 +33,8 @@ public class AnnotationsProcessor {
 
 
     /**
-     * @param dataObjectSet Set&ltClass&lt?&gt&gt
-     * @return Constructor&lt?&gt
+     * @param dataObjectSet Set&lt;Class&lt;?&gt;&gt;
+     * @return Constructor&lt;?&gt;
      */
     @NotNull
     private Constructor<?> getCorrespondingConstructor(@NotNull Set<Class<?>> dataObjectSet) {
@@ -43,6 +43,9 @@ public class AnnotationsProcessor {
             
             constructorLoop: for (Constructor<?> constructor : constructors) {
                 Class<?>[] params = constructor.getParameterTypes();
+                if(params.length != primitiveClasses.size()){
+                    continue;
+                }
 
                 for(int i = 0; i < params.length; i++){
                     Class<?> param = params[i];
