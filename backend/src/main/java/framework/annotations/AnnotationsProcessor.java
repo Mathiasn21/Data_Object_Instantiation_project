@@ -11,6 +11,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 
+/**
+ * Class responsible for handling all processing related to annotations.
+ */
 public class AnnotationsProcessor {
     private final List<Class<?>> primitiveClasses = new ArrayList<>();
 
@@ -26,13 +29,14 @@ public class AnnotationsProcessor {
      * @param clazz &lt;? extends {@link Annotation}&gt;
      * @return Set&lt;Class&lt;?&gt;&gt;
      */
-    protected final Set<Class<?>> grabAllClassesAnnotatedWith(Class<? extends Annotation> clazz){
+    protected final Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
         Reflections reflections = new Reflections("");
         return reflections.getTypesAnnotatedWith(clazz);
     }
 
 
     /**
+     * Returns first matching constructor
      * @param dataObjectSet Set&lt;Class&lt;?&gt;&gt;
      * @return Constructor&lt;?&gt;
      */
@@ -68,14 +72,14 @@ public class AnnotationsProcessor {
     @NotNull
     @Contract(value = "_-> new")
     public final Object initializeDataObject(@NotNull Object ...initArgs) throws InstantiationException {
-        Set<Class<?>> dataObjectSet = grabAllClassesAnnotatedWith(DataObject.class);
+        Set<Class<?>> dataObjectSet = getAllClassesWith(DataObject.class);
         Constructor<?> constructor = getCorrespondingConstructor(dataObjectSet);
         return initializeDataObject(constructor, initArgs);
     }
 
 
     /**
-     * @param constructor {@link Constructor}&lt?&gt
+     * @param constructor {@link Constructor}&lt;?&gt;
      * @param initArgs ...Object
      * @return Object
      * @throws InstantiationException InstantiationException

@@ -113,11 +113,15 @@ public final class CSVCollector extends Collector {
      * @param name String
      * @return Item[]
      */
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
     @Override
     public Item[] getCategoryBy(String name) {
         return new Item[0];
     }
 
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
     @Override
     public String[] getColumnBy(String columnName) {
         return new String[0];
