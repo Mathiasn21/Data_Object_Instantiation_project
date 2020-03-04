@@ -1,6 +1,5 @@
 package DTOs;
 
-import framework.annotations.PrimaryColumn;
 import framework.annotations.DataObjectField;
 
 /**
@@ -8,15 +7,12 @@ import framework.annotations.DataObjectField;
  */
 public class ComplexDTO {
 
-    @DataObjectField
-    @PrimaryColumn
+    @DataObjectField(primaryColumnName = "name")
     private String string;
 
-    @PrimaryColumn
     @DataObjectField
     private int integer;
 
-    @PrimaryColumn
     @DataObjectField
     private double doubles;
 

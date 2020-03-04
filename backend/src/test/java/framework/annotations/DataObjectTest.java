@@ -24,7 +24,7 @@ public class DataObjectTest{
         list.add(field3);
         list.add(field4);
 
-        AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor(primitiveTypes);
+        AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObject(list.toArray()));
     }
 
