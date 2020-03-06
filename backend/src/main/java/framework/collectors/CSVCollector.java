@@ -1,14 +1,11 @@
 package framework.collectors;
 
 import framework.annotations.DataObject;
-import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +78,7 @@ public final class CSVCollector extends Collector implements ICSV {
     @Override
     public void loadAndReadFile() throws IOException {
         /*String line;
-        BufferedReader bufferedReader = HandleStorage.readFromFile(fileName);
+        BufferedReader bufferedReader = ReadFile.from(fileName);
         List<String[]> rows = new ArrayList<>();
         boolean foundPrimarycolumns = false;
         while ((line = bufferedReader.readLine()) != null) {

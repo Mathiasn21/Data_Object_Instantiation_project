@@ -27,7 +27,6 @@ import java.util.*;
  * @version 1.0
  */
 public class AnnotationsProcessor implements IAnnotationsProcessor{
-
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
