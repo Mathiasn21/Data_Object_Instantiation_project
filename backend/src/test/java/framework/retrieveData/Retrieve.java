@@ -1,7 +1,9 @@
 package framework.retrieveData;
 
-import framework.utilities.data.retrieve.IRetrieveData;
-import framework.utilities.data.retrieve.RetrieveData;
+import framework.utilities.data.read.IRetrieveData;
+import framework.utilities.data.read.RetrieveData;
+import framework.utilities.data.write.IWriteData;
+import framework.utilities.data.write.WriteData;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
@@ -11,5 +13,8 @@ public class Retrieve {
         //Example of usage:
         IRetrieveData retrieveData = new RetrieveData();
         retrieveData.fromFile().given("name");
+
+        IWriteData writeData = new WriteData();
+        writeData.toFile().given("","");
     }
 }

@@ -3,8 +3,7 @@ package framework.collectors;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import framework.annotations.DataObject;
-import framework.utilities.data.retrieve.IReadFile;
-import framework.utilities.data.retrieve.ReadFile;
+import framework.utilities.data.read.ReadFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

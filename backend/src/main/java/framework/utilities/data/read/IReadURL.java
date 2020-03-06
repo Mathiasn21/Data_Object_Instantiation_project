@@ -1,4 +1,4 @@
-package framework.utilities.data.retrieve;
+package framework.utilities.data.read;
 
 import org.jetbrains.annotations.NotNull;
 
