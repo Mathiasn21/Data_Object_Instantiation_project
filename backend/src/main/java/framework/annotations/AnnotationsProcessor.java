@@ -85,7 +85,8 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     }
 
     @Override
-    public List<?> initializeDataObjects(@NotNull List<List<Object>> listWithInitArgs) throws InstantiationException {
+    public List<?> initializeDataObjects(@NotNull List<List<Object>> listWithInitArgs, @NotNull String file) throws InstantiationException {
+        //TODO: Check
         return null;
     }
 
@@ -104,7 +105,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         dataObjectSet.iterator().forEachRemaining((object) -> {
             DataObject dataObject = object.getAnnotation(DataObject.class);
             System.out.println(dataObject.fileName());
-            System.out.println(Arrays.toString(dataObject.primaryColumnNames()));
+            System.out.println(Arrays.toString(dataObject.primaryKeys()));
         });
     }
 
