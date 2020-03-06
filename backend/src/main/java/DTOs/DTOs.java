@@ -1,13 +1,14 @@
 package DTOs;
 
 import framework.annotations.DataObject;
+import framework.collectors.JSONCollector;
 
 
 /**
  * Class representing usage for the DataObject annotation
  */
 
-@DataObject(fileName = "name", primaryColumnNames = {"1", "2", "3", "4"}, informationalRows = {"row1", "row2", "row3"})
+@DataObject(fileName = "name", primaryKeys = {"1", "2", "3", "4"}, informationalRows = {"row1", "row2", "row3"})
 public class DTOs {
     public String field1;
     public int field2;

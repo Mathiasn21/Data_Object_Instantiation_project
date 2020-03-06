@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface DataObject {
     String fileName() default "";
-    String[] primaryColumnNames() default "";
+    String[] primaryKeys() default "";
 
     String[] informationalRows() default "";
 }
