@@ -58,6 +58,17 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         return reflections.getTypesAnnotatedWith(clazz);
     }
 
+
+
+
+    // --------------------------------------------------//
+    //                   4.Private Getters               //
+    // --------------------------------------------------//
+    /**
+     * PrimaryTypes refers to the types that describes a dataset
+     * @param clazz Class&lt;?&gt;&gt;
+     * @return Class&lt;?&gt;&gt;[]
+     */
     @NotNull
     @Contract(value = "_ -> new", pure = true)
     private Class<?>[] getPrimaryTypes(@NotNull Class<?> clazz) {
@@ -66,7 +77,6 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
             res = new Class[0];
             //TODO: implement get primary types from field annotations
         }else{
-            //TODO: Grab all fields and their types
             Field[] fields = clazz.getFields();
             res = new Class[fields.length];
             for (int i = 0; i < fields.length; i++) {
