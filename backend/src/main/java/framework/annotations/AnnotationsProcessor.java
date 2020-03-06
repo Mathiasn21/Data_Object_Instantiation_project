@@ -3,9 +3,8 @@ package framework.annotations;
 /*Guide
  * 1. Import Statements
  * 2. Class Fields
- * 3. Getters
- * 4. Setters
- * 5. Overridden
+ * 3. Private Getters
+ * 4. Contract Methods
  * */
 
 // --------------------------------------------------//
@@ -41,8 +40,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         clazzes.iterator().forEachRemaining((clazz) -> {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
-            Class<?>[] primaryTypeArr = dataObject.primitiveTypes();
-            Class<?>[] primaryTypes = primaryTypeArr[0] == void.class ? getPrimaryTypes(clazz) : primaryTypeArr;
+            Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
 
             String fileName = dataObject.fileName();
@@ -53,20 +51,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
 
 
     // --------------------------------------------------//
-    //                   3.Getters                       //
-    // --------------------------------------------------//
-    /**
-     * @param clazz &lt;? extends {@link Annotation}&gt;
-     * @return Set&lt;Class&lt;?&gt;&gt;
-     */
-    private Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
-        Reflections reflections = new Reflections("");
-        return reflections.getTypesAnnotatedWith(clazz);
-    }
-
-
-    // --------------------------------------------------//
-    //                   4.Private Getters               //
+    //                   3.Private Getters               //
     // --------------------------------------------------//
     /**
      * PrimaryTypes refers to the types that describes a dataset
@@ -91,33 +76,15 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         return res;
     }
 
-    @Override
-    public DataObject getDataObjectForFilename(String fileName) {
-        return null;
-    }
 
     /**
-     * @param listWithInitArgs d
-     * @param file d
-     * @return d
-     * @throws InstantiationException d
-     * @throws NoSuchMethodException d
-     * @throws InvocationTargetException d
-     * @throws IllegalAccessException d
+     * @param clazz &lt;? extends {@link Annotation}&gt;
+     * @return Set&lt;Class&lt;?&gt;&gt;
      */
-    @SuppressWarnings("unchecked")//Only one possible type extension
-    @Override
-    public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file) throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<Object> listOfDataObjects = new ArrayList<>();
-        Class<?> clazz = filesMappedToDataObject.get(file);
-
-        Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
-        for (Object[] listWithInitArg : listWithInitArgs) {
-            listOfDataObjects.add(constructor.newInstance(listWithInitArg));
-        }
-        return listOfDataObjects;
+    private Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
+        Reflections reflections = new Reflections("");
+        return reflections.getTypesAnnotatedWith(clazz);
     }
-
 
     /**
      * @param constructors Array
@@ -142,6 +109,40 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         }
         throw new NoSuchConstructor();
     }
+
+
+    // --------------------------------------------------//
+    //                   4.Contract Methods              //
+    // --------------------------------------------------//
+    @Override
+    public DataObject getDataObjectForFilename(String fileName) {
+        //TODO implement logic for method
+        return null;
+    }
+
+
+    /**
+     * @param listWithInitArgs d
+     * @param file d
+     * @return d
+     * @throws InstantiationException d
+     * @throws NoSuchMethodException d
+     * @throws InvocationTargetException d
+     * @throws IllegalAccessException d
+     */
+    @SuppressWarnings("unchecked")//Only one possible type extension
+    @Override
+    public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file) throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        List<Object> listOfDataObjects = new ArrayList<>();
+        Class<?> clazz = filesMappedToDataObject.get(file);
+
+        Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
+        for (Object[] listWithInitArg : listWithInitArgs) {
+            listOfDataObjects.add(constructor.newInstance(listWithInitArg));
+        }
+        return listOfDataObjects;
+    }
+
 
 
     /**

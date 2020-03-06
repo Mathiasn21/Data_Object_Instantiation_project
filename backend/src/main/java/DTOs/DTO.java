@@ -1,5 +1,6 @@
 package DTOs;
 
+import framework.annotations.DataConstructor;
 import framework.annotations.DataObject;
 import framework.collectors.JSONCollector;
 
@@ -14,6 +15,7 @@ public class DTO {
     public double field3;
     public float field4;
 
+    @DataConstructor
     public DTO(String field1, int field2, double field3, float field4) {
         this.field1 = field1;
         this.field2 = field2;
