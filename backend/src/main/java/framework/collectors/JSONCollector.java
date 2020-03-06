@@ -79,14 +79,6 @@ public class JSONCollector extends Collector {
         });
     }
 
-    /**
-     * @param name String
-     * @return {@link Item[]}
-     */
-    @Override
-    public Item[] getCategoryBy(String name) {
-        return new Item[0];
-    }
 
     /**
      * @param columnName String

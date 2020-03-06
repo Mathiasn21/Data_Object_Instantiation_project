@@ -1,5 +1,6 @@
 package framework.collectors;
 
+import framework.annotations.DataObject;
 import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -17,10 +18,9 @@ import java.util.regex.Pattern;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public final class ICSVCollector extends Collector implements ICSV {
+public final class CSVCollector extends Collector implements ICSV {
     private String fileName;
     private final static Map<Setting, String> settings = new HashMap<>();
-    private List<String[]> informationalRows = new ArrayList<>();
     private List<String[]> rows;
 
     //Initiating default settings
@@ -28,19 +28,19 @@ public final class ICSVCollector extends Collector implements ICSV {
         settings.put(Setting.DELIMITER, ",");
     }
 
-    public ICSVCollector(){
+    public CSVCollector(){
         initialize();
         fileName = null;
     }
 
-    public ICSVCollector(@NotNull File file) {
+    public CSVCollector(@NotNull File file) {
         this(file.getName());
     }
 
     /**
      * @param fileName String
      */
-    public ICSVCollector(@NotNull String fileName) {
+    public CSVCollector(@NotNull String fileName) {
         this.fileName = fileName;
         initialize();
     }
@@ -49,7 +49,7 @@ public final class ICSVCollector extends Collector implements ICSV {
      * @param fileName String
      * @param primaryColumns String[]
      */
-    public ICSVCollector(@NotNull String fileName, @NotNull String[] primaryColumns){
+    public CSVCollector(@NotNull String fileName, @NotNull List<DataObject> primaryColumns){
         this(fileName);
         setPrimaryColumns(primaryColumns);
     }
@@ -58,7 +58,7 @@ public final class ICSVCollector extends Collector implements ICSV {
      * @param file {@link File}
      * @param primaryColumns String[]
      */
-    public ICSVCollector(@NotNull File file, @NotNull String[] primaryColumns){
+    public CSVCollector(@NotNull File file, @NotNull List<DataObject> primaryColumns){
         this(file.getName(), primaryColumns);
     }
 
@@ -79,55 +79,6 @@ public final class ICSVCollector extends Collector implements ICSV {
     }
 
     /**
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return "ICSVCollector";
-    }
-
-    /**
-     * @return String[][]
-     */
-    @Override
-    public String[][] getAllColumns() {
-        String[] primaryColumns = getAllPrimaryColumns();
-        int columnLength = primaryColumns.length;
-        int rowLength = rows.size();
-        String[][] columns = new String[rowLength][columnLength];
-        columns[0] = primaryColumns;
-        for(int row = 1; row < rowLength; row++){
-            columns[row] = rows.get(row);
-        }
-        return columns;
-    }
-
-    /**
-     * @return List String[]
-     */
-    public List<String[]> getInformationalRows() {
-        return informationalRows;
-    }
-
-    /**
-     * @param name String
-     * @return Item[]
-     */
-    @NotNull
-    @Contract(value = "_ -> new", pure = true)
-    @Override
-    public Item[] getCategoryBy(String name) {
-        return new Item[0];
-    }
-
-    @NotNull
-    @Contract(value = "_ -> new", pure = true)
-    @Override
-    public String[] getColumnBy(String columnName) {
-        return new String[0];
-    }
-
-    /**
      * @throws IOException {@link IOException} IOException
      */
     @Override
@@ -139,11 +90,13 @@ public final class ICSVCollector extends Collector implements ICSV {
         while ((line = bufferedReader.readLine()) != null) {
             String[] r = splitLineOn(line);
             if(!foundPrimarycolumns && calcPRowContainsPrimaryColumns(r)){
+                //TODO: fix
                 setPrimaryColumns(r);
                 foundPrimarycolumns = true;
                 continue;
             }else if(!foundPrimarycolumns){
-                informationalRows.add(r);
+                //TODO: call super method
+                super.getInformationalRows().add(r);
                 continue;
             }
             rows.add(r);
@@ -172,23 +125,12 @@ public final class ICSVCollector extends Collector implements ICSV {
         return true;
     }
 
-
     /**
-     * Returns the a index or -1 if none was found
-     * @param column String
-     * @return int
+     * @return String
      */
-    @Contract(pure = true)
-    private int findColumnIndex(String column) {
-        String[] primaryColumns = getAllPrimaryColumns();
-        int result = -1;
-        for (int i = 0, primaryColumnsLength = primaryColumns.length; i < primaryColumnsLength; i++) {
-            String primaryColumn = primaryColumns[i];
-            if (primaryColumn.equals(column)) {
-                result = i;
-                break;
-            }
-        }
-        return result;
+    @Override
+    public String toString() {
+        return "ICSVCollector";
     }
+
 }

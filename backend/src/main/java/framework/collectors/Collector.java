@@ -1,6 +1,5 @@
 package framework.collectors;
 
-import com.sun.source.tree.Tree;
 import framework.annotations.DataObject;
 import framework.collectors.factory.CollectorFactory;
 import framework.collectors.factory.ICollectorFactory;
@@ -14,31 +13,46 @@ import java.util.*;
  * @version 1.0
  */
 public abstract class Collector implements ICollector{
-    private String[] primaryColumns;
+    private List<DataObject> primaryColumns;
     private TreeMap<String, DataObject> rbTree = new TreeMap<>();
     private final Map<Setting, String> settings = new HashMap<>();
-
+    private List<String[]> informationalRows = new ArrayList<>();
 
     /**
-     * @param list {@link List}
+     * @param primaryColumns List<DataObject>
      */
     @Override
-    public final void setPrimaryColumns(@NotNull List<String> list) {
-        setPrimaryColumns(list.toArray(new String[0]));
+    public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
+
+    /**
+     * @return List<DataObject>
+     */
+    @Override
+    public final List<DataObject> getAllPrimaryColumns() {
+        return primaryColumns;
+    }
+
+    @Override
+    public List<DataObject> getAllColumns() {
+        return new ArrayList<>(rbTree.values());
     }
 
     /**
-     * @param primaryColumns String[]
+     * @param name String
+     * @return List<
      */
     @Override
-    public final void setPrimaryColumns(String[] primaryColumns){ this.primaryColumns = primaryColumns; }
+    public List<DataObject> getCategoryBy(DataObject name) {
+        List<DataObject> list = new ArrayList<>();
+        if(rbTree.containsValue(name)){
+            list.add(name);
+        }
+        return Collections.unmodifiableList(list) ;
+    }
 
-    /**
-     * @return String[]
-     */
-    @Override
-    public final String[] getAllPrimaryColumns() {
-        return primaryColumns;
+    public List<DataObject> getColumnBy(DataObject columnName) {
+        //TODO: implement method
+        return new ArrayList<>();
     }
 
     /**
@@ -85,6 +99,13 @@ public abstract class Collector implements ICollector{
         return factory.createCollectorFrom(extension);
     }
 
+    /**
+     * @return List String[]
+     */
+    public List<String[]> getInformationalRows() {
+        //TODO: add informational rows
+        return informationalRows;
+    }
 
     /**
      * @param mb int

@@ -1,5 +1,8 @@
 package framework.collectors;
 
+import framework.annotations.DataObject;
+
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -12,24 +15,17 @@ public interface ICollector {
     /**
      * @return String[]
      */
-    String[] getAllPrimaryColumns();
+    List<DataObject> getAllPrimaryColumns();
 
     /**
      * @return String[][]
      */
-    String[][] getAllColumns();
+    List<DataObject> getAllColumns();
 
     /**
      * @throws IOException IOException
      */
     void loadAndReadFile() throws IOException;
-
-
-    /**
-     * @param name String
-     * @return Item[]
-     */
-    Item[] getCategoryBy(String name);
 
     /**
      * @param key Setting
@@ -40,19 +36,16 @@ public interface ICollector {
     /**
      * @param columnName String
      */
-    String[] getColumnBy(String columnName);
-
-    /**
-     * @param primaryColumns String[]
-     */
-    void setPrimaryColumns(String[] primaryColumns);
+    List<DataObject> getColumnBy(DataObject columnName);
 
     /**
      * @param list List<String>
      */
-    void setPrimaryColumns(List<String> list);
+    void setPrimaryColumns(List<DataObject> list);
 
     void setAllSettings(Map<Setting, String> settings);
+
+    List<DataObject> getCategoryBy(DataObject name);
 
     /**
      * @param mb int
