@@ -37,9 +37,19 @@ public interface ICollector {
      */
     void setSetting(Setting key, String value);
 
+    /**
+     * @param columnName String
+     */
     String[] getColumnBy(String columnName);
 
+    /**
+     * @param primaryColumns String[]
+     */
     void setPrimaryColumns(String[] primaryColumns);
+
+    /**
+     * @param list List<String>
+     */
     void setPrimaryColumns(List<String> list);
 
     void setAllSettings(Map<Setting, String> settings);

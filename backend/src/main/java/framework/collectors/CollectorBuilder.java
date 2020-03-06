@@ -44,4 +44,9 @@ public class CollectorBuilder {
     public ICollector build(){
         return collector;
     }
+
+    @Override
+    public String toString() {
+        return "Collector builder";
+    }
 }
