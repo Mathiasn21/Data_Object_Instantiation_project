@@ -1,6 +1,6 @@
 package framework.collectors.factory;
 
-import framework.collectors.CSVCollector;
+import framework.collectors.ICSVCollector;
 import framework.collectors.ICollector;
 import framework.collectors.JSONCollector;
 
@@ -15,7 +15,7 @@ public class CollectorFactory implements ICollectorFactory<ICollector> {
     private static final Map<String, Class<? extends ICollector>> strMappedToCollectors = new HashMap<>();
     static{
         //TODO: extract mappings into its on config file
-        strMappedToCollectors.put("csv", CSVCollector.class);
+        strMappedToCollectors.put("csv", ICSVCollector.class);
         strMappedToCollectors.put("json", JSONCollector.class);
     }
 
@@ -24,8 +24,8 @@ public class CollectorFactory implements ICollectorFactory<ICollector> {
     public ICollector createCollectorFrom(String fileExtension) {
         Class<? extends ICollector> collectorClazz = strMappedToCollectors.get(fileExtension);
         ICollector collector = null;
-        if(collectorClazz == CSVCollector.class){
-            collector = new CSVCollector();
+        if(collectorClazz == ICSVCollector.class){
+            collector = new ICSVCollector();
         }else if(collectorClazz == JSONCollector.class) {
             collector = new JSONCollector();
         }

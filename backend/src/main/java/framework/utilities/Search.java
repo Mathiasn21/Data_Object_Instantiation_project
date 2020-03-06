@@ -1,7 +1,5 @@
 package framework.utilities;
 
-import framework.collectors.Item;
-
 /** Class for searching in a given dataset
  * @version 1.0.
  */

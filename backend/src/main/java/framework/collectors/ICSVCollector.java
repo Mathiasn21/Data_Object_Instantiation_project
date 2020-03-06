@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public final class CSVCollector extends Collector {
+public final class ICSVCollector extends Collector implements ICSV {
     private String fileName;
     private final static Map<Setting, String> settings = new HashMap<>();
     private List<String[]> informationalRows = new ArrayList<>();
@@ -28,19 +28,19 @@ public final class CSVCollector extends Collector {
         settings.put(Setting.DELIMITER, ",");
     }
 
-    public CSVCollector(){
+    public ICSVCollector(){
         initialize();
         fileName = null;
     }
 
-    public CSVCollector(@NotNull File file) {
+    public ICSVCollector(@NotNull File file) {
         this(file.getName());
     }
 
     /**
      * @param fileName String
      */
-    public CSVCollector(@NotNull String fileName) {
+    public ICSVCollector(@NotNull String fileName) {
         this.fileName = fileName;
         initialize();
     }
@@ -49,7 +49,7 @@ public final class CSVCollector extends Collector {
      * @param fileName String
      * @param primaryColumns String[]
      */
-    public CSVCollector(@NotNull String fileName, @NotNull String[] primaryColumns){
+    public ICSVCollector(@NotNull String fileName, @NotNull String[] primaryColumns){
         this(fileName);
         setPrimaryColumns(primaryColumns);
     }
@@ -58,7 +58,7 @@ public final class CSVCollector extends Collector {
      * @param file {@link File}
      * @param primaryColumns String[]
      */
-    public CSVCollector(@NotNull File file, @NotNull String[] primaryColumns){
+    public ICSVCollector(@NotNull File file, @NotNull String[] primaryColumns){
         this(file.getName(), primaryColumns);
     }
 
@@ -83,7 +83,7 @@ public final class CSVCollector extends Collector {
      */
     @Override
     public String toString() {
-        return "CSVCollector";
+        return "ICSVCollector";
     }
 
     /**
