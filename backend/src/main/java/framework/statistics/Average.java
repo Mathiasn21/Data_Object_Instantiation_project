@@ -29,9 +29,10 @@ public final class Average implements IAverage{
      */
     @Override
     public double calcSum() {
-        double sum = 0;
-        for(double i : data){
-            sum += i;
+        if(sum <= 0){
+            for(double i : data){
+                sum += i;
+            }
         }
         return sum;
     }

@@ -2,9 +2,7 @@ import framework.annotations.DTO;
 import framework.collectors.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,7 +15,7 @@ public class Main {
     }
 
     private static void testCollectors() throws IOException {
-        ICollector collector = new CSVCollector("testingFileCSV.csv");
+        ICollector collector = null;
         collector.setSetting(Setting.DELIMITER, ";");
         collector.loadAndReadFile();
 

@@ -1,6 +1,6 @@
 package framework.collectors;
 
-import framework.HandleStorage;
+import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -113,11 +113,15 @@ public final class CSVCollector extends Collector {
      * @param name String
      * @return Item[]
      */
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
     @Override
     public Item[] getCategoryBy(String name) {
         return new Item[0];
     }
 
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
     @Override
     public String[] getColumnBy(String columnName) {
         return new String[0];

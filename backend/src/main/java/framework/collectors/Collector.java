@@ -36,7 +36,7 @@ public abstract class Collector implements ICollector{
      * @return String[]
      */
     @Override
-    public String[] getAllPrimaryColumns() {
+    public final String[] getAllPrimaryColumns() {
         return primaryColumns;
     }
 
@@ -80,7 +80,7 @@ public abstract class Collector implements ICollector{
      */
     @NotNull
     public static ICollector fromFileExtension(String extension){
-        ICollectorFactory factory = new CollectorFactory();
+        ICollectorFactory<ICollector> factory = new CollectorFactory();
         return factory.createCollectorFrom(extension);
     }
 
@@ -92,6 +92,7 @@ public abstract class Collector implements ICollector{
     @Override
     public final void setMaxMemoryMB(int mb){
         //TODO: implement setMaxMemoryMB()
+        //TODO: Describe set max memory of what????
     }
 
 }

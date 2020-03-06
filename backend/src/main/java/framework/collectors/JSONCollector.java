@@ -2,7 +2,7 @@ package framework.collectors;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import framework.HandleStorage;
+import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 
 
-/** Class for collecting data. Implements {@link ICollector}
+/** Class for collecting data. Extends {@link Collector}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
@@ -56,7 +56,7 @@ public class JSONCollector extends Collector {
         String[] primaryColumns = getAllPrimaryColumns();
         int rowLength = primaryColumns.length;
         String[][] rows = new String[columnLength][rowLength];
-
+        Arrays.sort(new int[0]);
         for(int i = 0; i < columnLength; i++){
             JsonObject jsonObject = jsonObjectValues.get(i);
             for(int j = 0; j < rowLength; j++){

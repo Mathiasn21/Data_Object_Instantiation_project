@@ -1,4 +1,4 @@
-package framework;
+package framework.utilities;
 
 import com.google.gson.*;
 import org.jetbrains.annotations.NotNull;
