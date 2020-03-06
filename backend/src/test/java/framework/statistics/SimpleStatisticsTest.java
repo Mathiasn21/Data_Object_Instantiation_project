@@ -18,25 +18,25 @@ public class SimpleStatisticsTest {
 
     @Test
     public void sampleVarianceTest(){
-        double sampleVariance = simpleStatistics.sampleVariance();
+        double sampleVariance = simpleStatistics.calcSampleVariance();
         assertEquals(3.8392857142857144, sampleVariance);
     }
 
     @Test
     public void populationVarianceTest(){
-        double populationVariance = simpleStatistics.populationVariance();
+        double populationVariance = simpleStatistics.calcPopulationVariance();
         assertEquals(3.359375, populationVariance);
     }
 
     @Test
     public void standardDeviationFromSampleTest(){
-        double STD = simpleStatistics.standardDeviationFromSample();
+        double STD = simpleStatistics.calcStandardDeviationFromSample();
         assertEquals(1.9594095320493148, STD);
     }
 
     @Test
     public void standardDeviationFromPopulationTest(){
-        double STD = simpleStatistics.standardDeviationFromPopulation();
+        double STD = simpleStatistics.calcStandardDeviationFromPopulation();
         assertEquals(1.8328597873268975, STD);
     }
 

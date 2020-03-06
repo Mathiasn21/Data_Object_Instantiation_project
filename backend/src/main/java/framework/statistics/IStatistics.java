@@ -7,10 +7,10 @@ package framework.statistics;
  */
 public interface IStatistics {
 
-    double sampleVariance();
-    double populationVariance();
-    double standardDeviationFromSample();
-    double standardDeviationFromPopulation();
-    double covariance();
-    double correlation();
+    double calcSampleVariance();
+    double calcPopulationVariance();
+    double calcStandardDeviationFromSample();
+    double calcStandardDeviationFromPopulation();
+    double calcCovariance();
+    double calcCorrelation();
 }
