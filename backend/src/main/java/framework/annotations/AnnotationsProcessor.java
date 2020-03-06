@@ -84,6 +84,11 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         return initializeDataObject(constructor, initArgs);
     }
 
+    @Override
+    public List<?> initializeDataObjects(@NotNull List<List<Object>> listWithInitArgs) throws InstantiationException {
+        return null;
+    }
+
 
     /*
     public final List<Object> initializeDataObjects(List<List<Object>> initArgs)throws InstantiationException{
@@ -119,4 +124,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         }
         throw new InstantiationException("Unable to create such object");
     }
+
+
+
 }
