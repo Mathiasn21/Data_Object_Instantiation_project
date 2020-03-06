@@ -122,42 +122,26 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
 
 
     /**
-     * @param listWithInitArgs d
-     * @param file d
-     * @return d
-     * @throws InstantiationException d
-     * @throws NoSuchMethodException d
-     * @throws InvocationTargetException d
-     * @throws IllegalAccessException d
+     * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
+     * @param file String
+     * @return {@link List}&lt;{@link Object}[]&gt;
+     * @throws InstantiationException {@link InstantiationException} InstantiationException
+     * @throws NoSuchMethodException {@link NoSuchMethodException} NoSuchMethodException
+     * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
+     * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
      */
     @SuppressWarnings("unchecked")//Only one possible type extension
     @Override
-    public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file) throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
+            throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
         List<Object> listOfDataObjects = new ArrayList<>();
         Class<?> clazz = filesMappedToDataObject.get(file);
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
-        for (Object[] listWithInitArg : listWithInitArgs) {
-            listOfDataObjects.add(constructor.newInstance(listWithInitArg));
+        for (Object[] initArgs : listWithInitArgs) {
+            listOfDataObjects.add(constructor.newInstance(initArgs));
         }
         return listOfDataObjects;
-    }
-
-
-
-    /**
-     * @param constructor {@link Constructor}&lt;?&gt;
-     * @param initArgs ...Object
-     * @return Object
-     * @throws InstantiationException InstantiationException
-     */
-    @NotNull
-    private Object initializeDataObject(@NotNull Constructor<?> constructor, @NotNull Object ...initArgs) throws InstantiationException {
-        try {
-            return constructor.newInstance(initArgs);
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        throw new InstantiationException("Unable to create such object");
     }
 }
