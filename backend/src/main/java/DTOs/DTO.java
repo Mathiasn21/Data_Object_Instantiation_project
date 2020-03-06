@@ -8,13 +8,13 @@ import framework.collectors.JSONCollector;
  * Class representing usage for the DataObject annotation
  */
 @DataObject(fileName = "name")
-public class DTOs {
+public class DTO {
     public String field1;
     public int field2;
     public double field3;
     public float field4;
 
-    public DTOs(String field1, int field2, double field3, float field4) {
+    public DTO(String field1, int field2, double field3, float field4) {
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
@@ -23,7 +23,7 @@ public class DTOs {
 
     @Override
     public String toString() {
-        return "DTOs{" +
+        return "DTO{" +
                 "field1='" + field1 + '\'' +
                 ", field2=" + field2 +
                 ", field3=" + field3 +

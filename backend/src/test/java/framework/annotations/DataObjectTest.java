@@ -1,10 +1,11 @@
 package framework.annotations;
+import DTOs.DTO;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DataObjectTest{
     private static final String field1 = "This string";
@@ -24,9 +25,13 @@ public class DataObjectTest{
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "name"));
-
         try {
-            System.out.println(annotationsProcessor.initializeDataObjectsFromFileName(list, "name"));
+            List<Object> DTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "name");
+            for(Object o : DTO){
+                System.out.println(o instanceof DTO);
+            }
+            assertEquals(DTO.size(), numObjects);
+            System.out.println(DTO);
         } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
         }
