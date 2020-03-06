@@ -7,7 +7,7 @@ import framework.annotations.DataObject;
  * Class representing usage for the DataObject annotation
  */
 
-@DataObject(fileName = "name", primaryColumnNames = {"1", "2", "3", "4"})
+@DataObject(fileName = "name", primaryColumnNames = {"1", "2", "3", "4"}, informationalRows = {"row1", "row2", "row3"})
 public class DTOs {
     public String field1;
     public int field2;

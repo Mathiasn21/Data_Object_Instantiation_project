@@ -15,11 +15,11 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public class AnnotationsProcessor {
+public class AnnotationsProcessor implements IAnnotationsProcessor{
     private final List<Class<?>> primaryColumnTypes = new ArrayList<>();
+    private final Map<String, Class<?>> map = new HashMap<>();
 
     public AnnotationsProcessor() {
-
     }
 
     /**
@@ -28,6 +28,7 @@ public class AnnotationsProcessor {
     public AnnotationsProcessor(List<Class<?>> primitives) {
         primaryColumnTypes.addAll((primitives));
     }
+
 
     /**
      * @param clazz &lt;? extends {@link Annotation}&gt;
@@ -75,6 +76,7 @@ public class AnnotationsProcessor {
      */
     @NotNull
     @Contract(value = "_-> new")
+    @Override
     public final Object initializeDataObject(@NotNull Object ...initArgs) throws InstantiationException {
         Set<Class<?>> dataObjectSet = getAllClassesWith(DataObject.class);
         setupPrimaryColumnsTypes(dataObjectSet);
@@ -82,12 +84,22 @@ public class AnnotationsProcessor {
         return initializeDataObject(constructor, initArgs);
     }
 
+
+    /*
+    public final List<Object> initializeDataObjects(List<List<Object>> initArgs)throws InstantiationException{
+        Set<Class<?>> dataObjectSet = getAllClassesWith(DataObject.class);
+        setupPrimaryColumnsTypes(dataObjectSet);
+        Constructor<?> constructor = getCorrespondingConstructor(dataObjectSet);
+        return initializeDataObject(constructor, initArgs);
+    }
+    */
+
     private void setupPrimaryColumnsTypes(Set<Class<?>> dataObjectSet) {
         if(primaryColumnTypes.size() != 0){return;}
         dataObjectSet.iterator().forEachRemaining((object) -> {
-            DataObject dataObject = (DataObject) object.cast(DataObject.class);
+            DataObject dataObject = object.getAnnotation(DataObject.class);
             System.out.println(dataObject.fileName());
-            System.out.println(dataObject.primaryColumnNames());
+            System.out.println(Arrays.toString(dataObject.primaryColumnNames()));
         });
     }
 
@@ -101,9 +113,7 @@ public class AnnotationsProcessor {
     @NotNull
     private Object initializeDataObject(@NotNull Constructor<?> constructor, @NotNull Object ...initArgs) throws InstantiationException {
         try {
-            Object o = constructor.newInstance(initArgs);
-            System.out.println(o);
-            return 0;
+            return constructor.newInstance(initArgs);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
