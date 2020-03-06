@@ -4,7 +4,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.List;
 
 /**
  * Annotation used for specifying a class representing a given dataset.
@@ -15,5 +14,5 @@ import java.util.List;
 @Target(ElementType.TYPE)
 public @interface DataObject {
     String fileName() default "";
-    Class<?>[] primaryColumns();
+    String[] primaryColumnNames() default "";
 }

@@ -1,5 +1,7 @@
 package framework.collectors;
 
+import framework.annotations.DataObject;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +31,7 @@ public interface ICollector {
      * @param name String
      * @return Item[]
      */
-    Item[] getCategoryBy(String name);
+    DataObject[] getCategoryBy(String name);
 
     /**
      * @param key Setting

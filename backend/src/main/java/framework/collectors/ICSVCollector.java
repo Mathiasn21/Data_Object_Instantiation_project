@@ -1,5 +1,6 @@
 package framework.collectors;
 
+import framework.annotations.DataObject;
 import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -116,8 +117,8 @@ public final class ICSVCollector extends Collector implements ICSV {
     @NotNull
     @Contract(value = "_ -> new", pure = true)
     @Override
-    public Item[] getCategoryBy(String name) {
-        return new Item[0];
+    public DataObject[] getCategoryBy(String name) {
+        return new DataObject[0];
     }
 
     @NotNull

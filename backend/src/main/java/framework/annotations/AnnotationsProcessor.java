@@ -86,7 +86,8 @@ public class AnnotationsProcessor {
         if(primaryColumnTypes.size() != 0){return;}
         dataObjectSet.iterator().forEachRemaining((object) -> {
             DataObject dataObject = (DataObject) object.cast(DataObject.class);
-            System.out.println(Arrays.toString(dataObject.primaryColumns()));
+            System.out.println(dataObject.fileName());
+            System.out.println(dataObject.primaryColumnNames());
         });
     }
 

@@ -2,6 +2,7 @@ package framework.collectors;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import framework.annotations.DataObject;
 import framework.utilities.HandleStorage;
 import org.jetbrains.annotations.NotNull;
 
@@ -81,11 +82,11 @@ public class JSONCollector extends Collector {
 
     /**
      * @param name String
-     * @return {@link Item[]}
+     * @return {@link DataObject[]}
      */
     @Override
-    public Item[] getCategoryBy(String name) {
-        return new Item[0];
+    public DataObject[] getCategoryBy(String name) {
+        return new DataObject[0];
     }
 
     /**
