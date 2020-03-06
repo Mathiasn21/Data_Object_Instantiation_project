@@ -79,6 +79,58 @@ public final class CSVCollector extends Collector implements ICSV {
     }
 
     /**
+<<<<<<< HEAD:backend/src/main/java/framework/collectors/CSVCollector.java
+=======
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "ICSVCollector";
+    }
+
+    /**
+     * @return String[][]
+     */
+    @Override
+    public String[][] getAllColumns() {
+        String[] primaryColumns = getAllPrimaryColumns();
+        int columnLength = primaryColumns.length;
+        int rowLength = rows.size();
+        String[][] columns = new String[rowLength][columnLength];
+        columns[0] = primaryColumns;
+        for(int row = 1; row < rowLength; row++){
+            columns[row] = rows.get(row);
+        }
+        return columns;
+    }
+
+    /**
+     * @return List String[]
+     */
+    public List<String[]> getInformationalRows() {
+        return informationalRows;
+    }
+
+    /**
+     * @param name String
+     * @return Item[]
+     */
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
+    @Override
+    public DataObject[] getCategoryBy(String name) {
+        return new DataObject[0];
+    }
+
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
+    @Override
+    public String[] getColumnBy(String columnName) {
+        return new String[0];
+    }
+
+    /**
+>>>>>>> ee6710f62803842328fdc234d6b9cd5b39477b0b:backend/src/main/java/framework/collectors/ICSVCollector.java
      * @throws IOException {@link IOException} IOException
      */
     @Override
