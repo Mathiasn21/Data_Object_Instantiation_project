@@ -15,19 +15,17 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public class JSONCollector extends Collector {
+public class JSONCollector extends Collector implements IJSON {
     private String filename;
     private final static Map<Setting, String> settings = new HashMap<>();
-    private List<String> primaryKeys;
+    private List<DataObject> primaryKeys;
     private List<JsonObject> jsonObjectValues;
 
     /**
      * @param filename String
-     * @param primaryKeys ...String
      */
-    public JSONCollector(@NotNull String filename, String ...primaryKeys) {
+    public JSONCollector(@NotNull String filename) {
         this.filename = filename;
-        this.primaryKeys = Arrays.asList(primaryKeys);
         setPrimaryColumns(primaryKeys);
     }
 
@@ -41,31 +39,9 @@ public class JSONCollector extends Collector {
 
     /**
      * @param file {@link File}
-     * @param primaryKeys ...String
      */
-    public JSONCollector(@NotNull File file, String ...primaryKeys) {
-        this(file.getName(), primaryKeys);
-    }
-
-
-    /**
-     * @return String[][]
-     */
-    @Override
-    public String[][] getAllColumns() {
-        int columnLength = jsonObjectValues.size();
-        String[] primaryColumns = getAllPrimaryColumns();
-        int rowLength = primaryColumns.length;
-        String[][] rows = new String[columnLength][rowLength];
-        Arrays.sort(new int[0]);
-        for(int i = 0; i < columnLength; i++){
-            JsonObject jsonObject = jsonObjectValues.get(i);
-            for(int j = 0; j < rowLength; j++){
-                String column = primaryColumns[j];
-                rows[i][j] = String.valueOf(jsonObject.get(column));
-            }
-        }
-        return rows;
+    public JSONCollector(@NotNull File file) {
+        this(file.getName());
     }
 
     /**
@@ -80,24 +56,8 @@ public class JSONCollector extends Collector {
         });
     }
 
-<<<<<<< HEAD
-=======
-    /**
-     * @param name String
-     * @return {@link DataObject[]}
-     */
     @Override
-    public DataObject[] getCategoryBy(String name) {
-        return new DataObject[0];
-    }
->>>>>>> ee6710f62803842328fdc234d6b9cd5b39477b0b
-
-    /**
-     * @param columnName String
-     * @return String[]
-     */
-    @Override
-    public String[] getColumnBy(String columnName) {
-        return new String[0];
+    public String toString() {
+        return "JSON Collector";
     }
 }

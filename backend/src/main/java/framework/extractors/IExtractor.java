@@ -1,7 +1,9 @@
 package framework.extractors;
 
+import framework.annotations.DataObject;
 import framework.collectors.ICollector;
 
+import java.util.List;
 import java.util.Map;
 
 /** Class for extracting primitive data from dataset
@@ -15,8 +17,7 @@ public interface IExtractor{
      * @param <T> T extends ICollector
      * @return double[]
      */
-    <T extends ICollector> double[] extractColumnFrom(T collector, String columnName);
+    <T extends ICollector> List<DataObject> extractColumnFrom(T collector, DataObject columnName);
 
-    <T extends ICollector> Map<String, Integer> extractReportFom(T collector, String columnName);
-
+    <T extends ICollector> Map<String, Integer> extractReportFom(T collector, DataObject columnName);
 }

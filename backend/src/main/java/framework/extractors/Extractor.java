@@ -1,9 +1,13 @@
 package framework.extractors;
 
+import framework.annotations.DataObject;
 import framework.collectors.ICollector;
 import framework.extractors.IExtractor;
 import org.jetbrains.annotations.NotNull;
 
+import javax.xml.crypto.Data;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /** Class used for extracting information from
@@ -12,11 +16,10 @@ import java.util.Map;
  */
 public class Extractor implements IExtractor {
     @Override
-    public <T extends ICollector> double[] extractColumnFrom(@NotNull T collector, String columnName) {
-        String[] data = collector.getColumnBy(columnName);
-        return new double[0];
+    public <T extends ICollector> List<DataObject> extractColumnFrom(@NotNull T collector, DataObject columnName) {
+        List<DataObject> data = collector.getColumnBy(columnName);
+        return Collections.unmodifiableList(data);
     }
-
 
     /**
      * @param collector {@link ICollector}
@@ -25,7 +28,7 @@ public class Extractor implements IExtractor {
      * @return T extends {@link ICollector}
      */
     @Override
-    public <T extends ICollector> Map<String, Integer> extractReportFom(T collector, String columnName) {
+    public <T extends ICollector> Map<String, Integer> extractReportFom(T collector, DataObject columnName) {
         return null;
     }
 }

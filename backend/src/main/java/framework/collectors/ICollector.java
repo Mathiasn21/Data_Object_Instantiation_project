@@ -1,11 +1,6 @@
 package framework.collectors;
 
 import framework.annotations.DataObject;
-
-<<<<<<< HEAD
-import javax.xml.crypto.Data;
-=======
->>>>>>> ee6710f62803842328fdc234d6b9cd5b39477b0b
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -30,16 +25,6 @@ public interface ICollector {
      */
     void loadAndReadFile() throws IOException;
 
-<<<<<<< HEAD
-=======
-
-    /**
-     * @param name String
-     * @return Item[]
-     */
-    DataObject[] getCategoryBy(String name);
-
->>>>>>> ee6710f62803842328fdc234d6b9cd5b39477b0b
     /**
      * @param key Setting
      * @param value String
