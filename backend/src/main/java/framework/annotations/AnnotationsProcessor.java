@@ -1,5 +1,16 @@
 package framework.annotations;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Class Fields
+ * 3. Getters
+ * 4. Setters
+ * 5. Overridden
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import framework.exceptions.NoSuchConstructor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -7,6 +18,7 @@ import org.reflections.Reflections;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -16,20 +28,27 @@ import java.util.*;
  * @version 1.0
  */
 public class AnnotationsProcessor implements IAnnotationsProcessor{
-    private final List<Class<?>> primaryColumnTypes = new ArrayList<>();
-    private final Map<String, Class<?>> map = new HashMap<>();
+
+    // --------------------------------------------------//
+    //                2.Class Fields                     //
+    // --------------------------------------------------//
+    private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
+    private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
+    private final List<DataObject> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
+        Set<Class<?>> clazzes = getAllClassesWith(DataObject.class);
+        clazzes.iterator().forEachRemaining((clazz) -> {
+            DataObject dataObject = clazz.getAnnotation(DataObject.class);
+            Class<?>[] primaryTypeArr = dataObject.primitiveTypes();
+            Class<?>[] primaryTypes = primaryTypeArr.length == 0 ? getPrimaryTypes(clazz) : primaryTypeArr;
+        });
     }
 
-    /**
-     * @param primitives List&lt;Class&lt;?&gt;&gt;
-     */
-    public AnnotationsProcessor(List<Class<?>> primitives) {
-        primaryColumnTypes.addAll((primitives));
-    }
 
-
+    // --------------------------------------------------//
+    //                   3.Getters                       //
+    // --------------------------------------------------//
     /**
      * @param clazz &lt;? extends {@link Annotation}&gt;
      * @return Set&lt;Class&lt;?&gt;&gt;
@@ -37,6 +56,25 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     protected final Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
         Reflections reflections = new Reflections("");
         return reflections.getTypesAnnotatedWith(clazz);
+    }
+
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
+    private Class<?>[] getPrimaryTypes(@NotNull Class<?> clazz) {
+        Class<?>[] res;
+        if(clazz.isAnnotationPresent(DataObjectField.class)){
+            res = new Class[0];
+            //TODO: implement get primary types from field annotations
+        }else{
+            //TODO: Grab all fields and their types
+            Field[] fields = clazz.getFields();
+            res = new Class[fields.length];
+            for (int i = 0; i < fields.length; i++) {
+                Field field = fields[i];
+                res[i] = field.getType();
+            }
+        }
+        return res;
     }
 
 
@@ -69,6 +107,11 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     }
 
 
+    @Override
+    public DataObject getDataObjectForFilename(String fileName) {
+        return null;
+    }
+
     /**
      * @param initArgs ...Object
      * @return Object
@@ -86,10 +129,9 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
 
     @Override
     public List<?> initializeDataObjects(@NotNull List<List<Object>> listWithInitArgs, @NotNull String file) throws InstantiationException {
-        //TODO: Check
+        DataObject dataObject = null;
         return null;
     }
-
 
     /*
     public final List<Object> initializeDataObjects(List<List<Object>> initArgs)throws InstantiationException{
@@ -100,13 +142,12 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     }
     */
 
-    private void setupPrimaryColumnsTypes(Set<Class<?>> dataObjectSet) {
-        if(primaryColumnTypes.size() != 0){return;}
-        dataObjectSet.iterator().forEachRemaining((object) -> {
-            DataObject dataObject = object.getAnnotation(DataObject.class);
-            System.out.println(dataObject.fileName());
-            System.out.println(Arrays.toString(dataObject.primaryKeys()));
-        });
+    private void setupPrimaryColumnsTypes(@NotNull DataObject dataObject) {
+        if(){
+
+        }
+        System.out.println(dataObject.fileName());
+        System.out.println(Arrays.toString(dataObject.primaryKeys()));
     }
 
 
