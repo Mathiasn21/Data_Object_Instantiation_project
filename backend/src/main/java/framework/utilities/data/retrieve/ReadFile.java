@@ -12,7 +12,7 @@ import java.util.List;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public final class ReadFile {
+public final class ReadFile implements IReadFile{
 
     /**
      * Returns a buffer for reading the given file.
@@ -22,16 +22,22 @@ public final class ReadFile {
      * @throws IOException IOException {@link IOException}
      */
     @NotNull
-    public static BufferedReader from(@NotNull String fileName) throws IOException {
+    public BufferedReader given(@NotNull String fileName) throws IOException {
         String filepath = "/files/" + fileName;
         return new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + filepath), StandardCharsets.UTF_8));
     }
 
+    @Override
+    public @NotNull BufferedReader given(@NotNull File resource) throws IOException {
+        //TODO: Implement logic
+        return null;
+    }
 
-    public static JsonArray fromJSON(String filename) throws IOException {
+
+    public JsonArray fromJSON(String filename) throws IOException {
         //TODO: Alter logic in order to divide json text in another class
 
-        BufferedReader bufferedReader = from(filename);
+        BufferedReader bufferedReader = given(filename);
         StringBuilder textFromFile = new StringBuilder();
         String line;
 
@@ -53,7 +59,7 @@ public final class ReadFile {
      */
     @NotNull
     @SuppressWarnings("unchecked")//Will always be possible otherwise and exception is thrown waaay before this method
-    private static <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
+    private <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
         Class<T[]> arrClass = (Class<T[]>) Array.newInstance(type, 0).getClass();

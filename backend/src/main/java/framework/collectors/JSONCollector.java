@@ -3,6 +3,7 @@ package framework.collectors;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import framework.annotations.DataObject;
+import framework.utilities.data.retrieve.IReadFile;
 import framework.utilities.data.retrieve.ReadFile;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +50,8 @@ public class JSONCollector extends Collector implements IJSON {
      */
     @Override
     public void loadAndReadFile() throws IOException {
-        JsonArray jsonStr = ReadFile.fromJSON(filename);
+        ReadFile readFile = new ReadFile();
+        JsonArray jsonStr = readFile.fromJSON(filename);
         jsonObjectValues = new ArrayList<>();
         jsonStr.iterator().forEachRemaining((element) -> {
             jsonObjectValues.add(element.getAsJsonObject());

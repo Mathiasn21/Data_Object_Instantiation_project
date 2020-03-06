@@ -6,7 +6,7 @@ import framework.collectors.ICollector;
 import java.util.List;
 import java.util.Map;
 
-/** Class for extracting primitive data from dataset
+/** Class for extracting primitive data given dataset
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */

@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-//TODO: implement remaining logic from another project code -> Mathias
+//TODO: implement remaining logic given another project code -> Mathias
 public final class WriteFile {
     /**
      * Standard method for writing data to a given file.

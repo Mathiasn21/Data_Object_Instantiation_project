@@ -63,7 +63,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         Class<?>[] res;
         if(clazz.isAnnotationPresent(DataObjectField.class)){
             res = new Class[0];
-            //TODO: implement get primary types from field annotations
+            //TODO: implement get primary types given field annotations
         }else{
             Field[] fields = clazz.getFields();
             res = new Class[fields.length];

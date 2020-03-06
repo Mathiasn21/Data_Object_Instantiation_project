@@ -41,4 +41,15 @@ public class DataObjectTest{
     void fields_initialization(){
 
     }
+
+
+    @Test
+    void dataObject_initialization_no_spcified_file(){
+
+    }
+
+    @Test
+    void dataObject_initialization_with_fields(){
+
+    }
 }

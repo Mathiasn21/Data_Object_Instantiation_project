@@ -78,7 +78,7 @@ public final class CSVCollector extends Collector implements ICSV {
     @Override
     public void loadAndReadFile() throws IOException {
         /*String line;
-        BufferedReader bufferedReader = ReadFile.from(fileName);
+        BufferedReader bufferedReader = ReadFile.given(fileName);
         List<String[]> rows = new ArrayList<>();
         boolean foundPrimarycolumns = false;
         while ((line = bufferedReader.readLine()) != null) {
