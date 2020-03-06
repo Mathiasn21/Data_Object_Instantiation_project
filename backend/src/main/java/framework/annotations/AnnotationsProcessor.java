@@ -40,8 +40,14 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         Set<Class<?>> clazzes = getAllClassesWith(DataObject.class);
         clazzes.iterator().forEachRemaining((clazz) -> {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
+
             Class<?>[] primaryTypeArr = dataObject.primitiveTypes();
-            Class<?>[] primaryTypes = primaryTypeArr.length == 0 ? getPrimaryTypes(clazz) : primaryTypeArr;
+            Class<?>[] primaryTypes = primaryTypeArr[0] == void.class ? getPrimaryTypes(clazz) : primaryTypeArr;
+            dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
+
+            String fileName = dataObject.fileName();
+            if (fileName.equals("")) { dataObjectsWithNoFiles.add(dataObject);
+            } else { filesMappedToDataObject.put(fileName, clazz); }
         });
     }
 
@@ -53,12 +59,10 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
      * @param clazz &lt;? extends {@link Annotation}&gt;
      * @return Set&lt;Class&lt;?&gt;&gt;
      */
-    protected final Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
+    private Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
         Reflections reflections = new Reflections("");
         return reflections.getTypesAnnotatedWith(clazz);
     }
-
-
 
 
     // --------------------------------------------------//
@@ -87,77 +91,56 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         return res;
     }
 
-
-    /**
-     * Returns first matching constructor
-     * @param dataObjectSet Set&lt;Class&lt;?&gt;&gt;
-     * @return Constructor&lt;?&gt;
-     */
-    @NotNull
-    private Constructor<?> getCorrespondingConstructor(@NotNull Set<Class<?>> dataObjectSet) {
-        for(Class<?> clazz : dataObjectSet){
-            Constructor<?>[] constructors = clazz.getConstructors();
-
-            constructorLoop: for (Constructor<?> constructor : constructors) {
-                Class<?>[] params = constructor.getParameterTypes();
-                if(params.length != primaryColumnTypes.size()){
-                    continue;
-                }
-
-                for(int i = 0; i < params.length; i++){
-                    Class<?> param = params[i];
-                    if(param != primaryColumnTypes.get(i)){
-                        continue constructorLoop;
-                    }
-                }
-                return constructor;
-            }
-        }
-        throw new NoSuchConstructor();
-    }
-
-
     @Override
     public DataObject getDataObjectForFilename(String fileName) {
         return null;
     }
 
     /**
-     * @param initArgs ...Object
-     * @return Object
-     * @throws InstantiationException {@link InstantiationException} InstantiateException
+     * @param listWithInitArgs d
+     * @param file d
+     * @return d
+     * @throws InstantiationException d
+     * @throws NoSuchMethodException d
+     * @throws InvocationTargetException d
+     * @throws IllegalAccessException d
+     */
+    @SuppressWarnings("unchecked")//Only one possible type extension
+    @Override
+    public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file) throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        List<Object> listOfDataObjects = new ArrayList<>();
+        Class<?> clazz = filesMappedToDataObject.get(file);
+
+        Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
+        for (Object[] listWithInitArg : listWithInitArgs) {
+            listOfDataObjects.add(constructor.newInstance(listWithInitArg));
+        }
+        return listOfDataObjects;
+    }
+
+
+    /**
+     * @param constructors Array
+     * @param primaryKeys Array
+     * @return Constructors
      */
     @NotNull
-    @Contract(value = "_-> new")
-    @Override
-    public final Object initializeDataObject(@NotNull Object ...initArgs) throws InstantiationException {
-        Set<Class<?>> dataObjectSet = getAllClassesWith(DataObject.class);
-        setupPrimaryColumnsTypes(dataObjectSet);
-        Constructor<?> constructor = getCorrespondingConstructor(dataObjectSet);
-        return initializeDataObject(constructor, initArgs);
-    }
+    private Constructor<?> getFirstMatchingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryKeys) {
+        constructorLoop: for (Constructor<?> constructor : constructors) {
+            Class<?>[] params = constructor.getParameterTypes();
+            if(params.length != primaryKeys.length){
+                continue;
+            }
 
-    @Override
-    public List<?> initializeDataObjects(@NotNull List<List<Object>> listWithInitArgs, @NotNull String file) throws InstantiationException {
-        DataObject dataObject = null;
-        return null;
-    }
-
-    /*
-    public final List<Object> initializeDataObjects(List<List<Object>> initArgs)throws InstantiationException{
-        Set<Class<?>> dataObjectSet = getAllClassesWith(DataObject.class);
-        setupPrimaryColumnsTypes(dataObjectSet);
-        Constructor<?> constructor = getCorrespondingConstructor(dataObjectSet);
-        return initializeDataObject(constructor, initArgs);
-    }
-    */
-
-    private void setupPrimaryColumnsTypes(@NotNull DataObject dataObject) {
-        if(){
-
+            for(int i = 0; i < params.length; i++){
+                Class<?> param = params[i];
+                if(param != primaryKeys[i]){
+                    continue constructorLoop;
+                }
+            }
+            return constructor;
         }
-        System.out.println(dataObject.fileName());
-        System.out.println(Arrays.toString(dataObject.primaryKeys()));
+        throw new NoSuchConstructor();
     }
 
 
@@ -176,7 +159,4 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         }
         throw new InstantiationException("Unable to create such object");
     }
-
-
-
 }

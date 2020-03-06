@@ -1,5 +1,7 @@
 package framework.collectors;
 
+import framework.annotations.DataObject;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,20 +11,13 @@ import java.util.Map;
  * @version 1.0
  */
 public class CollectorBuilder {
-
     private final ICollector collector;
-
     public CollectorBuilder(String extension) {
         this.collector = Collector.fromFileExtension(extension);
     }
 
-    public final CollectorBuilder setPrimaryColumns(String[] primaryColumns){
+    public final CollectorBuilder setPrimaryColumns(List<DataObject> primaryColumns){
         collector.setPrimaryColumns(primaryColumns);
-        return this;
-    }
-
-    public final CollectorBuilder setPrimaryColumns(List<String> list){
-        collector.setPrimaryColumns(list);
         return this;
     }
 

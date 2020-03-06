@@ -1,5 +1,6 @@
 package DTOs;
 
+import framework.annotations.DataConstructor;
 import framework.annotations.DataObjectField;
 
 /**
@@ -17,6 +18,8 @@ public class ComplexDTO {
     private double doubles;
 
     private String thing;
+
+    @DataConstructor
     public ComplexDTO(String string, int integer, double doubles) {
         this.string = string;
         this.integer = integer;
