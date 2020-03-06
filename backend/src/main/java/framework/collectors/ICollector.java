@@ -1,6 +1,8 @@
 package framework.collectors;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /** Interface describing contract for all collectors
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -35,7 +37,22 @@ public interface ICollector {
      */
     void setSetting(Setting key, String value);
 
+    /**
+     * @param columnName String
+     */
     String[] getColumnBy(String columnName);
+
+    /**
+     * @param primaryColumns String[]
+     */
+    void setPrimaryColumns(String[] primaryColumns);
+
+    /**
+     * @param list List<String>
+     */
+    void setPrimaryColumns(List<String> list);
+
+    void setAllSettings(Map<Setting, String> settings);
 
     /**
      * @param mb int
