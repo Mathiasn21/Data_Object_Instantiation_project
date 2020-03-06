@@ -1,14 +1,13 @@
 package framework.collectors;
 
+import com.sun.source.tree.Tree;
+import framework.annotations.DataObject;
 import framework.collectors.factory.CollectorFactory;
 import framework.collectors.factory.ICollectorFactory;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /** Class for collecting data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -16,7 +15,9 @@ import java.util.Map;
  */
 public abstract class Collector implements ICollector{
     private String[] primaryColumns;
+    private TreeMap<String, DataObject> rbTree = new TreeMap<>();
     private final Map<Setting, String> settings = new HashMap<>();
+
 
     /**
      * @param list {@link List}
