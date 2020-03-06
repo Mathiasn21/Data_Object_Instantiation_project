@@ -10,6 +10,6 @@ public class Retrieve {
     void data_from_file() throws IOException {
         //Example of usage:
         IRetrieveData retrieveData = new RetrieveData();
-        retrieveData.fromFile().from("name");
+        retrieveData.fromFile().given("name");
     }
 }
