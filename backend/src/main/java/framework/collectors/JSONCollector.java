@@ -80,6 +80,8 @@ public class JSONCollector extends Collector {
         });
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @param name String
      * @return {@link DataObject[]}
@@ -88,6 +90,7 @@ public class JSONCollector extends Collector {
     public DataObject[] getCategoryBy(String name) {
         return new DataObject[0];
     }
+>>>>>>> ee6710f62803842328fdc234d6b9cd5b39477b0b
 
     /**
      * @param columnName String
