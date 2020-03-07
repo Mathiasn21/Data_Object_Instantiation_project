@@ -38,7 +38,7 @@ public class DataObjectTest{
     }
 
     @Test
-    void dataObject_initialization_with_fields(){
+    void dataObject_instantiation_with_fields(){
         ArrayList<Object[]> list = new ArrayList<>();
         Object[] arr = {"string", 22, 42.054};
         int numObjects = 50;
@@ -54,10 +54,8 @@ public class DataObjectTest{
             List<ComplexDTO> test = new ArrayList<>();
 
             for(Object o : complexDTO){
-                if(o instanceof ComplexDTO){
-                    test.add((ComplexDTO) o);
-                }
                 assertTrue(o instanceof ComplexDTO);
+                test.add((ComplexDTO) o);
             }
             assertEquals(complexDTO.size(), numObjects);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
@@ -67,7 +65,7 @@ public class DataObjectTest{
 
 
     @Test
-    void dataObject_initialization_no_specified_file(){
+    void dataObject_instantiation_no_specified_file(){
 
     }
 }
