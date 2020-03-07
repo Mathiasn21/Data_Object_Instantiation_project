@@ -111,12 +111,6 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     // --------------------------------------------------//
     //                   4.Contract Methods              //
     // --------------------------------------------------//
-    @Override
-    public DataObject getDataObjectForFilename(String fileName) {
-        //TODO implement logic for method
-        return null;
-    }
-
 
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
@@ -131,6 +125,10 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
             throws InstantiationException, InvocationTargetException, IllegalAccessException {
 
+        /*TODO: implement logic for whenever there is no mapped file.
+         * It will then just find first matching class where the field types match
+         * the required types.
+         */
         List<Object> listOfDataObjects = new ArrayList<>();
         Class<?> clazz = filesMappedToDataObject.get(file);
 
