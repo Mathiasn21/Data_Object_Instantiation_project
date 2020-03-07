@@ -44,7 +44,7 @@ public class DataObjectTest{
 
 
     @Test
-    void dataObject_initialization_no_spcified_file(){
+    void dataObject_initialization_no_specified_file(){
 
     }
 

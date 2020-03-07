@@ -7,7 +7,7 @@ import framework.utilities.data.write.WriteData;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
-public class Retrieve {
+public class Read {
     @Test
     void data_from_file() throws IOException {
         //Example of usage:

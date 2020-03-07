@@ -40,8 +40,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         clazzes.iterator().forEachRemaining((clazz) -> {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
-            System.out.println(Arrays.toString(clazz.getConstructors()[0].getAnnotations()));
-            getCorrespondingConstructor();
+            getCorrespondingConstructor(clazz.getConstructors());
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
 
@@ -51,8 +50,9 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         });
     }
 
-    private void getCorrespondingConstructor() {
-
+    private void getCorrespondingConstructor(@NotNull Constructor<?>[] constructors) {
+        DataConstructor constructorClazz = constructors.getClass().getAnnotation(DataConstructor.class);
+        System.out.println(constructorClazz);
     }
 
 
