@@ -25,6 +25,8 @@ public interface ICollector {
      */
     void loadAndReadFile() throws IOException;
 
+    //TODO: Add method: void loadAndReadData();
+
     /**
      * @param key Setting
      * @param value String

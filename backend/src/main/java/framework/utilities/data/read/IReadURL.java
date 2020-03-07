@@ -5,8 +5,10 @@ import org.jetbrains.annotations.NotNull;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.io.BufferedReader;
-/**
- * Determines a contract for how to expose URL data
+
+/** Interface describing a contract for reading from a URL
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
  */
 public interface IReadURL extends IRead{
     /**

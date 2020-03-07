@@ -9,7 +9,7 @@ import java.io.IOException;
  * They are only supposed to mediate the retrieval of information given those classes that do handle this functionality.
  * Of course the aim here is to also implement remaining functionality where it be needed
  */
-public interface IRetrieveData {
+public interface IReadData {
     @NotNull IReadFile fromFile() throws IOException;
     @NotNull IReadURL fromURL() throws IOException;
 }

@@ -2,11 +2,14 @@ package framework.utilities.data.write;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
 public final class WriteURL implements IWriteURL {
     WriteURL() {
     }

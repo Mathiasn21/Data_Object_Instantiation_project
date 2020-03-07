@@ -7,7 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Determines a contract for how to store URL POST data
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
  */
 public interface IWriteURL extends IWrite {
     /**

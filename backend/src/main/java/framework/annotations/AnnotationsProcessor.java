@@ -10,7 +10,7 @@ package framework.annotations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import framework.exceptions.NoSuchConstructor;
+import framework.errors.NoSuchConstructor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;

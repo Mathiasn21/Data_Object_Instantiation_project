@@ -8,6 +8,10 @@ import java.io.*;
 import java.util.List;
 
 //TODO: implement remaining logic given another project code -> Mathias
+/**
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
 public final class WriteFile implements IWriteFile{
     WriteFile() {
     }
