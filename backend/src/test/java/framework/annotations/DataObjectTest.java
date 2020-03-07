@@ -38,7 +38,7 @@ public class DataObjectTest{
     }
 
     @Test
-    void fields_initialization(){
+    void dataObject_initialization_with_fields(){
         ArrayList<Object[]> list = new ArrayList<>();
         Object[] arr = {"string", 22, 42.054};
         int numObjects = 50;
@@ -50,11 +50,16 @@ public class DataObjectTest{
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "test"));
         try {
-            List<Object> DTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "test");
-            for(Object o : DTO){
+            List<Object> complexDTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "test");
+            List<ComplexDTO> test = new ArrayList<>();
+
+            for(Object o : complexDTO){
+                if(o instanceof ComplexDTO){
+                    test.add((ComplexDTO) o);
+                }
                 assertTrue(o instanceof ComplexDTO);
             }
-            assertEquals(DTO.size(), numObjects);
+            assertEquals(complexDTO.size(), numObjects);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -63,11 +68,6 @@ public class DataObjectTest{
 
     @Test
     void dataObject_initialization_no_specified_file(){
-
-    }
-
-    @Test
-    void dataObject_initialization_with_fields(){
 
     }
 }

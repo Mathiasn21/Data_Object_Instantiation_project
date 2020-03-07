@@ -122,7 +122,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
      */
     @SuppressWarnings("unchecked")//Only one possible type extension
     @Override
-    public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
+    public <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
             throws InstantiationException, InvocationTargetException, IllegalAccessException {
 
         /*TODO: implement logic for whenever there is no mapped file.
@@ -136,6 +136,6 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
-        return listOfDataObjects;
+        return (List<T>) listOfDataObjects;
     }
 }
