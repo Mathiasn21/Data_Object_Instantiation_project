@@ -9,4 +9,11 @@ public class DTONoFile {
     public DTONoFile(String string) {
         this.string = string;
     }
+
+    @Override
+    public String toString() {
+        return "DTONoFile{" +
+                "string='" + string + '\'' +
+                '}';
+    }
 }
