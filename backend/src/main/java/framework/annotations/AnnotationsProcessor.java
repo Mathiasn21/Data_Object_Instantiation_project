@@ -10,9 +10,11 @@ package framework.annotations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import framework.errors.NoMatchingDataObject;
 import framework.errors.NoSuchConstructor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Constructor;
@@ -32,7 +34,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
-    private final List<DataObject> dataObjectsWithNoFiles = new ArrayList<>();
+    private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
         Set<Class<?>> clazzes = getAllDataObjectClasses();
@@ -44,7 +46,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
             objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
 
             String fileName = dataObject.fileName();
-            if (fileName.equals("")) { dataObjectsWithNoFiles.add(dataObject);
+            if (fileName.equals("")) { dataObjectsWithNoFiles.add(clazz);
             } else { filesMappedToDataObject.put(fileName, clazz); }
         });
     }
@@ -120,22 +122,44 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
      * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
      * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
      */
-    @SuppressWarnings("unchecked")//Only one possible type extension
+    @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
     public <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
             throws InstantiationException, InvocationTargetException, IllegalAccessException {
 
-        /*TODO: implement logic for whenever there is no mapped file.
-         * It will then just find first matching class where the field types match
-         * the required types.
-         */
         List<Object> listOfDataObjects = new ArrayList<>();
-        Class<?> clazz = filesMappedToDataObject.get(file);
+        Class<?> clazz = filesMappedToDataObject.containsKey(file) ?
+                filesMappedToDataObject.get(file) : getDataObjectWithoutFile(listWithInitArgs.get(0));
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
         return (List<T>) listOfDataObjects;
+    }
+
+
+    @Nullable
+    @Contract(pure = true)
+    @SuppressWarnings("unchecked")//Only one possible type of constructor class
+    private Class<?> getDataObjectWithoutFile(@NotNull Object[] sample) {
+        Class<?>[] types = new Class[sample.length];
+        for (int i = 0; i < sample.length; i++) {
+            types[i] = sample[i].getClass();
+        }
+
+        clazzLoop: for(Class<?> clazz : dataObjectsWithNoFiles){
+            Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
+            Class<?>[] params = constructor.getParameterTypes();
+            if(params.length == types.length){
+                for(int i = 0; i < types.length; i++){
+                    if(types[i] != params[i]){
+                        continue clazzLoop;
+                    }
+                }
+                return clazz;
+            }
+        }
+        throw new NoMatchingDataObject();
     }
 }

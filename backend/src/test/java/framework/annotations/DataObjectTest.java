@@ -1,6 +1,7 @@
 package framework.annotations;
 import DTOs.ComplexDTO;
 import DTOs.DTO;
+import DTOs.DTONoFile;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -63,9 +64,28 @@ public class DataObjectTest{
         }
     }
 
-
     @Test
     void dataObject_instantiation_no_specified_file(){
+        ArrayList<Object[]> list = new ArrayList<>();
+        Object[] sample = new Object[]{"dwafesagea"};
 
+        int numObjects = 50;
+        for(int i = 0; i < numObjects; i++){
+            list.add(sample);
+        }
+
+        AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "dd"));
+        try {
+            List<Object> noFiles = annotationsProcessor.initializeDataObjectsFromFileName(list, "dd");
+            for(Object o : noFiles){
+                assertTrue(o instanceof DTONoFile);
+            }
+            assertEquals(noFiles.size(), numObjects);
+            System.out.println(noFiles);
+
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
