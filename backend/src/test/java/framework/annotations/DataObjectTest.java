@@ -1,4 +1,5 @@
 package framework.annotations;
+import DTOs.ComplexDTO;
 import DTOs.DTO;
 import org.junit.jupiter.api.Test;
 
@@ -31,14 +32,32 @@ public class DataObjectTest{
                 assertTrue(o instanceof DTO);
             }
             assertEquals(DTO.size(), numObjects);
-        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
 
     @Test
     void fields_initialization(){
+        ArrayList<Object[]> list = new ArrayList<>();
+        Object[] arr = {"string", 22, 42.054};
+        int numObjects = 50;
 
+        for(int i = 0; i < numObjects; i++){
+            list.add(arr);
+        }
+
+        AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "test"));
+        try {
+            List<Object> DTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "test");
+            for(Object o : DTO){
+                assertTrue(o instanceof ComplexDTO);
+            }
+            assertEquals(DTO.size(), numObjects);
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
 

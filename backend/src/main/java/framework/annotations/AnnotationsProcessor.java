@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -36,7 +35,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     private final List<DataObject> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
-        Set<Class<?>> clazzes = getAllClassesWith(DataObject.class);
+        Set<Class<?>> clazzes = getAllDataObjectClasses();
         clazzes.iterator().forEachRemaining((clazz) -> {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
@@ -86,30 +85,28 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     @NotNull
     @Contract(value = "_ -> new", pure = true)
     private Class<?>[] getPrimaryTypes(@NotNull Class<?> clazz) {
-        Class<?>[] res;
-        if(clazz.isAnnotationPresent(DataObjectField.class)){
-            res = new Class[0];
-            //TODO: implement get primary types given field annotations
-        }else{
-            Field[] fields = clazz.getFields();
-            res = new Class[fields.length];
-            for (int i = 0; i < fields.length; i++) {
-                Field field = fields[i];
-                res[i] = field.getType();
-            }
+        List<Class<?>> dataFields = new ArrayList<>();//is annotated with DataField
+        List<Class<?>> listOfFields = new ArrayList<>();//Is not annotated with DataField
+
+        Field[] fields = clazz.getFields();
+        for (Field field : fields) {
+            Class<?> type = field.getType();
+
+            if (field.isAnnotationPresent(DataObjectField.class)) { dataFields.add(type);
+            } else { listOfFields.add(type); }
         }
-        return res;
+        return (dataFields.isEmpty() ? listOfFields : dataFields).toArray(new Class[0]);
     }
 
 
     /**
-     * @param clazz &lt;? extends {@link Annotation}&gt;
      * @return Set&lt;Class&lt;?&gt;&gt;
      */
-    private Set<Class<?>> getAllClassesWith(Class<? extends Annotation> clazz){
+    private Set<Class<?>> getAllDataObjectClasses(){
         Reflections reflections = new Reflections("");
-        return reflections.getTypesAnnotatedWith(clazz);
+        return reflections.getTypesAnnotatedWith(DataObject.class);
     }
+
 
     // --------------------------------------------------//
     //                   4.Contract Methods              //
@@ -126,19 +123,17 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
      * @param file String
      * @return {@link List}&lt;{@link Object}[]&gt;
      * @throws InstantiationException {@link InstantiationException} InstantiationException
-     * @throws NoSuchMethodException {@link NoSuchMethodException} NoSuchMethodException
      * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
      * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
      */
     @SuppressWarnings("unchecked")//Only one possible type extension
     @Override
     public List<Object> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
-            throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            throws InstantiationException, InvocationTargetException, IllegalAccessException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
         Class<?> clazz = filesMappedToDataObject.get(file);
 
-        //Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));

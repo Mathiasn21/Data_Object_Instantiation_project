@@ -1,21 +1,23 @@
 package DTOs;
 
 import framework.annotations.DataConstructor;
+import framework.annotations.DataObject;
 import framework.annotations.DataObjectField;
 
 /**
  * ComplexDTO that contains custom field that require mapping
  */
+@DataObject(fileName = "test")
 public class ComplexDTO {
 
     @DataObjectField
-    private String string;
+    public String string;
 
     @DataObjectField
-    private int integer;
+    public int integer;
 
     @DataObjectField
-    private double doubles;
+    public double doubles;
 
     private String thing;
 
