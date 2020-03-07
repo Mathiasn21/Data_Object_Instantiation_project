@@ -32,6 +32,7 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     // --------------------------------------------------//
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
+    private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
     private final List<DataObject> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
@@ -39,6 +40,8 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         clazzes.iterator().forEachRemaining((clazz) -> {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
+            System.out.println(Arrays.toString(clazz.getConstructors()[0].getAnnotations()));
+            getCorrespondingConstructor();
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
 
@@ -46,6 +49,10 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
             if (fileName.equals("")) { dataObjectsWithNoFiles.add(dataObject);
             } else { filesMappedToDataObject.put(fileName, clazz); }
         });
+    }
+
+    private void getCorrespondingConstructor() {
+
     }
 
 

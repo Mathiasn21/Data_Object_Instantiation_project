@@ -3,11 +3,11 @@ package framework.utilities.data.read;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
-public final class RetrieveData implements IRetrieveData {
+public final class ReadData implements IRetrieveData {
     private final IReadFile readFile;
     private final IReadURL readURL;
 
-    public RetrieveData() {
+    public ReadData() {
         readFile = new ReadFile();
         readURL = new ReadURL();
     }

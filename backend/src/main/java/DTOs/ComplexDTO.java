@@ -8,7 +8,7 @@ import framework.annotations.DataObjectField;
  */
 public class ComplexDTO {
 
-    @DataObjectField(primaryColumnName = "name")
+    @DataObjectField
     private String string;
 
     @DataObjectField
