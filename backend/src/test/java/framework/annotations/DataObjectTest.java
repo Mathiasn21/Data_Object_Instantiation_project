@@ -82,8 +82,6 @@ public class DataObjectTest{
                 assertTrue(o instanceof DTONoFile);
             }
             assertEquals(noFiles.size(), numObjects);
-            System.out.println(noFiles);
-
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }

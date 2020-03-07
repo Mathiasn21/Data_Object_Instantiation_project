@@ -113,7 +113,6 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
     // --------------------------------------------------//
     //                   4.Contract Methods              //
     // --------------------------------------------------//
-
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param file String
