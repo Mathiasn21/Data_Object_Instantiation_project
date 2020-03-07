@@ -40,9 +40,9 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         clazzes.iterator().forEachRemaining((clazz) -> {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
-            getCorrespondingConstructor(clazz.getConstructors());
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
+            objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
 
             String fileName = dataObject.fileName();
             if (fileName.equals("")) { dataObjectsWithNoFiles.add(dataObject);
@@ -50,9 +50,28 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         });
     }
 
-    private void getCorrespondingConstructor(@NotNull Constructor<?>[] constructors) {
-        DataConstructor constructorClazz = constructors.getClass().getAnnotation(DataConstructor.class);
-        System.out.println(constructorClazz);
+    /**
+     * @param constructors {@link Constructor}&lt;?&gt;[]
+     * @return {@link Constructor}&lt;?&gt;
+     */
+    @NotNull
+    private Constructor<?> getCorrespondingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryTypes) {
+        constructorLoop: for(Constructor<?> constructor : constructors){
+            Class<?>[] params = constructor.getParameterTypes();
+
+            if(constructor.isAnnotationPresent(DataConstructor.class)){
+                return constructor;
+            }else if(params.length == primaryTypes.length){
+                for(int i = 0; i < params.length; i++){
+                    Class<?> param = params[i];
+                    if(param != primaryTypes[i]){
+                        continue constructorLoop;
+                    }
+                }
+                return constructor;
+            }
+        }
+        throw new NoSuchConstructor();
     }
 
 
@@ -92,31 +111,6 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         return reflections.getTypesAnnotatedWith(clazz);
     }
 
-    /**
-     * @param constructors Array
-     * @param primaryKeys Array
-     * @return Constructors
-     */
-    @NotNull
-    private Constructor<?> getFirstMatchingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryKeys) {
-        constructorLoop: for (Constructor<?> constructor : constructors) {
-            Class<?>[] params = constructor.getParameterTypes();
-            if(params.length != primaryKeys.length){
-                continue;
-            }
-
-            for(int i = 0; i < params.length; i++){
-                Class<?> param = params[i];
-                if(param != primaryKeys[i]){
-                    continue constructorLoop;
-                }
-            }
-            return constructor;
-        }
-        throw new NoSuchConstructor();
-    }
-
-
     // --------------------------------------------------//
     //                   4.Contract Methods              //
     // --------------------------------------------------//
@@ -144,7 +138,8 @@ public class AnnotationsProcessor implements IAnnotationsProcessor{
         List<Object> listOfDataObjects = new ArrayList<>();
         Class<?> clazz = filesMappedToDataObject.get(file);
 
-        Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
+        //Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) clazz.getConstructor(dataObjectMappedToPrimaryKeyTypes.get(clazz));
+        Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }

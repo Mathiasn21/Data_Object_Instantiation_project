@@ -28,10 +28,9 @@ public class DataObjectTest{
         try {
             List<Object> DTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "name");
             for(Object o : DTO){
-                System.out.println(o instanceof DTO);
+                assertTrue(o instanceof DTO);
             }
             assertEquals(DTO.size(), numObjects);
-            System.out.println(DTO);
         } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
         }
