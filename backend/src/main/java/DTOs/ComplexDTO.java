@@ -19,7 +19,7 @@ public class ComplexDTO {
     @DataObjectField
     public double doubles;
 
-    private String thing;
+    private String thing = "dada";
 
     @DataConstructor
     public ComplexDTO(String string, int integer, double doubles) {

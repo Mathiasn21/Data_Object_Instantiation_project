@@ -1,4 +1,4 @@
-package framework.retrieveData;
+package framework.collectData;
 
 import framework.collectors.Collector;
 import framework.collectors.ICollector;

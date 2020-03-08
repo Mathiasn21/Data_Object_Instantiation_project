@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.*;
 
-/** Class for collecting data
+/** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
@@ -105,6 +105,7 @@ public final class Collector implements ICollector{
     public final void setSetting(@NotNull Setting key, @NotNull String value) {
         settings.put(key, value);
     }
+
 
     /**
      * Sets all settings from a given map.

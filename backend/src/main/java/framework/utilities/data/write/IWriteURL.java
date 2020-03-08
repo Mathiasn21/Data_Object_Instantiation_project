@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
+/**Describes a concrete contract for writing data to a URL
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */

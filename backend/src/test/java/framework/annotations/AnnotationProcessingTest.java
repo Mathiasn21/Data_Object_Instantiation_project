@@ -9,7 +9,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DataObjectTest{
+public class AnnotationProcessingTest {
     private static final String field1 = "This string";
     private static final int field2 = 22;
     private static final double field3 = 1.24;

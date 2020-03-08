@@ -32,7 +32,7 @@ public final class WriteURL implements IWriteURL {
      */
     @Contract(pure = true)
     @Override
-    public final void given(String resource, @NotNull String data) throws IOException {
+    public final void given(@NotNull String resource, @NotNull String data) throws IOException {
 
     }
 }

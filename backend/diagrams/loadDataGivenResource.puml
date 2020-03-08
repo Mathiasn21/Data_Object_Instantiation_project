@@ -1,8 +1,0 @@
-@startuml
-title Load data from resource
-Actor Client
-
-Client -> Collector
-
-
-@enduml
