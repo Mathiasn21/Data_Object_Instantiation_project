@@ -11,7 +11,7 @@ import java.io.File;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public final class ResourceBuilder {
+public class ResourceBuilder {
     private IRead read;
     ResourceBuilder() {
     }

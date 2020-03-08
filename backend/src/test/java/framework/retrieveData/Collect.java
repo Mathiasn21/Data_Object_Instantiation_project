@@ -16,7 +16,7 @@ public class Collect {
         ICollector collector = Collector.getBuilder(resource, new CSVHandler()).build();
         collector.loadData();
 
-        IWriteData writeData = new WriteData();
-        writeData.toFile().given("","");
+        //IWriteData writeData = new WriteData();
+        //writeData.toFile().given("","");
     }
 }
