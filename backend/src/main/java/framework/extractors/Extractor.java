@@ -2,12 +2,10 @@ package framework.extractors;
 
 import framework.annotations.DataObject;
 import framework.collectors.ICollector;
-import framework.extractors.IExtractor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.xml.crypto.Data;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

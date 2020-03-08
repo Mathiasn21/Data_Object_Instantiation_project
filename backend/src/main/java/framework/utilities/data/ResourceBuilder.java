@@ -4,8 +4,8 @@ import framework.utilities.data.read.IRead;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.net.URL;
 import java.io.File;
+import java.net.URL;
 
 /**
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
