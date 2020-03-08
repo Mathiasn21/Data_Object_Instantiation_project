@@ -1,4 +1,4 @@
-package framework.database;
+package database;
 
 /** Class representing a contract for interacting with a database
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

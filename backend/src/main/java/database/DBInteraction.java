@@ -1,4 +1,4 @@
-package framework.database;
+package database;
 
 /** Class interacting with a db
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

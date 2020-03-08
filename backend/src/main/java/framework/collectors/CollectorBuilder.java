@@ -18,8 +18,8 @@ import java.util.Map;
 public final class CollectorBuilder {
     private final ICollector collector;
 
-    public CollectorBuilder(){
-        this.collector = new Collector();
+    CollectorBuilder(Resource resource, IHandle dataHandler){
+        this.collector = new Collector(resource, dataHandler);
     }
 
     // --------------------------------------------------//
@@ -70,4 +70,8 @@ public final class CollectorBuilder {
     public final String toString() {
         return "Collector builder";
     }
+
+    /*TODO: Allow this class to be extended with its own implementations
+     *  This could be done either through interfaces or a better way, through inheritance.
+     * */
 }

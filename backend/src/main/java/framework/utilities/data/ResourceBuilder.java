@@ -1,28 +1,61 @@
 package framework.utilities.data;
 
 import framework.utilities.data.read.IRead;
-import java.net.URL;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
+import java.net.URL;
 import java.io.File;
 
-public class ResourceBuilder {
+/**
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0.0
+ */
+public final class ResourceBuilder {
     private IRead read;
-
-    public ResourceBuilder() {
+    ResourceBuilder() {
     }
 
+    /**
+     * @param file String
+     * @return {@link ResourceBuilder}
+     */
     public ResourceBuilder fromFile(String file) {
         return this;
     }
 
+    /**
+     * @param file {@link File}
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromFile(File file) {
         return this;
     }
 
-    public ResourceBuilder fromURL(URL file) {
+    /**
+     * @param url String
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
+    public ResourceBuilder fromURL(String url) {
         return this;
     }
 
+    /**
+     * @param url {@link URL}
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
+    public ResourceBuilder fromURL(URL url) {
+        return this;
+    }
+
+    /**
+     * @return {@link Resource}
+     */
+    @NotNull
+    @Contract(value = " -> new", pure = true)
     public Resource build() {
         return new Resource(read);
     }

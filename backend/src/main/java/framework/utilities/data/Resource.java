@@ -1,6 +1,7 @@
 package framework.utilities.data;
 
 import framework.utilities.data.read.IRead;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ public final class Resource {
     /**
      * @param readData {@link IRead}
      */
-    public Resource(IRead readData) { this.readData = readData; }
+    Resource(IRead readData) { this.readData = readData; }
 
     /**
      * @return {@link BufferedReader}
@@ -25,4 +26,17 @@ public final class Resource {
     public final @NotNull BufferedReader getData() throws FileNotFoundException {
         return readData.read();
     }
+
+    /**
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = " -> new", pure = true)
+    public static @NotNull ResourceBuilder getBuilder(){
+        return new ResourceBuilder();
+    }
+
+
+    /*TODO: Allow this class to be extended with its own implementations
+    *  This could be done either through inheritance or a better way, through interfaces.
+    * */
 }

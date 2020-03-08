@@ -22,16 +22,27 @@ public final class Collector implements ICollector{
     private TreeMap<String, DataObject> rbTree = new TreeMap<>();
     private List<String[]> informationalRows = new ArrayList<>();
 
-    private IHandle handler;
+    private IHandle dataHandler;
     private Resource resource;
-    Collector() {
 
+    /**
+     * @param resource {@link Resource}
+     * @param dataHandler {@link IHandle}
+     */
+    Collector(Resource resource, IHandle dataHandler) {
+        this.resource = resource;
+        this.dataHandler = dataHandler;
     }
 
+    /**
+     * @param resource {@link Resource}
+     * @param dataHandler {@link IHandle}
+     * @return
+     */
     @NotNull
-    @Contract(" -> new")
-    public static CollectorBuilder getBuilder() {
-        return new CollectorBuilder();
+    @Contract("_, _ -> new")
+    public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
+        return new CollectorBuilder(resource, dataHandler);
     }
 
     /**

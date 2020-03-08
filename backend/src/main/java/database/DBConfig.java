@@ -1,4 +1,4 @@
-package framework.database;
+package database;
 
 /** Class representing valid db configuration
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
