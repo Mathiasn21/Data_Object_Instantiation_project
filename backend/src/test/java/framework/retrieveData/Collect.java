@@ -12,12 +12,13 @@ import framework.utilities.data.write.WriteData;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
-public class Read {
+public class Collect {
     @Test
     void data_from_file() throws IOException {
+        IHandle dataHandler = new CSVHandler();
+
         Resource resource = new ResourceBuilder().fromFile("").build();
 
-        IHandle dataHandler = new CSVHandler();
         CollectorBuilder builder = Collector.getBuilder()
                 .setResource(resource)
                 .setDataHandler(dataHandler);

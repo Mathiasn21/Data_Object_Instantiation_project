@@ -1,20 +1,28 @@
 package framework.utilities.data;
 
-import framework.annotations.DataObject;
-import framework.utilities.data.handle.IHandle;
 import framework.utilities.data.read.IRead;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 
-public class Resource {
+/** Class representing a data source
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
+public final class Resource {
     private final IRead readData;
 
-    public Resource(IRead readData) {
-        this.readData = readData;
-    }
+    /**
+     * @param readData {@link IRead}
+     */
+    public Resource(IRead readData) { this.readData = readData; }
 
-    public BufferedReader getData() throws FileNotFoundException {
+    /**
+     * @return {@link BufferedReader}
+     * @throws FileNotFoundException FileNotFoundException
+     */
+    public final @NotNull BufferedReader getData() throws FileNotFoundException {
         return readData.read();
     }
 }

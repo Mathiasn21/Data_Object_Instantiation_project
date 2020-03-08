@@ -14,7 +14,7 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public class Collector implements ICollector{
+public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
     private List<DataObject> primaryColumns;
@@ -35,7 +35,8 @@ public class Collector implements ICollector{
     }
 
     /**
-     * @param primaryColumns List<DataObject>
+     * Sets the primary columns to match and find
+     * @param primaryColumns {@link List}&lt;{@link DataObject}&gt;
      */
     @Override
     public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
@@ -72,34 +73,36 @@ public class Collector implements ICollector{
         return Collections.unmodifiableList(list) ;
     }
 
+
+    /**
+     * will be moved to extractor.
+     * @param columnName String
+     * @return {@link List}&lt;{@link DataObject}&gt;
+     */
+    @Deprecated
     public List<DataObject> getColumnBy(DataObject columnName) {
         //TODO: implement method
         return new ArrayList<>();
     }
 
     /**
-     * @param key   Setting Setting
-     * @param value String String
+     *
+     * @param key {@link Setting}
+     * @param value String
      */
     @Override
-    public final void setSetting(Setting key, String value) {
+    public final void setSetting(@NotNull Setting key, @NotNull String value) {
         settings.put(key, value);
     }
 
     /**
-     * @param settings Map String String
+     * Sets all settings from a given map.
+     * Will overwrite all existing settings with the new value.
+     * @param settings {@link Map}&lt;String, String&gt;
      */
     @Override
-    public final void setAllSettings(Map<Setting, String> settings){
+    public final void setAllSettings(Map<@NotNull Setting, @NotNull String> settings){
         this.settings.putAll(settings);
-    }
-
-    /**
-     * @param setting Setting
-     * @return String
-     */
-    protected final String getSetting(@NotNull Setting setting){
-        return settings.get(setting);
     }
 
     /**
@@ -107,20 +110,12 @@ public class Collector implements ICollector{
      * for more information
      * @return Map {@link Setting}, String.
      */
-    @NotNull
     @Contract(pure = true)
-    public final Map<Setting, String> getSettings(){ return Collections.unmodifiableMap(settings); }
-
-
-    /**
-     * @return List String[]
-     */
-    public List<String[]> getInformationalRows() {
-        //TODO: add informational rows
-        return informationalRows;
-    }
+    public final @NotNull Map<@NotNull Setting, @NotNull String> getSettings(){ return Collections.unmodifiableMap(settings); }
 
     /**
+     * Sets max memory that this collector is allowed to utilize.
+     * Keeps the internal data structure from filling up.
      * @param mb int
      */
     @Contract(pure = true)

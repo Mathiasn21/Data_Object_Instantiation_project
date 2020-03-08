@@ -12,14 +12,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/** Class used for extracting information given
+/** Class used for extracting information from a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
 public final class Extractor implements IExtractor {
+    /**
+     * @param collector {@link ICollector}
+     * @param columnName String
+     * @param <T> T extends {@link ICollector}
+     * @return T extends {@link ICollector}
+     */
     @NotNull
     @Override
-    public <T extends ICollector> List<DataObject> extractColumnFrom(@NotNull T collector, DataObject columnName) {
+    public final <T extends ICollector> List<DataObject> extractColumnFrom(@NotNull T collector, DataObject columnName) {
         List<DataObject> data = collector.getColumnBy(columnName);
         return Collections.unmodifiableList(data);
     }
@@ -33,7 +39,7 @@ public final class Extractor implements IExtractor {
     @Nullable
     @Contract(pure = true)
     @Override
-    public <T extends ICollector> Map<String, Integer> extractReportFom(T collector, DataObject columnName) {
+    public final <T extends ICollector> Map<String, Integer> extractReportFom(T collector, DataObject columnName) {
         return null;
     }
 }

@@ -13,12 +13,12 @@ import java.util.Map;
  */
 public interface ICollector {
     /**
-     * @return String[]
+     * @return {@link List}&lt;{@link DataObject}&gt;
      */
     List<DataObject> getAllPrimaryColumns();
 
     /**
-     * @return String[][]
+     * @return {@link List}&lt;{@link DataObject}&gt;
      */
     List<DataObject> getAllColumns();
 
@@ -27,26 +27,34 @@ public interface ICollector {
      */
     void loadData() throws IOException;
 
-    //TODO: Add method: void loadAndReadData();
-
     /**
-     * @param key Setting
-     * @param value String
+     * @param key {@link Setting}
+     * @param value {@link String}
      */
     void setSetting(Setting key, String value);
 
     /**
-     * @param columnName String
+     * @param columnName {@link DataObject}
+     * @return {@link List}&lt;{@link DataObject}&gt;
      */
     List<DataObject> getColumnBy(DataObject columnName);
 
     /**
-     * @param list List<String>
+     * @param list {@link List}&lt;{@link DataObject}&gt;
      */
     void setPrimaryColumns(List<DataObject> list);
 
+    /**
+     * @param settings {@link Map}&lt;{@link Setting}, {@link String}&gt;
+     */
     void setAllSettings(Map<Setting, String> settings);
 
+    //TODO: might be better to remove this
+    /**
+     * Might be redundant
+     * @param name {@link DataObject}
+     * @return {@link List}&lt;{@link DataObject}&gt;
+     */
     List<DataObject> getCategoryBy(DataObject name);
 
     /**

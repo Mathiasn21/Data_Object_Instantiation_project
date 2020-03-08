@@ -11,6 +11,15 @@ import java.io.IOException;
  * Of course the aim here is to also implement remaining functionality where it be needed
  */
 public interface IWriteData {
+    /**
+     * @return {@link IWriteFile}
+     * @throws IOException IOException
+     */
     @NotNull IWriteFile toFile() throws IOException;
+
+    /**
+     * @return {@link IWriteURL}
+     * @throws IOException IOException
+     */
     @NotNull IWriteURL toURL() throws IOException;
 }

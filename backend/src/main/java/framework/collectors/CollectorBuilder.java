@@ -3,6 +3,8 @@ package framework.collectors;
 import framework.annotations.DataObject;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -10,14 +12,31 @@ import java.util.Map;
 /**
  * Class for creating a builder pattern for Collector class
  * @author Maria Pedersen Github: https://github.com/marped
- * @version 1.0
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 2.0.0
  */
-public class CollectorBuilder {
+public final class CollectorBuilder {
     private final ICollector collector;
 
     public CollectorBuilder(){
         this.collector = new Collector();
     }
+
+    // --------------------------------------------------//
+    //                2.Required Calls                   //
+    // --------------------------------------------------//
+    @NotNull
+    @Contract(pure = true)
+    public final CollectorBuilder setDataHandler(IHandle dataHandler) {
+        return this;
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    public final CollectorBuilder setResource(Resource resource) {
+        return this;
+    }
+
 
     public final CollectorBuilder setPrimaryColumns(List<DataObject> primaryColumns){
         collector.setPrimaryColumns(primaryColumns);
@@ -39,20 +58,16 @@ public class CollectorBuilder {
         return this;
     }
 
-    public CollectorBuilder setResource(Resource resource) {
-        return null;
-    }
 
-    public ICollector build(){
+
+    public final ICollector build(){
         return collector;
     }
 
+    @NotNull
+    @Contract(pure = true)
     @Override
-    public String toString() {
+    public final String toString() {
         return "Collector builder";
-    }
-
-    public CollectorBuilder setDataHandler(IHandle dataHandler) {
-        return null;
     }
 }

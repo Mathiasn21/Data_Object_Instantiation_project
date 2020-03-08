@@ -10,24 +10,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class CSVHandler implements IHandle{
+/** Class for handling CSV data. By default it utilizes the delimiter ","
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
+public final class CSVHandler implements IHandle{
     private String delimiter = ",";
     private Class<?>[] primaryKeyTypes;
     private String[] primaryKeys;
 
+    /**
+     * @param types {@link Class}&lt;?&gt;[]
+     */
     @Override
-    public void setPrimaryKeyTypes(Class<?>[] types) {
+    public final void setPrimaryKeyTypes(@NotNull Class<?>[] types) {
         primaryKeyTypes = types;
     }
 
+    /**
+     * @param keys String[]
+     */
     @Override
-    public void setPrimaryKeys(String[] keys) {
+    public final void setPrimaryKeys(@NotNull String[] keys) {
         primaryKeys = keys;
     }
 
+    /**
+     * @param bufferedReader {@link BufferedReader}
+     * @return {@link List}&lt;{@link List}&lt;{@link Object}&gt;&gt;
+     * @throws IOException IOException
+     */
     @Override
-    @NotNull
-    public List<List<Object>> handle(@NotNull BufferedReader bufferedReader) throws IOException {
+    public final @NotNull List<List<Object>> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         String line;
         List<List<Object>> rows = new ArrayList<>();
         while ((line = bufferedReader.readLine()) != null) {
@@ -43,11 +57,10 @@ public class CSVHandler implements IHandle{
         return rows;
     }
 
-    public void setColumns(){
-
-    }
-
-    public void setDelimiter(String delimiter) {
+    /**
+     * @param delimiter String
+     */
+    public final void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
     }
 

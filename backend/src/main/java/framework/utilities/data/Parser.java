@@ -1,7 +1,16 @@
 package framework.utilities.data;
 
-public class Parser {
-    public static Object parseValueToObject( Class<?> clazz, String value ) {
+/** Class for parsing string values to primitive types given a clazz
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @version 1.0
+ */
+public final class Parser {
+    /**
+     * @param clazz {@link Class}&lt;?&gt;
+     * @param value String
+     * @return {@link Object}
+     */
+    public static Object parseValueToObject(Class<?> clazz, String value) {
         if(String.class == clazz){ return value;}
 
         if(Boolean.class == clazz  || Boolean.TYPE == clazz){ return Boolean.parseBoolean(value); }

@@ -2,6 +2,7 @@ package framework.utilities.data.write;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -19,7 +20,6 @@ public final class WriteFile implements IWriteFile{
     /**
      * Utilizes parametrization combined with generics, in order to
      * convert a given T[] object and its specified Class template to json format.
-     *
      * @param list T[]
      * @return String
      */
@@ -28,6 +28,11 @@ public final class WriteFile implements IWriteFile{
         return gson.toJson(list);
     }
 
+    /**
+     * @param resource {@link File}
+     * @param data String
+     * @throws IOException IOException
+     */
     @Override
     public final void given(@NotNull File resource, @NotNull String data) throws IOException {
         String filepath = "/files/" + resource;
@@ -45,6 +50,7 @@ public final class WriteFile implements IWriteFile{
      * @param resource   String
      * @param data String
      */
+    @Contract(pure = true)
     @Override
     public final void given(@NotNull String resource, @NotNull String data) throws IOException {
 
