@@ -1,13 +1,10 @@
 package framework.utilities.data.read;
 
-import com.google.gson.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

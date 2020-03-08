@@ -67,7 +67,7 @@ public final class Collector implements ICollector{
     }
 
     @Override
-    public void loadData() throws IOException {
+    public void CollectData() throws IOException {
 
     }
 

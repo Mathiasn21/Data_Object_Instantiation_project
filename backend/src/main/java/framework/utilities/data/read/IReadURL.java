@@ -2,9 +2,9 @@ package framework.utilities.data.read;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.io.BufferedReader;
 
 /** Interface describing a contract for reading from a URL
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

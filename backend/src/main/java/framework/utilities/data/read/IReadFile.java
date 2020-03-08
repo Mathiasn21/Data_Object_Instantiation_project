@@ -1,6 +1,5 @@
 package framework.utilities.data.read;
 
-import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;

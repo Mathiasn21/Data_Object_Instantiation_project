@@ -1,7 +1,6 @@
 package framework.collectors;
 
 import framework.annotations.DataObject;
-import framework.utilities.data.Resource;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,7 +24,7 @@ public interface ICollector {
     /**
      * @throws IOException IOException
      */
-    void loadData() throws IOException;
+    void CollectData() throws IOException;
 
     /**
      * @param key {@link Setting}
