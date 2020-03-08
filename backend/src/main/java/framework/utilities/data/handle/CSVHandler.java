@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/** Class for handling CSV data. By default it utilizes the delimiter ","
+/** Class that contains concrete instruction for handling CSV data.
+ *  By default it utilizes the delimiter ","
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
@@ -36,6 +37,13 @@ public final class CSVHandler implements IHandle{
     }
 
     /**
+     * @param delimiter String
+     */
+    public final void setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
+
+    /**
      * @param bufferedReader {@link BufferedReader}
      * @return {@link List}&lt;{@link List}&lt;{@link Object}&gt;&gt;
      * @throws IOException IOException
@@ -55,13 +63,6 @@ public final class CSVHandler implements IHandle{
             //TODO: Add logic for detecting the first full row -> primaryRow without knowing details about said keys
         }
         return rows;
-    }
-
-    /**
-     * @param delimiter String
-     */
-    public final void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
     }
 
     /**

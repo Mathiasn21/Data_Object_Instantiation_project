@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-/** Class for handling JSON data.
+/** Class that contains concrete instructions for handling JSON data.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */

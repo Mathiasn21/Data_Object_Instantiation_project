@@ -3,6 +3,7 @@ package framework.collectors;
 import framework.annotations.DataObject;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -12,36 +13,22 @@ import java.util.Map;
  */
 public interface ICollector {
     /**
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    List<DataObject> getAllPrimaryColumns();
-
-    /**
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    List<DataObject> getAllColumns();
-
-    /**
      * @throws IOException IOException
      */
     void CollectData() throws IOException;
+
+
+
+    /**
+     * @param list {@link List}&lt;{@link DataObject}&gt;
+     */
+    void setPrimaryColumns(List<DataObject> list);
 
     /**
      * @param key {@link Setting}
      * @param value {@link String}
      */
     void setSetting(Setting key, String value);
-
-    /**
-     * @param columnName {@link DataObject}
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    List<DataObject> getColumnBy(DataObject columnName);
-
-    /**
-     * @param list {@link List}&lt;{@link DataObject}&gt;
-     */
-    void setPrimaryColumns(List<DataObject> list);
 
     /**
      * @param settings {@link Map}&lt;{@link Setting}, {@link String}&gt;
@@ -60,4 +47,15 @@ public interface ICollector {
      * @param mb int
      */
     void setMaxMemoryMB(int mb);
+
+
+    /**
+     * @return {@link List}&lt;{@link DataObject}&gt;
+     */
+    List<DataObject> getAllPrimaryColumns();
+
+    /**
+     * @return {@link List}&lt;{@link DataObject}&gt;
+     */
+    Collection<DataObject> getAllColumns();
 }

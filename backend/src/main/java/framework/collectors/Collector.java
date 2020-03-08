@@ -20,7 +20,6 @@ public final class Collector implements ICollector{
     private List<DataObject> primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
     private TreeMap<String, DataObject> rbTree = new TreeMap<>();
-    private List<String[]> informationalRows = new ArrayList<>();
 
     private IHandle dataHandler;
     private Resource resource;
@@ -35,14 +34,13 @@ public final class Collector implements ICollector{
     }
 
     /**
-     * @param resource {@link Resource}
-     * @param dataHandler {@link IHandle}
-     * @return
+     * Collects all data from a resource utilizing the stored handler.
+     * @throws IOException IOException
      */
-    @NotNull
-    @Contract("_, _ -> new")
-    public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
-        return new CollectorBuilder(resource, dataHandler);
+    @Override
+    public void CollectData() throws IOException {
+        List<List<Object>> initArgs = dataHandler.handle(resource.getData());
+        //TODO: implement logic for instantiating objects given initArgs. Utilize AnnotationProcessor to do this
     }
 
     /**
@@ -52,49 +50,6 @@ public final class Collector implements ICollector{
     @Override
     public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
 
-    /**
-     * Columns that describe the values inherent in a dataset.
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    @Override
-    public final List<DataObject> getAllPrimaryColumns() {
-        return primaryColumns;
-    }
-
-    @Override
-    public List<DataObject> getAllColumns() {
-        return new ArrayList<>(rbTree.values());
-    }
-
-    @Override
-    public void CollectData() throws IOException {
-
-    }
-
-    /**
-     * @param name {@link DataObject}
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    @Override
-    public List<DataObject> getCategoryBy(DataObject name) {
-        List<DataObject> list = new ArrayList<>();
-        if(rbTree.containsValue(name)){
-            list.add(name);
-        }
-        return Collections.unmodifiableList(list) ;
-    }
-
-
-    /**
-     * will be moved to extractor.
-     * @param columnName String
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    @Deprecated
-    public List<DataObject> getColumnBy(DataObject columnName) {
-        //TODO: implement method
-        return new ArrayList<>();
-    }
 
     /**
      *
@@ -118,14 +73,6 @@ public final class Collector implements ICollector{
     }
 
     /**
-     * Returns an unmodifiable map see {@link Collections}
-     * for more information
-     * @return Map {@link Setting}, String.
-     */
-    @Contract(pure = true)
-    public final @NotNull Map<@NotNull Setting, @NotNull String> getSettings(){ return Collections.unmodifiableMap(settings); }
-
-    /**
      * Sets max memory that this collector is allowed to utilize.
      * Keeps the internal data structure from filling up.
      * @param mb int
@@ -135,6 +82,61 @@ public final class Collector implements ICollector{
     public final void setMaxMemoryMB(int mb){
         //TODO: implement setMaxMemoryMB()
         //TODO: Describe set max memory of what????
+    }
+
+
+    /**
+     * @param name {@link DataObject}
+     * @return {@link List}&lt;{@link DataObject}&gt;
+     */
+    @NotNull
+    @Override
+    public List<DataObject> getCategoryBy(DataObject name) {
+        List<DataObject> list = new ArrayList<>();
+        if(rbTree.containsValue(name)){
+            list.add(name);
+        }
+        return Collections.unmodifiableList(list) ;
+    }
+
+
+    /**
+     * Columns that describe the values inherent in a dataset.
+     * @return {@link List}&lt;{@link DataObject}&gt;
+     */
+    @Override
+    public final List<DataObject> getAllPrimaryColumns() {
+        return primaryColumns;
+    }
+
+    /**
+     * Returns all column data excluding primary keys
+     * @return {@link Collection}&lt;{@link DataObject}&gt;
+     */
+    @NotNull
+    @Override
+    public Collection<DataObject> getAllColumns() {
+        return Collections.unmodifiableCollection(rbTree.values());
+    }
+
+    /**
+     * Returns an unmodifiable map see {@link Collections}
+     * for more information
+     * @return Map {@link Setting}, String.
+     */
+    @Contract(pure = true)
+    public final @NotNull Map<@NotNull Setting, @NotNull String> getSettings(){ return Collections.unmodifiableMap(settings); }
+
+
+    /**
+     * @param resource {@link Resource}
+     * @param dataHandler {@link IHandle}
+     * @return {@link CollectorBuilder}
+     */
+    @NotNull
+    @Contract("_, _ -> new")
+    public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
+        return new CollectorBuilder(resource, dataHandler);
     }
 
 }

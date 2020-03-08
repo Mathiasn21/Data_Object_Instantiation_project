@@ -27,7 +27,7 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public class AnnotationsProcessor implements IAnnotationsProcessor{
+public final class AnnotationsProcessor implements IAnnotationsProcessor{
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
