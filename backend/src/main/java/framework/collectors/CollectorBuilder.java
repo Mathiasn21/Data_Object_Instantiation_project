@@ -1,6 +1,8 @@
 package framework.collectors;
 
 import framework.annotations.DataObject;
+import framework.utilities.data.Resource;
+import framework.utilities.data.handle.IHandle;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +14,9 @@ import java.util.Map;
  */
 public class CollectorBuilder {
     private final ICollector collector;
-    public CollectorBuilder(String extension) {
-        this.collector = Collector.fromFileExtension(extension);
+
+    public CollectorBuilder(){
+        this.collector = new Collector();
     }
 
     public final CollectorBuilder setPrimaryColumns(List<DataObject> primaryColumns){
@@ -36,6 +39,10 @@ public class CollectorBuilder {
         return this;
     }
 
+    public CollectorBuilder setResource(Resource resource) {
+        return null;
+    }
+
     public ICollector build(){
         return collector;
     }
@@ -43,5 +50,9 @@ public class CollectorBuilder {
     @Override
     public String toString() {
         return "Collector builder";
+    }
+
+    public CollectorBuilder setDataHandler(IHandle dataHandler) {
+        return null;
     }
 }

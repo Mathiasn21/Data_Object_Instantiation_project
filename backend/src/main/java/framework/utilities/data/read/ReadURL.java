@@ -3,6 +3,8 @@ package framework.utilities.data.read;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -19,7 +21,12 @@ final class ReadURL implements IReadURL{
     }
 
     @Override
-    public @NotNull BufferedReader given(@NotNull String resource) {
+    public void given(@NotNull String resource) throws IOException {
+        //TODO: Implement logic
+    }
+
+    @Override
+    public @NotNull BufferedReader read() throws FileNotFoundException {
         //TODO: Implement logic
         return null;
     }

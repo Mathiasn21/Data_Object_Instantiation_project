@@ -1,22 +1,38 @@
 package framework.collectors;
 
+import framework.annotations.AnnotationsProcessor;
 import framework.annotations.DataObject;
-import framework.collectors.factory.CollectorFactory;
-import framework.collectors.factory.ICollectorFactory;
+import framework.utilities.data.Resource;
+import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.*;
 
 /** Class for collecting data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public abstract class Collector implements ICollector{
+public class Collector implements ICollector{
+    private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
+
     private List<DataObject> primaryColumns;
-    private TreeMap<String, DataObject> rbTree = new TreeMap<>();
     private final Map<Setting, String> settings = new HashMap<>();
+    private TreeMap<String, DataObject> rbTree = new TreeMap<>();
     private List<String[]> informationalRows = new ArrayList<>();
+
+    private IHandle handler;
+    private Resource resource;
+    Collector() {
+
+    }
+
+    @NotNull
+    @Contract(" -> new")
+    public static CollectorBuilder getBuilder() {
+        return new CollectorBuilder();
+    }
 
     /**
      * @param primaryColumns List<DataObject>
@@ -25,7 +41,8 @@ public abstract class Collector implements ICollector{
     public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
 
     /**
-     * @return List<DataObject>
+     * Columns that describe the values inherent in a dataset.
+     * @return {@link List}&lt;{@link DataObject}&gt;
      */
     @Override
     public final List<DataObject> getAllPrimaryColumns() {
@@ -37,9 +54,14 @@ public abstract class Collector implements ICollector{
         return new ArrayList<>(rbTree.values());
     }
 
+    @Override
+    public void loadData() throws IOException {
+
+    }
+
     /**
-     * @param name String
-     * @return List<
+     * @param name {@link DataObject}
+     * @return {@link List}&lt;{@link DataObject}&gt;
      */
     @Override
     public List<DataObject> getCategoryBy(DataObject name) {
@@ -89,15 +111,6 @@ public abstract class Collector implements ICollector{
     @Contract(pure = true)
     public final Map<Setting, String> getSettings(){ return Collections.unmodifiableMap(settings); }
 
-    /**
-     * @param extension String
-     * @return ICollector {@link ICollector}
-     */
-    @NotNull
-    public static ICollector fromFileExtension(String extension){
-        ICollectorFactory<ICollector> factory = new CollectorFactory();
-        return factory.createCollectorFrom(extension);
-    }
 
     /**
      * @return List String[]

@@ -2,7 +2,6 @@ package DTOs;
 
 import framework.annotations.DataConstructor;
 import framework.annotations.DataObject;
-import framework.collectors.JSONCollector;
 
 
 /**

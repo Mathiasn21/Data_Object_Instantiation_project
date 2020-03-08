@@ -13,7 +13,7 @@ import java.util.List;
  * @version 1.0
  */
 public final class ReadFile implements IReadFile{
-
+    private String path;
     /**
      * Returns a buffer for reading the given file.
      * Charset is standard UTF-8
@@ -21,23 +21,26 @@ public final class ReadFile implements IReadFile{
      * @return BufferedReader BufferedReader {@link BufferedReader}
      * @throws IOException IOException {@link IOException}
      */
-    @NotNull
-    public BufferedReader given(@NotNull String fileName) throws IOException {
-        String filepath = "/files/" + fileName;
-        return new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + filepath), StandardCharsets.UTF_8));
+    public void given(@NotNull String fileName) throws IOException {
+        path = "/files/" + fileName;
     }
 
     @Override
-    public @NotNull BufferedReader given(@NotNull File resource) throws IOException {
+    public BufferedReader read() throws FileNotFoundException {
+        return new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + path), StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public @NotNull ReadFile given(@NotNull File resource) throws IOException {
         //TODO: Implement logic
         return null;
     }
 
 
-    public JsonArray fromJSON(String filename) throws IOException {
+    public JsonArray fromJSON() throws IOException {
         //TODO: Alter logic in order to divide json text in another class
 
-        BufferedReader bufferedReader = given(filename);
+        BufferedReader bufferedReader = read();
         StringBuilder textFromFile = new StringBuilder();
         String line;
 

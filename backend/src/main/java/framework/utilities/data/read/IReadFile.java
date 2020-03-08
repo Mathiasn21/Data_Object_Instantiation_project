@@ -1,5 +1,6 @@
 package framework.utilities.data.read;
 
+import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -16,6 +17,5 @@ public interface IReadFile extends IRead{
      * @return BufferedReader {@link BufferedReader}
      * @throws IOException IOException {@link IOException}
      */
-    @NotNull
-    BufferedReader given(@NotNull File resource) throws IOException;
+    ReadFile given(@NotNull File resource) throws IOException;
 }

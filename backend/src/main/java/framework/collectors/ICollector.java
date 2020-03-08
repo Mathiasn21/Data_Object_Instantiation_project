@@ -1,6 +1,8 @@
 package framework.collectors;
 
 import framework.annotations.DataObject;
+import framework.utilities.data.Resource;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,7 @@ public interface ICollector {
     /**
      * @throws IOException IOException
      */
-    void loadAndReadFile() throws IOException;
+    void loadData() throws IOException;
 
     //TODO: Add method: void loadAndReadData();
 
@@ -51,5 +53,4 @@ public interface ICollector {
      * @param mb int
      */
     void setMaxMemoryMB(int mb);
-
 }
