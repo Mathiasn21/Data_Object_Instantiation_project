@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public final class Extractor implements IExtractor {
     @NotNull
     @Override
     public final <T extends ICollector> List<DataObject> extractColumnFrom(@NotNull T collector, DataObject columnName) {
-        List<DataObject> data = collector.getColumnBy(columnName);
+        List<DataObject> data = new ArrayList<>();
         return Collections.unmodifiableList(data);
     }
 
