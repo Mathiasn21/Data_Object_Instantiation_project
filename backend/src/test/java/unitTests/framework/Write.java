@@ -1,4 +1,4 @@
-package framework.writeData;
+package unitTests.framework;
 
 import org.junit.jupiter.api.Test;
 
