@@ -85,6 +85,7 @@ public class AnnotationProcessingTest {
             for(Object o : noFiles){
                 assertTrue(o instanceof DTONoFile);
             }
+            System.out.println(noFiles);
             assertEquals(noFiles.size(), numObjects);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
