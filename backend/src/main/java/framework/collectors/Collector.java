@@ -41,12 +41,14 @@ public final class Collector implements ICollector{
      */
     @Override
     public void CollectData() throws IOException {
+        long start = System.currentTimeMillis();
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
         try {
             annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        System.out.println(System.currentTimeMillis() - start);
     }
 
     /**
