@@ -13,8 +13,7 @@ import java.io.IOException;
 public interface IReadFile extends IRead{
     /**
      * @param resource String
-     * @return BufferedReader {@link BufferedReader}
      * @throws IOException IOException {@link IOException}
      */
-    ReadFile given(@NotNull File resource) throws IOException;
+    void given(@NotNull File resource) throws IOException;
 }

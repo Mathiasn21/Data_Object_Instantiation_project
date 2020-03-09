@@ -3,8 +3,11 @@ import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
 import framework.annotations.AnnotationsProcessor;
+import framework.utilities.data.Resource;
+import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -86,5 +89,24 @@ public class AnnotationProcessingTest {
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Test
+    void dataObject_instantiation_no_specified_test() throws IOException {
+
+        String path = System.getProperty("user.dir") + "/files/DTOJson.json";
+        Resource resource = Resource.getBuilder().fromFile(path).build();
+        JSONHandler jsonHandler = new JSONHandler();
+        List<Object[]> list = jsonHandler.handle(resource.getData());
+        System.out.println(Arrays.toString(list.toArray()));
+
+        AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "DTOJson.json"));
+
+        try {
+            List<Object> noFiles = annotationsProcessor.initializeDataObjectsFromFileName(list, "dd");
+            for(Object o : noFiles){ assertTrue(o instanceof DTONoFile); }
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {e.printStackTrace();}
     }
 }

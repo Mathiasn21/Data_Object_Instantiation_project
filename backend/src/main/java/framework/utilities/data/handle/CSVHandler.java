@@ -49,9 +49,9 @@ public final class CSVHandler implements IHandle{
      * @throws IOException IOException
      */
     @Override
-    public final @NotNull List<List<Object>> handle(@NotNull BufferedReader bufferedReader) throws IOException {
+    public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         String line;
-        List<List<Object>> rows = new ArrayList<>();
+        List<Object[]> rows = new ArrayList<>();
         while ((line = bufferedReader.readLine()) != null) {
             String[] r = splitLineOn(line);
             List<Object> args = new ArrayList<>();
@@ -59,7 +59,7 @@ public final class CSVHandler implements IHandle{
             for(int i = 0; i < r.length; i++){
                 args.add(Parser.parseValueToObject(primaryKeyTypes[i], r[i]));
             }
-            rows.add(args);
+            rows.add(args.toArray());
             //TODO: Add logic for detecting the first full row -> primaryRow without knowing details about said keys
         }
         return rows;

@@ -38,9 +38,9 @@ public final class JSONHandler implements IHandle{
      * @throws IOException IOException
      */
     @Override
-    public final @NotNull List<List<Object>> handle(@NotNull BufferedReader bufferedReader) throws IOException {
+    public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         StringBuilder textFromFile = new StringBuilder();
-        List<List<Object>> res = new ArrayList<>();
+        List<Object[]> res = new ArrayList<>();
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             textFromFile.append(line);
@@ -56,7 +56,7 @@ public final class JSONHandler implements IHandle{
             for(Map.Entry<String, JsonElement> entry: entries) {
                 arrayList.add(entry.getValue());
             }
-            res.add(arrayList);
+            res.add(arrayList.toArray());
         });
 
         return res;
