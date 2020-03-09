@@ -44,7 +44,8 @@ public final class Collector implements ICollector{
         long start = System.currentTimeMillis();
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
         try {
-            annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
+            List<Object> objectList = annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
+            System.out.println("Size is: " + objectList.size());
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
