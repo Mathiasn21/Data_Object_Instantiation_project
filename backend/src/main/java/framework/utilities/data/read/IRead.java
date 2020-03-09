@@ -20,4 +20,9 @@ public interface IRead {
      * @return BufferedReader {@link BufferedReader}
      */
     BufferedReader read() throws FileNotFoundException;
+
+    /**
+     * @return String
+     */
+    String getSourceName();
 }

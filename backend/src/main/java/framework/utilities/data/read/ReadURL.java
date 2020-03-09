@@ -14,6 +14,7 @@ import java.net.URL;
  * @version 1.0
  */
 final class ReadURL implements IReadURL{
+    private String name;
 
     /**
      * @param resource String
@@ -46,5 +47,10 @@ final class ReadURL implements IReadURL{
     public @NotNull BufferedReader read() throws FileNotFoundException {
         //TODO: Implement logic
         return null;
+    }
+
+    @Override
+    public String getSourceName() {
+        return name;
     }
 }

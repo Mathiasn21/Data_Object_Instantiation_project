@@ -35,6 +35,11 @@ public final class ReadFile implements IReadFile{
         return new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
     }
 
+    @Override
+    public String getSourceName() {
+        return path;
+    }
+
     /**
      * @param resource String
      * @return {@link ReadFile}
