@@ -1,4 +1,4 @@
-package framework.read;
+package unitTests.framework;
 
 import org.junit.jupiter.api.Test;
 

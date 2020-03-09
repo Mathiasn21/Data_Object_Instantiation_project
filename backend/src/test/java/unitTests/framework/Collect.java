@@ -1,4 +1,4 @@
-package framework.collectData;
+package unitTests.framework;
 
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
