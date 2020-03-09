@@ -3,17 +3,20 @@ package framework.utilities.data.read;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 /**
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
 final class ReadURL implements IReadURL{
+    private String name;
+
+    private String url;
 
     /**
      * @param resource String
@@ -22,9 +25,8 @@ final class ReadURL implements IReadURL{
      */
     @Contract(pure = true)
     @Override
-    public @NotNull BufferedReader given(@NotNull URL resource) throws MalformedURLException {
-        //TODO: Implement logic
-        return null;
+    public void given(@NotNull URL resource) throws IOException {
+        url = resource.toString(); //her må det parses til String
     }
 
     /**
@@ -34,7 +36,7 @@ final class ReadURL implements IReadURL{
     @Contract(pure = true)
     @Override
     public void given(@NotNull String resource) throws IOException {
-        //TODO: Implement logic
+        url = resource;
     }
 
     /**
@@ -43,8 +45,17 @@ final class ReadURL implements IReadURL{
      */
     @Contract(pure = true)
     @Override
-    public @NotNull BufferedReader read() throws FileNotFoundException {
-        //TODO: Implement logic
-        return null;
+    public @NotNull BufferedReader read() throws IOException {
+        /*//ER DETTE BEDRE HMM
+        URL oracle = new URL(url);
+        URLConnection ucon = oracle.openConnection();
+        return new BufferedReader(new InputStreamReader(ucon.getInputStream(), StandardCharsets.UTF_8));*/
+
+        return new BufferedReader(new InputStreamReader(new URL(url).openStream(), StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String getSourceName() {
+        return name;
     }
 }

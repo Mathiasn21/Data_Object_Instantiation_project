@@ -1,19 +1,23 @@
 package unitTests.framework;
 
-import framework.collectors.Collector;
-import framework.collectors.ICollector;
 import framework.utilities.data.Resource;
-import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-public class Collect {
+public class HandleData {
     @Test
-    void data_from_file() throws IOException {
+    void handle_json() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
         Resource resource = Resource.getBuilder().fromFile(path).build();
-        ICollector collector = Collector.getBuilder(resource, new JSONHandler()).build();
-        collector.CollectData();
+
+        JSONHandler jsonHandler = new JSONHandler();
+        List<Object[]> list = jsonHandler.handle(resource.getData());
+
+        for (Object[] o: list) {
+            System.out.println(Arrays.toString(o));
+        }
     }
 }

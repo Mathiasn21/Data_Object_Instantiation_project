@@ -27,7 +27,7 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
-public final class AnnotationsProcessor implements IAnnotationsProcessor{
+public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
@@ -50,6 +50,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor{
             } else { filesMappedToDataObject.put(fileName, clazz); }
         });
     }
+
 
     /**
      * @param constructors {@link Constructor}&lt;?&gt;[]
@@ -140,8 +141,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor{
 
 
     /**
-     * @param sample
-     * @return
+     * @param sample {@link Object}[]
+     * @return {@link Class}&lt;&gt;
      */
     @Nullable
     @Contract(pure = true)

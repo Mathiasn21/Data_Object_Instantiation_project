@@ -3,6 +3,7 @@ package framework.utilities.data.read;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -17,5 +18,5 @@ public interface IReadURL extends IRead{
      * @throws MalformedURLException MalformedURLException {@link MalformedURLException}
      */
     @NotNull
-    BufferedReader given(@NotNull URL resource) throws MalformedURLException;
+    void given(@NotNull URL resource) throws IOException;
 }

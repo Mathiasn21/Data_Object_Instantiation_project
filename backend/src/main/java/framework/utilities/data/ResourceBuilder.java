@@ -1,10 +1,12 @@
 package framework.utilities.data;
 
 import framework.utilities.data.read.IRead;
+import framework.utilities.data.read.ReadFile;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -18,13 +20,14 @@ public class ResourceBuilder {
     //TODO: implement concrete logic for this builder
 
 
-
-
     /**
      * @param file String
      * @return {@link ResourceBuilder}
      */
-    public ResourceBuilder fromFile(String file) {
+    public ResourceBuilder fromFile(@NotNull String file) throws IOException {
+        ReadFile readFile = new ReadFile();
+        readFile.given(file);
+        read = readFile;
         return this;
     }
 
@@ -33,7 +36,10 @@ public class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromFile(File file) {
+    public ResourceBuilder fromFile(@NotNull File file) throws IOException {
+        ReadFile readFile = new ReadFile();
+        readFile.given(file.getName());
+        read = readFile;
         return this;
     }
 

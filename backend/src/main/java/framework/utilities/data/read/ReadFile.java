@@ -20,10 +20,11 @@ public final class ReadFile implements IReadFile{
      * @throws IOException IOException {@link IOException}
      */
     public void given(@NotNull String fileName) throws IOException {
-        path = "/files/" + fileName;
+        path = fileName;
     }
 
     //TODO: Alter such that all paths are absolute and not relative
+
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
@@ -32,7 +33,12 @@ public final class ReadFile implements IReadFile{
     @Contract(" -> new")
     @Override
     public BufferedReader read() throws FileNotFoundException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + path), StandardCharsets.UTF_8));
+        return new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String getSourceName() {
+        return path;
     }
 
     /**
@@ -42,8 +48,7 @@ public final class ReadFile implements IReadFile{
      */
     @Contract(pure = true)
     @Override
-    public @NotNull ReadFile given(@NotNull File resource) throws IOException {
-        //TODO: Implement logic
-        return null;
+    public void given(@NotNull File resource) throws IOException {
+        path = resource.getPath();
     }
 }

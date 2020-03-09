@@ -17,8 +17,6 @@ public interface ICollector {
      */
     void CollectData() throws IOException;
 
-
-
     /**
      * @param list {@link List}&lt;{@link DataObject}&gt;
      */
@@ -34,14 +32,6 @@ public interface ICollector {
      * @param settings {@link Map}&lt;{@link Setting}, {@link String}&gt;
      */
     void setAllSettings(Map<Setting, String> settings);
-
-    //TODO: might be better to remove this
-    /**
-     * Might be redundant
-     * @param name {@link DataObject}
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    List<DataObject> getCategoryBy(DataObject name);
 
     /**
      * @param mb int
