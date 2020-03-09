@@ -99,7 +99,10 @@ public class AnnotationProcessingTest {
         Resource resource = Resource.getBuilder().fromFile(path).build();
         JSONHandler jsonHandler = new JSONHandler();
         List<Object[]> list = jsonHandler.handle(resource.getData());
-        System.out.println(Arrays.toString(list.toArray()));
+        for (Object[] arr: list) {
+            System.out.println(Arrays.toString(arr));
+        }
+
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "DTOJson.json"));

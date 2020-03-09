@@ -54,7 +54,7 @@ public final class JSONHandler implements IHandle{
             List<Object> arrayList = new ArrayList<>();
 
             for(Map.Entry<String, JsonElement> entry: entries) {
-                arrayList.add(entry.getValue());
+                arrayList.add(entry.getValue().toString());
             }
             res.add(arrayList.toArray());
         });
