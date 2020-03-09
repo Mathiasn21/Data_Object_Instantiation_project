@@ -91,7 +91,6 @@ public final class Collector implements ICollector{
         //TODO: Describe set max memory of what????
     }
 
-
     /**
      * Columns that describe the values inherent in a dataset.
      * @return {@link List}&lt;{@link DataObject}&gt;
