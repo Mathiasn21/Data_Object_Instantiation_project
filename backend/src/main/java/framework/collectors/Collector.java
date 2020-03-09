@@ -12,6 +12,7 @@ import java.util.*;
 
 /** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0.0
  */
 public final class Collector implements ICollector{
@@ -83,21 +84,6 @@ public final class Collector implements ICollector{
     public final void setMaxMemoryMB(int mb){
         //TODO: implement setMaxMemoryMB()
         //TODO: Describe set max memory of what????
-    }
-
-
-    /**
-     * @param name {@link DataObject}
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    @NotNull
-    @Override
-    public List<DataObject> getCategoryBy(DataObject name) {
-        List<DataObject> list = new ArrayList<>();
-        if(rbTree.containsValue(name)){
-            list.add(name);
-        }
-        return Collections.unmodifiableList(list) ;
     }
 
 

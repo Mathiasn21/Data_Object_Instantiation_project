@@ -6,8 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /** Class that contains concrete instructions for handling JSON data.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -41,14 +40,26 @@ public final class JSONHandler implements IHandle{
     @Override
     public final @NotNull List<List<Object>> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         StringBuilder textFromFile = new StringBuilder();
+        List<List<Object>> res = new ArrayList<>();
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             textFromFile.append(line);
         }
 
         JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
-        JsonArray jsonStr = jsonObject.getAsJsonArray();
-        return null;
+        JsonArray array = jsonObject.getAsJsonArray();
+        array.iterator().forEachRemaining((object) -> {
+            JsonObject object2 = object.getAsJsonObject();
+            Set<Map.Entry<String, JsonElement>> entries = object2.entrySet();
+            List<Object> arrayList = new ArrayList<>();
+
+            for(Map.Entry<String, JsonElement> entry: entries) {
+                arrayList.add(entry.getValue());
+            }
+            res.add(arrayList);
+        });
+
+        return res;
     }
 
     /**
