@@ -20,7 +20,7 @@ public interface IRead {
     /**
      * @return BufferedReader {@link BufferedReader}
      */
-    BufferedReader read() throws FileNotFoundException;
+    BufferedReader read() throws FileNotFoundException, IOException;
 
     /**
      * @return String
