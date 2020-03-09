@@ -62,6 +62,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor{
 
             if(constructor.isAnnotationPresent(DataConstructor.class)){
                 return constructor;
+                //TODO: swap out with a hash table
             }else if(params.length == primaryTypes.length){
                 for(int i = 0; i < params.length; i++){
                     Class<?> param = params[i];
@@ -138,6 +139,10 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor{
     }
 
 
+    /**
+     * @param sample
+     * @return
+     */
     @Nullable
     @Contract(pure = true)
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
