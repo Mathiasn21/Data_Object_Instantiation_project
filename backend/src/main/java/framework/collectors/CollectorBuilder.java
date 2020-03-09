@@ -22,6 +22,7 @@ public final class CollectorBuilder {
         this.collector = new Collector(resource, dataHandler);
     }
 
+    
     // --------------------------------------------------//
     //                2.Required Calls                   //
     // --------------------------------------------------//
