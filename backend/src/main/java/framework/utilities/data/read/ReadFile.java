@@ -22,7 +22,7 @@ public final class ReadFile implements IReadFile{
     public void given(@NotNull String fileName) throws IOException {
         path = fileName;
     }
-    
+
     //TODO: Alter such that all paths are absolute and not relative
 
     /**

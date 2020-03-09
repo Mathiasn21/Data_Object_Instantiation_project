@@ -20,8 +20,6 @@ public class ResourceBuilder {
     //TODO: implement concrete logic for this builder
 
 
-
-
     /**
      * @param file String
      * @return {@link ResourceBuilder}

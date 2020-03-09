@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /** Class representing a data source
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -23,7 +24,7 @@ public final class Resource {
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
-    public final @NotNull BufferedReader getData() throws FileNotFoundException {
+    public final @NotNull BufferedReader getData() throws IOException {
         return readData.read();
     }
 

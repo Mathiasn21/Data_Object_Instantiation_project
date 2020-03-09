@@ -18,5 +18,5 @@ public interface IReadURL extends IRead{
      * @throws MalformedURLException MalformedURLException {@link MalformedURLException}
      */
     @NotNull
-    BufferedReader given(@NotNull URL resource) throws IOException;
+    void given(@NotNull URL resource) throws IOException;
 }

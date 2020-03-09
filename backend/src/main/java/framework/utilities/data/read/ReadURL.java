@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
 final class ReadURL implements IReadURL{
@@ -25,8 +24,8 @@ final class ReadURL implements IReadURL{
      */
     @Contract(pure = true)
     @Override
-    public @NotNull BufferedReader given(@NotNull URL resource) throws IOException {
-        return new BufferedReader(new InputStreamReader(resource.openStream()));
+    public void given(@NotNull URL resource) throws IOException {
+        url = resource.toString(); //her må det parses til String
     }
 
     /**
@@ -46,6 +45,11 @@ final class ReadURL implements IReadURL{
     @Contract(pure = true)
     @Override
     public @NotNull BufferedReader read() throws IOException {
+        /*//ER DETTE BEDRE HMM
+        URL oracle = new URL(url);
+        URLConnection ucon = oracle.openConnection();
+        return new BufferedReader(new InputStreamReader(ucon.getInputStream(), StandardCharsets.UTF_8));*/
+
         return new BufferedReader(new InputStreamReader(new URL(url).openStream(), StandardCharsets.UTF_8));
     }
 }
