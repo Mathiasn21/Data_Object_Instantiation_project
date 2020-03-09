@@ -23,7 +23,6 @@ public final class ReadFile implements IReadFile{
         path = fileName;
     }
 
-
     //TODO: Alter such that all paths are absolute and not relative
     /**
      * @return {@link BufferedReader}
