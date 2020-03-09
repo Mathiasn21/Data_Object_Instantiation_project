@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
  * @version 1.0
  */
 final class ReadURL implements IReadURL{
+    private String name;
 
     private String url;
 
@@ -51,5 +52,10 @@ final class ReadURL implements IReadURL{
         return new BufferedReader(new InputStreamReader(ucon.getInputStream(), StandardCharsets.UTF_8));*/
 
         return new BufferedReader(new InputStreamReader(new URL(url).openStream(), StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String getSourceName() {
+        return name;
     }
 }

@@ -20,5 +20,10 @@ public interface IRead {
     /**
      * @return BufferedReader {@link BufferedReader}
      */
-    BufferedReader read() throws IOException;
+    BufferedReader read() throws FileNotFoundException, IOException;
+
+    /**
+     * @return String
+     */
+    String getSourceName();
 }

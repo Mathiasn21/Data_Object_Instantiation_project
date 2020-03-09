@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
@@ -20,7 +21,7 @@ public final class Collector implements ICollector{
 
     private List<DataObject> primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
-    private TreeMap<String, DataObject> rbTree = new TreeMap<>();
+    private TreeMap<String, DataObject> rbTreeSet = new TreeMap<>();
 
     private IHandle dataHandler;
     private Resource resource;
@@ -40,8 +41,15 @@ public final class Collector implements ICollector{
      */
     @Override
     public void CollectData() throws IOException {
+        long start = System.currentTimeMillis();
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
-        //TODO: implement logic for instantiating objects given initArgs. Utilize AnnotationProcessor to do this
+        try {
+            List<Object> objectList = annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
+            System.out.println("Size is: " + objectList.size());
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        System.out.println(System.currentTimeMillis() - start);
     }
 
     /**
@@ -102,7 +110,7 @@ public final class Collector implements ICollector{
     @NotNull
     @Override
     public Collection<DataObject> getAllColumns() {
-        return Collections.unmodifiableCollection(rbTree.values());
+        return Collections.unmodifiableCollection(rbTreeSet.values());
     }
 
 
