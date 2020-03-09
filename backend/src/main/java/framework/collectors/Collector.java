@@ -86,22 +86,6 @@ public final class Collector implements ICollector{
         //TODO: Describe set max memory of what????
     }
 
-
-    /**
-     * @param name {@link DataObject}
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    @NotNull
-    @Override
-    public List<DataObject> getCategoryBy(DataObject name) {
-        List<DataObject> list = new ArrayList<>();
-        if(rbTree.containsValue(name)){
-            list.add(name);
-        }
-        return Collections.unmodifiableList(list) ;
-    }
-
-
     /**
      * Columns that describe the values inherent in a dataset.
      * @return {@link List}&lt;{@link DataObject}&gt;

@@ -35,14 +35,6 @@ public interface ICollector {
      */
     void setAllSettings(Map<Setting, String> settings);
 
-    //TODO: might be better to remove this
-    /**
-     * Might be redundant
-     * @param name {@link DataObject}
-     * @return {@link List}&lt;{@link DataObject}&gt;
-     */
-    List<DataObject> getCategoryBy(DataObject name);
-
     /**
      * @param mb int
      */
