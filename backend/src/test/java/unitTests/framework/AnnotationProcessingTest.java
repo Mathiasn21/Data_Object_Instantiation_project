@@ -1,7 +1,8 @@
-package framework.annotations;
+package unitTests.framework;
 import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
+import framework.annotations.AnnotationsProcessor;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;

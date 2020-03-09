@@ -72,6 +72,7 @@ public final class Collector implements ICollector{
         this.settings.putAll(settings);
     }
 
+
     /**
      * Sets max memory that this collector is allowed to utilize.
      * Keeps the internal data structure from filling up.
@@ -119,6 +120,7 @@ public final class Collector implements ICollector{
         return Collections.unmodifiableCollection(rbTree.values());
     }
 
+
     /**
      * Returns an unmodifiable map see {@link Collections}
      * for more information
@@ -138,5 +140,4 @@ public final class Collector implements ICollector{
     public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
-
 }

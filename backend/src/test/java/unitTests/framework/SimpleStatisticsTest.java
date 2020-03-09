@@ -1,5 +1,6 @@
-package framework.statistics;
+package unitTests.framework;
 
+import framework.statistics.SimpleStatistics;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

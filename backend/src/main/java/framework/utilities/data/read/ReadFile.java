@@ -23,10 +23,13 @@ public final class ReadFile implements IReadFile{
         path = "/files/" + fileName;
     }
 
+    //TODO: Alter such that all paths are absolute and not relative
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
+    @NotNull
+    @Contract(" -> new")
     @Override
     public BufferedReader read() throws FileNotFoundException {
         return new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + path), StandardCharsets.UTF_8));

@@ -11,7 +11,7 @@ public final class Parser {
      * @return {@link Object}
      */
     public static Object parseValueToObject(Class<?> clazz, String value) {
-        if(String.class == clazz){ return value;}
+        if(String.class == clazz){ return value; }
 
         if(Boolean.class == clazz  || Boolean.TYPE == clazz){ return Boolean.parseBoolean(value); }
         if(Byte.class == clazz || Byte.TYPE == clazz){ return Byte.parseByte(value); }
