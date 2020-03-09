@@ -15,6 +15,10 @@ public class ResourceBuilder {
     private IRead read;
     ResourceBuilder() {
     }
+    //TODO: implement concrete logic for this builder
+
+
+
 
     /**
      * @param file String
