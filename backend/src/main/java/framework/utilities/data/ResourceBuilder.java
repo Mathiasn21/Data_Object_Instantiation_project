@@ -29,6 +29,7 @@ public class ResourceBuilder {
     public ResourceBuilder fromFile(@NotNull String file) throws IOException {
         ReadFile readFile = new ReadFile();
         readFile.given(file);
+        read = readFile;
         return this;
     }
 
@@ -40,6 +41,7 @@ public class ResourceBuilder {
     public ResourceBuilder fromFile(@NotNull File file) throws IOException {
         ReadFile readFile = new ReadFile();
         readFile.given(file.getName());
+        read = readFile;
         return this;
     }
 
