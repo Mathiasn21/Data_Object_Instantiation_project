@@ -30,15 +30,17 @@ public final class Extractor implements IExtractor {
         return Collections.unmodifiableList(data);
     }
 
+
     @NotNull
     @Override
-    public final <T extends ICollector> List<DataObject> extractGivenColumnsFrom(@NotNull T collector, DataObject columnFrom, DataObject columnTo){
-        List<DataObject> dataObjects = null;
+    public final <T extends ICollector> List<DataObject> extractGivenColumnsFrom(@NotNull T collector, DataObject column){
+        List<DataObject> data = null;
         for(int i = 0; i<10; i++){
-            dataObjects.add(i, columnFrom);
+            data.add(i, column);
         }
-        return null;
+        return Collections.unmodifiableList(data);
     }
+
 
     /**
      * @param collector {@link ICollector}
