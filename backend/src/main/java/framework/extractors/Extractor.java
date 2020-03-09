@@ -33,12 +33,23 @@ public final class Extractor implements IExtractor {
     }
 
 
+    /**
+     * @param collector
+     * @param columnsToExtract
+     * @param <T>
+     * @return returns the columns given by the user from the file.
+     */
     @NotNull
     @Override
-    public final <T extends ICollector> List<DataObject> extractGivenColumnsFrom(@NotNull T collector, DataObject column){
+    public final <T extends ICollector> List<DataObject> extractGivenColumnsFrom(@NotNull T collector, List<String> columnsToExtract){
+        List<DataObject> allColumns = (List<DataObject>) collector.getAllColumns();
         List<DataObject> data = null;
-        for(int i = 0; i<10; i++){
-            data.add(i, column);
+        for(int i = 0; i < columnsToExtract.size(); i++){
+            for(int j = 0; j < allColumns.size(); j++){
+                if (columnsToExtract.get(i).toString().equals(allColumns.get(j).toString())){
+                    data.add(allColumns.get(j));
+                }
+            }
         }
         return Collections.unmodifiableList(data);
     }

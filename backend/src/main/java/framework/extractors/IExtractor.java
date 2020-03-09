@@ -21,7 +21,7 @@ public interface IExtractor{
      */
     <T extends ICollector> List<DataObject> extractColumnFrom(T collector, DataObject columnName);
 
-    <T extends ICollector> List<DataObject> extractGivenColumnsFrom(T collector, DataObject column);
+    <T extends ICollector> List<DataObject> extractGivenColumnsFrom(T collector, List<String> columnsToExtract);
 
     <T extends ICollector> Collection<DataObject> extractAllColumnsFrom(T collector);
 
