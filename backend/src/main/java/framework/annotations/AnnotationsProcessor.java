@@ -167,4 +167,18 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         }
         throw new NoMatchingDataObject();
     }
+
+
+    /**
+     * @param classes {@link Class}&lt;?&gt;[]
+     * @return int hashcode that does not care for permutations
+     */
+    private int calcHashcodeFrom(@NotNull Class<?>[] classes){
+        int sum = 0;
+        for(Class<?> clazz : classes){
+            sum += clazz.hashCode() >>> 3;
+        }
+        System.out.println((sum << 1) + 1);
+        return sum;
+    }
 }
