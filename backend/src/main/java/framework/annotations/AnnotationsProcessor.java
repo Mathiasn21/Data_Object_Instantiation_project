@@ -141,8 +141,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
 
 
     /**
-     * @param sample
-     * @return
+     * @param sample {@link Object}[]
+     * @return {@link Class}&lt;&gt;
      */
     @Nullable
     @Contract(pure = true)
