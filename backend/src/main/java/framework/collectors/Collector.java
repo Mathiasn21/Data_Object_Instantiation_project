@@ -12,6 +12,7 @@ import java.util.*;
 
 /** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0.0
  */
 public final class Collector implements ICollector{

@@ -17,7 +17,7 @@ public interface IExtractor{
      * @param <T> T extends ICollector
      * @return double[]
      */
-    <T extends ICollector> List<DataObject> extractColumnFrom(T collector, DataObject columnName);
+    <T extends ICollector> List<DataObject> extractColumnFrom (T collector, DataObject columnName);
 
     <T extends ICollector> Map<String, Integer> extractReportFom(T collector, DataObject columnName);
 }

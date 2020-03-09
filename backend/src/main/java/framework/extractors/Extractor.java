@@ -2,6 +2,8 @@ package framework.extractors;
 
 import framework.annotations.DataObject;
 import framework.collectors.ICollector;
+import framework.exceptions.ExceptionHandler;
+import framework.exceptions.NoExistingColumn;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
