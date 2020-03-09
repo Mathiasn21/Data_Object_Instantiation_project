@@ -17,8 +17,6 @@ public interface ICollector {
      */
     void CollectData() throws IOException;
 
-
-
     /**
      * @param list {@link List}&lt;{@link DataObject}&gt;
      */

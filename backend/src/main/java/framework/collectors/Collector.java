@@ -40,7 +40,7 @@ public final class Collector implements ICollector{
      */
     @Override
     public void CollectData() throws IOException {
-        List<List<Object>> initArgs = dataHandler.handle(resource.getData());
+        List<Object[]> initArgs = dataHandler.handle(resource.getData());
         //TODO: implement logic for instantiating objects given initArgs. Utilize AnnotationProcessor to do this
     }
 

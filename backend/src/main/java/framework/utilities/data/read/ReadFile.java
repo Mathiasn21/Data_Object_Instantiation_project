@@ -22,8 +22,9 @@ public final class ReadFile implements IReadFile{
     public void given(@NotNull String fileName) throws IOException {
         path = fileName;
     }
-
+    
     //TODO: Alter such that all paths are absolute and not relative
+
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
@@ -42,8 +43,7 @@ public final class ReadFile implements IReadFile{
      */
     @Contract(pure = true)
     @Override
-    public @NotNull ReadFile given(@NotNull File resource) throws IOException {
-        //TODO: Implement logic
-        return null;
+    public void given(@NotNull File resource) throws IOException {
+        path = resource.getPath();
     }
 }

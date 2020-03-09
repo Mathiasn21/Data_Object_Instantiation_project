@@ -8,10 +8,10 @@ import java.io.PrintStream;
 
 /** Class for describing a code and a message describing the error
  * @author Maria Elinor Pedersen Github: https://github.com/marped
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
 public enum ExceptionHandler {
-
     ERROR_MISSING_RESOURCE(1, "Missing resource, make sure no files are missing"),
     ERROR_WRONG_DATA_OBJECT(2, "ERROR, wrong data format on object"),
     ERROR_NO_EXISTING_COLUMN(3, "ERROR, there are no existing column with that name"),
