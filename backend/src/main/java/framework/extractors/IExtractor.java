@@ -16,7 +16,7 @@ public interface IExtractor{
      * @return double[]
      */
     List<Object> extractColumnFrom (String columnName);
-    List<Object> extractColumnsFrom();
-    Collection<Object> extractAllColumnsFrom();
+    List<Object> extractColumns();
+    Collection<Object> extractAllColumns();
     Map<String, Integer> extractReportFom(String columnName);
 }

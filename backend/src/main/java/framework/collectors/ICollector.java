@@ -18,7 +18,7 @@ public interface ICollector {
     void CollectData() throws IOException;
 
     /**
-     * @param list {@link List}&lt;{@link DataObject}&gt;
+     * @param list {@link List}&lt;{@link String}&gt;
      */
     void setPrimaryKeys(List<String> list);
 
@@ -40,12 +40,12 @@ public interface ICollector {
 
 
     /**
-     * @return {@link List}&lt;{@link DataObject}&gt;
+     * @return {@link List}&lt;{@link String}&gt;
      */
     List<String> getPrimaryKeys();
 
     /**
-     * @return {@link List}&lt;{@link DataObject}&gt;
+     * @return {@link List}&lt;{@link Object}&gt;
      */
-    Collection<DataObject> getAllColumns();
+    List<Object> getAllColumns();
 }

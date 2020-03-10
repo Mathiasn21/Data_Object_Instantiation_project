@@ -15,9 +15,11 @@ import java.util.*;
  */
 public final class Extractor<T extends ICollector> implements IExtractor {
     private final T collector;
+    private final List<Object> allColumns;
 
     public Extractor(@NotNull T collector) {
         this.collector = collector;
+        this.allColumns = collector.getAllColumns();
     }
 
     /**
@@ -37,10 +39,10 @@ public final class Extractor<T extends ICollector> implements IExtractor {
      */
     @NotNull
     @Override
-    public final List<Object> extractColumnsFrom(){
+    public final List<Object> extractColumns(){
         //TODO: Alter method as intellij reports many warnings due to degenerated code
-        List<DataObject> allColumns = (List<DataObject>) collector.getAllColumns();
-        List<DataObject> data = null;
+        //TODO: Might be better to remove or move the code to anotehr more appropriate method
+        List<Object> data = null;
         List<String> primaryKeys = collector.getPrimaryKeys();
         for(int i = 0; i < primaryKeys.size(); i++){
             for(int j = 0; j < allColumns.size(); j++){
@@ -56,11 +58,11 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     /**
      * @return returns all columns from dataset
      */
+    @Contract(pure = true)
     @NotNull
     @Override
-    public final Collection<Object> extractAllColumnsFrom(){
-        List<DataObject> data = (List<DataObject>) collector.getAllColumns();
-        return Collections.unmodifiableList(data);
+    public final List<Object> extractAllColumns(){
+        return Collections.unmodifiableList(allColumns);
     }
 
     /**
