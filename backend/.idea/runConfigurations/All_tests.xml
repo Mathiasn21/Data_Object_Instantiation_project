@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All tests" type="JUnit" factoryName="JUnit">
-    <module name="framworkProject" />
+    <module name="backend" />
+    <useClassPathOnly />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="unitTests.framework.*" />
