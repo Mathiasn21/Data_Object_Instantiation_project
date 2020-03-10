@@ -22,10 +22,6 @@ public final class CollectorBuilder {
         this.collector = new Collector(resource, dataHandler);
     }
 
-    
-    // --------------------------------------------------//
-    //                2.Required Calls                   //
-    // --------------------------------------------------//
     @NotNull
     @Contract(pure = true)
     public final CollectorBuilder setDataHandler(IHandle dataHandler) {
