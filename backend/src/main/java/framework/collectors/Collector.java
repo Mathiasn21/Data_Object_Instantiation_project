@@ -19,10 +19,9 @@ import java.util.*;
 public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
-    private List<DataObject> primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
-    private TreeMap<String, DataObject> rbTreeSet = new TreeMap<>();
-
+    private TreeMap<String, Object> rbTreeSet = new TreeMap<>();
+    private List<String> primaryKeys;
     private IHandle dataHandler;
     private Resource resource;
 
@@ -54,10 +53,10 @@ public final class Collector implements ICollector{
 
     /**
      * Sets the primary columns to match and find
-     * @param primaryColumns {@link List}&lt;{@link DataObject}&gt;
+     * @param primaryKeys {@link List}&lt;{@link String}&gt;
      */
     @Override
-    public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
+    public final void setPrimaryKeys(List<String> primaryKeys){ this.primaryKeys = primaryKeys; }
 
 
     /**
@@ -96,21 +95,21 @@ public final class Collector implements ICollector{
 
     /**
      * Columns that describe the values inherent in a dataset.
-     * @return {@link List}&lt;{@link DataObject}&gt;
+     * @return {@link List}&lt;{@link String}&gt;
      */
     @Override
-    public final List<DataObject> getAllPrimaryColumns() {
-        return primaryColumns;
+    public final List<String> getPrimaryKeys() {
+        return primaryKeys;
     }
 
     /**
      * Returns all column data excluding primary keys
-     * @return {@link Collection}&lt;{@link DataObject}&gt;
+     * @return {@link List}&lt;{@link Object}&gt;
      */
     @NotNull
     @Override
-    public Collection<DataObject> getAllColumns() {
-        return Collections.unmodifiableCollection(rbTreeSet.values());
+    public List<Object> getAllColumns() {
+        return Collections.unmodifiableList(List.of(rbTreeSet.values().toArray()));
     }
 
 
