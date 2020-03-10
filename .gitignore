@@ -19,7 +19,6 @@ node_modules
 # Include when developing application packages.
 pubspec.lock
 .c9
-.idea/
 .devcontainer/*
 !.devcontainer/README.md
 !.devcontainer/recommended-devcontainer.json
@@ -52,3 +51,12 @@ yarn-error.log
 
 .notes.md
 baseline.json
+
+
+
+*.idea/
+
+#Rule Exceptions
+!logs/.gitkeep
+!logs/
+!backend/.idea/runConfigurations/
