@@ -19,7 +19,7 @@ import java.util.*;
 public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
-    private List<DataObject> primaryColumns;
+    private List<String> primaryKeys;
     private final Map<Setting, String> settings = new HashMap<>();
     private TreeMap<String, DataObject> rbTreeSet = new TreeMap<>();
 
@@ -54,10 +54,10 @@ public final class Collector implements ICollector{
 
     /**
      * Sets the primary columns to match and find
-     * @param primaryColumns {@link List}&lt;{@link DataObject}&gt;
+     * @param primaryKeys {@link List}&lt;{@link DataObject}&gt;
      */
     @Override
-    public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
+    public final void setPrimaryKeys(List<String> primaryKeys){ this.primaryKeys = primaryKeys; }
 
 
     /**
@@ -99,8 +99,8 @@ public final class Collector implements ICollector{
      * @return {@link List}&lt;{@link DataObject}&gt;
      */
     @Override
-    public final List<DataObject> getAllPrimaryColumns() {
-        return primaryColumns;
+    public final List<String> getPrimaryKeys() {
+        return primaryKeys;
     }
 
     /**

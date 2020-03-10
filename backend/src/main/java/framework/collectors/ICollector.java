@@ -20,7 +20,7 @@ public interface ICollector {
     /**
      * @param list {@link List}&lt;{@link DataObject}&gt;
      */
-    void setPrimaryColumns(List<DataObject> list);
+    void setPrimaryKeys(List<String> list);
 
     /**
      * @param key {@link Setting}
@@ -42,7 +42,7 @@ public interface ICollector {
     /**
      * @return {@link List}&lt;{@link DataObject}&gt;
      */
-    List<DataObject> getAllPrimaryColumns();
+    List<String> getPrimaryKeys();
 
     /**
      * @return {@link List}&lt;{@link DataObject}&gt;

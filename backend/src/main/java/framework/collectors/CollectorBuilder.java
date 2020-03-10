@@ -40,7 +40,7 @@ public final class CollectorBuilder {
 
 
     public final CollectorBuilder setPrimaryColumns(List<DataObject> primaryColumns){
-        collector.setPrimaryColumns(primaryColumns);
+        collector.setPrimaryKeys(primaryColumns);
         return this;
     }
 
