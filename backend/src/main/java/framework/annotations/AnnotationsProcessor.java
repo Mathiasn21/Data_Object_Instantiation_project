@@ -33,6 +33,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
+    private final Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
     private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
@@ -41,7 +42,9 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
-            objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
+            Constructor<?> constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
+            objectMappedToConstructor.put(clazz, constructor);
+            constructorToPrimaryTypes.put(constructor, primaryTypes);
 
             String fileName = dataObject.fileName();
             if (fileName.equals("")) { dataObjectsWithNoFiles.add(clazz);
@@ -120,26 +123,27 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param file String
-     * @return {@link List}&lt;{@link Object}[]&gt;
-     * @throws InstantiationException {@link InstantiationException} InstantiationException
-     * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
-     * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
+     * @return {@link ObjectInformation}&lt;{@link T}&gt;
+     * @throws InstantiationException InstantiationException
+     * @throws InvocationTargetException InvocationTargetException
+     * @throws IllegalAccessException IllegalAccessException
      */
     @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
-    public <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
-            throws InstantiationException, InvocationTargetException, IllegalAccessException {
+    public <T> ObjectInformation<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
+            throws ReflectiveOperationException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
         Class<?> clazz = filesMappedToDataObject.containsKey(file) ?
                 filesMappedToDataObject.get(file) : getDataObjectWithoutFile(listWithInitArgs.get(0));
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
+
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
-        return (List<T>) listOfDataObjects;
+        return new ObjectInformation<>(constructorToPrimaryTypes.get(constructor), clazz, (List<T>) listOfDataObjects);
     }
 
 

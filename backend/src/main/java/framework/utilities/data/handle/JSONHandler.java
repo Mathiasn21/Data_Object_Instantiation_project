@@ -28,9 +28,7 @@ public final class JSONHandler implements IHandle{
      * @param keys String[]
      */
     @Override
-    public final void setPrimaryKeys(@NotNull String[] keys) {
-        primaryKeys = keys;
-    }
+    public final void setPrimaryKeys(@NotNull String[] keys) { primaryKeys = keys; }
 
     /**
      * @param bufferedReader {@link BufferedReader}
@@ -39,12 +37,8 @@ public final class JSONHandler implements IHandle{
      */
     @Override
     public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
-        StringBuilder textFromFile = new StringBuilder();
         List<Object[]> res = new ArrayList<>();
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            textFromFile.append(line);
-        }
+        StringBuilder textFromFile = getJSONStringFrom(bufferedReader);
 
         JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
         JsonArray array = jsonObject.getAsJsonArray();
@@ -58,43 +52,33 @@ public final class JSONHandler implements IHandle{
             }
             res.add(arrayList.toArray());
         });
-
         return res;
     }
-
-    /**
-     * @param bufferedReader {@link BufferedReader}
-     * @return {@link JsonArray}
-     * @throws IOException IOException
-     */
-    public @NotNull JsonArray fromJSON(@NotNull BufferedReader bufferedReader) throws IOException {
-        //TODO: Alter logic in order to divide json text in another class
-        StringBuilder textFromFile = new StringBuilder();
-        String line;
-
-        while ((line = bufferedReader.readLine()) != null) {
-            textFromFile.append(line);
-        }
-
-        JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
-        return jsonObject.getAsJsonArray();
-    }
-
 
     /**
      * This method retrieves a list, given a type Class and a json string.
      * @param type             T[]
      * @param jsonTextFromFile String
      * @param <T>              T
-     * @return {@link List}
+     * @return {@link List}&lt;{@link T}&gt;
      */
     @NotNull
-    @SuppressWarnings("unchecked")//Will always be possible otherwise and exception is thrown way before this method
-    private <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
+    @SuppressWarnings("unchecked")//Will always be possible unless it's a null value
+    final <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
         Class<T[]> arrClass = (Class<T[]>) Array.newInstance(type, 0).getClass();
         T[] arrangementArray = gson.fromJson(jsonTextFromFile, arrClass);
         return (Arrays.asList(arrangementArray));
+    }
+
+    @NotNull
+    private StringBuilder getJSONStringFrom(@NotNull BufferedReader bufferedReader) throws IOException {
+        StringBuilder textFromFile = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            textFromFile.append(line);
+        }
+        return textFromFile;
     }
 }

@@ -13,6 +13,9 @@ public class Main {
         ICollector collector = Collector.getBuilder(resource, new JSONHandler()).build();
         collector.CollectData();
 
+
+
+
         System.out.println(System.currentTimeMillis() - start);
     }
 }

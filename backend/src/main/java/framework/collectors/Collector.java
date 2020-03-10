@@ -1,13 +1,13 @@
 package framework.collectors;
 
 import framework.annotations.AnnotationsProcessor;
+import framework.annotations.ObjectInformation;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
@@ -21,6 +21,8 @@ public final class Collector implements ICollector{
     private final Map<Setting, String> settings = new HashMap<>();
     private final TreeMap<String, Object> rbTreeSet = new TreeMap<>();
     private List<String> primaryKeys;
+    private Class<?>[] primaryTypes;
+    private Class<?> clazz;
     private final IHandle dataHandler;
     private final Resource resource;
 
@@ -41,10 +43,15 @@ public final class Collector implements ICollector{
     public void CollectData() throws IOException {
         long start = System.currentTimeMillis();
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
+
         try {
-            List<Object> objectList = annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
+            ObjectInformation<Object> objectObjectInformation = annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
+            List<Object> objectList = objectObjectInformation.data;
+            primaryTypes = objectObjectInformation.primaryKeyTypes;
+            clazz = objectObjectInformation.clazz;
+
             System.out.println("Size is: " + objectList.size());
-        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+        } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
         System.out.println(System.currentTimeMillis() - start);
@@ -102,6 +109,22 @@ public final class Collector implements ICollector{
     }
 
     /**
+     * @return Class&lt;?&gt;&gt;[]
+     */
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public Class<?>[] getPrimaryKeyTypes() { return primaryTypes; }
+
+    /**
+     * @return Class&lt;?&gt;&gt;
+     */
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public Class<?> getClazz() { return clazz; }
+
+    /**
      * Returns all column data excluding primary keys
      * @return {@link List}&lt;{@link Object}&gt;
      */
@@ -110,7 +133,6 @@ public final class Collector implements ICollector{
     public List<Object> getAllColumns() {
         return Collections.unmodifiableList(List.of(rbTreeSet.values().toArray()));
     }
-
 
     /**
      * Returns an unmodifiable map see {@link Collections}
@@ -131,4 +153,5 @@ public final class Collector implements ICollector{
     public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
+
 }

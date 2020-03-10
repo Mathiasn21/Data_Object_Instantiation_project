@@ -35,11 +35,22 @@ public interface ICollector {
      */
     void setMaxMemoryMB(int mb);
 
-
     /**
      * @return {@link List}&lt;{@link String}&gt;
      */
     List<String> getPrimaryKeys();
+
+    /**
+     * @return {@link Class}&lt;?&gt;[]
+     */
+    Class<?>[] getPrimaryKeyTypes();
+
+    /**
+     * @return {@link Class}&lt;?&gt;
+     */
+    Class<?> getClazz();
+
+
 
     /**
      * @return {@link List}&lt;{@link Object}&gt;

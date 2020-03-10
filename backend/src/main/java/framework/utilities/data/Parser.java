@@ -1,5 +1,8 @@
 package framework.utilities.data;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 /** Class for parsing string values to primitive types given a clazz
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
@@ -12,7 +15,6 @@ public final class Parser {
      */
     public static Object parseValueToObject(Class<?> clazz, String value) {
         if(String.class == clazz){ return value; }
-
         if(Boolean.class == clazz  || Boolean.TYPE == clazz){ return Boolean.parseBoolean(value); }
         if(Byte.class == clazz || Byte.TYPE == clazz){ return Byte.parseByte(value); }
         if(Short.class == clazz || Short.TYPE == clazz){ return Short.parseShort(value); }
@@ -21,5 +23,12 @@ public final class Parser {
         if(Float.class == clazz || Float.TYPE == clazz){ return Float.parseFloat(value); }
         if(Double.class == clazz || Double.TYPE == clazz){ return Double.parseDouble(value); }
         return value;
+    }
+
+    @NotNull
+    @Contract(value = "_, _ -> new", pure = true)
+    public static Object[] parseToArray(@NotNull Class<?> clazz, @NotNull String value){
+        //TODO: implement ability to parse from a string eg: [2,4,5,6,7,7] || [2.0,3.9] to the array
+        return new Object[0];
     }
 }

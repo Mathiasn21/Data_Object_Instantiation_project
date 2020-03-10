@@ -10,6 +10,6 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface IAnnotationsProcessor {
-    <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
+    <T> ObjectInformation<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
             throws ReflectiveOperationException;
 }

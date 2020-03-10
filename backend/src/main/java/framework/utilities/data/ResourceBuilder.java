@@ -17,10 +17,13 @@ import java.net.URL;
  */
 public class ResourceBuilder {
     private IRead read;
+
+    /**
+     * Leave be, prevents unwanted instantiation.
+     */
+    @Contract(pure = true)
     ResourceBuilder() {
     }
-    //TODO: implement concrete logic for this builder
-
 
     /**
      * @param file String
