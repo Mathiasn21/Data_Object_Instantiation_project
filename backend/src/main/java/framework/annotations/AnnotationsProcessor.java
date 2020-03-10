@@ -72,11 +72,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
                 int paramHashCode = calcHashcodeFrom(params);
                 int paramUniqueHashCOde = Arrays.hashCode(params);
 
-                if (paramUniqueHashCOde == primaryTypeUniqueHashCode) {
-                    return constructor;
-                }else if (paramHashCode == primaryTypeHashCode) {
-                    partialMatch = constructor;
-                }
+                if (paramUniqueHashCOde == primaryTypeUniqueHashCode) { return constructor;
+                }else if (paramHashCode == primaryTypeHashCode) { partialMatch = constructor; }
             }
         }
         if(partialMatch != null){

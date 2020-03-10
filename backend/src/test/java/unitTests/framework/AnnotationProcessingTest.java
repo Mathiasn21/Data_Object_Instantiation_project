@@ -23,7 +23,7 @@ public class AnnotationProcessingTest {
     void object_instantiation(){
         ArrayList<Object[]> list = new ArrayList<>();
         Object[] arr = {field1, field2, field3, field4};
-        int numObjects = 50;
+        int numObjects = 5000;
 
         for(int i = 0; i < numObjects; i++){
             list.add(arr);
