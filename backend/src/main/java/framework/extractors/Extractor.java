@@ -26,7 +26,7 @@ public final class Extractor implements IExtractor {
      */
     @NotNull
     @Override
-    public final <T extends ICollector> List<DataObject> extractColumnFrom(@NotNull T collector, DataObject columnName) {
+    public final <T extends ICollector> List<DataObject> extractColumnFrom(@NotNull T collector, @NotNull DataObject columnName) {
         List<DataObject> data = new ArrayList<>();
         return Collections.unmodifiableList(data);
     }
