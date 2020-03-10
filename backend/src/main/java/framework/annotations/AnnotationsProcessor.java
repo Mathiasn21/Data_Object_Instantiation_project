@@ -155,19 +155,17 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     private Class<?> getDataObjectWithoutFile(@NotNull Object[] sample) {
         Class<?>[] types = new Class[sample.length];
-        for (int i = 0; i < sample.length; i++) {
+        int i = 0;
+        while (i < sample.length) {
             types[i] = sample[i].getClass();
+            i++;
         }
 
-        clazzLoop: for(Class<?> clazz : dataObjectsWithNoFiles){
+        for (Class<?> clazz : dataObjectsWithNoFiles) {
             Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
             Class<?>[] params = constructor.getParameterTypes();
-            if(params.length == types.length){
-                for(int i = 0; i < types.length; i++){
-                    if(types[i] != params[i]){
-                        continue clazzLoop;
-                    }
-                }
+            
+            if (params.length == types.length && Arrays.hashCode(params) == Arrays.hashCode(types)) {
                 return clazz;
             }
         }
