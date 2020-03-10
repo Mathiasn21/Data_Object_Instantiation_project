@@ -1,7 +1,6 @@
 package framework.collectors;
 
 import framework.annotations.AnnotationsProcessor;
-import framework.annotations.DataObject;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
@@ -20,10 +19,10 @@ public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
     private final Map<Setting, String> settings = new HashMap<>();
-    private TreeMap<String, Object> rbTreeSet = new TreeMap<>();
+    private final TreeMap<String, Object> rbTreeSet = new TreeMap<>();
     private List<String> primaryKeys;
-    private IHandle dataHandler;
-    private Resource resource;
+    private final IHandle dataHandler;
+    private final Resource resource;
 
     /**
      * @param resource {@link Resource}

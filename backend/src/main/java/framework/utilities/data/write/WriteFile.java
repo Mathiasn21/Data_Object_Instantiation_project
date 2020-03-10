@@ -41,8 +41,6 @@ public final class WriteFile implements IWriteFile{
         String filepath = "/files/" + resource;
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("").getAbsolutePath() + filepath))) {
             bufferedWriter.write(data);
-        } catch (IOException ioexc) {
-            ioexc.printStackTrace();
         }
     }
 

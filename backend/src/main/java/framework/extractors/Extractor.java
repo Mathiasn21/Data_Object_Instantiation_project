@@ -41,7 +41,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public final List<Object> extractColumns(){
         //TODO: Alter method as intellij reports many warnings due to degenerated code
-        //TODO: Might be better to remove or move the code to anotehr more appropriate method
+        //TODO: Might be better to remove or move the code to another more appropriate method
         List<Object> data = null;
         List<String> primaryKeys = collector.getPrimaryKeys();
         for(int i = 0; i < primaryKeys.size(); i++){

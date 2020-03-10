@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public final class Resource {
     private final IRead readData;
-    private String name;
+    private final String name;
 
     /**
      * @param readData {@link IRead}

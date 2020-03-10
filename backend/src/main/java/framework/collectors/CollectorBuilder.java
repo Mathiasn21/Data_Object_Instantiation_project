@@ -1,6 +1,5 @@
 package framework.collectors;
 
-import framework.annotations.DataObject;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;

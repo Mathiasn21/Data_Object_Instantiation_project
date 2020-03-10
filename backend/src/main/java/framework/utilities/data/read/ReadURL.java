@@ -45,11 +45,6 @@ public final class ReadURL implements IReadURL{
     @Contract(pure = true)
     @Override
     public @NotNull BufferedReader read() throws IOException {
-        /*//ER DETTE BEDRE HMM
-        URL oracle = new URL(url);
-        URLConnection ucon = oracle.openConnection();
-        return new BufferedReader(new InputStreamReader(ucon.getInputStream(), StandardCharsets.UTF_8));*/
-
         return new BufferedReader(new InputStreamReader(new URL(url).openStream(), StandardCharsets.UTF_8));
     }
 

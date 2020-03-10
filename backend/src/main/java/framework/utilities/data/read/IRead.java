@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 /** Interface describing a contract for reading with a String resource
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -20,7 +19,7 @@ public interface IRead {
     /**
      * @return BufferedReader {@link BufferedReader}
      */
-    BufferedReader read() throws FileNotFoundException, IOException;
+    BufferedReader read() throws IOException;
 
     /**
      * @return String

@@ -89,7 +89,7 @@ public final class JSONHandler implements IHandle{
      * @return {@link List}
      */
     @NotNull
-    @SuppressWarnings("unchecked")//Will always be possible otherwise and exception is thrown waaay before this method
+    @SuppressWarnings("unchecked")//Will always be possible otherwise and exception is thrown way before this method
     private <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();

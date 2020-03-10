@@ -18,7 +18,7 @@ public class DTONoFile {
         this.string = string;
     }
 
-    public DTONoFile(int anint) {
+    public DTONoFile(int anInt) {
         this.string = "d";
     }
 

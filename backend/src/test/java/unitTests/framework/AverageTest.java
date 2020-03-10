@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @version 1.0
  */
 public class AverageTest {
-    double [] data = {1,2,3,4,5,6,6,6};
-    double [] data2 = {2,5,6,7,7,8,9};
+    private final double [] data = {1,2,3,4,5,6,6,6};
+    private final double [] data2 = {2,5,6,7,7,8,9};
 
-    Average average = new Average(data);
-    Average average2 = new Average(data2);
+    private final Average average = new Average(data);
+    private final Average average2 = new Average(data2);
 
     @Test
     public void calcSum(){

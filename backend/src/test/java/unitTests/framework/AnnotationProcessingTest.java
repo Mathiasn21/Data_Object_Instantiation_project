@@ -71,7 +71,7 @@ public class AnnotationProcessingTest {
     @Test
     void dataObject_instantiation_no_specified_file(){
         ArrayList<Object[]> list = new ArrayList<>();
-        Object[] sample = new Object[]{"dwafesagea"};
+        Object[] sample = new Object[]{"word"};
 
         int numObjects = 50;
         for(int i = 0; i < numObjects; i++){

@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface IAnnotationsProcessor {
     <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
-            throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
+            throws ReflectiveOperationException;
 }

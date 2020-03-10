@@ -4,7 +4,6 @@ import framework.utilities.data.Resource;
 import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 public class HandleData {

@@ -158,11 +158,12 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             i++;
         }
 
+        int typesHashCode = Arrays.hashCode(types);
         for (Class<?> clazz : dataObjectsWithNoFiles) {
             Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
             Class<?>[] params = constructor.getParameterTypes();
 
-            if (params.length == types.length && Arrays.hashCode(params) == Arrays.hashCode(types)) {
+            if (params.length == types.length && Arrays.hashCode(params) == typesHashCode) {
                 return clazz;
             }
         }

@@ -1,9 +1,6 @@
 package framework.collectors;
 
-import framework.annotations.DataObject;
-
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
