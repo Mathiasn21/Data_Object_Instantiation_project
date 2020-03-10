@@ -140,7 +140,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
                 filesMappedToDataObject.get(file) : getDataObjectWithoutFile(listWithInitArgs.get(0));
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
-
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
