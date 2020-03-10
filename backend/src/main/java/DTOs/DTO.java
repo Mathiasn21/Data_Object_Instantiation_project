@@ -20,7 +20,6 @@ public class DTO {
         this.field2 = field2;
     }
 
-    @DataConstructor
     public DTO(String field1, int field2, double field3, float field4) {
         this.field1 = field1;
         this.field2 = field2;

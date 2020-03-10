@@ -11,17 +11,24 @@ import framework.annotations.DataObjectField;
 public class ComplexDTO {
 
     @DataObjectField
-    public String string;
+    public int integer;
 
     @DataObjectField
-    public int integer;
+    public String string;
+
+
+    private String thing = "dada";
 
     @DataObjectField
     public double doubles;
 
-    private String thing = "dada";
+    public ComplexDTO(String string, double doubles, int integer) {
+        this.integer = integer;
+        this.string = string;
+        this.thing = thing;
+        this.doubles = doubles;
+    }
 
-    @DataConstructor
     public ComplexDTO(String string, int integer, double doubles) {
         this.string = string;
         this.integer = integer;

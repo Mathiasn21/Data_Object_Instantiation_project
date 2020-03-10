@@ -64,6 +64,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      */
     @NotNull
     private Constructor<?> getCorrespondingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryTypes) {
+        Constructor<?> partialMatch = null;
         for (Constructor<?> constructor : constructors) {
             Class<?>[] params = constructor.getParameterTypes();
             int primaryTypeUniqueHashCode = Arrays.hashCode(primaryTypes);
@@ -80,10 +81,15 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
                 constructorUniqueSignatures.put(constructor, paramUniqueHashCOde);
                 constructorSignatures.put(constructor, paramHashCode);
 
-                if (paramUniqueHashCOde == primaryTypeUniqueHashCode || paramHashCode == primaryTypeHashCode) {
+                if (paramUniqueHashCOde == primaryTypeUniqueHashCode) {
                     return constructor;
+                }else if (paramHashCode == primaryTypeHashCode) {
+                    partialMatch = constructor;
                 }
             }
+        }
+        if(partialMatch != null){
+            return partialMatch;
         }
         throw new NoSuchConstructor();
     }
