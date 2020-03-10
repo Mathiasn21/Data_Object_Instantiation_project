@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @version 1.0
  */
 public final class CSVHandler implements IHandle{
-    private String delimiter = ",";
+    private char delimiter = ',';
     private Class<?>[] primaryKeyTypes;
     private String[] primaryKeys;
 
@@ -37,9 +37,10 @@ public final class CSVHandler implements IHandle{
     }
 
     /**
+     * A char to split each column for each row
      * @param delimiter String
      */
-    public final void setDelimiter(String delimiter) {
+    public final void setDelimiter(char delimiter) {
         this.delimiter = delimiter;
     }
 
@@ -72,7 +73,7 @@ public final class CSVHandler implements IHandle{
     @NotNull
     @Contract(pure = true)
     private String[] splitLineOn(@NotNull String line){
-        return line.split(delimiter);
+        return line.split(String.valueOf(delimiter));
     }
 
 
