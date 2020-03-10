@@ -15,9 +15,5 @@ public class HandleData {
 
         JSONHandler jsonHandler = new JSONHandler();
         List<Object[]> list = jsonHandler.handle(resource.getData());
-
-        for (Object[] o: list) {
-            System.out.println(Arrays.toString(o));
-        }
     }
 }
