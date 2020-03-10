@@ -39,7 +39,7 @@ public final class CollectorBuilder {
     }
 
 
-    public final CollectorBuilder setPrimaryColumns(List<DataObject> primaryColumns){
+    public final CollectorBuilder setPrimaryColumns(List<String> primaryColumns){
         collector.setPrimaryKeys(primaryColumns);
         return this;
     }
