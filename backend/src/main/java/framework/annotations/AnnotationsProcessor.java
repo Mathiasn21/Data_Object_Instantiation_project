@@ -34,6 +34,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
+    private final Map<Constructor<?>, Integer> constructorSignatures = new HashMap<>();
+    private final Map<Constructor<?>, Integer> constructorUniqueSignatures = new HashMap<>();
     private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
@@ -42,6 +44,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
+
             dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
             objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
 
@@ -52,35 +55,40 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     }
 
 
+    // --------------------------------------------------//
+    //                   3.Private Getters               //
+    // --------------------------------------------------//
     /**
      * @param constructors {@link Constructor}&lt;?&gt;[]
      * @return {@link Constructor}&lt;?&gt;
      */
     @NotNull
     private Constructor<?> getCorrespondingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryTypes) {
-        constructorLoop: for(Constructor<?> constructor : constructors){
+        for (Constructor<?> constructor : constructors) {
             Class<?>[] params = constructor.getParameterTypes();
+            int primaryTypeUniqueHashCode = Arrays.hashCode(primaryTypes);
+            int primaryTypeHashCode = calcHashcodeFrom(primaryTypes);
 
-            if(constructor.isAnnotationPresent(DataConstructor.class)){
+
+            if (constructor.isAnnotationPresent(DataConstructor.class)) {
                 return constructor;
-                //TODO: swap out with a hash table
-            }else if(params.length == primaryTypes.length){
-                for(int i = 0; i < params.length; i++){
-                    Class<?> param = params[i];
-                    if(param != primaryTypes[i]){
-                        continue constructorLoop;
-                    }
+
+            } else if (params.length == primaryTypes.length) {
+                int paramHashCode = calcHashcodeFrom(params);
+                int paramUniqueHashCOde = Arrays.hashCode(params);
+
+                constructorUniqueSignatures.put(constructor, paramUniqueHashCOde);
+                constructorSignatures.put(constructor, paramHashCode);
+
+                if (paramUniqueHashCOde == primaryTypeUniqueHashCode || paramHashCode == primaryTypeHashCode) {
+                    return constructor;
                 }
-                return constructor;
             }
         }
         throw new NoSuchConstructor();
     }
 
 
-    // --------------------------------------------------//
-    //                   3.Private Getters               //
-    // --------------------------------------------------//
     /**
      * PrimaryTypes refers to the types that describes a dataset
      * @param clazz Class&lt;?&gt;&gt;
@@ -123,6 +131,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
      * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
      */
+    @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
     public <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
@@ -178,7 +187,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         for(Class<?> clazz : classes){
             sum += clazz.hashCode() >>> 3;
         }
-        System.out.println((sum << 1) + 1);
-        return sum;
+        return (sum << 1) + 1;
     }
 }

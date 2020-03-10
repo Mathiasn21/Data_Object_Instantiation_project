@@ -1,7 +1,9 @@
 package framework.utilities.data;
 
 import framework.utilities.data.read.IRead;
+import framework.utilities.data.read.IReadURL;
 import framework.utilities.data.read.ReadFile;
+import framework.utilities.data.read.ReadURL;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +50,10 @@ public class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURL(String url) {
+    public ResourceBuilder fromURL(@NotNull String url) throws IOException {
+        IReadURL readURL = new ReadURL();
+        readURL.given(url);
+        read = readURL;
         return this;
     }
 
@@ -57,7 +62,10 @@ public class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURL(URL url) {
+    public ResourceBuilder fromURL(@NotNull URL url) throws IOException {
+        IReadURL readURL = new ReadURL();
+        readURL.given(url);
+        read = readURL;
         return this;
     }
 

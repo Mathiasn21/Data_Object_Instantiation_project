@@ -6,9 +6,14 @@ import framework.annotations.DataObject;
 public class DTONoFile {
     public String string;
 
+    public DTONoFile(int integer, String string) {
+        this.string = string;
+    }
+
     public DTONoFile(String string) {
         this.string = string;
     }
+
 
     @Override
     public String toString() {

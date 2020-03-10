@@ -6,14 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 /**
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-final class ReadURL implements IReadURL{
+public final class ReadURL implements IReadURL{
     private String name;
 
     private String url;
