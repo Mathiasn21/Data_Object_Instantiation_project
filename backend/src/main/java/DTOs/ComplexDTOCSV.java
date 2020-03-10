@@ -12,7 +12,7 @@ public class ComplexDTOCSV {
     @DataObjectField
     public int integer;
 
-    @DataObjectField
+    @DataObjectField(primaryColumnName = "Column1")
     public String string;
 
 
