@@ -32,10 +32,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     //                2.Class Fields                     //
     // --------------------------------------------------//
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
-    private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
-    private final Map<Constructor<?>, Integer> constructorSignatures = new HashMap<>();
-    private final Map<Constructor<?>, Integer> constructorUniqueSignatures = new HashMap<>();
     private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
@@ -44,8 +41,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
-
-            dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
             objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
 
             String fileName = dataObject.fileName();
@@ -70,16 +65,12 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             int primaryTypeUniqueHashCode = Arrays.hashCode(primaryTypes);
             int primaryTypeHashCode = calcHashcodeFrom(primaryTypes);
 
-
             if (constructor.isAnnotationPresent(DataConstructor.class)) {
                 return constructor;
 
             } else if (params.length == primaryTypes.length) {
                 int paramHashCode = calcHashcodeFrom(params);
                 int paramUniqueHashCOde = Arrays.hashCode(params);
-
-                constructorUniqueSignatures.put(constructor, paramUniqueHashCOde);
-                constructorSignatures.put(constructor, paramHashCode);
 
                 if (paramUniqueHashCOde == primaryTypeUniqueHashCode) {
                     return constructor;
