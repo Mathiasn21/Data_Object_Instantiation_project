@@ -31,4 +31,17 @@ public final class Parser {
         //TODO: implement ability to parse from a string eg: [2,4,5,6,7,7] || [2.0,3.9] to the array
         return new Object[0];
     }
+
+    @NotNull
+    @Contract(value = "_ -> new", pure = true)
+    public static Class<?> primitiveParseFromObjectClass(@NotNull Class<?> clazz){
+        return clazz == Double.class    ?      double.class    :
+               clazz == Float.class     ?      float.class     :
+               clazz == Integer.class   ?      int.class       :
+               clazz == Long.class      ?      long.class      :
+               clazz == Boolean.class   ?      boolean.class   :
+               clazz == Short.class     ?      short.class     :
+               clazz == Byte.class      ?      byte.class      :
+               clazz;
+    }
 }

@@ -12,6 +12,7 @@ package framework.annotations;
 // --------------------------------------------------//
 import framework.errors.NoMatchingDataObject;
 import framework.errors.NoSuchConstructor;
+import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -158,18 +159,27 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         Class<?>[] types = new Class[sample.length];
         int i = 0;
         while (i < sample.length) {
-            types[i] = sample[i].getClass();
+            types[i] = Parser.primitiveParseFromObjectClass(sample[i].getClass());
             i++;
         }
 
-        int typesHashCode = Arrays.hashCode(types);
+        int typesUniqueHashCode = Arrays.hashCode(types);
+        int typesHashCode = calcHashcodeFrom(types);
+        Class<?> partialMatch = null;
+
         for (Class<?> clazz : dataObjectsWithNoFiles) {
             Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
             Class<?>[] params = constructor.getParameterTypes();
+            int paramsUniqueHashCode = Arrays.hashCode(params);
+            int paramsHashCode = calcHashcodeFrom(params);
 
-            if (params.length == types.length && Arrays.hashCode(params) == typesHashCode) {
-                return clazz;
+            if(params.length == types.length ){
+                if (paramsUniqueHashCode == typesUniqueHashCode) { return clazz;
+                }else if (paramsHashCode == typesHashCode) { partialMatch = clazz; }
             }
+        }
+        if(partialMatch != null){
+            return partialMatch;
         }
         throw new NoMatchingDataObject();
     }

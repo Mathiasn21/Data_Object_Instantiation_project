@@ -12,7 +12,7 @@ public interface IHandle {
     /**
      * @param types {@link Class}&lt;?&gt;[]
      */
-    void setPrimaryKeyTypes(Class<?>[] types);
+    void setPrimaryKeyTypes(Class<?>... types);
 
     /**
      * @param keys String[]
