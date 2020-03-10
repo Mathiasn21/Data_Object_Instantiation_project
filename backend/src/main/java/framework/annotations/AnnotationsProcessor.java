@@ -32,7 +32,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     //                2.Class Fields                     //
     // --------------------------------------------------//
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
-    private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
     private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
 
@@ -42,7 +41,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
-            dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
             objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
 
             String fileName = dataObject.fileName();
@@ -52,35 +50,42 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     }
 
 
+    // --------------------------------------------------//
+    //                   3.Private Getters               //
+    // --------------------------------------------------//
     /**
      * @param constructors {@link Constructor}&lt;?&gt;[]
      * @return {@link Constructor}&lt;?&gt;
      */
     @NotNull
     private Constructor<?> getCorrespondingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryTypes) {
-        constructorLoop: for(Constructor<?> constructor : constructors){
+        Constructor<?> partialMatch = null;
+        for (Constructor<?> constructor : constructors) {
             Class<?>[] params = constructor.getParameterTypes();
+            int primaryTypeUniqueHashCode = Arrays.hashCode(primaryTypes);
+            int primaryTypeHashCode = calcHashcodeFrom(primaryTypes);
 
-            if(constructor.isAnnotationPresent(DataConstructor.class)){
+            if (constructor.isAnnotationPresent(DataConstructor.class)) {
                 return constructor;
-                //TODO: swap out with a hash table
-            }else if(params.length == primaryTypes.length){
-                for(int i = 0; i < params.length; i++){
-                    Class<?> param = params[i];
-                    if(param != primaryTypes[i]){
-                        continue constructorLoop;
-                    }
+
+            } else if (params.length == primaryTypes.length) {
+                int paramHashCode = calcHashcodeFrom(params);
+                int paramUniqueHashCOde = Arrays.hashCode(params);
+
+                if (paramUniqueHashCOde == primaryTypeUniqueHashCode) {
+                    return constructor;
+                }else if (paramHashCode == primaryTypeHashCode) {
+                    partialMatch = constructor;
                 }
-                return constructor;
             }
+        }
+        if(partialMatch != null){
+            return partialMatch;
         }
         throw new NoSuchConstructor();
     }
 
 
-    // --------------------------------------------------//
-    //                   3.Private Getters               //
-    // --------------------------------------------------//
     /**
      * PrimaryTypes refers to the types that describes a dataset
      * @param clazz Class&lt;?&gt;&gt;
@@ -123,6 +128,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
      * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
      */
+    @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
     public <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
@@ -166,5 +172,18 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             }
         }
         throw new NoMatchingDataObject();
+    }
+
+
+    /**
+     * @param classes {@link Class}&lt;?&gt;[]
+     * @return int hashcode that does not care for permutations
+     */
+    private int calcHashcodeFrom(@NotNull Class<?>[] classes){
+        int sum = 0;
+        for(Class<?> clazz : classes){
+            sum += clazz.hashCode() >>> 3;
+        }
+        return (sum << 1) + 1;
     }
 }
