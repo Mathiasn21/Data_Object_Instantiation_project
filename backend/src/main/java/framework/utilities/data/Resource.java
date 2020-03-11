@@ -33,6 +33,22 @@ public final class Resource {
     }
 
     /**
+     * @return {@link String}
+     * @throws FileNotFoundException FileNotFoundException
+     */
+    @NotNull
+    public final String getDataAsString() throws IOException {
+        StringBuilder builder = new StringBuilder();
+        BufferedReader bufferedReader = readData.read();
+        String line;
+        while((line = bufferedReader.readLine()) != null ){
+            builder.append(line);
+        }
+
+        return builder.toString();
+    }
+
+    /**
      * @return {@link ResourceBuilder}
      */
     @Contract(value = " -> new", pure = true)

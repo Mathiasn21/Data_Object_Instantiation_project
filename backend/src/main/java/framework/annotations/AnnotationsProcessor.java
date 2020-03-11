@@ -48,7 +48,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             objectMappedToConstructor.put(clazz, constructor);
             constructorToPrimaryTypes.put(constructor, primaryTypes);
 
-            String fileName = dataObject.fileName();
+            String fileName = dataObject.resourceName();
             if (fileName.equals("")) { dataObjectsWithNoFiles.add(clazz);
             } else { filesMappedToDataObject.put(fileName, clazz); }
         });
@@ -124,7 +124,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
-     * @param file String
+     * @param name String
      * @return {@link ObjectInformation}&lt;{@link T}&gt;
      * @throws InstantiationException InstantiationException
      * @throws InvocationTargetException InvocationTargetException
@@ -133,12 +133,13 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
-    public <T> ObjectInformation<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
+    public <T> ObjectInformation<T> initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
             throws ReflectiveOperationException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
-        Class<?> clazz = filesMappedToDataObject.containsKey(file) ?
-                filesMappedToDataObject.get(file) : getDataObjectWithoutFile(listWithInitArgs.get(0));
+        Class<?> clazz = filesMappedToDataObject.containsKey(name) ?
+                filesMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
+
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
@@ -149,8 +150,30 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
 
 
     /**
+     * @param objects {@link Object} ...objects
+     * @return {@link Class}&lt;?&gt;
+     */
+    @Contract(pure = true)
+    @Override
+    @Nullable
+    public Class<?> getClassFromObjectSample(@NotNull Object... objects){
+        return getDataObjectWithoutFile(objects);
+    }
+
+    /**
+     * @param name {@link String}
+     * @return {@link Class}&lt;?&gt;
+     */
+    @Override
+    @Nullable
+    public Class<?> getClassFromObjectSample(@NotNull String name){
+        return filesMappedToDataObject.get(name);
+    }
+
+
+    /**
      * @param sample {@link Object}[]
-     * @return {@link Class}&lt;&gt;
+     * @return {@link Class}&lt;?&gt;
      */
     @Nullable
     @Contract(pure = true)

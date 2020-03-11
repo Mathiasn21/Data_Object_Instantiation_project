@@ -4,6 +4,7 @@ import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
+import framework.utilities.data.handle.JSONHandler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,11 +21,11 @@ public final class Collector implements ICollector{
 
     private final Map<Setting, String> settings = new HashMap<>();
     private final TreeMap<String, Object> rbTreeSet = new TreeMap<>();
+    private final IHandle dataHandler;
+    private final Resource resource;
     private List<String> primaryKeys;
     private Class<?>[] primaryTypes;
     private Class<?> clazz;
-    private final IHandle dataHandler;
-    private final Resource resource;
 
     /**
      * @param resource {@link Resource}
@@ -43,9 +44,8 @@ public final class Collector implements ICollector{
     public void CollectData() throws IOException {
         long start = System.currentTimeMillis();
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
-
         try {
-            ObjectInformation<Object> objectObjectInformation = annotationProcessor.initializeDataObjectsFromFileName(initArgs, resource.getName());
+            ObjectInformation<Object> objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
             List<Object> objectList = objectObjectInformation.data;
             primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;

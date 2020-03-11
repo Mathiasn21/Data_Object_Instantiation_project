@@ -64,7 +64,7 @@ public final class JSONHandler implements IHandle{
      */
     @NotNull
     @SuppressWarnings("unchecked")//Will always be possible unless it's a null value
-    final <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
+    public final <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
         Class<T[]> arrClass = (Class<T[]>) Array.newInstance(type, 0).getClass();

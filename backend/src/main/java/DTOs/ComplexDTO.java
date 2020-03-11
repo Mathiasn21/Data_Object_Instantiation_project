@@ -6,7 +6,7 @@ import framework.annotations.DataObjectField;
 /**
  * ComplexDTO that contains custom field that require mapping
  */
-@DataObject(fileName = "test")
+@DataObject(resourceName = "test")
 public class ComplexDTO {
 
     @DataObjectField
@@ -14,7 +14,6 @@ public class ComplexDTO {
 
     @DataObjectField
     public String string;
-
 
     private String thing = "dada";
 

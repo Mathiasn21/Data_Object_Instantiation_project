@@ -21,41 +21,50 @@ public final class CollectorBuilder {
         this.collector = new Collector(resource, dataHandler);
     }
 
+    @Contract("_ -> this")
     @NotNull
-    @Contract(pure = true)
     public final CollectorBuilder setDataHandler(IHandle dataHandler) {
         return this;
     }
 
+    @Contract("_ -> this")
     @NotNull
-    @Contract(pure = true)
     public final CollectorBuilder setResource(Resource resource) {
         return this;
     }
 
 
+    @Contract("_ -> this")
+    @NotNull
     public final CollectorBuilder setPrimaryColumns(List<String> primaryColumns){
         collector.setPrimaryKeys(primaryColumns);
         return this;
     }
 
+    @Contract("_, _ -> this")
+    @NotNull
     public final CollectorBuilder setSetting(Setting key, String value) {
         collector.setSetting(key, value);
         return this;
     }
 
+
+    @Contract("_ -> this")
+    @NotNull
     public final CollectorBuilder setAllSettings(Map<Setting, String> settings){
         collector.setAllSettings(settings);
         return this;
     }
 
+    @Contract("_ -> this")
+    @NotNull
     public final CollectorBuilder setMaxMemoryMB(int mb){
         collector.setMaxMemoryMB(mb);
         return this;
     }
 
-
-
+    @Contract(pure = true)
+    @NotNull
     public final ICollector build(){
         return collector;
     }

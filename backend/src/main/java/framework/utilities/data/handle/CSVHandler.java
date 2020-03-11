@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/** Class that contains concrete instruction for handling CSV data.
+/** Class that contains concrete instruction for handling JSON data.
  *  By default it utilizes the delimiter ","
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
