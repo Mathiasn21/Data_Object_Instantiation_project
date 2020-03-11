@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
+        String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;//Just a path
         Resource resource = Resource.getBuilder().fromFile(path).build();
         ICollector collector = Collector.getBuilder(resource, new JSONHandler()).build();
         collector.CollectData();
