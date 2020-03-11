@@ -1,4 +1,5 @@
 package unitTests.framework;
+
 import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
@@ -9,8 +10,8 @@ import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,7 +101,6 @@ public class AnnotationProcessingTest {
 
     @Test
     void dataObject_instantiation_no_specified_test() throws IOException {
-
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";
         Resource resource = Resource.getBuilder().fromFile(path).build();
         JSONHandler jsonHandler = new JSONHandler();

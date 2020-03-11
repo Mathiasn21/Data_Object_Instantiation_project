@@ -11,6 +11,41 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Read {
+    @Test
+    void from_file_using_string() {
+        Assertions.assertDoesNotThrow(() -> {
+            String path = System.getProperty("user.dir") + "/files/DTOJson.json";
+            Resource resource = Resource.getBuilder().fromFile(path).build();
+
+            StringBuilder builder = new StringBuilder();
+            BufferedReader bufferedReader = resource.getData();
+
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                builder.append(line);
+            }
+            Assertions.assertFalse(builder.toString().isEmpty());
+            Assertions.assertFalse(builder.toString().isBlank());
+        });
+    }
+
+    @Test
+    void from_file_using_file() {
+        Assertions.assertDoesNotThrow(() -> {
+            String path = System.getProperty("user.dir") + "/files/DTOJson.json";
+            Resource resource = Resource.getBuilder().fromFile(path).build();
+
+            StringBuilder builder = new StringBuilder();
+            BufferedReader bufferedReader = resource.getData();
+
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                builder.append(line);
+            }
+            Assertions.assertFalse(builder.toString().isEmpty());
+            Assertions.assertFalse(builder.toString().isBlank());
+        });
+    }
 
     @Test
     void from_URL_using_URL() {
