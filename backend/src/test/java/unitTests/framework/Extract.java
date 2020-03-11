@@ -86,6 +86,28 @@ public class Extract {
         }
     }
 
+    @Test
+    void all_columns_as_type_T_not_given() throws IOException {
+        List<ComplexDTOCSV> list = new ArrayList<>();
+        for(int i = 0; i < 24; i++){
+            list.add(new ComplexDTOCSV("dwada", 5.5, 5));
+        }
+
+        ICollector collector = genCollector();
+        IExtractor extractor = new Extractor<>(collector);
+        List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT();
+
+        Assertions.assertFalse(res.isEmpty());
+        Assertions.assertEquals(list, res);
+        int i = 0;
+        while (i < res.size()) {
+            assertNotNull(res.get(i));
+            i++;
+        }
+    }
+
+
+
     @NotNull
     private ICollector genCollector() throws IOException {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;

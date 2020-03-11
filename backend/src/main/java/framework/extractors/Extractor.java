@@ -81,4 +81,11 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public final Map<String, Integer> extractReportFom(@NotNull String columnName) {
         return null;
     }
+
+    @NotNull
+    @Contract(value = " -> new", pure = true)
+    @Override
+    public <O> List<O> extractAllColumnsAsT() {
+        return new ArrayList<>();
+    }
 }

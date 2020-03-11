@@ -1,6 +1,8 @@
 package framework.extractors;
 
 
+import DTOs.ComplexDTOCSV;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,4 +21,6 @@ public interface IExtractor{
     List<Object> extractAllColumns();
     <T>List<T> extractAllColumns(Class<?> clazz);
     Map<String, Integer> extractReportFom(String columnName);
+
+    <T> List<T> extractAllColumnsAsT();
 }
