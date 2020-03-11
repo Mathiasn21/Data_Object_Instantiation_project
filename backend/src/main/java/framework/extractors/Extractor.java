@@ -38,7 +38,6 @@ public final class Extractor<T extends ICollector> implements IExtractor {
      * @return returns the columns given by the user from the file.
      */
     @NotNull
-    @Override
     public final List<Object> extractColumns(){
         //TODO: Alter method as intellij reports many warnings due to degenerated code
         //TODO: Might be better to remove or move the code to another more appropriate method
@@ -63,6 +62,13 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public final List<Object> extractAllColumns(){
         return Collections.unmodifiableList(allColumns);
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public <O> List<O> extractAllColumns(Class<?> clazz) {
+        return new ArrayList<>();
     }
 
     /**

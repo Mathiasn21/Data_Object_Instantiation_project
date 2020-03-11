@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class Extract {
     @Test
     void single_column() throws IOException {
@@ -62,6 +64,29 @@ public class Extract {
         }
     }
 
+    @Test
+    void all_columns_as_type_T() throws IOException {
+        List<ComplexDTOCSV> list = new ArrayList<>();
+        for(int i = 0; i < 24; i++){
+            list.add(new ComplexDTOCSV("dwada", 5.5, 5));
+        }
+
+        ICollector collector = genCollector();
+        IExtractor extractor = new Extractor<>(collector);
+        Class<?>[] types = collector.getPrimaryKeyTypes();
+        Class<?> clazz = collector.getClazz();
+
+        List<ComplexDTOCSV> res = extractor.extractAllColumns(clazz);
+
+        Assertions.assertFalse(res.isEmpty());
+        Assertions.assertEquals(list, res);
+
+        int i = 0;
+        while (i < res.size()) {
+            assertNotNull(res.get(i));
+            i++;
+        }
+    }
 
     @NotNull
     private ICollector genCollector() throws IOException {
