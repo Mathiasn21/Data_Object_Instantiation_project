@@ -15,5 +15,12 @@ public class Main {
         collector.CollectData();
 
         System.out.println(System.currentTimeMillis() - start);
+
+
+
+        /*
+        * ICollector c = Collector.newInstance(() -> {}, () -> resource);
+        *
+        * */
     }
 }
