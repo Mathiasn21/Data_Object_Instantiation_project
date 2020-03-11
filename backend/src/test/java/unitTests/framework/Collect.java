@@ -13,8 +13,8 @@ public class Collect {
     @Test
     void data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
-        Resource resource = Resource.getBuilder().fromFile(path).build();
-        ICollector collector = Collector.getBuilder(resource, new JSONHandler()).build();
+        Resource resource = Resource.newResource().fromFile(path).build();
+        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
         collector.CollectData();
     }
 
@@ -24,8 +24,8 @@ public class Collect {
 
         Assertions.assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
-            Resource resource = Resource.getBuilder().fromURL(url).build();
-            ICollector collector = Collector.getBuilder(resource, new JSONHandler()).build();
+            Resource resource = Resource.newResource().fromURL(url).build();
+            ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
             collector.CollectData();
         });
     }

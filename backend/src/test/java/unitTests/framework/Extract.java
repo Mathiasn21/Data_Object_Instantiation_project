@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class Extract {
@@ -111,10 +110,10 @@ public class Extract {
     @NotNull
     private ICollector genCollector() throws IOException {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
-        Resource resource = Resource.getBuilder().fromFile(path).build();
+        Resource resource = Resource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
         handler.setPrimaryKeyTypes(String.class, double.class, int.class);
-        ICollector collector = Collector.getBuilder(resource, handler).build();
+        ICollector collector = Collector.newCollector(resource, handler).build();
         collector.CollectData();
         return collector;
     }

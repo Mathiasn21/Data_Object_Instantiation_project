@@ -11,7 +11,7 @@ public class HandleData {
     @Test
     void handle_json_with_only_primitives() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
-        Resource resource = Resource.getBuilder().fromFile(path).build();
+        Resource resource = Resource.newResource().fromFile(path).build();
 
         JSONHandler jsonHandler = new JSONHandler();
         List<Object[]> list = jsonHandler.handle(resource.getData());

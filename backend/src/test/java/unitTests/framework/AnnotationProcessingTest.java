@@ -102,7 +102,7 @@ public class AnnotationProcessingTest {
     @Test
     void dataObject_instantiation_no_specified_test() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";
-        Resource resource = Resource.getBuilder().fromFile(path).build();
+        Resource resource = Resource.newResource().fromFile(path).build();
         JSONHandler jsonHandler = new JSONHandler();
         List<Object[]> list = jsonHandler.handle(resource.getData());
 

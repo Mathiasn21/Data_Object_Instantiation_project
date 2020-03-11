@@ -150,7 +150,7 @@ public final class Collector implements ICollector{
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
+    public static CollectorBuilder newCollector(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
 

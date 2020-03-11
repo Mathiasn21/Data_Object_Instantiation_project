@@ -36,7 +36,7 @@ public final class Resource {
      * @return {@link ResourceBuilder}
      */
     @Contract(value = " -> new", pure = true)
-    public static @NotNull ResourceBuilder getBuilder(){
+    public static @NotNull ResourceBuilder newResource(){
         return new ResourceBuilder();
     }
 
