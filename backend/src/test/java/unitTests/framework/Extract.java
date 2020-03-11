@@ -50,8 +50,6 @@ public class Extract {
 
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
-        Class<?>[] types = collector.getPrimaryKeyTypes();
-
         List<Object> res = extractor.extractAllColumns();
 
         Assertions.assertFalse(res.isEmpty());
