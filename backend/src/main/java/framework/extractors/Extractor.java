@@ -68,7 +68,12 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public <O> List<O> extractAllColumns(Class<?> clazz) {
-        return new ArrayList<>();
+        List<Object> primaryKeys = collector.getAllColumns();
+        List<O> allColumns = null;
+        for(int i = 0; i < allColumns.size(); i++){
+            allColumns.add(allColumns.get(j));
+        }
+        return Collections.unmodifiableList(allColumns);
     }
 
     /**
