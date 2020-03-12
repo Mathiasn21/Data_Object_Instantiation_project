@@ -21,6 +21,7 @@ public final class Collector implements ICollector{
 
     private final Map<Setting, String> settings = new HashMap<>();
     private final TreeMap<String, Object> rbTreeSet = new TreeMap<>();
+    private List<Object> dataObjects;
     private final IHandle dataHandler;
     private final Resource resource;
     private List<String> primaryKeys;
@@ -49,6 +50,7 @@ public final class Collector implements ICollector{
             List<Object> objectList = objectObjectInformation.data;
             primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;
+            dataObjects = objectList;
 
             System.out.println("Size is: " + objectList.size());
         } catch (ReflectiveOperationException e) {
@@ -131,7 +133,7 @@ public final class Collector implements ICollector{
     @NotNull
     @Override
     public List<Object> getAllColumns() {
-        return Collections.unmodifiableList(List.of(rbTreeSet.values().toArray()));
+        return Collections.unmodifiableList(List.of(dataObjects));
     }
 
     /**
