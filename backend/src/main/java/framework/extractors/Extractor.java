@@ -31,12 +31,12 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
         List<Object> data = new ArrayList<>();
         List<Object> allColumns = collector.getAllColumns();
-        for (Object allColumn : allColumns) {
-            if (allColumn.toString().equals(columnName)) {
+        for (int i = 0; i < allColumns.size(); i++){
+            if (allColumns.indexOf(i).equals(columnName)) {
                 data.add(allColumn);
             }
         }
-        return Collections.unmodifiableList(data);
+        return data;
     }
 
 
