@@ -41,10 +41,10 @@ public class Extract {
     }
 
     @Test
-    void several_columns() throws IOException {
+    void all_columns() throws IOException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
-            list.add(new ComplexDTOCSV("dwada", 5.5, 5));
+            list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
         }
 
         ICollector collector = genCollector();

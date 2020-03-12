@@ -133,7 +133,7 @@ public final class Collector implements ICollector{
     @NotNull
     @Override
     public List<Object> getAllColumns() {
-        return Collections.unmodifiableList(List.of(dataObjects));
+        return Collections.unmodifiableList(dataObjects);
     }
 
     /**
