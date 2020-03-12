@@ -23,7 +23,6 @@ public class ComplexDTO {
     public ComplexDTO(String string, double doubles, int integer) {
         this.integer = integer;
         this.string = string;
-        this.thing = thing;
         this.doubles = doubles;
     }
 
