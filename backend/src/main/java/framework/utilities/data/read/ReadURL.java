@@ -25,7 +25,7 @@ public final class ReadURL implements IReadURL{
     @Contract(pure = true)
     @Override
     public void given(@NotNull URL resource) throws IOException {
-        url = resource.toString(); //her må det parses til String
+        url = resource.toString();
     }
 
     /**
