@@ -30,6 +30,14 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
         List<DataObject> data = new ArrayList<>();
+        List<Object> allColumns = collector.getAllColumns();
+        for(int i = 0; i < allColumns.size(); i++){
+            for(int j = 0; j < allColumns.size(); j++){
+                if (allColumns.get(i).toString() == columnName){
+                    data.add(allColumns.get(j));
+                }
+            }
+        }
         return Collections.unmodifiableList(data);
     }
 
@@ -63,9 +71,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public final List<Object> extractAllColumns(){
         List<Object> allColumns = collector.getAllColumns();
         List<Object> allColumnsExctacted = null;
-        for(int i = 0; i < allColumns.size(); i++){
-            allColumns.add(allColumns.get(i));
-        }
+        allColumnsExctacted.addAll(allColumns);
         return Collections.unmodifiableList(allColumnsExctacted);
     }
 
@@ -75,8 +81,8 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public <O> List<O> extractAllColumns(Class<?> clazz) {
         List<Object> allColumns = collector.getAllColumns();
         List<O> allColumnsExctacted = null;
-        for(int i = 0; i < allColumns.size(); i++){
-            allColumns.add(allColumns.get(i));
+        for (Object allColumn : allColumns) {
+            allColumnsExctacted.add((O) allColumn);
         }
         return Collections.unmodifiableList(allColumnsExctacted);
     }
@@ -96,6 +102,9 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Contract(value = " -> new", pure = true)
     @Override
     public <O> List<O> extractAllColumnsAsT() {
-        return new ArrayList<>();
+        List<Object> allColumns = collector.getAllColumns();
+        ArrayList<O> allColumnsExctacted = null;
+        allColumns.addAll(allColumns);
+        return allColumnsExctacted;
     }
 }
