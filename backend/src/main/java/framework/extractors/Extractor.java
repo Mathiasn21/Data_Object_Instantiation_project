@@ -68,9 +68,11 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public final List<Object> extractAllColumns(){
         List<Object> allColumns = collector.getAllColumns();
-        List<Object> allColumnsExctacted = null;
-        allColumnsExctacted.addAll(allColumns);
-        return Collections.unmodifiableList(allColumnsExctacted);
+        List<Object> exctractedColumns = new ArrayList<>();
+        for(int i = 0; i < allColumns.size(); i++){
+            exctractedColumns.add(allColumns.indexOf(i));
+        }
+        return collector.getAllColumns();
     }
 
     @NotNull
