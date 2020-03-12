@@ -29,13 +29,11 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @NotNull
     @Override
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
-        List<DataObject> data = new ArrayList<>();
+        List<Object> data = new ArrayList<>();
         List<Object> allColumns = collector.getAllColumns();
-        for(int i = 0; i < allColumns.size(); i++){
-            for(int j = 0; j < allColumns.size(); j++){
-                if (allColumns.get(i).toString() == columnName){
-                    data.add(allColumns.get(j));
-                }
+        for (Object allColumn : allColumns) {
+            if (allColumn.toString().equals(columnName)) {
+                data.add(allColumn);
             }
         }
         return Collections.unmodifiableList(data);
