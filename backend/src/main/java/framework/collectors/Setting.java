@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Contract;
  * @version 1.0
  */
 public enum Setting {
-    DELIMITER("DELIMITER");
+    ;
     public final String key;
 
     /**

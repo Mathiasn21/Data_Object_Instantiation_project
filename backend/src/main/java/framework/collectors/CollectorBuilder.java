@@ -1,6 +1,5 @@
 package framework.collectors;
 
-import framework.annotations.DataObject;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
@@ -22,45 +21,50 @@ public final class CollectorBuilder {
         this.collector = new Collector(resource, dataHandler);
     }
 
-    
-    // --------------------------------------------------//
-    //                2.Required Calls                   //
-    // --------------------------------------------------//
+    @Contract("_ -> this")
     @NotNull
-    @Contract(pure = true)
     public final CollectorBuilder setDataHandler(IHandle dataHandler) {
         return this;
     }
 
+    @Contract("_ -> this")
     @NotNull
-    @Contract(pure = true)
     public final CollectorBuilder setResource(Resource resource) {
         return this;
     }
 
 
-    public final CollectorBuilder setPrimaryColumns(List<DataObject> primaryColumns){
-        collector.setPrimaryColumns(primaryColumns);
+    @Contract("_ -> this")
+    @NotNull
+    public final CollectorBuilder setPrimaryColumns(List<String> primaryColumns){
+        collector.setPrimaryKeys(primaryColumns);
         return this;
     }
 
+    @Contract("_, _ -> this")
+    @NotNull
     public final CollectorBuilder setSetting(Setting key, String value) {
         collector.setSetting(key, value);
         return this;
     }
 
+
+    @Contract("_ -> this")
+    @NotNull
     public final CollectorBuilder setAllSettings(Map<Setting, String> settings){
         collector.setAllSettings(settings);
         return this;
     }
 
+    @Contract("_ -> this")
+    @NotNull
     public final CollectorBuilder setMaxMemoryMB(int mb){
         collector.setMaxMemoryMB(mb);
         return this;
     }
 
-
-
+    @Contract(pure = true)
+    @NotNull
     public final ICollector build(){
         return collector;
     }

@@ -6,30 +6,31 @@ import framework.annotations.DataObjectField;
 /**
  * ComplexDTO that contains custom field that require mapping
  */
-@DataObject(resourceName = "test")
-public class ComplexDTO {
+@DataObject
+public class ComplexDTOCSV {
 
     @DataObjectField
     public int integer;
 
-    @DataObjectField
+    @DataObjectField(primaryColumnName = "Column1")
     public String string;
+
 
     private String thing = "dada";
 
     @DataObjectField
     public double doubles;
 
-    public ComplexDTO(String string, double doubles, int integer) {
-        this.integer = integer;
+    public ComplexDTOCSV(String string, int integer, double doubles) {
         this.string = string;
-        this.thing = thing;
+        this.integer = integer;
         this.doubles = doubles;
     }
 
-    public ComplexDTO(String string, int integer, double doubles) {
-        this.string = string;
+    public ComplexDTOCSV(String string, double doubles, int integer) {
         this.integer = integer;
+        this.string = string;
+        this.thing = thing;
         this.doubles = doubles;
     }
 

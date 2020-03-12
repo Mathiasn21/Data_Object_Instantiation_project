@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /** Class representing a data source
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -13,26 +14,50 @@ import java.io.FileNotFoundException;
  */
 public final class Resource {
     private final IRead readData;
+    private final String name;
 
     /**
      * @param readData {@link IRead}
      */
-    Resource(IRead readData) { this.readData = readData; }
+    Resource(@NotNull IRead readData) {
+        this.readData = readData;
+        this.name = readData.getSourceName();
+    }
 
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
-    public final @NotNull BufferedReader getData() throws FileNotFoundException {
+    public final @NotNull BufferedReader getData() throws IOException {
         return readData.read();
+    }
+
+    /**
+     * @return {@link String}
+     * @throws FileNotFoundException FileNotFoundException
+     */
+    @NotNull
+    public final String getDataAsString() throws IOException {
+        StringBuilder builder = new StringBuilder();
+        BufferedReader bufferedReader = readData.read();
+        String line;
+        while((line = bufferedReader.readLine()) != null ){
+            builder.append(line);
+        }
+
+        return builder.toString();
     }
 
     /**
      * @return {@link ResourceBuilder}
      */
     @Contract(value = " -> new", pure = true)
-    public static @NotNull ResourceBuilder getBuilder(){
+    public static @NotNull ResourceBuilder newResource(){
         return new ResourceBuilder();
+    }
+
+    public String getName() {
+        return name;
     }
 
 

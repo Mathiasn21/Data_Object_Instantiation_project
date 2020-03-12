@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/** Class that contains concrete instruction for handling CSV data.
+/** Class that contains concrete instruction for handling JSON data.
  *  By default it utilizes the delimiter ","
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
 public final class CSVHandler implements IHandle{
-    private String delimiter = ",";
+    private char delimiter = ',';
     private Class<?>[] primaryKeyTypes;
     private String[] primaryKeys;
 
@@ -37,9 +37,10 @@ public final class CSVHandler implements IHandle{
     }
 
     /**
+     * A char to split each column for each row
      * @param delimiter String
      */
-    public final void setDelimiter(String delimiter) {
+    public final void setDelimiter(char delimiter) {
         this.delimiter = delimiter;
     }
 
@@ -49,9 +50,9 @@ public final class CSVHandler implements IHandle{
      * @throws IOException IOException
      */
     @Override
-    public final @NotNull List<List<Object>> handle(@NotNull BufferedReader bufferedReader) throws IOException {
+    public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         String line;
-        List<List<Object>> rows = new ArrayList<>();
+        List<Object[]> rows = new ArrayList<>();
         while ((line = bufferedReader.readLine()) != null) {
             String[] r = splitLineOn(line);
             List<Object> args = new ArrayList<>();
@@ -59,7 +60,7 @@ public final class CSVHandler implements IHandle{
             for(int i = 0; i < r.length; i++){
                 args.add(Parser.parseValueToObject(primaryKeyTypes[i], r[i]));
             }
-            rows.add(args);
+            rows.add(args.toArray());
             //TODO: Add logic for detecting the first full row -> primaryRow without knowing details about said keys
         }
         return rows;
@@ -72,7 +73,7 @@ public final class CSVHandler implements IHandle{
     @NotNull
     @Contract(pure = true)
     private String[] splitLineOn(@NotNull String line){
-        return line.split(delimiter);
+        return line.split(String.valueOf(delimiter));
     }
 
 

@@ -12,7 +12,7 @@ public interface IHandle {
     /**
      * @param types {@link Class}&lt;?&gt;[]
      */
-    void setPrimaryKeyTypes(Class<?>[] types);
+    void setPrimaryKeyTypes(Class<?>... types);
 
     /**
      * @param keys String[]
@@ -24,5 +24,5 @@ public interface IHandle {
      * @return {@link List}&lt;{@link List}&lt;{@link Object}&gt;&gt;
      * @throws IOException IOException
      */
-    List<List<Object>> handle(BufferedReader bufferedReader) throws IOException;
+    List<Object[]> handle(BufferedReader bufferedReader) throws IOException;
 }

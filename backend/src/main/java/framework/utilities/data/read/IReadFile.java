@@ -2,7 +2,6 @@ package framework.utilities.data.read;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,8 +12,7 @@ import java.io.IOException;
 public interface IReadFile extends IRead{
     /**
      * @param resource String
-     * @return BufferedReader {@link BufferedReader}
      * @throws IOException IOException {@link IOException}
      */
-    ReadFile given(@NotNull File resource) throws IOException;
+    void given(@NotNull File resource) throws IOException;
 }

@@ -1,12 +1,17 @@
 package unitTests.framework;
+
 import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
 import framework.annotations.AnnotationsProcessor;
+import framework.annotations.ObjectInformation;
+import framework.utilities.data.Resource;
+import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,21 +25,22 @@ public class AnnotationProcessingTest {
     void object_instantiation(){
         ArrayList<Object[]> list = new ArrayList<>();
         Object[] arr = {field1, field2, field3, field4};
-        int numObjects = 50;
+        int numObjects = 5000;
 
         for(int i = 0; i < numObjects; i++){
             list.add(arr);
         }
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
-        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "name"));
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "name"));
         try {
-            List<Object> DTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "name");
+            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "name");
+            List<Object> DTO = objectInformation.data;
             for(Object o : DTO){
                 assertTrue(o instanceof DTO);
             }
             assertEquals(DTO.size(), numObjects);
-        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+        } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
     }
@@ -50,9 +56,11 @@ public class AnnotationProcessingTest {
         }
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
-        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "test"));
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "test"));
         try {
-            List<Object> complexDTO = annotationsProcessor.initializeDataObjectsFromFileName(list, "test");
+            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "test");
+            List<Object> complexDTO = objectInformation.data;
+
             List<ComplexDTO> test = new ArrayList<>();
 
             for(Object o : complexDTO){
@@ -60,7 +68,7 @@ public class AnnotationProcessingTest {
                 test.add((ComplexDTO) o);
             }
             assertEquals(complexDTO.size(), numObjects);
-        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+        } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
     }
@@ -68,7 +76,7 @@ public class AnnotationProcessingTest {
     @Test
     void dataObject_instantiation_no_specified_file(){
         ArrayList<Object[]> list = new ArrayList<>();
-        Object[] sample = new Object[]{"dwafesagea"};
+        Object[] sample = new Object[]{"word"};
 
         int numObjects = 50;
         for(int i = 0; i < numObjects; i++){
@@ -76,15 +84,36 @@ public class AnnotationProcessingTest {
         }
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
-        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjectsFromFileName(list, "dd"));
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "dd"));
         try {
-            List<Object> noFiles = annotationsProcessor.initializeDataObjectsFromFileName(list, "dd");
+            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "dd");
+            List<Object> noFiles = objectInformation.data;
+
             for(Object o : noFiles){
                 assertTrue(o instanceof DTONoFile);
             }
             assertEquals(noFiles.size(), numObjects);
-        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+        } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Test
+    void dataObject_instantiation_no_specified_test() throws IOException {
+        String path = System.getProperty("user.dir") + "/files/DTOJson.json";
+        Resource resource = Resource.newResource().fromFile(path).build();
+        JSONHandler jsonHandler = new JSONHandler();
+        List<Object[]> list = jsonHandler.handle(resource.getData());
+
+        AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "DTOJson.json"));
+
+        try {
+            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "DTOJson.json");
+            List<Object> noFiles = objectInformation.data;
+
+            for(Object o : noFiles){ assertTrue(o instanceof DTONoFile); }
+        } catch (ReflectiveOperationException e) {e.printStackTrace();}
     }
 }

@@ -1,9 +1,6 @@
 package framework.collectors;
 
-import framework.annotations.DataObject;
-
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +15,9 @@ public interface ICollector {
     void CollectData() throws IOException;
 
     /**
-     * @param list {@link List}&lt;{@link DataObject}&gt;
+     * @param list {@link List}&lt;{@link String}&gt;
      */
-    void setPrimaryColumns(List<DataObject> list);
+    void setPrimaryKeys(List<String> list);
 
     /**
      * @param key {@link Setting}
@@ -38,14 +35,25 @@ public interface ICollector {
      */
     void setMaxMemoryMB(int mb);
 
+    /**
+     * @return {@link List}&lt;{@link String}&gt;
+     */
+    List<String> getPrimaryKeys();
 
     /**
-     * @return {@link List}&lt;{@link DataObject}&gt;
+     * @return {@link Class}&lt;?&gt;[]
      */
-    List<DataObject> getAllPrimaryColumns();
+    Class<?>[] getPrimaryKeyTypes();
 
     /**
-     * @return {@link List}&lt;{@link DataObject}&gt;
+     * @return {@link Class}&lt;?&gt;
      */
-    Collection<DataObject> getAllColumns();
+    Class<?> getClazz();
+
+
+
+    /**
+     * @return {@link List}&lt;{@link Object}&gt;
+     */
+    List<Object> getAllColumns();
 }

@@ -12,6 +12,7 @@ package framework.annotations;
 // --------------------------------------------------//
 import framework.errors.NoMatchingDataObject;
 import framework.errors.NoSuchConstructor;
+import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,12 +29,13 @@ import java.util.*;
  * @version 1.0
  */
 public final class AnnotationsProcessor implements IAnnotationsProcessor {
+
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
     private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
-    private final Map<Class<?>, Class<?>[]> dataObjectMappedToPrimaryKeyTypes = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
+    private final Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
     private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
 
     public AnnotationsProcessor() {
@@ -42,45 +44,50 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
-            dataObjectMappedToPrimaryKeyTypes.put(clazz, primaryTypes);
-            objectMappedToConstructor.put(clazz, getCorrespondingConstructor(clazz.getConstructors(), primaryTypes));
+            Constructor<?> constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
+            objectMappedToConstructor.put(clazz, constructor);
+            constructorToPrimaryTypes.put(constructor, primaryTypes);
 
-            String fileName = dataObject.fileName();
+            String fileName = dataObject.resourceName();
             if (fileName.equals("")) { dataObjectsWithNoFiles.add(clazz);
             } else { filesMappedToDataObject.put(fileName, clazz); }
         });
     }
 
 
+    // --------------------------------------------------//
+    //                   3.Private Getters               //
+    // --------------------------------------------------//
     /**
      * @param constructors {@link Constructor}&lt;?&gt;[]
      * @return {@link Constructor}&lt;?&gt;
      */
     @NotNull
     private Constructor<?> getCorrespondingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryTypes) {
-        constructorLoop: for(Constructor<?> constructor : constructors){
+        Constructor<?> partialMatch = null;
+        for (Constructor<?> constructor : constructors) {
             Class<?>[] params = constructor.getParameterTypes();
+            int primaryTypeUniqueHashCode = Arrays.hashCode(primaryTypes);
+            int primaryTypeHashCode = calcHashcodeFrom(primaryTypes);
 
-            if(constructor.isAnnotationPresent(DataConstructor.class)){
+            if (constructor.isAnnotationPresent(DataConstructor.class)) {
                 return constructor;
-                //TODO: swap out with a hash table
-            }else if(params.length == primaryTypes.length){
-                for(int i = 0; i < params.length; i++){
-                    Class<?> param = params[i];
-                    if(param != primaryTypes[i]){
-                        continue constructorLoop;
-                    }
-                }
-                return constructor;
+
+            } else if (params.length == primaryTypes.length) {
+                int paramHashCode = calcHashcodeFrom(params);
+                int paramUniqueHashCOde = Arrays.hashCode(params);
+
+                if (paramUniqueHashCOde == primaryTypeUniqueHashCode) { return constructor;
+                }else if (paramHashCode == primaryTypeHashCode) { partialMatch = constructor; }
             }
+        }
+        if(partialMatch != null){
+            return partialMatch;
         }
         throw new NoSuchConstructor();
     }
 
 
-    // --------------------------------------------------//
-    //                   3.Private Getters               //
-    // --------------------------------------------------//
     /**
      * PrimaryTypes refers to the types that describes a dataset
      * @param clazz Class&lt;?&gt;&gt;
@@ -117,54 +124,99 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
-     * @param file String
-     * @return {@link List}&lt;{@link Object}[]&gt;
-     * @throws InstantiationException {@link InstantiationException} InstantiationException
-     * @throws InvocationTargetException {@link InvocationTargetException} InvocationTargetException
-     * @throws IllegalAccessException {@link IllegalAccessException} IllegalAccessException
+     * @param name String
+     * @return {@link ObjectInformation}&lt;{@link T}&gt;
+     * @throws InstantiationException InstantiationException
+     * @throws InvocationTargetException InvocationTargetException
+     * @throws IllegalAccessException IllegalAccessException
      */
+    @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
-    public <T>List<T> initializeDataObjectsFromFileName(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
-            throws InstantiationException, InvocationTargetException, IllegalAccessException {
+    public <T> ObjectInformation<T> initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
+            throws ReflectiveOperationException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
-        Class<?> clazz = filesMappedToDataObject.containsKey(file) ?
-                filesMappedToDataObject.get(file) : getDataObjectWithoutFile(listWithInitArgs.get(0));
+        Class<?> clazz = filesMappedToDataObject.containsKey(name) ?
+                filesMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
+
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
-        return (List<T>) listOfDataObjects;
+        return new ObjectInformation<>(constructorToPrimaryTypes.get(constructor), clazz, (List<T>) listOfDataObjects);
     }
 
 
     /**
-     * @param sample
-     * @return
+     * @param objects {@link Object} ...objects
+     * @return {@link Class}&lt;?&gt;
+     */
+    @Contract(pure = true)
+    @Override
+    @Nullable
+    public Class<?> getClassFromObjectSample(@NotNull Object... objects){
+        return getDataObjectWithoutFile(objects);
+    }
+
+    /**
+     * @param name {@link String}
+     * @return {@link Class}&lt;?&gt;
+     */
+    @Override
+    @Nullable
+    public Class<?> getClassFromObjectSample(@NotNull String name){
+        return filesMappedToDataObject.get(name);
+    }
+
+
+    /**
+     * @param sample {@link Object}[]
+     * @return {@link Class}&lt;?&gt;
      */
     @Nullable
     @Contract(pure = true)
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     private Class<?> getDataObjectWithoutFile(@NotNull Object[] sample) {
         Class<?>[] types = new Class[sample.length];
-        for (int i = 0; i < sample.length; i++) {
-            types[i] = sample[i].getClass();
+        int i = 0;
+        while (i < sample.length) {
+            types[i] = Parser.primitiveParseFromObjectClass(sample[i].getClass());
+            i++;
         }
 
-        clazzLoop: for(Class<?> clazz : dataObjectsWithNoFiles){
+        int typesUniqueHashCode = Arrays.hashCode(types);
+        int typesHashCode = calcHashcodeFrom(types);
+        Class<?> partialMatch = null;
+
+        for (Class<?> clazz : dataObjectsWithNoFiles) {
             Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
             Class<?>[] params = constructor.getParameterTypes();
-            if(params.length == types.length){
-                for(int i = 0; i < types.length; i++){
-                    if(types[i] != params[i]){
-                        continue clazzLoop;
-                    }
-                }
-                return clazz;
+            int paramsUniqueHashCode = Arrays.hashCode(params);
+            int paramsHashCode = calcHashcodeFrom(params);
+
+            if(params.length == types.length ){
+                if (paramsUniqueHashCode == typesUniqueHashCode) { return clazz;
+                }else if (paramsHashCode == typesHashCode) { partialMatch = clazz; }
             }
         }
+        if(partialMatch != null){
+            return partialMatch;
+        }
         throw new NoMatchingDataObject();
+    }
+
+
+    /**
+     * @param classes {@link Class}&lt;?&gt;[]
+     * @return int hashcode that does not care for permutations
+     */
+    private int calcHashcodeFrom(@NotNull Class<?>[] classes){
+        int sum = 0;
+        for(Class<?> clazz : classes){
+            sum += clazz.hashCode() >>> 3;
+        }
+        return (sum << 1) + 1;
     }
 }

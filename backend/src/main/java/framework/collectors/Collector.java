@@ -1,9 +1,10 @@
 package framework.collectors;
 
 import framework.annotations.AnnotationsProcessor;
-import framework.annotations.DataObject;
+import framework.annotations.ObjectInformation;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
+import framework.utilities.data.handle.JSONHandler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,12 +19,13 @@ import java.util.*;
 public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
-    private List<DataObject> primaryColumns;
     private final Map<Setting, String> settings = new HashMap<>();
-    private TreeMap<String, DataObject> rbTree = new TreeMap<>();
-
-    private IHandle dataHandler;
-    private Resource resource;
+    private final TreeMap<String, Object> rbTreeSet = new TreeMap<>();
+    private final IHandle dataHandler;
+    private final Resource resource;
+    private List<String> primaryKeys;
+    private Class<?>[] primaryTypes;
+    private Class<?> clazz;
 
     /**
      * @param resource {@link Resource}
@@ -40,16 +42,27 @@ public final class Collector implements ICollector{
      */
     @Override
     public void CollectData() throws IOException {
-        List<List<Object>> initArgs = dataHandler.handle(resource.getData());
-        //TODO: implement logic for instantiating objects given initArgs. Utilize AnnotationProcessor to do this
+        long start = System.currentTimeMillis();
+        List<Object[]> initArgs = dataHandler.handle(resource.getData());
+        try {
+            ObjectInformation<Object> objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
+            List<Object> objectList = objectObjectInformation.data;
+            primaryTypes = objectObjectInformation.primaryKeyTypes;
+            clazz = objectObjectInformation.clazz;
+
+            System.out.println("Size is: " + objectList.size());
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+        }
+        System.out.println(System.currentTimeMillis() - start);
     }
 
     /**
      * Sets the primary columns to match and find
-     * @param primaryColumns {@link List}&lt;{@link DataObject}&gt;
+     * @param primaryKeys {@link List}&lt;{@link String}&gt;
      */
     @Override
-    public final void setPrimaryColumns(List<DataObject> primaryColumns){ this.primaryColumns = primaryColumns; }
+    public final void setPrimaryKeys(List<String> primaryKeys){ this.primaryKeys = primaryKeys; }
 
 
     /**
@@ -86,26 +99,40 @@ public final class Collector implements ICollector{
         //TODO: Describe set max memory of what????
     }
 
-
     /**
      * Columns that describe the values inherent in a dataset.
-     * @return {@link List}&lt;{@link DataObject}&gt;
+     * @return {@link List}&lt;{@link String}&gt;
      */
     @Override
-    public final List<DataObject> getAllPrimaryColumns() {
-        return primaryColumns;
+    public final List<String> getPrimaryKeys() {
+        return primaryKeys;
     }
+
+    /**
+     * @return Class&lt;?&gt;&gt;[]
+     */
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public Class<?>[] getPrimaryKeyTypes() { return primaryTypes; }
+
+    /**
+     * @return Class&lt;?&gt;&gt;
+     */
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public Class<?> getClazz() { return clazz; }
 
     /**
      * Returns all column data excluding primary keys
-     * @return {@link Collection}&lt;{@link DataObject}&gt;
+     * @return {@link List}&lt;{@link Object}&gt;
      */
     @NotNull
     @Override
-    public Collection<DataObject> getAllColumns() {
-        return Collections.unmodifiableCollection(rbTree.values());
+    public List<Object> getAllColumns() {
+        return Collections.unmodifiableList(List.of(rbTreeSet.values().toArray()));
     }
-
 
     /**
      * Returns an unmodifiable map see {@link Collections}
@@ -123,7 +150,8 @@ public final class Collector implements ICollector{
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static CollectorBuilder getBuilder(Resource resource, IHandle dataHandler) {
+    public static CollectorBuilder newCollector(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
+
 }
