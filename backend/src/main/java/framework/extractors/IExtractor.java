@@ -20,7 +20,7 @@ public interface IExtractor{
     List<Object> extractColumnFrom (String columnName);
     List<Object> extractAllColumns();
     <T>List<T> extractAllColumns(Class<?> clazz);
-    Map<String, Integer> extractReportFom(String columnName);
+    Map<String, Integer> extractReportFrom(String columnName);
 
     <T> List<T> extractAllColumnsAsT();
 }
