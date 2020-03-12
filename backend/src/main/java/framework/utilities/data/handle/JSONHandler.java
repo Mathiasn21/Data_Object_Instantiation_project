@@ -43,7 +43,7 @@ public final class JSONHandler implements IHandle{
         JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
         JsonArray array = jsonObject.getAsJsonArray();
         array.iterator().forEachRemaining((object) -> {
-            JsonObject object2 = object.getAsJsonObject();
+            JsonObject object2  = object.getAsJsonObject();
             Set<Map.Entry<String, JsonElement>> entries = object2.entrySet();
             List<Object> arrayList = new ArrayList<>();
 

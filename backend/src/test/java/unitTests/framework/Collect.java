@@ -19,6 +19,14 @@ public class Collect {
     }
 
     @Test
+    void data_from_file2() throws IOException {
+        String path = System.getProperty("user.dir") + "/files/testingJSONFile.json" ;
+        Resource resource = Resource.newResource().fromFile(path).build();
+        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        collector.CollectData();
+    }
+
+    @Test
     void data_from_URL() {
         //TODO: implement correct url for a json api
 
