@@ -1,6 +1,7 @@
 package framework.extractors;
 
 import framework.annotations.DataObject;
+import framework.annotations.DataObjectField;
 import framework.collectors.ICollector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,7 @@ import java.util.*;
  * @version 1.0
  */
 public final class Extractor<T extends ICollector> implements IExtractor {
+
     private final T collector;
     private final List<Object> allColumns;
 
@@ -31,9 +33,9 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
         List<Object> data = new ArrayList<>();
         List<Object> allColumns = collector.getAllColumns();
-        for (int i = 0; i < allColumns.size(); i++){
-            if (allColumns.indexOf(i).equals(columnName)) {
-                data.add(allColumn);
+        for(int i = 0; i < allColumns.size(); i++){
+            if(allColumns.get(i).toString() == columnName){
+                data.add(allColumns.get(i));
             }
         }
         return data;
@@ -76,10 +78,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public <O> List<O> extractAllColumns(Class<?> clazz) {
         List<Object> allColumns = collector.getAllColumns();
         List<O> allColumnsExctacted = null;
-        for (Object allColumn : allColumns) {
-            allColumnsExctacted.add((O) allColumn);
-        }
-        return Collections.unmodifiableList(allColumnsExctacted);
+        return null;
     }
 
     /**
