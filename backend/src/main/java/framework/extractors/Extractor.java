@@ -1,5 +1,6 @@
 package framework.extractors;
 
+import DTOs.ComplexDTOCSV;
 import framework.annotations.DataObject;
 import framework.annotations.DataObjectField;
 import framework.collectors.ICollector;
@@ -34,9 +35,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
         List<Object> data = new ArrayList<>();
         List<Object> allColumns = collector.getAllColumns();
         for(int i = 0; i < allColumns.size(); i++){
-            if(allColumns.get(i).toString() == columnName){
-                data.add(allColumns.get(i));
-            }
+            System.out.println(allColumns.get(i));
         }
         return data;
     }
@@ -77,8 +76,8 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public <O> List<O> extractAllColumns(Class<?> clazz) {
         List<Object> allColumns = collector.getAllColumns();
-        List<O> allColumnsExctacted = null;
-        return null;
+        List<O> allColumnsExctacted = (List<O>) allColumns;
+        return allColumnsExctacted;
     }
 
     /**
@@ -97,8 +96,6 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public <O> List<O> extractAllColumnsAsT() {
         List<Object> allColumns = collector.getAllColumns();
-        ArrayList<O> allColumnsExctacted = null;
-        allColumns.addAll(allColumns);
-        return allColumnsExctacted;
+        return (List<O>) allColumns;
     }
 }
