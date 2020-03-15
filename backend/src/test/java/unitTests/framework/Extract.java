@@ -68,7 +68,7 @@ public class Extract {
     void all_columns_as_type_T() throws IOException {
         List<ComplexDTOCSV> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
-            list.add(new ComplexDTOCSV("dwada", 5.5, 5));
+            list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
         }
 
         ICollector collector = genCollector();
@@ -92,12 +92,15 @@ public class Extract {
     void all_columns_as_type_T_not_given() throws IOException {
         List<ComplexDTOCSV> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
-            list.add(new ComplexDTOCSV("dwada", 5.5, 5));
+            list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
         }
 
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
         List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT();
+
+        System.out.println(list);
+        System.out.println(res);
 
         Assertions.assertFalse(res.isEmpty());
         Assertions.assertEquals(list, res);
