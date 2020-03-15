@@ -78,6 +78,9 @@ public class Extract {
 
         List<ComplexDTOCSV> res = extractor.extractAllColumns(clazz);
 
+        System.out.println(list);
+        System.out.println(res);
+
         Assertions.assertFalse(res.isEmpty());
         Assertions.assertEquals(list, res);
 
@@ -99,8 +102,8 @@ public class Extract {
         IExtractor extractor = new Extractor<>(collector);
         List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT();
 
-        System.out.println(list);
-        System.out.println(res);
+        //System.out.println(list);
+        //System.out.println(res);
 
         Assertions.assertFalse(res.isEmpty());
         Assertions.assertEquals(list, res);

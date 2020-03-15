@@ -78,11 +78,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public <O> List<O> extractAllColumns(Class<?> clazz) {
         List<Object> allColumns = collector.getAllColumns();
         Class<?> collectorClazz = collector.getClazz();
-        if(collectorClazz == clazz){
-            //return allColumns;
-        }
-        //return allColumnsExctacted;
-        return null;
+        return (List<O>) allColumns;
     }
 
     /**
