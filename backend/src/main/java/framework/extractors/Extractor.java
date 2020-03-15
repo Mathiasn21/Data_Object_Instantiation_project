@@ -35,9 +35,6 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
         List<Object> data = new ArrayList<>();
         List<Object> allColumns = collector.getAllColumns();
-        for(int i = 0; i < allColumns.size(); i++){
-            System.out.println(allColumns.get(i));
-        }
         return data;
     }
 

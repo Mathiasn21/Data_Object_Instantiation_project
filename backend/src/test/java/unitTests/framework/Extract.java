@@ -22,7 +22,7 @@ public class Extract {
     void single_column() throws IOException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
-            list.add("dwada");
+            list.add("\"dwada\"");
         }
 
         ICollector collector = genCollector();
@@ -78,9 +78,6 @@ public class Extract {
 
         List<ComplexDTOCSV> res = extractor.extractAllColumns(clazz);
 
-        System.out.println(list);
-        System.out.println(res);
-
         Assertions.assertFalse(res.isEmpty());
         Assertions.assertEquals(list, res);
 
@@ -101,9 +98,6 @@ public class Extract {
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
         List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT();
-
-        //System.out.println(list);
-        //System.out.println(res);
 
         Assertions.assertFalse(res.isEmpty());
         Assertions.assertEquals(list, res);
