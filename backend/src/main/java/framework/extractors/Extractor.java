@@ -3,6 +3,7 @@ package framework.extractors;
 import DTOs.ComplexDTOCSV;
 import framework.annotations.DataObject;
 import framework.annotations.DataObjectField;
+import framework.collectors.Collector;
 import framework.collectors.ICollector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -76,7 +77,14 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Override
     public <O> List<O> extractAllColumns(Class<?> clazz) {
         List<Object> allColumns = collector.getAllColumns();
-        List<O> allColumnsExctacted = (List<O>) allColumns;
+        Class<?> collectorClazz = collector.getClazz();
+        List<O> allColumnsExctacted = null;
+        for(int i = 0; i < allColumns.size(); i++){
+            if(collectorClazz == clazz){
+                allColumns.add(allColumns.get(i));
+            }
+        }
+        assert false;
         return allColumnsExctacted;
     }
 
