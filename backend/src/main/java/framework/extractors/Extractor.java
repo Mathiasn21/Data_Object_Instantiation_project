@@ -100,7 +100,6 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Contract(value = " -> new", pure = true)
     @Override
     public <O> List<O> extractAllColumnsAsT() {
-        List<Object> allColumns = collector.getAllColumns();
-        return (List<O>) allColumns;
+        return (List<O>) collector.getAllColumns();
     }
 }
