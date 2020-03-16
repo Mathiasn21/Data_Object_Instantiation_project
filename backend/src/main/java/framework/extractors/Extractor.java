@@ -1,14 +1,11 @@
 package framework.extractors;
 
-import DTOs.ComplexDTOCSV;
-import framework.annotations.DataObject;
-import framework.annotations.DataObjectField;
-import framework.collectors.Collector;
 import framework.collectors.ICollector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /** Class used for extracting information from a collector
@@ -35,6 +32,18 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
         List<Object> data = new ArrayList<>();
         List<Object> allColumns = collector.getAllColumns();
+        //Grab fields from class
+        Class<?> clazz = allColumns.get(0).getClass();
+        Field[] fields = clazz.getFields();
+
+        System.out.println(clazz);
+        System.out.println(fields[1].getType());
+        System.out.println(fields[2].getName());
+
+        List<String> keys = collector.getPrimaryKeys();
+
+        if(keys != null) System.out.println(keys.get(0));
+        //grab primarykeys if exists from collector.
         return data;
     }
 
