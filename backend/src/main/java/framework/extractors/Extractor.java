@@ -32,27 +32,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
         List<DataObject> data = new ArrayList<>();
         return Collections.unmodifiableList(data);
     }
-
-
-    /**
-     * @return returns the columns given by the user from the file.
-     */
-    @NotNull
-    public final List<Object> extractColumns(){
-        //FIXME: Alter method as intellij reports many warnings due to degenerated code
-        //FIXME: Might be better to remove or move the code to another more appropriate method
-        List<Object> data = null;
-        List<String> primaryKeys = collector.getPrimaryKeys();
-        for(int i = 0; i < primaryKeys.size(); i++){
-            for(int j = 0; j < allColumns.size(); j++){
-                if (primaryKeys.get(i).toString().equals(allColumns.get(j).toString())){
-                    data.add(allColumns.get(j));
-                }
-            }
-        }
-        return Collections.unmodifiableList(data);
-    }
-
+    
 
     /**
      * @return returns all columns from dataset
