@@ -51,9 +51,7 @@ public final class Collector implements ICollector{
             clazz = objectObjectInformation.clazz;
 
             System.out.println("Size is: " + objectList.size());
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-        }
+        } catch (ReflectiveOperationException e) { e.printStackTrace(); }
         System.out.println(System.currentTimeMillis() - start);
     }
 
