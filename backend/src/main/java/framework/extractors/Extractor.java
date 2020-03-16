@@ -32,7 +32,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
         List<DataObject> data = new ArrayList<>();
         return Collections.unmodifiableList(data);
     }
-    
+
 
     /**
      * @return returns all columns from dataset
