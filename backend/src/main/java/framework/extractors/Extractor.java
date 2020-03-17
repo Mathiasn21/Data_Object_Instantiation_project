@@ -30,20 +30,22 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @NotNull
     @Override
     public final List<Object> extractColumnFrom(@NotNull String columnName) {
-        List<Object> data = new ArrayList<>();
+        List<Object> data = null;
         List<Object> allColumns = collector.getAllColumns();
         //Grab fields from class
         Class<?> clazz = allColumns.get(0).getClass();
         Field[] fields = clazz.getFields();
 
-        System.out.println(clazz);
-        System.out.println(fields[1].getType());
-        System.out.println(fields[2].getName());
+        System.out.println(fields[1].getName());
 
-        List<String> keys = collector.getPrimaryKeys();
+        if(fields[1].getName().equals(columnName)){
+            data.add(fields[1]);
+        }
 
-        if(keys != null) System.out.println(keys.get(0));
-        //grab primarykeys if exists from collector.
+        /*List<String> keys = collector.getPrimaryKeys();
+        System.out.println(keys.get(0)); //IS EMPTY???
+        //grab primarykeys if exists from collector.*/
+
         return data;
     }
 

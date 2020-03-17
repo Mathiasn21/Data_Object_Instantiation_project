@@ -30,8 +30,7 @@ public class Extract {
         Class<?>[] types = collector.getPrimaryKeyTypes();
         List<Object> column1 = extractor.extractColumnFrom("Column1");
 
-        System.out.println(list);
-        System.out.println(column1);
+        //System.out.println(list);
 
         Assertions.assertFalse(column1.isEmpty());
         Assertions.assertEquals(list, column1);
