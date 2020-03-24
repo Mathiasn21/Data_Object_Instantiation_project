@@ -3,8 +3,7 @@ package framework.utilities.data.structure;
 import java.util.HashMap;
 import java.util.Map;
 
-import static structure.QuickTraversals.*;
-import static structure.QuickTraversals.getBottomLeftChild;
+import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
 /**
  * A red black tree has the following rules:

@@ -1,6 +1,7 @@
 package framework.utilities.data.structure;
 
-import structure.utils.Stack;
+
+import framework.utilities.data.structure.utils.Stack;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

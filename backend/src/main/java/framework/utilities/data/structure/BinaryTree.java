@@ -5,8 +5,7 @@ package framework.utilities.data.structure;
 
 import java.util.Iterator;
 
-import static structure.QuickTraversals.getBottomLeftChild;
-
+import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/

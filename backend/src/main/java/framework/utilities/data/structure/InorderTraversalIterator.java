@@ -1,14 +1,11 @@
 package framework.utilities.data.structure;
 
-import structure.utils.Stack;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static structure.QuickTraversals.getBottomLeftChild;
+import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
 public class InorderTraversalIterator<T extends Comparable<T>> implements Iterator<Node<T>> {
-    private final Stack<Node<T>> s = new Stack<>();
     private Node<T> next;
 
     public InorderTraversalIterator(Node<T> rootNode) {

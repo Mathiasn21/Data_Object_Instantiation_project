@@ -1,7 +1,7 @@
 package framework.utilities.data.structure;
 
-import structure.utils.IQueue;
-import structure.utils.MyQueue;
+import framework.utilities.data.structure.utils.IQueue;
+import framework.utilities.data.structure.utils.MyQueue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
