@@ -1,8 +1,10 @@
 package framework.utilities.data.structure;
+
+
   ///////////////////////////////////////////////
  //             Import statements             //
 ///////////////////////////////////////////////
-
+import java.util.Comparator;
 import java.util.Iterator;
 
 import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
@@ -11,9 +13,13 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T>
  */
-public class BinaryTree<T extends Comparable<T>> implements IBinaryTree<T>{
+public class Tree<T extends Comparable<T>> implements ITree<T> {
+    private final Comparator<T> comparator;
     private Node<T> rootNode;
-    public BinaryTree() { rootNode = null; }
+    public Tree(Comparator<T> comparator) {
+        rootNode = null;
+        this.comparator = comparator;
+    }
 
 
       ///////////////////////////////////////////////
@@ -217,8 +223,8 @@ public class BinaryTree<T extends Comparable<T>> implements IBinaryTree<T>{
     }
 
     @Override
-    public IBinaryTree<T> copyToNewTree(){
-        BinaryTree<T> tree = new BinaryTree<>();
+    public ITree<T> copyToNewTree(){
+        Tree<T> tree = new Tree<>(this.comparator);
         if (rootNode != null) {
             tree.insert(rootNode.t);
             appendNodesToCopy(rootNode, tree.getRootNode());

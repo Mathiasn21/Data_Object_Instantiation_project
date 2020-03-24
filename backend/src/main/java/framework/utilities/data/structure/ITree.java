@@ -2,7 +2,7 @@ package framework.utilities.data.structure;
 
 import java.util.Iterator;
 
-public interface IBinaryTree<T extends Comparable<T>> {
+public interface ITree<T extends Comparable<T>> {
     void insert(T t);
     Node<T> remove(T t);
 
@@ -18,5 +18,5 @@ public interface IBinaryTree<T extends Comparable<T>> {
     Iterator<Node<T>> preorderTraversal();
     Iterator<Node<T>> levelorderTraversal();
 
-    IBinaryTree<T> copyToNewTree();
+    ITree<T> copyToNewTree();
 }

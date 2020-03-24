@@ -1,11 +1,13 @@
 package framework.utilities.data.structure;
 
+import java.util.Comparator;
+
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T>
  */
-public class AVLTree<T extends Comparable<T>> extends BinaryTree<T>{
-    public AVLTree() { super(); }
+public class AVLTree<T extends Comparable<T>> extends Tree<T> {
+    public AVLTree(Comparator<T> comparator) { super(comparator); }
 
 
       ///////////////////////////////////////////////

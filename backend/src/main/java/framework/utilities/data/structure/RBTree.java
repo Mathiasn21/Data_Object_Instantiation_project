@@ -1,5 +1,6 @@
 package framework.utilities.data.structure;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,8 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class RBTree<T extends Comparable<T>> extends BinaryTree<T> {
-    public RBTree() { super(); }
+public class RBTree<T extends Comparable<T>> extends Tree<T> {
+    public RBTree(Comparator<T> comparator) { super(comparator); }
 
 
     ///////////////////////////////////////////////
@@ -194,9 +195,9 @@ public class RBTree<T extends Comparable<T>> extends BinaryTree<T> {
         }else if(isBlack(x) && isBlack(w)){
 
             //Case 3
-            if(parent.left == x && isRed((RBNode<T>) w.left) && isBlack((RBNode<T>) w.right)){
+            if(parent.left == x && isRed(getLeftOf(w)) && isBlack(getRightOf(w))){
                 removalCase3(w, parent, true);
-            }else if(parent.right == x && isRed((RBNode<T>) w.right) && isBlack((RBNode<T>) w.left)){
+            }else if(parent.right == x && isRed(getRightOf(w)) && isBlack(getLeftOf(w))){
                 removalCase3(w, parent, false);
             }
 
