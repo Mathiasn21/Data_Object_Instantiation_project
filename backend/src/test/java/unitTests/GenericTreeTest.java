@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GenericTreeTest {
     @Test
-    void insertion_with_comparator_set(){
+    void insertion_with_comparator_set_using_Tree(){
         int[] res = {2, 3, 4, 5, 6, 7, 13, 14, 15};
         int[] arr = {13, 4, 5, 14, 3, 6, 2, 3, 15, 7};
 
@@ -28,9 +28,21 @@ public class GenericTreeTest {
         });
     }
 
-    void insertion_without_comparator_set(){
+    @Test
+    void insertion_without_comparator_set_using_Tree(){
+        int[] res = {2, 3, 4, 5, 6, 7, 13, 14, 15};
+        int[] arr = {13, 4, 5, 14, 3, 6, 2, 3, 15, 7};
 
+        ITree<Integer> tree = new Tree<>();
+        for(int integer : arr) { tree.insert(integer); }
 
+        Iterator<Node<Integer>> iterator = tree.inorderTraversal();
 
+        assertDoesNotThrow(() -> {
+            for(int integer : res){
+                assertEquals(integer, (int) iterator.next().getT());
+            }
+            assertFalse(iterator.hasNext());
+        });
     }
 }

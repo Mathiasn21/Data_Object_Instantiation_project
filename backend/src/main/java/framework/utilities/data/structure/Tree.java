@@ -4,24 +4,46 @@ package framework.utilities.data.structure;
   ///////////////////////////////////////////////
  //             Import statements             //
 ///////////////////////////////////////////////
+import framework.errors.NotComparable;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Iterator;
 
 import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
 /**
+ * A simple binary search tree and
+ * implements: {@link ITree&lt;{@link T}&gt;}
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T>
  */
 public class Tree<T> implements ITree<T> {
     private final Comparator<T> comparator;
     private Node<T> rootNode;
+    private Method method = null;
 
+    /**
+     * @param comparator {@link Comparator}&lt;{@link T}&gt;
+     */
     public Tree(Comparator<T> comparator) {
         rootNode = null;
         this.comparator = comparator;
     }
 
+    /**
+     * Sets the current comparator to null.
+     * Asserts that any T object implement comparable else
+     * this will throw an error {@link NotComparable}
+     */
+    @Contract(pure = true)
+    public Tree() {
+        rootNode = null;
+        this.comparator = null;
+    }
 
       ///////////////////////////////////////////////
      //               GETTERS                     //
@@ -249,10 +271,25 @@ public class Tree<T> implements ITree<T> {
      * @return int
      */
     @SuppressWarnings("unchecked")//Is checked before cast and only uses compareTo
-    protected int compare(T thiz, T that){
+    protected int compare(@NotNull T thiz, @NotNull T that){
         if(thiz instanceof Comparable){
-            return ((Comparable<T>) thiz).compareTo(that);
+            if(method == null){ setupComparableMethod(thiz); }
+
+            //Guaranteed to return int by interface
+            try { return (int) method.invoke(thiz, that);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        if(comparator == null){
+            throw new NotComparable("Missing comparator or object is not comparable");
         }
         return comparator.compare(thiz, that);
+    }
+
+    @SuppressWarnings("unchecked")//As this is guaranteed before this method
+    private void setupComparableMethod(@NotNull T thiz) {
+        try { method = ((Comparable<T>) thiz).getClass().getMethod("compareTo", thiz.getClass());
+        } catch (NoSuchMethodException e) { e.printStackTrace(); }
     }
 }
