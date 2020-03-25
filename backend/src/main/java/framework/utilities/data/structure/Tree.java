@@ -5,11 +5,14 @@ package framework.utilities.data.structure;
  //             Import statements             //
 ///////////////////////////////////////////////
 import framework.errors.NotComparable;
+import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -25,10 +28,13 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @param <T>
  */
 public class Tree<T> implements ITree<T> {
-    private final Comparator<T> comparator;
+    private Comparator<T> comparator;
     private final boolean compressDuplicates;
     private Node<T> rootNode;
     private Method method = null;
+    private Comparator<Object> experimentalComparator;
+    private Field fieldToutilize = null;
+    private Method methodToUse = null;
 
     /**
      * Sets the current comparator to null.
@@ -120,7 +126,6 @@ public class Tree<T> implements ITree<T> {
             rootNode = that;
             return;
         }
-
         int compareRes = compare(thiz.t, that.t);
 
         //If oject exists and equals then increment counter
@@ -279,19 +284,69 @@ public class Tree<T> implements ITree<T> {
      */
     @SuppressWarnings("unchecked")//Is checked before cast and only uses compareTo
     protected int compare(@NotNull T thiz, @NotNull T that){
-        if(thiz instanceof Comparable){
+        /*if(thiz instanceof Comparable){
             if(method == null){ setupComparableMethod(thiz); }
 
             //Guaranteed to return int by interface
             try { return (int) method.invoke(thiz, that);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
+        }*/
+        if(comparator == null && experimentalComparator == null){
+            try { tryToSetupComparator(thiz, that);
+            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
+        }
+
+        try {
+            //Error is thrown in setupComparable if it is null. Thereby making this safe
+            if(comparator != null){
+                return comparator.compare(thiz, that);
+            }else if (experimentalComparator != null){
+                if(fieldToutilize != null){
+                    return experimentalComparator.compare(fieldToutilize.get(thiz), fieldToutilize.get(thiz));
+                }
+                return experimentalComparator.compare(methodToUse.invoke(thiz), methodToUse.invoke(that));
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        throw new Error();
+    }
+
+    private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
+        Field[] fields = thiz.getClass().getFields();
+        for (Field field : fields) {
+            Class<?> type = field.getType();
+            if(Parser.isPrimitiveType(type) && Modifier.isPublic(field.getModifiers())){
+                Object o = field.get(thiz);
+                Object o2 = field.get(that);
+                if(!o.equals(o2)){
+                    this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
+                    this.fieldToutilize = field;
+                    return;
+                }
             }
         }
-        if(comparator == null){
-            throw new NotComparable("Missing comparator or object is not comparable");
+
+        Method[] methods = thiz.getClass().getMethods();
+        for (Method method : methods) {
+            Class<?> type = method.getReturnType();
+            String name = method.getName();
+
+            //FIXME: cleanup this sick method...
+            if(Parser.isPrimitiveType(type) && Modifier.isPublic(method.getModifiers()) &&
+                    (name.startsWith("get") || name.equals(type.getName() + "Value")) &&
+                    method.getParameters().length == 0){
+                Object o = method.invoke(thiz);
+                Object o2 = method.invoke(that);
+                if(!o.equals(o2)){
+                    this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
+                    this.methodToUse = method;
+                    return;
+                }
+            }
         }
-        return comparator.compare(thiz, that);
+        //R.I.P
+        throw new NotComparable("Missing comparator or object is not comparable");
     }
 
     @SuppressWarnings("unchecked")//As this is guaranteed before this method
