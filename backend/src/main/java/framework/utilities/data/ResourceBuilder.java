@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
+ * Builds a resource from which to fetch data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
