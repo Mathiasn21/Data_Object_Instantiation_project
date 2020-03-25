@@ -3,7 +3,7 @@
     <module name="framworkProject" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="unitTests.framework.*" />
+        <option name="PATTERN" value="unitTests.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import DTOs.ComplexDTO;
 import DTOs.DTO;

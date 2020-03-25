@@ -122,6 +122,11 @@ public class RBTree<T extends Comparable<T>> extends Tree<T> {
         return orgNode;
     }
 
+    @Override
+    public int size() {
+        return 0;
+    }
+
     /**
      * @param node RBNode&lt;T&gt;
      * @param isRoot boolean

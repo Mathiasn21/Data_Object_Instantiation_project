@@ -38,6 +38,11 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
         return removedNode;
     }
 
+    @Override
+    public int size() {
+        return 0;
+    }
+
     /**
      * Traverse upwards and re balance on need
      * @param root Node

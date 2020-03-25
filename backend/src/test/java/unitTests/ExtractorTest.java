@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class Extract {
+public class ExtractorTest {
     @Test
     void single_column() throws IOException {
         List<Object> list = new ArrayList<>();

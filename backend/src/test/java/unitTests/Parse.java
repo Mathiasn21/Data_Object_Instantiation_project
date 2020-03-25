@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import framework.utilities.data.Parser;
 import org.junit.jupiter.api.Test;

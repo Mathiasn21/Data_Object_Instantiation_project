@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 
-public class Collect {
+public class CollectorTest {
     @Test
     void data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;

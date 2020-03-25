@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import framework.statistics.Average;
 import org.junit.jupiter.api.Test;

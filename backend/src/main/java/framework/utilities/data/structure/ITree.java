@@ -9,6 +9,7 @@ public interface ITree<T extends Comparable<T>> {
     int getNumberOfNodesWithOneChild();
     int getNumberOfNodesWithTwoChild();
     int getNumberOfLeaves();
+    int size();
 
     boolean contains(T t);
     T search(T t);

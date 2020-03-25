@@ -29,6 +29,12 @@ public class Tree<T extends Comparable<T>> implements ITree<T> {
 
     @Override
     public int getNumberOfLeaves() { return getNumberOfLeaves(rootNode); }
+
+    @Override
+    public int size() {
+        return 0;
+    }
+
     private int getNumberOfLeaves(Node<T> root) {
         if(root == null){ return 0; }
         if(!(root.hasLeftChild() || root.hasRightChild())){ return 1; }

@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.JSONHandler;
