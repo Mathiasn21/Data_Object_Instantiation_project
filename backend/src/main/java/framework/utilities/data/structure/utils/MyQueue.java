@@ -1,5 +1,9 @@
 package framework.utilities.data.structure.utils;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ * @param <T>
+ */
 public class MyQueue<T> implements IQueue<T> {
     private T[] object;
     private int size, head, tail;

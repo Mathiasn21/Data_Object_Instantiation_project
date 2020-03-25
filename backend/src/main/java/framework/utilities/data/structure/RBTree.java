@@ -19,8 +19,9 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
 public class RBTree<T> extends Tree<T> {
     public RBTree(Comparator<T> comparator) { super(comparator); }
 
+    public RBTree() {super();}
 
-      ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
      //                 SETTERS                   //
     ///////////////////////////////////////////////
     @Override

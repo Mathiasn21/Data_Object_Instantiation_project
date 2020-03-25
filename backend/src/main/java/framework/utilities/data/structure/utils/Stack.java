@@ -2,6 +2,10 @@ package framework.utilities.data.structure.utils;
 
 import java.util.Arrays;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ * @param <T>
+ */
 public class Stack<T> {
     private int size;
     private static final int DEFAULT_SIZE = 25;

@@ -8,9 +8,9 @@ import java.util.Comparator;
  */
 public class AVLTree<T> extends Tree<T> {
     public AVLTree(Comparator<T> comparator) { super(comparator); }
+    public AVLTree() {super();}
 
-
-      ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
      //              SETTERS                      //
     ///////////////////////////////////////////////
     @Override

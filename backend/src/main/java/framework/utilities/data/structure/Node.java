@@ -2,6 +2,10 @@ package framework.utilities.data.structure;
 
 import java.util.Objects;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ * @param <T>
+ */
 public class Node<T> implements Cloneable{
     protected int tCounter = 1;
     protected T t;

@@ -6,6 +6,10 @@ import framework.utilities.data.structure.utils.MyQueue;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ * @param <T>
+ */
 public class LevelOrderIterator<T> implements Iterator<Node<T>> {
     private final IQueue<Node<T>> q = new MyQueue<>();
     private Node<T> next;

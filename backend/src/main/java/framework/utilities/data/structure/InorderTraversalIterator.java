@@ -5,6 +5,10 @@ import java.util.NoSuchElementException;
 
 import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ * @param <T>
+ */
 public class InorderTraversalIterator<T> implements Iterator<Node<T>> {
     private Node<T> next;
 

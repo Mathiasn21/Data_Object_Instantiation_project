@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /** Class for parsing string values to primitive types given a clazz
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0
  */
 public final class Parser {
@@ -25,6 +25,11 @@ public final class Parser {
         return value;
     }
 
+    /**
+     * @param clazz {@link Class}&lt;?&gt;
+     * @param value String
+     * @return {@link Object}[]
+     */
     @NotNull
     @Contract(value = "_, _ -> new", pure = true)
     public static Object[] parseToArray(@NotNull Class<?> clazz, @NotNull String value){
@@ -32,6 +37,11 @@ public final class Parser {
         return new Object[0];
     }
 
+    /**
+     * Returns corresponding primitive class, given a primitive wrapper
+     * @param clazz {@link Class}&lt;?&gt;
+     * @return {@link Class}&lt;?&gt;
+     */
     @NotNull
     @Contract(value = "_ -> new", pure = true)
     public static Class<?> primitiveParseFromObjectClass(@NotNull Class<?> clazz){

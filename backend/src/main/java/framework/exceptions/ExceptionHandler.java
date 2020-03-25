@@ -9,7 +9,7 @@ import java.io.PrintStream;
 /** Class for describing a code and a message describing the error
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public enum ExceptionHandler {
     ERROR_MISSING_RESOURCE(1, "Missing resource, make sure no files are missing"),
