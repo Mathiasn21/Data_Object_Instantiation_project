@@ -1,6 +1,6 @@
 package framework.utilities.data.structure;
 
-public class RBNode<T extends Comparable<T>> extends Node<T> implements Cloneable {
+public class RBNode<T> extends Node<T> implements Cloneable {
     public boolean color = false;
 
     RBNode(T t, RBNode<T> parent) {

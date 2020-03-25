@@ -16,19 +16,19 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class RBTree<T extends Comparable<T>> extends Tree<T> {
+public class RBTree<T> extends Tree<T> {
     public RBTree(Comparator<T> comparator) { super(comparator); }
 
 
-    ///////////////////////////////////////////////
-    //              SETTERS                      //
+      ///////////////////////////////////////////////
+     //                 SETTERS                   //
     ///////////////////////////////////////////////
     @Override
     public void insert(T data) {
         RBNode<T> node = new RBNode<>(data, null);
         insert(getRootNode(), node);//Calls super method
 
-        //No need to re balance
+        //No need to re balance - as node is root
         if(node.parent == null){
             node.color = false;
             return;

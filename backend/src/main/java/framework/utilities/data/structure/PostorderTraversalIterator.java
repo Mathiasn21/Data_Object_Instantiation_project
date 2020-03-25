@@ -6,7 +6,7 @@ import framework.utilities.data.structure.utils.Stack;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class PostorderTraversalIterator<T extends Comparable<T>> implements Iterator<Node<T>> {
+public class PostorderTraversalIterator<T> implements Iterator<Node<T>> {
     private final Stack<Node<T>> s = new Stack<>();
 
     public PostorderTraversalIterator(Node<T> rootNode) { traverse(rootNode); }

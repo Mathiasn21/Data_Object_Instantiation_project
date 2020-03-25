@@ -2,7 +2,7 @@ package framework.utilities.data.structure;
 
 import java.util.Objects;
 
-public class Node<T extends Comparable<T>> implements Comparable<Node<T>>, Cloneable{
+public class Node<T> implements Cloneable{
     protected int tCounter = 1;
     protected T t;
     protected Node<T> left, right, parent;
@@ -34,10 +34,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>>, Clone
         return num;
     }
 
-    public Integer getTCounter(){ return tCounter; }
-
-    @Override
-    public int compareTo(Node<T> o) { return t.compareTo(o.t); }
+    public int getTCounter(){ return tCounter; }
 
     @Override
     public String toString() { return t.toString(); }

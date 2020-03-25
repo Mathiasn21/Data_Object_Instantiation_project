@@ -5,7 +5,7 @@ import framework.utilities.data.structure.utils.Stack;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class PreorderTraversalIterator<T extends Comparable<T>> implements Iterator<Node<T>> {
+public class PreorderTraversalIterator<T> implements Iterator<Node<T>> {
     private final Stack<Node<T>> s = new Stack<>();
 
     public PreorderTraversalIterator(Node<T> rootNode) { traverse(rootNode); }

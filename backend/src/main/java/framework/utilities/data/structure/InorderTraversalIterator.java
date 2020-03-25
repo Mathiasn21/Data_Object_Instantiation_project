@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
-public class InorderTraversalIterator<T extends Comparable<T>> implements Iterator<Node<T>> {
+public class InorderTraversalIterator<T> implements Iterator<Node<T>> {
     private Node<T> next;
 
     public InorderTraversalIterator(Node<T> rootNode) {

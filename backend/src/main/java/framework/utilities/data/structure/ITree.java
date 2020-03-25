@@ -1,8 +1,7 @@
 package framework.utilities.data.structure;
 
 import java.util.Iterator;
-
-public interface ITree<T extends Comparable<T>> {
+public interface ITree<T> {
     void insert(T t);
     Node<T> remove(T t);
 

@@ -13,9 +13,10 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T>
  */
-public class Tree<T extends Comparable<T>> implements ITree<T> {
+public class Tree<T> implements ITree<T> {
     private final Comparator<T> comparator;
     private Node<T> rootNode;
+
     public Tree(Comparator<T> comparator) {
         rootNode = null;
         this.comparator = comparator;
@@ -31,9 +32,7 @@ public class Tree<T extends Comparable<T>> implements ITree<T> {
     public int getNumberOfLeaves() { return getNumberOfLeaves(rootNode); }
 
     @Override
-    public int size() {
-        return 0;
-    }
+    public int size() { return 0; }
 
     private int getNumberOfLeaves(Node<T> root) {
         if(root == null){ return 0; }
@@ -85,7 +84,7 @@ public class Tree<T extends Comparable<T>> implements ITree<T> {
             return;
         }
 
-        int compareRes = currentNode.compareTo(node);
+        int compareRes = compare(currentNode.t, node.t);
 
         //If node exists increment counter and return
         if(compareRes == 0){
@@ -149,7 +148,7 @@ public class Tree<T extends Comparable<T>> implements ITree<T> {
         Node<T> res = rootNode;
         while(res != null){
             if(!(res.hasLeftChild() || res.hasRightChild())){ return null; }
-            int compare = t.compareTo(res.t);
+            int compare = compare(t, res.t);
             if(compare == 0){ return res.t; }
             res = compare > 0 ? res.getRight() : res.getLeft();
         }
@@ -159,7 +158,7 @@ public class Tree<T extends Comparable<T>> implements ITree<T> {
     protected Node<T> searchNode(T t) {
         Node<T> res = rootNode;
         while(res != null){
-            int compare = t.compareTo(res.t);
+            int compare = compare(t, res.t);
             if(compare == 0){ return res; }
             if(!(res.hasLeftChild() || res.hasRightChild())){ return null; }
             res = compare > 0 ? res.getRight() : res.getLeft();
@@ -241,5 +240,19 @@ public class Tree<T extends Comparable<T>> implements ITree<T> {
     private void appendNodesToCopy(Node<T> node, Node<T> copy){
         if(node.hasLeftChild()){copy.setLeftChild(node.getLeft());}
         if(node.hasRightChild()){copy.setRightChild(node.getRight());}
+    }
+
+    /**
+     * Compares this with that
+     * @param thiz T
+     * @param that T
+     * @return int
+     */
+    @SuppressWarnings("unchecked")//Is checked before cast and only uses compareTo
+    protected int compare(T thiz, T that){
+        if(thiz instanceof Comparable){
+            return ((Comparable<T>) thiz).compareTo(that);
+        }
+        return comparator.compare(thiz, that);
     }
 }
