@@ -38,8 +38,7 @@ public final class WriteFile implements IWriteFile{
      */
     @Override
     public final void given(@NotNull File resource, @NotNull String data) throws IOException {
-        String filepath = "/files/" + resource;
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("").getAbsolutePath() + filepath))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource))) {
             bufferedWriter.write(data);
         }
     }
