@@ -18,21 +18,17 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
 /**
  * A simple binary search tree and
  * implements: {@link ITree&lt;{@link T}&gt;}
+ * By default root is null, comparator is null and it does not compress
+ * duplicates, as this option is set to false.
+ * Compression of duplicates is done by calling equals on T
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T>
  */
 public class Tree<T> implements ITree<T> {
     private final Comparator<T> comparator;
+    private final boolean compressDuplicates;
     private Node<T> rootNode;
     private Method method = null;
-
-    /**
-     * @param comparator {@link Comparator}&lt;{@link T}&gt;
-     */
-    public Tree(Comparator<T> comparator) {
-        rootNode = null;
-        this.comparator = comparator;
-    }
 
     /**
      * Sets the current comparator to null.
@@ -40,10 +36,29 @@ public class Tree<T> implements ITree<T> {
      * this will throw an error {@link NotComparable}
      */
     @Contract(pure = true)
-    public Tree() {
-        rootNode = null;
-        this.comparator = null;
+    public Tree() { this(null); }
+
+    /**
+     * @param compressDuplicates {@link Comparator}&lt;{@link T}&gt;
+     */
+    @Contract(pure = true)
+    public Tree(boolean compressDuplicates) { this(null, compressDuplicates); }
+
+    /**
+     * @param comparator {@link Comparator}&lt;{@link T}&gt;
+     */
+    public Tree(Comparator<T> comparator) { this(comparator, false); }
+
+    /**Main constructor for customizing this
+     * @param comparator  {@link Comparator}&lt;{@link T}&gt;
+     * @param compressDuplicates boolean
+     */
+    public Tree(Comparator<T> comparator, boolean compressDuplicates) {
+        this.comparator = comparator;
+        this.compressDuplicates = compressDuplicates;
+        this.rootNode = null;
     }
+
 
       ///////////////////////////////////////////////
      //               GETTERS                     //
@@ -100,31 +115,31 @@ public class Tree<T> implements ITree<T> {
         Node<T> newNode = new Node<>(data, null);
         insert(rootNode, newNode);
     }
-    protected void insert(Node<T> currentNode, Node<T> node) {
+    protected void insert(Node<T> thiz, Node<T> that) {
         if(rootNode == null){
-            rootNode = node;
+            rootNode = that;
             return;
         }
 
-        int compareRes = compare(currentNode.t, node.t);
+        int compareRes = compare(thiz.t, that.t);
 
-        //If node exists increment counter and return
-        if(compareRes == 0){
-            currentNode.tCounter++;
+        //If oject exists and equals then increment counter
+        if(compareRes == 0 && thiz.t.equals(that.t) && compressDuplicates){
+            thiz.tCounter++;
             return;
         }
         boolean compare = compareRes > 0;
 
-        if(compare && !currentNode.hasLeftChild()){
-            currentNode.setLeftChild(node);
-            node.parent = currentNode;
+        if(compare && !thiz.hasLeftChild()){
+            thiz.setLeftChild(that);
+            that.parent = thiz;
 
-        }else if (!(compare || currentNode.hasRightChild())){
-            currentNode.setRightChild(node);
-            node.parent = currentNode;
+        }else if (!(compare || thiz.hasRightChild())){
+            thiz.setRightChild(that);
+            that.parent = thiz;
 
-        }else if (compare && currentNode.hasLeftChild()){ insert(currentNode.getLeft(), node);
-        }else if (!compare && currentNode.hasRightChild()){ insert(currentNode.getRight(), node); }
+        }else if (compare && thiz.hasLeftChild()){ insert(thiz.getLeft(), that);
+        }else if (!compare && thiz.hasRightChild()){ insert(thiz.getRight(), that); }
     }
 
     protected final void setRootNode(Node<T> root) { rootNode = root; }
@@ -134,24 +149,16 @@ public class Tree<T> implements ITree<T> {
      //               ITERATORS                   //
     ///////////////////////////////////////////////
     @Override
-    public Iterator<Node<T>> inorderTraversal() {
-     return new InorderTraversalIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> inorderTraversal() { return new InorderTraversalIterator<>(rootNode); }
 
     @Override
-    public Iterator<Node<T>> postorderTraversal() {
-        return new PostorderTraversalIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> postorderTraversal() { return new PostorderTraversalIterator<>(rootNode); }
 
     @Override
-    public Iterator<Node<T>> preorderTraversal() {
-        return new PreorderTraversalIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> preorderTraversal() { return new PreorderTraversalIterator<>(rootNode); }
 
     @Override
-    public Iterator<Node<T>> levelorderTraversal() {
-        return new LevelOrderIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> levelorderTraversal() { return new LevelOrderIterator<>(rootNode); }
 
 
       ///////////////////////////////////////////////
