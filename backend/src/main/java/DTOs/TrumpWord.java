@@ -3,7 +3,7 @@ package DTOs;
 import framework.annotations.DataConstructor;
 import framework.annotations.DataObject;
 
-@DataObject(resourceName = "trumpSpeeches.txt")
+@DataObject
 public class TrumpWord {
     public String word;
 

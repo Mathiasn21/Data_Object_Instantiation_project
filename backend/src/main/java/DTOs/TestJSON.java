@@ -6,8 +6,6 @@ import framework.annotations.JSON;
 import framework.utilities.data.Resource;
 
 @DataObject
-@CSV(sources = {"https://source", "file.csv"})
-@JSON(sources = "files", sourceClass = Resource.class)
 public class TestJSON {
     public final String item;
     public String itemName;

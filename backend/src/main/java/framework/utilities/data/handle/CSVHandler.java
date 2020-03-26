@@ -28,6 +28,7 @@ public final class CSVHandler implements IHandle{
     private String[] primaryKeys;
     private Map<String, Boolean> settings = new HashMap<>();
     private boolean skipEmptyLines = false;
+    private boolean removeDoubleQuotes = false;
     private boolean convertFloatToDouble = true;
 
     /**
@@ -47,6 +48,15 @@ public final class CSVHandler implements IHandle{
      * @param delimiter String
      */
     public final void setDelimiter(char delimiter) { this.delimiter = delimiter; }
+
+    /**
+     * Remove any double quotes inside a string.
+     * By default this is off.
+     * @param removeDoubleQuotes boolean
+     */
+    public void setRemoveDoubleQuotes(boolean removeDoubleQuotes) {
+        this.removeDoubleQuotes = removeDoubleQuotes;
+    }
 
     /**
      * Decides whether or not to treat each all data
@@ -149,6 +159,7 @@ public final class CSVHandler implements IHandle{
      * @param row String[]
      * @return boolean
      */
+    @Deprecated
     @Contract(pure = true)
     private static boolean calcPRowContainsPrimaryColumns(@NotNull String[] row){
         //TODO: Delegate settings to config file
