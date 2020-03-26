@@ -13,11 +13,12 @@ import java.util.List;
 
 //TODO: implement remaining logic given another project code -> Mathias
 /**
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
 public final class WriteFile implements IWriteFile{
-    WriteFile() {
+    public WriteFile() {
     }
 
     /**
@@ -53,6 +54,8 @@ public final class WriteFile implements IWriteFile{
     @Contract(pure = true)
     @Override
     public final void given(@NotNull String resource, @NotNull String data) throws IOException {
-
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource))) {
+            bufferedWriter.write(data);
+        }
     }
 }
