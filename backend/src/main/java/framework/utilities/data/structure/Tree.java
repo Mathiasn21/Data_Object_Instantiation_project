@@ -271,8 +271,8 @@ public class Tree<T> implements ITree<T> {
     }
 
     private void appendNodesToCopy(Node<T> node, Node<T> copy){
-        if(node.hasLeftChild()){copy.setLeftChild(node.getLeft());}
-        if(node.hasRightChild()){copy.setRightChild(node.getRight());}
+        if(node.hasLeftChild()){ copy.setLeftChild(node.getLeft()); }
+        if(node.hasRightChild()){ copy.setRightChild(node.getRight()); }
     }
 
     /**
