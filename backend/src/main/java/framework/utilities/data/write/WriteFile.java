@@ -18,11 +18,6 @@ import java.util.List;
  * @version 1.0.0
  */
 public final class WriteFile implements IWriteFile{
-
-    boolean errorOccurred = true;
-    ExceptionHandler err = null;
-    Throwable thrown = null;
-
     WriteFile() {
     }
 
@@ -89,39 +84,20 @@ public final class WriteFile implements IWriteFile{
     @Override
     public void appendDataGiven(@NotNull String resource, @NotNull String data) throws IOException {
         File file = new File(resource);
-        if (!file.exists()) {
-            throw new FileNotFoundException();
-        }
+        if (!file.exists()) { throw new FileNotFoundException(); }
+
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource, true))) {
             bufferedWriter.write(data);
-        }catch (FileNotFoundException e) {
-            err = ExceptionHandler.ERROR_FILE_DOES_NOT_EXIST;
-            thrown = e;
-        } catch (IOException IOEx){
-            err = ExceptionHandler.ERROR_LOAD_RESOURCE;
-            thrown = IOEx;
-        }finally{
-            if (errorOccurred && (err != null)) ExceptionHandler.createLogWithDetails(err, thrown);
         }
     }
 
     //FIXME: Missing JDoc
     public void createFile(@NotNull File resource) throws IOException {
-        try {
-            if (resource.createNewFile()) {
-                new File(resource.getPath());
-            } else
-                throw new FileAlreadyExistsException(resource.getPath());
-        }catch (FileAlreadyExistsException e){
-            err = ExceptionHandler.ERROR_FILE_EXISTS;
-            thrown = e;
-        }catch (IOException IOEx){
-            err = ExceptionHandler.ERROR_LOAD_RESOURCE;
-            thrown = IOEx;
+        if (resource.createNewFile()) {
+            new File(resource.getPath());
+            return;
         }
-        finally{
-            if (errorOccurred && (err != null)) ExceptionHandler.createLogWithDetails(err, thrown);
-        }
+        throw new FileAlreadyExistsException(resource.getPath());
     }
 
     //FIXME: Missing JDoc
