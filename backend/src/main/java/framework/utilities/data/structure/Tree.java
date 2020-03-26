@@ -153,13 +153,10 @@ public class Tree<T> implements ITree<T> {
     ///////////////////////////////////////////////
     @Override
     public Iterator<Node<T>> inorderTraversal() { return new InorderTraversalIterator<>(rootNode); }
-
     @Override
     public Iterator<Node<T>> postorderTraversal() { return new PostorderTraversalIterator<>(rootNode); }
-
     @Override
     public Iterator<Node<T>> preorderTraversal() { return new PreorderTraversalIterator<>(rootNode); }
-
     @Override
     public Iterator<Node<T>> levelorderTraversal() { return new LevelOrderIterator<>(rootNode); }
 
