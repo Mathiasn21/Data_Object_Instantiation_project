@@ -15,7 +15,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Comparator;
 import java.util.Iterator;
-
 import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
 /**
@@ -284,13 +283,13 @@ public class Tree<T> implements ITree<T> {
      */
     @SuppressWarnings("unchecked")//Is checked before cast and only uses compareTo
     protected int compare(@NotNull T thiz, @NotNull T that){
-        /*if(thiz instanceof Comparable){
+        if(thiz instanceof Comparable){
             if(method == null){ setupComparableMethod(thiz); }
 
             //Guaranteed to return int by interface
             try { return (int) method.invoke(thiz, that);
             } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
-        }*/
+        }
         if(comparator == null && experimentalComparator == null){
             try { tryToSetupComparator(thiz, that);
             } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
