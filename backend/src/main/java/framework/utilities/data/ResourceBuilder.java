@@ -44,7 +44,7 @@ public class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromFile(@NotNull File file) throws IOException {
         ReadFile readFile = new ReadFile();
-        readFile.given(file.getName());
+        readFile.given(file);
         read = readFile;
         return this;
     }

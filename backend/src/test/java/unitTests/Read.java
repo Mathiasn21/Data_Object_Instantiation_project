@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.net.URL;
 
 public class Read {
@@ -29,7 +30,7 @@ public class Read {
     @Test
     void from_file_using_file() {
         Assertions.assertDoesNotThrow(() -> {
-            String path = System.getProperty("user.dir") + "/files/DTOJson.json";
+            File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
             Resource resource = Resource.newResource().fromFile(path).build();
 
             StringBuilder builder = new StringBuilder();
@@ -63,8 +64,6 @@ public class Read {
     }
     @Test
     void from_URL_using_string() {
-        //TODO: implement test
-
         Assertions.assertDoesNotThrow(() -> {
             String URL = "http://example.com";
             Resource resource = Resource.newResource().fromURL(URL).build();
