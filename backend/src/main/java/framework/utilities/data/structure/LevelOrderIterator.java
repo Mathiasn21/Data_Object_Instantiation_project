@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class LevelOrderIterator<T> implements Iterator<Node<T>> {
     private final IQueue<Node<T>> q = new MyQueue<>();

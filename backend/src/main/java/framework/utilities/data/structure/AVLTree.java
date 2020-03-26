@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class AVLTree<T> extends Tree<T> {
     public AVLTree(Comparator<T> comparator) { super(comparator); }

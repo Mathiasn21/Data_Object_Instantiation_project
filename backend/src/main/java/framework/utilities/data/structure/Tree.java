@@ -23,7 +23,7 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * duplicates, as this option is set to false.
  * Compression of duplicates is done by calling equals on T
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class Tree<T> implements ITree<T> {
     private Comparator<T> comparator;

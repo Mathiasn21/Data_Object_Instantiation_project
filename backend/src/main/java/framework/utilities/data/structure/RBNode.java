@@ -3,7 +3,7 @@ package framework.utilities.data.structure;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class RBNode<T> extends Node<T> implements Cloneable {
     public boolean color = false;

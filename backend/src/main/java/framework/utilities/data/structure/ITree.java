@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public interface ITree<T> {
     void insert(T t);

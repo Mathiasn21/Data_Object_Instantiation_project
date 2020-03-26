@@ -112,7 +112,6 @@ public class ExtractorTest {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
-        handler.setPrimaryKeyTypes(String.class, double.class, int.class);
         ICollector collector = Collector.newCollector(resource, handler).build();
         collector.CollectData();
         return collector;

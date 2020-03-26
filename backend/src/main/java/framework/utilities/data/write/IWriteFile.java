@@ -23,7 +23,6 @@ public interface IWriteFile extends IWrite {
      * @param resource String
      * @param data String
      * @throws IOException IOException
-     * @return
      */
     void appendDataGiven(@NotNull String resource, @NotNull String data) throws IOException;
 

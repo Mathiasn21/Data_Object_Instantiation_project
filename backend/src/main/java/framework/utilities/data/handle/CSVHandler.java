@@ -28,6 +28,7 @@ public final class CSVHandler implements IHandle{
     private String[] primaryKeys;
     private Map<String, Boolean> settings = new HashMap<>();
     private boolean skipEmptyLines = false;
+    private boolean convertFloatToDouble = true;
 
     /**
      * @param types {@link Class}&lt;?&gt;[]
@@ -54,6 +55,16 @@ public final class CSVHandler implements IHandle{
      */
     public void isSingleColumn(boolean singleColumn) { isSingleColumn = singleColumn; }
 
+    /**
+     * Changes the setting for auto converting
+     * {@link Class}&lt;{@link Float}&gt; to {@link Class}&lt;{@link Double}&gt;.
+     * Change this if you're utilizing floats
+     * in a dataobject constructor.
+     * @param convertFloatToDouble boolean
+     */
+    public void isConvertintFloatToDouble(boolean convertFloatToDouble) {
+        this.convertFloatToDouble = convertFloatToDouble;
+    }
 
     /**
      * @param bufferedReader {@link BufferedReader}
@@ -75,7 +86,7 @@ public final class CSVHandler implements IHandle{
 
             //Find primary types if not already
             if(!foundTypes){
-                if(!isSingleColumn){
+                if(isSingleColumn){
                     Class<?> type = r.length > 1 ? singleColumnPrimitiveTypeFrom(r[0], r[1]) : primitiveTypeFrom(r[0]);
                     types.add(type);
                 }else{ types = findAllPrimitiveTypes(r); }
@@ -94,9 +105,15 @@ public final class CSVHandler implements IHandle{
                 }
                 args.add(Parser.classToValueFromObject(types.get(i), value));
             }
+            //If it's multiple column, append thoose to the row
             if(!isSingleColumn){
                 rows.add(args.toArray());
             }
+        }
+
+        //This is pretty much always true, but, better to be safe
+        if(primaryKeyTypes == null || primaryKeyTypes.length == 0){
+            setPrimaryKeyTypes(types.toArray(Class<?>[]::new));
         }
         return rows;
     }
@@ -151,13 +168,14 @@ public final class CSVHandler implements IHandle{
     private Class<?> primitiveTypeFrom(@NotNull String element) {
         if(isCreatable(element)){
             Number number = createNumber(element);
-            return number.getClass();
+            Class<?> clazz = number.getClass();
+            return clazz == Float.class && convertFloatToDouble ? Double.class : clazz;
         }
         return String.class;
     }
 
     private Class<?> singleColumnPrimitiveTypeFrom(@NotNull String firstElement, @NotNull String secondElement) {
-        if(!(isCreatable(firstElement) && isCreatable(secondElement))){
+        if((isCreatable(firstElement) && isCreatable(secondElement))){
             Number first = createNumber(firstElement);
             Number second = createNumber(firstElement);
             if(first.getClass() != second.getClass()){

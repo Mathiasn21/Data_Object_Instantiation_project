@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class Node<T> implements Cloneable{
     protected int tCounter = 1;

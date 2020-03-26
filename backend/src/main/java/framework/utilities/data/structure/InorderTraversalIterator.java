@@ -7,7 +7,7 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class InorderTraversalIterator<T> implements Iterator<Node<T>> {
     private Node<T> next;

@@ -141,7 +141,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         Class<?> clazz = filesMappedToDataObject.containsKey(name) ?
                 filesMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
 
-
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
@@ -202,9 +201,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
                 }else if (paramsHashCode == typesHashCode) { partialMatch = clazz; }
             }
         }
-        if(partialMatch != null){
-            return partialMatch;
-        }
+
+        if(partialMatch != null){ return partialMatch; }
         throw new NoMatchingDataObject();
     }
 

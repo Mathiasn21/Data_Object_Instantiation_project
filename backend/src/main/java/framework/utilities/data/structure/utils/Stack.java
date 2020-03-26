@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @param <T>
+ * @param <T> T
  */
 public class Stack<T> {
     private int size;
