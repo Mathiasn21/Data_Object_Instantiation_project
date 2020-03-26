@@ -12,10 +12,13 @@ import java.io.IOException;
 @FunctionalInterface
 interface IWrite {
 
+    //TODO: move appendDataGiven(String, String) here, from IWriteURL and IWriteFile
+
     /**
      * @param resource String
      * @param data String
      * @throws IOException IOException
      */
     void given(@NotNull String resource, @NotNull String data) throws IOException;
+
 }

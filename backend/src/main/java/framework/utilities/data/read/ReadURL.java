@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -20,27 +21,25 @@ public final class ReadURL implements IReadURL{
     /**
      * @param resource String
      * @return {@link BufferedReader}
-     * @throws MalformedURLException MalformedURLException
      */
     @Contract(pure = true)
     @Override
-    public void given(@NotNull URL resource) throws IOException {
+    public void given(@NotNull URL resource) {
         url = resource.toString();
     }
 
     /**
      * @param resource String
-     * @throws IOException IOException
      */
     @Contract(pure = true)
     @Override
-    public void given(@NotNull String resource) throws IOException {
+    public void given(@NotNull String resource) {
         url = resource;
     }
 
     /**
      * @return {@link BufferedReader}
-     * @throws FileNotFoundException FileNotFoundException
+     * @throws IOException IOException
      */
     @Contract(pure = true)
     @Override
