@@ -14,7 +14,6 @@ import java.net.URL;
 public interface IReadURL extends IRead{
     /**
      * @param resource String
-     * @return BufferedReader {@link BufferedReader}
      * @throws MalformedURLException MalformedURLException {@link MalformedURLException}
      */
     void given(@NotNull URL resource) throws IOException;

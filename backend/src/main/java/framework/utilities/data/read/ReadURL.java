@@ -19,7 +19,6 @@ public final class ReadURL implements IReadURL{
 
     /**
      * @param resource String
-     * @return {@link BufferedReader}
      * @throws MalformedURLException MalformedURLException
      */
     @Contract(pure = true)

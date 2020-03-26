@@ -14,6 +14,7 @@ public interface IWriteURL extends IWrite {
 
     /**
      * @param resource String
+     * @param data String
      * @throws MalformedURLException MalformedURLException {@link MalformedURLException}
      */
     void given(@NotNull URL resource, @NotNull String data) throws MalformedURLException;

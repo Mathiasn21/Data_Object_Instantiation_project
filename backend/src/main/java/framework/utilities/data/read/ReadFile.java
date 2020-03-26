@@ -16,7 +16,6 @@ public final class ReadFile implements IReadFile{
      * Returns a buffer for reading the given file.
      * Charset is standard UTF-8
      * @param fileName String
-     * @return BufferedReader BufferedReader {@link BufferedReader}
      * @throws IOException IOException {@link IOException}
      */
     public void given(@NotNull String fileName) throws IOException {
@@ -41,7 +40,6 @@ public final class ReadFile implements IReadFile{
 
     /**
      * @param resource String
-     * @return {@link ReadFile}
      * @throws IOException IOException
      */
     @Contract(pure = true)
