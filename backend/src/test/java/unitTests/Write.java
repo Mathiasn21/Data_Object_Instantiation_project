@@ -106,13 +106,16 @@ public class Write {
     @Test
     void to_file_using_string_appending(){
 
-        //TODO: dosnt work
+        //FIXME: doesn't work
         Assertions.assertDoesNotThrow(() -> {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
             WriteFile write = WriteFile.getObj();
             write.appendDataGiven(path, "appending");
 
+
+
+            //Reads from resource
             Resource resource = Resource.newResource().fromFile(path).build();
             StringBuilder builder = new StringBuilder();
             BufferedReader bufferedReader = resource.getData();

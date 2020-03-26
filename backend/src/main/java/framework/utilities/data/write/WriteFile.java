@@ -96,7 +96,7 @@ public final class WriteFile implements IWriteFile{
             } else {
                 Writer fileWriter = new FileWriter(resource, true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                bufferedWriter.write(data);
+                bufferedWriter.append(data);
             }
         }catch (FileNotFoundException e) {
             err = ExceptionHandler.ERROR_FILE_DOES_NOT_EXIST;
