@@ -28,9 +28,7 @@ public final class Resource {
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
-    public final @NotNull BufferedReader getData() throws IOException {
-        return readData.read();
-    }
+    public final @NotNull BufferedReader getData() throws IOException { return readData.read(); }
 
     /**
      * @return {@link String}
