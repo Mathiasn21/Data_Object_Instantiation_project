@@ -19,8 +19,7 @@ public final class ReadURL implements IReadURL{
     private String url;
 
     /**
-     * @param resource String
-     * @return {@link BufferedReader}
+     * @param resource URL
      */
     @Contract(pure = true)
     @Override

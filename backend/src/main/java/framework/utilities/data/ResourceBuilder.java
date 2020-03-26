@@ -27,6 +27,7 @@ public class ResourceBuilder {
     }
 
     /**
+     * @throws IOException e
      * @param file String
      * @return {@link ResourceBuilder}
      */
@@ -38,6 +39,7 @@ public class ResourceBuilder {
     }
 
     /**
+     * @throws IOException e
      * @param file {@link File}
      * @return {@link ResourceBuilder}
      */
@@ -50,6 +52,7 @@ public class ResourceBuilder {
     }
 
     /**
+     * @throws IOException e
      * @param url String
      * @return {@link ResourceBuilder}
      */
@@ -62,6 +65,7 @@ public class ResourceBuilder {
     }
 
     /**
+     * @throws IOException e
      * @param url {@link URL}
      * @return {@link ResourceBuilder}
      */

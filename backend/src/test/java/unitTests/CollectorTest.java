@@ -17,6 +17,7 @@ public class CollectorTest {
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
         collector.CollectData();
+        System.out.println(collector.getAllColumns());
     }
 
     @Test
@@ -25,6 +26,7 @@ public class CollectorTest {
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
         collector.CollectData();
+        System.out.println(collector.getAllColumns());
     }
 
     @Test
@@ -33,6 +35,7 @@ public class CollectorTest {
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
         collector.CollectData();
+        System.out.println(collector.getAllColumns());
     }
 
     @Test

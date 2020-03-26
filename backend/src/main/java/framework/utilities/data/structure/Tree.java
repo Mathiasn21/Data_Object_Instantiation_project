@@ -19,7 +19,6 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
 
 /**
  * A simple binary search tree and
- * implements: {@link ITree&lt;{@link T}&gt;}
  * By default root is null, comparator is null and it does not compress
  * duplicates, as this option is set to false.
  * Compression of duplicates is done by calling equals on T
@@ -271,8 +270,8 @@ public class Tree<T> implements ITree<T> {
     }
 
     private void appendNodesToCopy(Node<T> node, Node<T> copy){
-        if(node.hasLeftChild()){copy.setLeftChild(node.getLeft());}
-        if(node.hasRightChild()){copy.setRightChild(node.getRight());}
+        if(node.hasLeftChild()){ copy.setLeftChild(node.getLeft()); }
+        if(node.hasRightChild()){ copy.setRightChild(node.getRight()); }
     }
 
     /**
@@ -310,6 +309,7 @@ public class Tree<T> implements ITree<T> {
         throw new Error();
     }
 
+    @SuppressWarnings("unchecked")//All instances are of type Object - guaranteed
     private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
         Field[] fields = thiz.getClass().getFields();
         for (Field field : fields) {

@@ -59,6 +59,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     //                   3.Private Getters               //
     // --------------------------------------------------//
     /**
+     * @param primaryTypes p
      * @param constructors {@link Constructor}&lt;?&gt;[]
      * @return {@link Constructor}&lt;?&gt;
      */

@@ -28,9 +28,9 @@ public interface IWriteURL extends IWrite {
     void appendDataGiven(@NotNull String resource, @NotNull String data) throws IOException;
 
     /**
-     * @param resource String
+     * @param resource URL
      * @param data String
-     * @throws IOException IOException
+     * @throws IOException IOExceptio
      */
     void appendDataGiven(@NotNull URL resource, @NotNull String data) throws IOException;
 

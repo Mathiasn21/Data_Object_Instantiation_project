@@ -16,7 +16,6 @@ public final class ReadFile implements IReadFile{
      * Returns a buffer for reading the given file.
      * Charset is standard UTF-8
      * @param fileName String
-     * @return BufferedReader BufferedReader {@link BufferedReader}
      */
     public void given(@NotNull String fileName) {
         path = fileName;
@@ -40,7 +39,6 @@ public final class ReadFile implements IReadFile{
 
     /**
      * @param resource String
-     * @return {@link ReadFile}
      */
     @Contract(pure = true)
     @Override

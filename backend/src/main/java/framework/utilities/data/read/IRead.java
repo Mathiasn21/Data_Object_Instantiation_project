@@ -12,11 +12,13 @@ import java.io.IOException;
  */
 public interface IRead {
     /**
+     * @throws IOException e
      * @param resource String
      */
     void given(@NotNull String resource) throws IOException;
 
     /**
+     * @throws IOException e
      * @return BufferedReader {@link BufferedReader}
      */
     BufferedReader read() throws IOException;
