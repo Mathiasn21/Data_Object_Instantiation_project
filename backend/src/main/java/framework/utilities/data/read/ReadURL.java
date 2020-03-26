@@ -10,11 +10,10 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @version 1.0
+ * @version 1.0.0
  */
 public final class ReadURL implements IReadURL{
     private String name;
-
     private String url;
 
     /**
@@ -23,9 +22,7 @@ public final class ReadURL implements IReadURL{
      */
     @Contract(pure = true)
     @Override
-    public void given(@NotNull URL resource) throws IOException {
-        url = resource.toString();
-    }
+    public void given(@NotNull URL resource) throws IOException { url = resource.toString(); }
 
     /**
      * @param resource String
@@ -33,9 +30,7 @@ public final class ReadURL implements IReadURL{
      */
     @Contract(pure = true)
     @Override
-    public void given(@NotNull String resource) throws IOException {
-        url = resource;
-    }
+    public void given(@NotNull String resource) throws IOException { url = resource; }
 
     /**
      * @return {@link BufferedReader}
@@ -48,7 +43,5 @@ public final class ReadURL implements IReadURL{
     }
 
     @Override
-    public String getSourceName() {
-        return name;
-    }
+    public String getSourceName() { return name; }
 }

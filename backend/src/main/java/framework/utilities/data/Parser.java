@@ -15,7 +15,7 @@ public final class Parser {
      * @param value String
      * @return {@link Object}
      */
-    public static Object parseValueToObject(Class<?> clazz, String value) {
+    public static Object classToValueFromObject(Class<?> clazz, String value) {
         if(String.class  == clazz)                            { return value; }
         if(Integer.class == clazz || Integer.TYPE == clazz)   { return Integer.parseInt(value); }
         if(Double.class  == clazz || Double.TYPE  == clazz)   { return Double.parseDouble(value); }

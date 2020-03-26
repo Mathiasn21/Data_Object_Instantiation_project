@@ -78,7 +78,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Nullable
     @Contract(pure = true)
     @Override
-    public final Map<String, Integer> extractReportFom(@NotNull String columnName) {
+    public final Map<String, Double> extractReportFom(@NotNull String columnName) {
         return null;
     }
 

@@ -3,7 +3,6 @@ package framework.utilities.data.read;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /** Interface describing a contract for reading with a String resource

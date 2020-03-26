@@ -2,7 +2,6 @@ package framework.utilities.data.handle;
 
 import com.google.gson.*;
 import framework.utilities.data.Parser;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -75,7 +74,7 @@ public final class JSONHandler implements IHandle{
         Object arr = Array.newInstance(type, size);
 
         for (int i = 0; i < size; i++){
-            Array.set(arr, i, Parser.parseValueToObject(type, array.get(i).toString()));
+            Array.set(arr, i, Parser.classToValueFromObject(type, array.get(i).toString()));
         }
         return arr;
     }

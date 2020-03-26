@@ -3,6 +3,7 @@ package unitTests;
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
 import framework.utilities.data.Resource;
+import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,23 @@ public class CollectorTest {
         String path = System.getProperty("user.dir") + "/files/primitiveJSONtypes.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        collector.CollectData();
+        System.out.println(collector.getAllColumns());
+    }
+
+
+    @Test
+    void data_from_file4() throws IOException {
+        String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
+        Resource resource = Resource.newResource().fromFile(path).build();
+        CSVHandler csvHandler = new CSVHandler();
+        csvHandler.setDelimiter(' ');
+        csvHandler.isSingleColumn(true);
+
+        Class<?>[] s = new Class[]{String.class};
+        csvHandler.setPrimaryKeyTypes(s);
+
+        ICollector collector = Collector.newCollector(resource, csvHandler).build();
         collector.CollectData();
         System.out.println(collector.getAllColumns());
     }
