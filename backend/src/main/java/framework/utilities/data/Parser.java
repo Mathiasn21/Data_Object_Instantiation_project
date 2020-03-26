@@ -3,9 +3,7 @@ package framework.utilities.data;
 import framework.errors.NoSuchComparatorError;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Comparator;
-import java.util.NoSuchElementException;
 
 /** Class for parsing string values to primitive types given a clazz
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
@@ -66,7 +64,8 @@ public final class Parser {
      */
     @Contract(pure = true)
     public static boolean isPrimitiveType(@NotNull Class<?> clazz){
-        return  (clazz == Double.class  || clazz == double.class ) ||
+        return  (clazz == String.class)                            ||
+                (clazz == Double.class  || clazz == double.class ) ||
                 (clazz == Float.class   || clazz == float.class  ) ||
                 (clazz == Integer.class || clazz == int.class    ) ||
                 (clazz == Long.class    || clazz == long.class   ) ||

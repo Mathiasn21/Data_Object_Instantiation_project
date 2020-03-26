@@ -318,7 +318,7 @@ public class Tree<T> implements ITree<T> {
             if(Parser.isPrimitiveType(type) && Modifier.isPublic(field.getModifiers())){
                 Object o = field.get(thiz);
                 Object o2 = field.get(that);
-                if(!o.equals(o2)){
+                if(!o.equals(o2) || !compressDuplicates){
                     this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
                     this.fieldToutilize = field;
                     return;
@@ -337,7 +337,7 @@ public class Tree<T> implements ITree<T> {
                     method.getParameters().length == 0){
                 Object o = method.invoke(thiz);
                 Object o2 = method.invoke(that);
-                if(!o.equals(o2)){
+                if(!o.equals(o2) || !compressDuplicates){
                     this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
                     this.methodToUse = method;
                     return;

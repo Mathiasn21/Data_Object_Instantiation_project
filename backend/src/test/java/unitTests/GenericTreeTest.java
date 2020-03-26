@@ -19,9 +19,7 @@ public class GenericTreeTest {
 
         Iterator<Node<Integer>> iterator = tree.inorderTraversal();
         assertDoesNotThrow(() -> {
-            for(int integer : res){
-                assertEquals(integer, (int) iterator.next().getT());
-            }
+            for(int integer : res){ assertEquals(integer, (int) iterator.next().getT()); }
             assertFalse(iterator.hasNext());
         });
     }
@@ -33,13 +31,10 @@ public class GenericTreeTest {
 
         ITree<Integer> tree = new Tree<>(false);
         for(int integer : arr) { tree.insert(integer); }
-
         Iterator<Node<Integer>> iterator = tree.inorderTraversal();
 
         assertDoesNotThrow(() -> {
-            for(int integer : res){
-                assertEquals(integer, (int) iterator.next().getT());
-            }
+            for(int integer : res){ assertEquals(integer, (int) iterator.next().getT()); }
             assertFalse(iterator.hasNext());
         });
     }
