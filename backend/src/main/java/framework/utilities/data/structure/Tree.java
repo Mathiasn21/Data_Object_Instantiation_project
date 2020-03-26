@@ -277,11 +277,10 @@ public class Tree<T> implements ITree<T> {
 
     /**
      * Compares this with that
-     * @param thiz T
-     * @param that T
+     * @param thiz {@link T}
+     * @param that {@link T}
      * @return int
      */
-    @SuppressWarnings("unchecked")//Is checked before cast and only uses compareTo
     protected int compare(@NotNull T thiz, @NotNull T that){
         if(thiz instanceof Comparable){
             if(method == null){ setupComparableMethod(thiz); }
