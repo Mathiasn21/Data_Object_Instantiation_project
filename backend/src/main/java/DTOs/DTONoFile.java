@@ -2,9 +2,10 @@ package DTOs;
 
 import framework.annotations.DataObject;
 import framework.annotations.DataObjectField;
+import org.jetbrains.annotations.NotNull;
 
 @DataObject
-public class DTONoFile {
+public class DTONoFile implements Comparable<DTONoFile>{
     public int anInt;
 
     @DataObjectField
@@ -31,5 +32,11 @@ public class DTONoFile {
         return "DTONoFile{" +
                 "string='" + string + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(@NotNull DTONoFile o) {
+        return this.string.compareTo(o.string);
     }
 }

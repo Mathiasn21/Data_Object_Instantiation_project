@@ -127,7 +127,7 @@ public class Tree<T> implements ITree<T> {
         int compareRes = compare(thiz.t, that.t);
 
         //If oject exists and equals then increment counter
-        if(compareRes == 0 && thiz.t.equals(that.t) && compressDuplicates){
+        if(compareRes == 0 && compressDuplicates){
             thiz.tCounter++;
             return;
         }

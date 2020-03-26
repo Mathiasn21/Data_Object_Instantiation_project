@@ -42,13 +42,16 @@ public class CollectorTest {
         String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         CSVHandler csvHandler = new CSVHandler();
-        csvHandler.setDelimiter(' ');
+        csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
+        csvHandler.setRemoveDoubleQuotes(true);
+        csvHandler.setSkipEmptyLines(true);
 
         Class<?>[] s = new Class[]{String.class};
         csvHandler.setPrimaryKeyTypes(s);
 
         ICollector collector = Collector.newCollector(resource, csvHandler).build();
+        collector.setCompressionOn(true);
         collector.CollectData();
         List<Object> l = collector.getAllColumns();
         System.out.println(l);

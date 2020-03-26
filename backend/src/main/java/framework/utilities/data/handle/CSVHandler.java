@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
  * @version 1.0
  */
 public final class CSVHandler implements IHandle{
-    private char delimiter = ',';
+    private String delimiter = ",";
     private boolean isSingleColumn = false;
 
     private Class<?>[] primaryKeyTypes;
@@ -47,7 +47,18 @@ public final class CSVHandler implements IHandle{
      * A char to split each column for each row
      * @param delimiter String
      */
-    public final void setDelimiter(char delimiter) { this.delimiter = delimiter; }
+    public final void setDelimiter(char delimiter) { this.delimiter = String.valueOf(delimiter); }
+
+    public void setSkipEmptyLines(boolean skipEmptyLines) {
+        this.skipEmptyLines = skipEmptyLines;
+    }
+
+    /**
+     * A char to split each column for each row
+     * @param delimiter String
+     */
+    public final void setDelimiter(String delimiter) { this.delimiter = delimiter; }
+
 
     /**
      * Remove any double quotes inside a string.

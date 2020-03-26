@@ -29,6 +29,7 @@ public final class Collector implements ICollector{
     private Class<?> clazz;
     private ITree<Object> rbTree;
     private Comparator<Object> comparator = null;
+    private boolean compression = false;
 
     /**
      * @param resource {@link Resource}
@@ -46,7 +47,7 @@ public final class Collector implements ICollector{
     @Override
     public void CollectData() throws IOException {
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
-        rbTree = new RBTree<>(comparator);
+        rbTree = new RBTree<>(comparator, compression);
 
         try {
             ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
@@ -76,6 +77,11 @@ public final class Collector implements ICollector{
     @Override
     public final void setSetting(@NotNull Setting key, @NotNull String value) {
         settings.put(key, value);
+    }
+
+    @Override
+    public void setCompressionOn(boolean b) {
+        this.compression = b;
     }
 
 
