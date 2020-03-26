@@ -5,16 +5,16 @@ import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 import java.util.List;
 
 //TODO: implement remaining logic given another project code -> Mathias
 /**
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public final class WriteFile implements IWriteFile{
     WriteFile() {
@@ -36,24 +36,79 @@ public final class WriteFile implements IWriteFile{
      * @param data String
      * @throws IOException IOException
      */
+    @Contract(pure = true)
     @Override
     public final void given(@NotNull File resource, @NotNull String data) throws IOException {
-        String filepath = "/files/" + resource;
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("").getAbsolutePath() + filepath))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource))) {
             bufferedWriter.write(data);
         }
     }
 
     /**
      * Standard method for writing data to a given file.
+     * This method appends data, and does not overwrite
+     * @param resource File
+     * @param data String
+     * @throws IOException IOException
+     */
+    @Contract(pure = true)
+    @Override
+    public void appendDataGiven(@NotNull File resource, @NotNull String data) throws IOException {
+        System.out.println("test");//TODO: implement method
+    }
+
+    /**
+     * Standard method for writing data to a given file.
      * This method does not append but overwrites!
-     * Utilizes a relative path for top level directory, plus filename.extension
      * @param resource   String
      * @param data String
+     * @throws IOException IOException
      */
     @Contract(pure = true)
     @Override
     public final void given(@NotNull String resource, @NotNull String data) throws IOException {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource))) {
+            bufferedWriter.write(data);
+        }
+    }
 
+    /**
+     * Standard method for writing data to a given file.
+     * This method appends data, and does not overwrite
+     * @param resource String
+     * @param data String
+     * @throws IOException IOException
+     */
+    @Contract(pure = true)
+    @Override
+    public void appendDataGiven(@NotNull String resource, @NotNull String data) throws IOException {
+        File file = new File(resource);
+        if (!file.exists()) { throw new FileNotFoundException(); }
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource, true))) {
+            bufferedWriter.write(data);
+        }
+    }
+
+    //FIXME: Missing JDoc
+    public void createFile(@NotNull File resource) throws IOException {
+        if (resource.createNewFile()) {
+            new File(resource.getPath());
+            return;
+        }
+        throw new FileAlreadyExistsException(resource.getPath());
+    }
+
+    //FIXME: Missing JDoc
+    public void deleteFile(@NotNull File resource) throws IOException {
+        Files.deleteIfExists(resource.toPath());
+    }
+
+    //FIXME: Missing JDoc
+    @NotNull
+    @Contract(value = " -> new", pure = true)
+    public static WriteFile getObj() {
+        //TODO: find a better method to reach private class
+        return new WriteFile();
     }
 }

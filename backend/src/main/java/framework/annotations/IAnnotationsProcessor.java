@@ -10,9 +10,25 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface IAnnotationsProcessor {
+    /**
+     * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
+     * @param file {@link String}
+     * @param <T> {@link T}
+     * @return {@link ObjectInformation}&lt;{@link T}&gt;
+     * @throws ReflectiveOperationException ReflectiveOperationException
+     */
     <T> ObjectInformation<T> initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
             throws ReflectiveOperationException;
 
+    /**
+     * @param objects {@link Object}
+     * @return {@link Class}&lt;?&gt;
+     */
     @Nullable Class<?> getClassFromObjectSample(Object... objects);
+
+    /**
+     * @param name {@link String}
+     * @return {@link Class}&lt;?&gt;
+     */
     @Nullable Class<?> getClassFromObjectSample(String name);
 }

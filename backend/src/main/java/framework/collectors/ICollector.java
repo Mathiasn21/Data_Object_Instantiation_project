@@ -1,12 +1,15 @@
 package framework.collectors;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 /** Interface describing contract for all collectors
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public interface ICollector {
     /**
@@ -50,10 +53,11 @@ public interface ICollector {
      */
     Class<?> getClazz();
 
-
-
     /**
      * @return {@link List}&lt;{@link Object}&gt;
      */
     List<Object> getAllColumns();
+
+
+
 }

@@ -6,41 +6,34 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 /**
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @version 1.0
+ * @version 1.0.0
  */
 public final class ReadURL implements IReadURL{
     private String name;
-
     private String url;
 
     /**
-     * @param resource String
-     * @return {@link BufferedReader}
-     * @throws MalformedURLException MalformedURLException
+     * @param resource URL
      */
     @Contract(pure = true)
     @Override
-    public void given(@NotNull URL resource) throws IOException {
-        url = resource.toString();
-    }
+    public void given(@NotNull URL resource) throws IOException { url = resource.toString(); }
 
     /**
      * @param resource String
+     */
+    @Contract(pure = true)
+    @Override
+    public void given(@NotNull String resource) throws IOException { url = resource; }
+
+    /**
+     * @return {@link BufferedReader}
      * @throws IOException IOException
-     */
-    @Contract(pure = true)
-    @Override
-    public void given(@NotNull String resource) throws IOException {
-        url = resource;
-    }
-
-    /**
-     * @return {@link BufferedReader}
-     * @throws FileNotFoundException FileNotFoundException
      */
     @Contract(pure = true)
     @Override
@@ -49,7 +42,5 @@ public final class ReadURL implements IReadURL{
     }
 
     @Override
-    public String getSourceName() {
-        return name;
-    }
+    public String getSourceName() { return name; }
 }

@@ -17,7 +17,6 @@ public class ComplexDTOCSV {
     @DataObjectField(primaryColumnName = "Column1")
     public String string;
 
-
     private String thing = "dada";
 
     @DataObjectField

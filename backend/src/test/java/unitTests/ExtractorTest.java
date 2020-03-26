@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class Extract {
+public class ExtractorTest {
     @Test
     void single_column() throws IOException {
         List<Object> list = new ArrayList<>();
@@ -114,7 +114,6 @@ public class Extract {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
-        handler.setPrimaryKeyTypes(String.class, double.class, int.class);
         ICollector collector = Collector.newCollector(resource, handler).build();
         collector.CollectData();
         return collector;

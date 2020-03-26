@@ -1,4 +1,4 @@
-package unitTests.framework;
+package unitTests;
 
 import framework.statistics.SimpleStatistics;
 import org.junit.jupiter.api.Test;

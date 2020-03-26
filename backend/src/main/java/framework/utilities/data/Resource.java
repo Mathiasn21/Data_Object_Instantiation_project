@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/** Class representing a data source
+/** Class representing a data source. Aka a place to fetch data from.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0
  */
@@ -28,9 +28,7 @@ public final class Resource {
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
-    public final @NotNull BufferedReader getData() throws IOException {
-        return readData.read();
-    }
+    public final @NotNull BufferedReader getData() throws IOException { return readData.read(); }
 
     /**
      * @return {@link String}
@@ -52,13 +50,9 @@ public final class Resource {
      * @return {@link ResourceBuilder}
      */
     @Contract(value = " -> new", pure = true)
-    public static @NotNull ResourceBuilder newResource(){
-        return new ResourceBuilder();
-    }
+    public static @NotNull ResourceBuilder newResource(){ return new ResourceBuilder(); }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
 
     /*TODO: Allow this class to be extended with its own implementations

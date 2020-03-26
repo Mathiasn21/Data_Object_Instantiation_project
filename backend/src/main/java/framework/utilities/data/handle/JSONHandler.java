@@ -1,12 +1,15 @@
 package framework.utilities.data.handle;
 
 import com.google.gson.*;
+import framework.utilities.data.Parser;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.*;
+
+import static org.apache.commons.lang3.math.NumberUtils.*;
 
 /** Class that contains concrete instructions for handling JSON data.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -39,21 +42,55 @@ public final class JSONHandler implements IHandle{
     public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         List<Object[]> res = new ArrayList<>();
         StringBuilder textFromFile = getJSONStringFrom(bufferedReader);
-
         JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
-        JsonArray array = jsonObject.getAsJsonArray();
-        array.iterator().forEachRemaining((object) -> {
-            JsonObject object2  = object.getAsJsonObject();
-            Set<Map.Entry<String, JsonElement>> entries = object2.entrySet();
-            List<Object> arrayList = new ArrayList<>();
 
-            for(Map.Entry<String, JsonElement> entry: entries) {
-                arrayList.add(entry.getValue().toString());
-            }
-            res.add(arrayList.toArray());
-        });
+        if(jsonObject.isJsonArray()){
+            JsonArray array = jsonObject.getAsJsonArray();
+            array.iterator().forEachRemaining((object) -> addObjectsToArray(res, object));
+        }else{ addObjectsToArray(res, jsonObject); }
         return res;
     }
+
+    private void addObjectsToArray(@NotNull List<Object[]> res, @NotNull JsonElement object) {
+        JsonObject object2  = object.getAsJsonObject();
+        Set<Map.Entry<String, JsonElement>> entries = object2.entrySet();
+        List<Object> arrayList = new ArrayList<>();
+
+        for(Map.Entry<String, JsonElement> entry: entries) {
+            JsonElement element = entry.getValue();
+            if(element.isJsonPrimitive()){
+                arrayList.add(entry.getValue().getAsString());
+            }else if(element.isJsonArray()){
+                Object arr = parseToPrimitiveArray(element.getAsJsonArray());
+                arrayList.add(arr);
+            }
+        }
+        res.add(arrayList.toArray());
+    }
+
+    private Object parseToPrimitiveArray(@NotNull JsonArray array){
+        int size = array.size();
+        Class<?> type = Parser.primitiveParseFromObjectClass(findPrimitiveTypeFrom(array.get(0), array.get(size - 1)));
+        Object arr = Array.newInstance(type, size);
+
+        for (int i = 0; i < size; i++){
+            Array.set(arr, i, Parser.classToValueFromObject(type, array.get(i).toString()));
+        }
+        return arr;
+    }
+
+    private Class<?> findPrimitiveTypeFrom(@NotNull JsonElement firstElement, @NotNull JsonElement secondElement) {
+        if(!(isCreatable(firstElement.toString()) && isCreatable(secondElement.toString()))){
+            throw new Error();//TODO: alter to a more descriptive error
+        }
+        Number first = createNumber(firstElement.toString());
+        Number second = createNumber(firstElement.toString());
+        if(second.getClass() != second.getClass()){
+            throw new Error();
+        }
+        return first.getClass();
+    }
+
 
     /**
      * This method retrieves a list, given a type Class and a json string.
@@ -76,9 +113,7 @@ public final class JSONHandler implements IHandle{
     private StringBuilder getJSONStringFrom(@NotNull BufferedReader bufferedReader) throws IOException {
         StringBuilder textFromFile = new StringBuilder();
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            textFromFile.append(line);
-        }
+        while ((line = bufferedReader.readLine()) != null) { textFromFile.append(line); }
         return textFromFile;
     }
 }
