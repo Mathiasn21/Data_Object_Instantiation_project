@@ -88,16 +88,12 @@ public final class WriteFile implements IWriteFile{
     @Contract(pure = true)
     @Override
     public void appendDataGiven(@NotNull String resource, @NotNull String data) throws IOException {
-        //TODO: find out why this is not working grrr
         File file = new File(resource);
-        try {
-            if (!file.exists()) {
-                throw new FileNotFoundException();
-            } else {
-                Writer fileWriter = new FileWriter(resource, true);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                bufferedWriter.append(data);
-            }
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        }
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resource, true))) {
+            bufferedWriter.write(data);
         }catch (FileNotFoundException e) {
             err = ExceptionHandler.ERROR_FILE_DOES_NOT_EXIST;
             thrown = e;

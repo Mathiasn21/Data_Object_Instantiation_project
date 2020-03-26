@@ -111,7 +111,7 @@ public class Write {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
             WriteFile write = WriteFile.getObj();
-            write.appendDataGiven(path, "appending");
+            write.appendDataGiven(path, "wwappending2");
 
 
 
