@@ -5,11 +5,9 @@ import framework.collectors.ICollector;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.JSONHandler;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CollectorTest {
     @Test
@@ -56,11 +54,14 @@ public class CollectorTest {
     void data_from_URL() {
         //TODO: implement correct url for an json api
 
+        fail();
+        /*
         Assertions.assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
             Resource resource = Resource.newResource().fromURL(url).build();
             ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
             collector.CollectData();
         });
+        */
     }
 }

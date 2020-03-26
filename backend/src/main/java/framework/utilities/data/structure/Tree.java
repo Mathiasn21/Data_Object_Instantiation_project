@@ -306,6 +306,7 @@ public class Tree<T> implements ITree<T> {
         throw new Error();
     }
 
+    //FIXME: cleanup this sick method...
     @SuppressWarnings("unchecked")//All instances are of type Object - guaranteed
     private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
         Field[] fields = thiz.getClass().getFields();
@@ -327,7 +328,6 @@ public class Tree<T> implements ITree<T> {
             Class<?> type = method.getReturnType();
             String name = method.getName();
 
-            //FIXME: cleanup this sick method...
             if(Parser.isPrimitiveType(type) && Modifier.isPublic(method.getModifiers()) &&
                     (name.startsWith("get") || name.equals(type.getName() + "Value")) &&
                     method.getParameters().length == 0){
