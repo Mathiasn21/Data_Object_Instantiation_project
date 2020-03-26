@@ -136,7 +136,7 @@ public final class Collector implements ICollector{
     public List<Object> getAllColumns() {
         Iterator<Node<Object>> iterator = rbTree.inorderTraversal();
         List<Object> res = new ArrayList<>();
-        while(iterator.hasNext()){ res.add(iterator.next()); }
+        while(iterator.hasNext()){ res.add(iterator.next().getT()); }
         return res;
     }
 
