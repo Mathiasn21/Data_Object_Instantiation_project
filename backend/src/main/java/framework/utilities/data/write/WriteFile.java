@@ -105,7 +105,8 @@ public final class WriteFile implements IWriteFile{
         }
     }
 
-    public void createFile(File resource) throws IOException {
+    //FIXME: Missing JDoc
+    public void createFile(@NotNull File resource) throws IOException {
         try {
             if (resource.createNewFile()) {
                 new File(resource.getPath());
@@ -123,10 +124,14 @@ public final class WriteFile implements IWriteFile{
         }
     }
 
-    public void deleteFile(File resource) throws IOException {
+    //FIXME: Missing JDoc
+    public void deleteFile(@NotNull File resource) throws IOException {
         Files.deleteIfExists(resource.toPath());
     }
 
+    //FIXME: Missing JDoc
+    @NotNull
+    @Contract(value = " -> new", pure = true)
     public static WriteFile getObj() {
         //TODO: find a better method to reach private class
         return new WriteFile();
