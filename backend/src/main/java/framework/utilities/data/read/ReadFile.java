@@ -16,9 +16,8 @@ public final class ReadFile implements IReadFile{
      * Returns a buffer for reading the given file.
      * Charset is standard UTF-8
      * @param fileName String
-     * @throws IOException IOException {@link IOException}
      */
-    public void given(@NotNull String fileName) throws IOException {
+    public void given(@NotNull String fileName) {
         path = fileName;
     }
 
@@ -40,11 +39,10 @@ public final class ReadFile implements IReadFile{
 
     /**
      * @param resource String
-     * @throws IOException IOException
      */
     @Contract(pure = true)
     @Override
-    public void given(@NotNull File resource) throws IOException {
+    public void given(@NotNull File resource)  {
         path = resource.getPath();
     }
 }
