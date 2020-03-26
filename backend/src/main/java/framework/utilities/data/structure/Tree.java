@@ -5,34 +5,35 @@ package framework.utilities.data.structure;
  //             Import statements             //
 ///////////////////////////////////////////////
 import framework.errors.NotComparable;
+import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Comparator;
 import java.util.Iterator;
-
 import static framework.utilities.data.structure.QuickTraversals.getBottomLeftChild;
 
 /**
  * A simple binary search tree and
  * implements: {@link ITree&lt;{@link T}&gt;}
+ * By default root is null, comparator is null and it does not compress
+ * duplicates, as this option is set to false.
+ * Compression of duplicates is done by calling equals on T
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T>
  */
 public class Tree<T> implements ITree<T> {
-    private final Comparator<T> comparator;
+    private Comparator<T> comparator;
+    private final boolean compressDuplicates;
     private Node<T> rootNode;
     private Method method = null;
-
-    /**
-     * @param comparator {@link Comparator}&lt;{@link T}&gt;
-     */
-    public Tree(Comparator<T> comparator) {
-        rootNode = null;
-        this.comparator = comparator;
-    }
+    private Comparator<Object> experimentalComparator;
+    private Field fieldToutilize = null;
+    private Method methodToUse = null;
 
     /**
      * Sets the current comparator to null.
@@ -40,10 +41,29 @@ public class Tree<T> implements ITree<T> {
      * this will throw an error {@link NotComparable}
      */
     @Contract(pure = true)
-    public Tree() {
-        rootNode = null;
-        this.comparator = null;
+    public Tree() { this(null); }
+
+    /**
+     * @param compressDuplicates {@link Comparator}&lt;{@link T}&gt;
+     */
+    @Contract(pure = true)
+    public Tree(boolean compressDuplicates) { this(null, compressDuplicates); }
+
+    /**
+     * @param comparator {@link Comparator}&lt;{@link T}&gt;
+     */
+    public Tree(Comparator<T> comparator) { this(comparator, false); }
+
+    /**Main constructor for customizing this
+     * @param comparator  {@link Comparator}&lt;{@link T}&gt;
+     * @param compressDuplicates boolean
+     */
+    public Tree(Comparator<T> comparator, boolean compressDuplicates) {
+        this.comparator = comparator;
+        this.compressDuplicates = compressDuplicates;
+        this.rootNode = null;
     }
+
 
       ///////////////////////////////////////////////
      //               GETTERS                     //
@@ -100,31 +120,30 @@ public class Tree<T> implements ITree<T> {
         Node<T> newNode = new Node<>(data, null);
         insert(rootNode, newNode);
     }
-    protected void insert(Node<T> currentNode, Node<T> node) {
+    protected void insert(Node<T> thiz, Node<T> that) {
         if(rootNode == null){
-            rootNode = node;
+            rootNode = that;
             return;
         }
+        int compareRes = compare(thiz.t, that.t);
 
-        int compareRes = compare(currentNode.t, node.t);
-
-        //If node exists increment counter and return
-        if(compareRes == 0){
-            currentNode.tCounter++;
+        //If oject exists and equals then increment counter
+        if(compareRes == 0 && thiz.t.equals(that.t) && compressDuplicates){
+            thiz.tCounter++;
             return;
         }
         boolean compare = compareRes > 0;
 
-        if(compare && !currentNode.hasLeftChild()){
-            currentNode.setLeftChild(node);
-            node.parent = currentNode;
+        if(compare && !thiz.hasLeftChild()){
+            thiz.setLeftChild(that);
+            that.parent = thiz;
 
-        }else if (!(compare || currentNode.hasRightChild())){
-            currentNode.setRightChild(node);
-            node.parent = currentNode;
+        }else if (!(compare || thiz.hasRightChild())){
+            thiz.setRightChild(that);
+            that.parent = thiz;
 
-        }else if (compare && currentNode.hasLeftChild()){ insert(currentNode.getLeft(), node);
-        }else if (!compare && currentNode.hasRightChild()){ insert(currentNode.getRight(), node); }
+        }else if (compare && thiz.hasLeftChild()){ insert(thiz.getLeft(), that);
+        }else if (!compare && thiz.hasRightChild()){ insert(thiz.getRight(), that); }
     }
 
     protected final void setRootNode(Node<T> root) { rootNode = root; }
@@ -134,24 +153,16 @@ public class Tree<T> implements ITree<T> {
      //               ITERATORS                   //
     ///////////////////////////////////////////////
     @Override
-    public Iterator<Node<T>> inorderTraversal() {
-     return new InorderTraversalIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> inorderTraversal() { return new InorderTraversalIterator<>(rootNode); }
 
     @Override
-    public Iterator<Node<T>> postorderTraversal() {
-        return new PostorderTraversalIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> postorderTraversal() { return new PostorderTraversalIterator<>(rootNode); }
 
     @Override
-    public Iterator<Node<T>> preorderTraversal() {
-        return new PreorderTraversalIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> preorderTraversal() { return new PreorderTraversalIterator<>(rootNode); }
 
     @Override
-    public Iterator<Node<T>> levelorderTraversal() {
-        return new LevelOrderIterator<>(rootNode);
-    }
+    public Iterator<Node<T>> levelorderTraversal() { return new LevelOrderIterator<>(rootNode); }
 
 
       ///////////////////////////////////////////////
@@ -266,25 +277,74 @@ public class Tree<T> implements ITree<T> {
 
     /**
      * Compares this with that
-     * @param thiz T
-     * @param that T
+     * @param thiz {@link T}
+     * @param that {@link T}
      * @return int
      */
-    @SuppressWarnings("unchecked")//Is checked before cast and only uses compareTo
     protected int compare(@NotNull T thiz, @NotNull T that){
         if(thiz instanceof Comparable){
             if(method == null){ setupComparableMethod(thiz); }
 
             //Guaranteed to return int by interface
             try { return (int) method.invoke(thiz, that);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
+        }
+        if(comparator == null && experimentalComparator == null){
+            try { tryToSetupComparator(thiz, that);
+            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
+        }
+
+        try {
+            //Error is thrown in setupComparable if it is null. Thereby making this safe
+            if(comparator != null){
+                return comparator.compare(thiz, that);
+            }else if (experimentalComparator != null){
+                if(fieldToutilize != null){
+                    return experimentalComparator.compare(fieldToutilize.get(thiz), fieldToutilize.get(thiz));
+                }
+                return experimentalComparator.compare(methodToUse.invoke(thiz), methodToUse.invoke(that));
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        throw new Error();
+    }
+
+    private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
+        Field[] fields = thiz.getClass().getFields();
+        for (Field field : fields) {
+            Class<?> type = field.getType();
+            if(Parser.isPrimitiveType(type) && Modifier.isPublic(field.getModifiers())){
+                Object o = field.get(thiz);
+                Object o2 = field.get(that);
+                if(!o.equals(o2) || !compressDuplicates){
+                    this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
+                    this.fieldToutilize = field;
+                    return;
+                }
             }
         }
-        if(comparator == null){
-            throw new NotComparable("Missing comparator or object is not comparable");
+
+        Method[] methods = thiz.getClass().getMethods();
+        for (Method method : methods) {
+            Class<?> type = method.getReturnType();
+            String name = method.getName();
+
+            //FIXME: cleanup this sick method...
+            if(Parser.isPrimitiveType(type) && Modifier.isPublic(method.getModifiers()) &&
+                    (name.startsWith("get") || name.equals(type.getName() + "Value")) &&
+                    method.getParameters().length == 0){
+                Object o = method.invoke(thiz);
+                Object o2 = method.invoke(that);
+                if(!o.equals(o2) || !compressDuplicates){
+                    this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
+                    this.methodToUse = method;
+                    return;
+                }
+            }
         }
-        return comparator.compare(thiz, that);
+        //R.I.P
+        throw new NotComparable("Missing comparator or object is not comparable");
     }
 
     @SuppressWarnings("unchecked")//As this is guaranteed before this method

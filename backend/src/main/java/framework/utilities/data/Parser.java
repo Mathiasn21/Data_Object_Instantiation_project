@@ -1,7 +1,9 @@
 package framework.utilities.data;
 
+import framework.errors.NoSuchComparatorError;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import java.util.Comparator;
 
 /** Class for parsing string values to primitive types given a clazz
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
@@ -53,5 +55,41 @@ public final class Parser {
                clazz == Short.class     ?      short.class     :
                clazz == Byte.class      ?      byte.class      :
                clazz;
+    }
+
+    /**
+     * Returns if given class is a primitive or a primtitve wrapper
+     * @param clazz {@link Class}&lt;?&gt;
+     * @return boolean
+     */
+    @Contract(pure = true)
+    public static boolean isPrimitiveType(@NotNull Class<?> clazz){
+        return  (clazz == String.class)                            ||
+                (clazz == Double.class  || clazz == double.class ) ||
+                (clazz == Float.class   || clazz == float.class  ) ||
+                (clazz == Integer.class || clazz == int.class    ) ||
+                (clazz == Long.class    || clazz == long.class   ) ||
+                (clazz == Boolean.class || clazz == boolean.class) ||
+                (clazz == Short.class   || clazz == short.class  ) ||
+                (clazz == Byte.class    || clazz == byte.class   );
+    }
+
+
+    /**
+     * Gets a comparator for a given primtitve type, or throws an error
+     * @param clazz {@link Class}&lt;?&gt;
+     * @return {@link Comparator}&lt;?&gt;
+     */
+    @NotNull
+    public static Comparator<?> getComparatorForPrimitive(@NotNull Class<?> clazz) {
+        if(String.class  == clazz)                            { return (Comparator<String>)  String::compareTo; }
+        if(Integer.class == clazz || Integer.TYPE == clazz)   { return (Comparator<Integer>) Integer::compareTo; }
+        if(Double.class  == clazz || Double.TYPE  == clazz)   { return (Comparator<Double>)  Double::compareTo; }
+        if(Boolean.class == clazz || Boolean.TYPE == clazz)   { return (Comparator<Boolean>) Boolean::compareTo; }
+        if(Byte.class    == clazz || Byte.TYPE    == clazz)   { return (Comparator<Byte>)    Byte::compareTo; }
+        if(Short.class   == clazz || Short.TYPE   == clazz)   { return (Comparator<Short>)   Short::compareTo; }
+        if(Long.class    == clazz || Long.TYPE    == clazz)   { return (Comparator<Long>)    Long::compareTo; }
+        if(Float.class   == clazz || Float.TYPE   == clazz)   { return (Comparator<Float>)   Float::compareTo; }
+        throw new NoSuchComparatorError("No such comparator exists for class: " + clazz.getName());
     }
 }

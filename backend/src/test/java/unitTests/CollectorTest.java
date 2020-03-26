@@ -35,7 +35,6 @@ public class CollectorTest {
         collector.CollectData();
     }
 
-
     @Test
     void data_from_URL() {
         //TODO: implement correct url for an json api
