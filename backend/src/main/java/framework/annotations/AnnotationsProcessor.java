@@ -13,11 +13,13 @@ package framework.annotations;
 import framework.errors.NoMatchingDataObject;
 import framework.errors.NoSuchConstructor;
 import framework.utilities.data.Parser;
+import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -33,24 +35,35 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
-    private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
+    private final Map<String, Class<?>> resourceMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
+    private final Map<Class<?>, AnnotationInformation> clazzMappedToInformation = new HashMap<>();
     private final Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
-    private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
+    private final List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
+
 
     public AnnotationsProcessor() {
         Set<Class<?>> clazzes = getAllDataObjectClasses();
         clazzes.iterator().forEachRemaining((clazz) -> {
-            DataObject dataObject = clazz.getAnnotation(DataObject.class);
+            DataObject dataObject = clazz.getDeclaredAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             Constructor<?> constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
             objectMappedToConstructor.put(clazz, constructor);
             constructorToPrimaryTypes.put(constructor, primaryTypes);
 
-            String fileName = dataObject.resourceName();
-            if (fileName.equals("")) { dataObjectsWithNoFiles.add(clazz);
-            } else { filesMappedToDataObject.put(fileName, clazz); }
+            CSV csvAnnotation = clazz.getDeclaredAnnotation(CSV.class);
+            JSON jsonAnnotation = clazz.getDeclaredAnnotation(JSON.class);
+            Map<Class<? extends IHandle>, String[]> mappedResources = new HashMap<>();
+
+            if(csvAnnotation != null){
+                mappedResources.put(csvAnnotation.handler(), csvAnnotation.sources());
+            }
+            if(jsonAnnotation != null){
+                mappedResources.put(jsonAnnotation.handler(), jsonAnnotation.sources());
+            }
+            clazzMappedToInformation.put(clazz, new AnnotationInformation(clazz, mappedResources));
+            dataObjectsWithNoResources.add(clazz);
         });
     }
 
@@ -126,26 +139,25 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param name String
-     * @return {@link ObjectInformation}&lt;{@link T}&gt;
+     * @return {@link ObjectInformation}
      * @throws InstantiationException InstantiationException
      * @throws InvocationTargetException InvocationTargetException
      * @throws IllegalAccessException IllegalAccessException
      */
-    @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
-    public <T> ObjectInformation<T> initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
+    public @NotNull ObjectInformation initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
             throws ReflectiveOperationException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
-        Class<?> clazz = filesMappedToDataObject.containsKey(name) ?
-                filesMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
+        Class<?> clazz = resourceMappedToDataObject.containsKey(name) ?
+                resourceMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
-        return new ObjectInformation<>(constructorToPrimaryTypes.get(constructor), clazz, (List<T>) listOfDataObjects);
+        return new ObjectInformation(constructorToPrimaryTypes.get(constructor), clazz, listOfDataObjects);
     }
 
 
@@ -167,7 +179,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @Override
     @Nullable
     public Class<?> getClassFromObjectSample(@NotNull String name){
-        return filesMappedToDataObject.get(name);
+        return resourceMappedToDataObject.get(name);
     }
 
 
@@ -190,7 +202,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         int typesHashCode = calcHashcodeFrom(types);
         Class<?> partialMatch = null;
 
-        for (Class<?> clazz : dataObjectsWithNoFiles) {
+        for (Class<?> clazz : dataObjectsWithNoResources) {
             Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
             Class<?>[] params = constructor.getParameterTypes();
             int paramsUniqueHashCode = Arrays.hashCode(params);

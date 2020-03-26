@@ -13,11 +13,10 @@ public interface IAnnotationsProcessor {
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param file {@link String}
-     * @param <T> {@link T}
-     * @return {@link ObjectInformation}&lt;{@link T}&gt;
+     * @return {@link ObjectInformation}
      * @throws ReflectiveOperationException ReflectiveOperationException
      */
-    <T> ObjectInformation<T> initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
+    @NotNull ObjectInformation initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String file)
             throws ReflectiveOperationException;
 
     /**
