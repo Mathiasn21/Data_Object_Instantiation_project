@@ -34,7 +34,7 @@ public class AnnotationProcessingTest {
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "name"));
         try {
-            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "name");
+            ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "name");
             List<Object> DTO = objectInformation.data;
             for(Object o : DTO){
                 assertTrue(o instanceof DTO);
@@ -58,7 +58,7 @@ public class AnnotationProcessingTest {
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "test"));
         try {
-            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "test");
+            ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "test");
             List<Object> complexDTO = objectInformation.data;
 
             List<ComplexDTO> test = new ArrayList<>();
@@ -86,7 +86,7 @@ public class AnnotationProcessingTest {
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "dd"));
         try {
-            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "dd");
+            ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "dd");
             List<Object> noFiles = objectInformation.data;
 
             for(Object o : noFiles){
@@ -110,7 +110,7 @@ public class AnnotationProcessingTest {
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "DTOJson.json"));
 
         try {
-            ObjectInformation<Object> objectInformation= annotationsProcessor.initializeDataObjects(list, "DTOJson.json");
+            ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "DTOJson.json");
             List<Object> noFiles = objectInformation.data;
 
             for(Object o : noFiles){ assertTrue(o instanceof DTONoFile); }

@@ -126,8 +126,10 @@ public class Tree<T> implements ITree<T> {
         }
         int compareRes = compare(thiz.t, that.t);
 
+
+        boolean b = thiz.t.equals(that.t);
         //If oject exists and equals then increment counter
-        if(compareRes == 0 && thiz.t.equals(that.t) && compressDuplicates){
+        if(compareRes == 0 && compressDuplicates){
             thiz.tCounter++;
             return;
         }
@@ -296,7 +298,7 @@ public class Tree<T> implements ITree<T> {
                 return comparator.compare(thiz, that);
             }else if (experimentalComparator != null){
                 if(fieldToutilize != null){
-                    return experimentalComparator.compare(fieldToutilize.get(thiz), fieldToutilize.get(thiz));
+                    return experimentalComparator.compare( fieldToutilize.get(thiz),fieldToutilize.get(that));
                 }
                 return experimentalComparator.compare(methodToUse.invoke(thiz), methodToUse.invoke(that));
             }
@@ -306,6 +308,7 @@ public class Tree<T> implements ITree<T> {
         throw new Error();
     }
 
+    //FIXME: cleanup this sick method...
     @SuppressWarnings("unchecked")//All instances are of type Object - guaranteed
     private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
         Field[] fields = thiz.getClass().getFields();
@@ -314,7 +317,7 @@ public class Tree<T> implements ITree<T> {
             if(Parser.isPrimitiveType(type) && Modifier.isPublic(field.getModifiers())){
                 Object o = field.get(thiz);
                 Object o2 = field.get(that);
-                if(!o.equals(o2) || !compressDuplicates){
+                if(!o.equals(o2) || !o.toString().toUpperCase().equals(o2.toString())){
                     this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
                     this.fieldToutilize = field;
                     return;
@@ -327,7 +330,6 @@ public class Tree<T> implements ITree<T> {
             Class<?> type = method.getReturnType();
             String name = method.getName();
 
-            //FIXME: cleanup this sick method...
             if(Parser.isPrimitiveType(type) && Modifier.isPublic(method.getModifiers()) &&
                     (name.startsWith("get") || name.equals(type.getName() + "Value")) &&
                     method.getParameters().length == 0){

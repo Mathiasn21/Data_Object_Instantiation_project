@@ -21,13 +21,14 @@ import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
  * @version 1.0
  */
 public final class CSVHandler implements IHandle{
-    private char delimiter = ',';
+    private String delimiter = ",";
     private boolean isSingleColumn = false;
 
     private Class<?>[] primaryKeyTypes;
     private String[] primaryKeys;
     private Map<String, Boolean> settings = new HashMap<>();
     private boolean skipEmptyLines = false;
+    private boolean removeDoubleQuotes = false;
     private boolean convertFloatToDouble = true;
 
     /**
@@ -46,7 +47,27 @@ public final class CSVHandler implements IHandle{
      * A char to split each column for each row
      * @param delimiter String
      */
-    public final void setDelimiter(char delimiter) { this.delimiter = delimiter; }
+    public final void setDelimiter(char delimiter) { this.delimiter = String.valueOf(delimiter); }
+
+    public void setSkipEmptyLines(boolean skipEmptyLines) {
+        this.skipEmptyLines = skipEmptyLines;
+    }
+
+    /**
+     * A char to split each column for each row
+     * @param delimiter String
+     */
+    public final void setDelimiter(String delimiter) { this.delimiter = delimiter; }
+
+
+    /**
+     * Remove any double quotes inside a string.
+     * By default this is off.
+     * @param removeDoubleQuotes boolean
+     */
+    public void setRemoveDoubleQuotes(boolean removeDoubleQuotes) {
+        this.removeDoubleQuotes = removeDoubleQuotes;
+    }
 
     /**
      * Decides whether or not to treat each all data
@@ -79,8 +100,6 @@ public final class CSVHandler implements IHandle{
 
         List<Class<?>> types = new ArrayList<>(1);
         while ((line = bufferedReader.readLine()) != null) {
-            if(skipEmptyLines && (line.isEmpty() || line.isBlank())){ continue; }
-
             List<Object> args = new ArrayList<>();
             String[] r = splitLineOn(line);
 
@@ -95,6 +114,7 @@ public final class CSVHandler implements IHandle{
 
             for (int i = 0; i < r.length; i++) {
                 String value = r[i];
+                if(skipEmptyLines && (value.isEmpty() || value.isBlank())){ continue; }
 
                 //Add args to row array and create a new ArrayList if theres only one column
                 if (isSingleColumn) {
@@ -149,6 +169,7 @@ public final class CSVHandler implements IHandle{
      * @param row String[]
      * @return boolean
      */
+    @Deprecated
     @Contract(pure = true)
     private static boolean calcPRowContainsPrimaryColumns(@NotNull String[] row){
         //TODO: Delegate settings to config file

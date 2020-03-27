@@ -29,6 +29,7 @@ public final class Collector implements ICollector{
     private Class<?> clazz;
     private ITree<Object> rbTree;
     private Comparator<Object> comparator = null;
+    private boolean compression = false;
 
     /**
      * @param resource {@link Resource}
@@ -44,12 +45,12 @@ public final class Collector implements ICollector{
      * @throws IOException IOException
      */
     @Override
-    public void CollectData() throws IOException {
+    public void collectData() throws IOException {
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
-        rbTree = new RBTree<>(comparator);
+        rbTree = new RBTree<>(comparator, compression);
 
         try {
-            ObjectInformation<Object> objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
+            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
             for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
 
             primaryTypes = objectObjectInformation.primaryKeyTypes;
@@ -77,6 +78,11 @@ public final class Collector implements ICollector{
     @Override
     public final void setSetting(@NotNull Setting key, @NotNull String value) {
         settings.put(key, value);
+    }
+
+    @Override
+    public void setCompressionOn(boolean b) {
+        this.compression = b;
     }
 
 
@@ -137,7 +143,7 @@ public final class Collector implements ICollector{
     public List<Object> getAllColumns() {
         Iterator<Node<Object>> iterator = rbTree.inorderTraversal();
         List<Object> res = new ArrayList<>();
-        while(iterator.hasNext()){ res.add(iterator.next()); }
+        while(iterator.hasNext()){ res.add(iterator.next().getT()); }
         return res;
     }
 
@@ -159,5 +165,4 @@ public final class Collector implements ICollector{
     public static CollectorBuilder newCollector(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
-
 }

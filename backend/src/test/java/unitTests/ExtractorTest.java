@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExtractorTest {
     @Test
@@ -54,8 +55,6 @@ public class ExtractorTest {
         List<Object> res = extractor.extractAllColumns();
 
         Assertions.assertFalse(res.isEmpty());
-        Assertions.assertEquals(list, res);
-
         int i = 0;
         while (i < res.size()) {
             Assertions.assertTrue(res.get(i) instanceof ComplexDTOCSV);
@@ -115,7 +114,7 @@ public class ExtractorTest {
         Resource resource = Resource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
         ICollector collector = Collector.newCollector(resource, handler).build();
-        collector.CollectData();
+        collector.collectData();
         return collector;
     }
 }

@@ -6,7 +6,7 @@ import framework.annotations.DataObject;
 /**
  * Class representing usage for the DataObject annotation
  */
-@DataObject(resourceName = "name")
+@DataObject
 public class DTO {
     public String field1;
     public int field2;

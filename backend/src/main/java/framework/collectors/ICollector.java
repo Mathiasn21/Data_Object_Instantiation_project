@@ -1,9 +1,6 @@
 package framework.collectors;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +12,7 @@ public interface ICollector {
     /**
      * @throws IOException IOException
      */
-    void CollectData() throws IOException;
+    void collectData() throws IOException;
 
     /**
      * @param list {@link List}&lt;{@link String}&gt;
@@ -27,6 +24,9 @@ public interface ICollector {
      * @param value {@link String}
      */
     void setSetting(Setting key, String value);
+
+    void setCompressionOn(boolean b);
+
 
     /**
      * @param settings {@link Map}&lt;{@link Setting}, {@link String}&gt;
@@ -57,7 +57,4 @@ public interface ICollector {
      * @return {@link List}&lt;{@link Object}&gt;
      */
     List<Object> getAllColumns();
-
-
-
 }

@@ -10,26 +10,21 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @version 1.0.0
+ * @version 2.0.0
  */
-public final class ReadURL implements IReadURL{
-    private String name;
-    private String url;
+public final class ReadURL implements IRead{
+    private final String name;
+    private final URL url;
 
-    /**
-     * @param resource URL
-     */
-    @Contract(pure = true)
-    @Override
-    public void given(@NotNull URL resource) throws IOException { url = resource.toString(); }
+    public ReadURL(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
 
-    /**
-     * @param resource String
-     */
     @Contract(pure = true)
-    @Override
-    public void given(@NotNull String resource) throws IOException { url = resource; }
+    public ReadURL(@NotNull URL url) {
+        this.url = url;
+        this.name = url.getPath();
+    }
 
     /**
      * @return {@link BufferedReader}
@@ -37,10 +32,10 @@ public final class ReadURL implements IReadURL{
      */
     @Contract(pure = true)
     @Override
-    public @NotNull BufferedReader read() throws IOException {
-        return new BufferedReader(new InputStreamReader(new URL(url).openStream(), StandardCharsets.UTF_8));
+    public final @NotNull BufferedReader read() throws IOException {
+        return new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
     }
 
     @Override
-    public String getSourceName() { return name; }
+    public final String getSourceName() { return name; }
 }

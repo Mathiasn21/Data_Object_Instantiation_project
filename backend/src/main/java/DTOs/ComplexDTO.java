@@ -6,7 +6,7 @@ import framework.annotations.DataObjectField;
 /**
  * ComplexDTO that contains custom field that require mapping
  */
-@DataObject(resourceName = "test")
+@DataObject
 public class ComplexDTO {
 
     @DataObjectField
