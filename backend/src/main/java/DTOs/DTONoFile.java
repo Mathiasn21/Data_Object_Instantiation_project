@@ -5,11 +5,12 @@ import framework.annotations.DataObjectField;
 import org.jetbrains.annotations.NotNull;
 
 @DataObject
-public class DTONoFile implements Comparable<DTONoFile>{
-    public int anInt;
+public class DTONoFile{
 
     @DataObjectField
     public String string;
+
+    public int anInt;
 
     public DTONoFile(int integer, String string) {
         this.string = string;
@@ -32,11 +33,5 @@ public class DTONoFile implements Comparable<DTONoFile>{
         return "DTONoFile{" +
                 "string='" + string + '\'' +
                 '}';
-    }
-
-
-    @Override
-    public int compareTo(@NotNull DTONoFile o) {
-        return this.string.compareTo(o.string);
     }
 }

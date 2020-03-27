@@ -100,8 +100,6 @@ public final class CSVHandler implements IHandle{
 
         List<Class<?>> types = new ArrayList<>(1);
         while ((line = bufferedReader.readLine()) != null) {
-            if(skipEmptyLines && (line.isEmpty() || line.isBlank())){ continue; }
-
             List<Object> args = new ArrayList<>();
             String[] r = splitLineOn(line);
 
@@ -116,6 +114,7 @@ public final class CSVHandler implements IHandle{
 
             for (int i = 0; i < r.length; i++) {
                 String value = r[i];
+                if(skipEmptyLines && (value.isEmpty() || value.isBlank())){ continue; }
 
                 //Add args to row array and create a new ArrayList if theres only one column
                 if (isSingleColumn) {

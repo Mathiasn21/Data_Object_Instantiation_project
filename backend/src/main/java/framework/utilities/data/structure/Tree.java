@@ -126,6 +126,8 @@ public class Tree<T> implements ITree<T> {
         }
         int compareRes = compare(thiz.t, that.t);
 
+
+        boolean b = thiz.t.equals(that.t);
         //If oject exists and equals then increment counter
         if(compareRes == 0 && compressDuplicates){
             thiz.tCounter++;
@@ -296,7 +298,7 @@ public class Tree<T> implements ITree<T> {
                 return comparator.compare(thiz, that);
             }else if (experimentalComparator != null){
                 if(fieldToutilize != null){
-                    return experimentalComparator.compare(fieldToutilize.get(thiz), fieldToutilize.get(thiz));
+                    return experimentalComparator.compare( fieldToutilize.get(thiz),fieldToutilize.get(that));
                 }
                 return experimentalComparator.compare(methodToUse.invoke(thiz), methodToUse.invoke(that));
             }
@@ -315,7 +317,7 @@ public class Tree<T> implements ITree<T> {
             if(Parser.isPrimitiveType(type) && Modifier.isPublic(field.getModifiers())){
                 Object o = field.get(thiz);
                 Object o2 = field.get(that);
-                if(!o.equals(o2) || !compressDuplicates){
+                if(!o.equals(o2) || !o.toString().toUpperCase().equals(o2.toString())){
                     this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
                     this.fieldToutilize = field;
                     return;
