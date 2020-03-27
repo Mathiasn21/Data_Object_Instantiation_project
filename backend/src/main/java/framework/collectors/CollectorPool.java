@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class CollectorPool implements ICollectorPool{
     private final List<ICollector> collectors;
@@ -18,6 +19,15 @@ public class CollectorPool implements ICollectorPool{
         for (ICollector collector : collectors) {
             collector.collectData();
         }
+    }
+
+    @Override
+    public void collectAllDataAsync() throws IOException {
+
+    }
+
+    @Override
+    public void collectAllDataAsync(ThreadPoolExecutor threadPool) throws IOException {
     }
 
     /**
