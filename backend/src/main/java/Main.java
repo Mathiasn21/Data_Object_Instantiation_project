@@ -7,6 +7,8 @@ import framework.utilities.data.handle.JSONHandler;
 
 import java.io.*;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -20,6 +22,7 @@ public class Main {
         String path2 = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         List<Resource> resources = Resource.newResource().fromFile(path2).fromFile(path2).buildAll();
         ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
-        collectorPool.collectAllData();
+        collectorPool.collectAllDataAsync((ThreadPoolExecutor) Executors.newFixedThreadPool(2));
+        System.out.println("herro");
     }
 }
