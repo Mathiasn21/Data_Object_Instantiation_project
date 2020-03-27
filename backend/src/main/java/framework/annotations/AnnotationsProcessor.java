@@ -37,7 +37,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     private final Map<String, Class<?>> resourceMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
-    private final Map<Class<?>, AnnotationInformation> clazzMappedToInformation = new HashMap<>();
     private final Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
     private final List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
 
@@ -45,24 +44,12 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     public AnnotationsProcessor() {
         Set<Class<?>> clazzes = getAllDataObjectClasses();
         clazzes.iterator().forEachRemaining((clazz) -> {
-            DataObject dataObject = clazz.getDeclaredAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             Constructor<?> constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
             objectMappedToConstructor.put(clazz, constructor);
             constructorToPrimaryTypes.put(constructor, primaryTypes);
 
-            CSV csvAnnotation = clazz.getDeclaredAnnotation(CSV.class);
-            JSON jsonAnnotation = clazz.getDeclaredAnnotation(JSON.class);
-            Map<Class<? extends IHandle>, String[]> mappedResources = new HashMap<>();
-
-            if(csvAnnotation != null){
-                mappedResources.put(csvAnnotation.handler(), csvAnnotation.sources());
-            }
-            if(jsonAnnotation != null){
-                mappedResources.put(jsonAnnotation.handler(), jsonAnnotation.sources());
-            }
-            clazzMappedToInformation.put(clazz, new AnnotationInformation(clazz, mappedResources));
             dataObjectsWithNoResources.add(clazz);
         });
     }

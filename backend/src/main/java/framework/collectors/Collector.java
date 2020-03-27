@@ -45,7 +45,7 @@ public final class Collector implements ICollector{
      * @throws IOException IOException
      */
     @Override
-    public void CollectData() throws IOException {
+    public void collectData() throws IOException {
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
         rbTree = new RBTree<>(comparator, compression);
 
@@ -164,5 +164,4 @@ public final class Collector implements ICollector{
     public static CollectorBuilder newCollector(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
-
 }

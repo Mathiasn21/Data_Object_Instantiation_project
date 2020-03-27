@@ -17,7 +17,7 @@ public class CollectorTest {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
-        collector.CollectData();
+        collector.collectData();
     }
 
     @Test
@@ -25,7 +25,7 @@ public class CollectorTest {
         String path = System.getProperty("user.dir") + "/files/testingJSONFile.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
-        collector.CollectData();
+        collector.collectData();
     }
 
     @Test
@@ -33,7 +33,7 @@ public class CollectorTest {
         String path = System.getProperty("user.dir") + "/files/primitiveJSONtypes.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
-        collector.CollectData();
+        collector.collectData();
     }
 
 
@@ -52,7 +52,7 @@ public class CollectorTest {
 
         ICollector collector = Collector.newCollector(resource, csvHandler).build();
         collector.setCompressionOn(true);
-        collector.CollectData();
+        collector.collectData();
         List<Object> l = collector.getAllColumns();
         System.out.println(l);
     }
@@ -67,7 +67,7 @@ public class CollectorTest {
             URL url = new URL("http://example.com");
             Resource resource = Resource.newResource().fromURL(url).build();
             ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
-            collector.CollectData();
+            collector.collectData();
         });
         */
     }

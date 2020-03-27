@@ -12,7 +12,7 @@ public interface ICollector {
     /**
      * @throws IOException IOException
      */
-    void CollectData() throws IOException;
+    void collectData() throws IOException;
 
     /**
      * @param list {@link List}&lt;{@link String}&gt;
@@ -57,7 +57,4 @@ public interface ICollector {
      * @return {@link List}&lt;{@link Object}&gt;
      */
     List<Object> getAllColumns();
-
-
-
 }

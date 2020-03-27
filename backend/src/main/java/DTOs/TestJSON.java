@@ -1,9 +1,6 @@
 package DTOs;
 
-import framework.annotations.CSV;
 import framework.annotations.DataObject;
-import framework.annotations.JSON;
-import framework.utilities.data.Resource;
 
 @DataObject
 public class TestJSON {

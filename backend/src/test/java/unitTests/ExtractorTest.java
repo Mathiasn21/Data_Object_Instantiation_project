@@ -112,7 +112,7 @@ public class ExtractorTest {
         Resource resource = Resource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
         ICollector collector = Collector.newCollector(resource, handler).build();
-        collector.CollectData();
+        collector.collectData();
         return collector;
     }
 }
