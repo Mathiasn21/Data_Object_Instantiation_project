@@ -8,8 +8,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 public interface ICollectorPool {
     void collectAllData() throws IOException;
     void collectAllDataAsync() throws IOException;
-    void collectAllDataAsync(ThreadPoolExecutor threadPool) throws IOException;
+    void collectAllDataAsync(ThreadPoolExecutor threadPool);
 
-    Iterator<ICollector> iterate();
+    Iterator<ICollector> iterator();
     List<ICollector> getAllCollectors();
+
+    void setNumberOfThreads(byte number);
 }
