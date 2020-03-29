@@ -14,7 +14,7 @@ public interface IExtractor{
      * @param columnName String
      * @return double[]
      */
-    List<Object> extractColumnFrom (String columnName);
+    List<Object> extractColumnFrom (String columnName) throws NoSuchFieldException, IllegalAccessException;
     List<Object> extractAllColumns();
     <T>List<T> extractAllColumns(Class<?> clazz);
     Map<String, Double> extractReportFom(String columnName);

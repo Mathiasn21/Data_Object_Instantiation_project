@@ -1,11 +1,13 @@
 package framework.extractors;
 
 import framework.collectors.ICollector;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /** Class used for extracting information from a collector
@@ -28,25 +30,27 @@ public final class Extractor<C extends ICollector> implements IExtractor {
      */
     @NotNull
     @Override
-    public final List<Object> extractColumnFrom(@NotNull String columnName) {
+    public final List<Object> extractColumnFrom(@NotNull String columnName) throws NoSuchFieldException, IllegalAccessException {
         List<Object> data = null;
         List<Object> allColumns = collector.getAllColumns();
         //Grab fields from class
-        Class<?> clazz = allColumns.get(0).getClass();
-        Field[] fields = clazz.getFields();
+        //Class<?> clazz = allColumns.get(0).getClass();
+        //Field[] fields = clazz.getFields();
 
-        System.out.println(fields[1].getName());
+        //System.out.println(fields[1].getName());
 
-        if(fields[1].getName().equals(columnName)){
+        for(Object x : allColumns) {
+            Class<?> clazz = x.getClass();
+            Field field = clazz.getField(columnName);
             assert data != null;
-            data.add(fields[1]);
+            data.add(field);
         }
 
         /*List<String> keys = collector.getPrimaryKeys();
         System.out.println(keys.get(0)); //IS EMPTY???
         //grab primarykeys if exists from collector.*/
 
-        return data;
+        return ;
     }
 
 
