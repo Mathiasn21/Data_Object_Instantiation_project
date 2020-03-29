@@ -5,8 +5,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -39,18 +39,23 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
         //System.out.println(fields[1].getName());
 
-        for(Object x : allColumns) {
-            Class<?> clazz = x.getClass();
-            Field field = clazz.getField(columnName);
-            assert data != null;
-            data.add(field);
-        }
+        assert false;
+        data.add(Arrays.stream(allColumns.getClass().getDeclaredFields())
+                .filter(e -> e.getName().startsWith(columnName))
+                .findFirst()
+                .map(f -> {
+                    f.setAccessible(true);
+                    try {
+                        return (String) f.get(columnName);
+                    } catch (IllegalAccessException e) {
+                        return null;
+                    }
+                }).orElseThrow(IllegalArgumentException::new));
 
         /*List<String> keys = collector.getPrimaryKeys();
         System.out.println(keys.get(0)); //IS EMPTY???
         //grab primarykeys if exists from collector.*/
-
-        return null;
+        return data;
     }
 
 
