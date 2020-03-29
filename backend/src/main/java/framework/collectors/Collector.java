@@ -4,6 +4,9 @@ import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
+import framework.utilities.data.structure.ITree;
+import framework.utilities.data.structure.Node;
+import framework.utilities.data.structure.RBTree;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,13 +22,14 @@ public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
     private final Map<Setting, String> settings = new HashMap<>();
-    private final TreeMap<String, Object> rbTreeSet = new TreeMap<>();
-    private List<Object> dataObjects;
     private final IHandle dataHandler;
     private final Resource resource;
     private List<String> primaryKeys = new ArrayList<>();
     private Class<?>[] primaryTypes;
     private Class<?> clazz;
+    private ITree<Object> rbTree;
+    private Comparator<Object> comparator = null;
+    private boolean compression = false;
 
     /**
      * @param resource {@link Resource}
@@ -41,21 +45,21 @@ public final class Collector implements ICollector{
      * @throws IOException IOException
      */
     @Override
-    public void CollectData() throws IOException {
-        long start = System.currentTimeMillis();
+    public void collectData() throws IOException {
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
+        rbTree = new RBTree<>(comparator, compression);
+
         try {
-            ObjectInformation<Object> objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
-            List<Object> objectList = objectObjectInformation.data;
+            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
+            for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
+
             primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;
             dataObjects = objectList;
 
-            System.out.println("Size is: " + objectList.size());
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
-        System.out.println(System.currentTimeMillis() - start);
     }
 
     /**
@@ -76,9 +80,14 @@ public final class Collector implements ICollector{
         settings.put(key, value);
     }
 
+    @Override
+    public void setCompressionOn(boolean b) {
+        this.compression = b;
+    }
+
 
     /**
-     * Sets all settings from a given map.
+     * Sets all settings from a execute map.
      * Will overwrite all existing settings with the new value.
      * @param settings {@link Map}&lt;String, String&gt;
      */
@@ -132,7 +141,10 @@ public final class Collector implements ICollector{
     @NotNull
     @Override
     public List<Object> getAllColumns() {
-        return Collections.unmodifiableList(dataObjects);
+        Iterator<Node<Object>> iterator = rbTree.inorderTraversal();
+        List<Object> res = new ArrayList<>();
+        while(iterator.hasNext()){ res.add(iterator.next().getT()); }
+        return res;
     }
 
     /**
@@ -142,7 +154,6 @@ public final class Collector implements ICollector{
      */
     @Contract(pure = true)
     public final @NotNull Map<@NotNull Setting, @NotNull String> getSettings(){ return Collections.unmodifiableMap(settings); }
-
 
     /**
      * @param resource {@link Resource}
@@ -154,5 +165,4 @@ public final class Collector implements ICollector{
     public static CollectorBuilder newCollector(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
-
 }

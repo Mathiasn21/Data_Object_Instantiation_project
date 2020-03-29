@@ -4,7 +4,7 @@ import framework.annotations.DataObject;
 
 @DataObject
 public class TestJSON {
-    public String item;
+    public final String item;
     public String itemName;
     public String thing;
     public int[] array;

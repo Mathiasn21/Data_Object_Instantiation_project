@@ -33,24 +33,22 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
-    private final Map<String, Class<?>> filesMappedToDataObject = new HashMap<>();
+    private final Map<String, Class<?>> resourceMappedToDataObject = new HashMap<>();
     private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
     private final Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
-    private final List<Class<?>> dataObjectsWithNoFiles = new ArrayList<>();
+    private final List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
+
 
     public AnnotationsProcessor() {
         Set<Class<?>> clazzes = getAllDataObjectClasses();
         clazzes.iterator().forEachRemaining((clazz) -> {
-            DataObject dataObject = clazz.getAnnotation(DataObject.class);
 
             Class<?>[] primaryTypes = getPrimaryTypes(clazz);
             Constructor<?> constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
             objectMappedToConstructor.put(clazz, constructor);
             constructorToPrimaryTypes.put(constructor, primaryTypes);
 
-            String fileName = dataObject.resourceName();
-            if (fileName.equals("")) { dataObjectsWithNoFiles.add(clazz);
-            } else { filesMappedToDataObject.put(fileName, clazz); }
+            dataObjectsWithNoResources.add(clazz);
         });
     }
 
@@ -59,6 +57,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     //                   3.Private Getters               //
     // --------------------------------------------------//
     /**
+     * @param primaryTypes p
      * @param constructors {@link Constructor}&lt;?&gt;[]
      * @return {@link Constructor}&lt;?&gt;
      */
@@ -86,7 +85,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         }
         throw new NoSuchConstructor();
     }
-
 
     /**
      * PrimaryTypes refers to the types that describes a dataset
@@ -118,6 +116,16 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         return reflections.getTypesAnnotatedWith(DataObject.class);
     }
 
+    /**
+     * @param name {@link String}
+     * @return {@link Class}&lt;?&gt;
+     */
+    @Override
+    @Nullable
+    public Class<?> getClassFromObjectSample(@NotNull String name){
+        return resourceMappedToDataObject.get(name);
+    }
+
 
     // --------------------------------------------------//
     //                   4.Contract Methods              //
@@ -125,27 +133,25 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param name String
-     * @return {@link ObjectInformation}&lt;{@link T}&gt;
+     * @return {@link ObjectInformation}
      * @throws InstantiationException InstantiationException
      * @throws InvocationTargetException InvocationTargetException
      * @throws IllegalAccessException IllegalAccessException
      */
-    @NotNull
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
-    public <T> ObjectInformation<T> initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
+    public @NotNull ObjectInformation initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
             throws ReflectiveOperationException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
-        Class<?> clazz = filesMappedToDataObject.containsKey(name) ?
-                filesMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
-
+        Class<?> clazz = resourceMappedToDataObject.containsKey(name) ?
+                resourceMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));
 
         Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
         for (Object[] initArgs : listWithInitArgs) {
             listOfDataObjects.add(constructor.newInstance(initArgs));
         }
-        return new ObjectInformation<>(constructorToPrimaryTypes.get(constructor), clazz, (List<T>) listOfDataObjects);
+        return new ObjectInformation(constructorToPrimaryTypes.get(constructor), clazz, listOfDataObjects);
     }
 
 
@@ -158,16 +164,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @Nullable
     public Class<?> getClassFromObjectSample(@NotNull Object... objects){
         return getDataObjectWithoutFile(objects);
-    }
-
-    /**
-     * @param name {@link String}
-     * @return {@link Class}&lt;?&gt;
-     */
-    @Override
-    @Nullable
-    public Class<?> getClassFromObjectSample(@NotNull String name){
-        return filesMappedToDataObject.get(name);
     }
 
 
@@ -190,7 +186,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         int typesHashCode = calcHashcodeFrom(types);
         Class<?> partialMatch = null;
 
-        for (Class<?> clazz : dataObjectsWithNoFiles) {
+        for (Class<?> clazz : dataObjectsWithNoResources) {
             Constructor<? extends DataObject> constructor = (Constructor<? extends DataObject>) objectMappedToConstructor.get(clazz);
             Class<?>[] params = constructor.getParameterTypes();
             int paramsUniqueHashCode = Arrays.hashCode(params);
@@ -201,9 +197,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
                 }else if (paramsHashCode == typesHashCode) { partialMatch = clazz; }
             }
         }
-        if(partialMatch != null){
-            return partialMatch;
-        }
+
+        if(partialMatch != null){ return partialMatch; }
         throw new NoMatchingDataObject();
     }
 

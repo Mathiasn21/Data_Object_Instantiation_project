@@ -6,13 +6,13 @@ import java.util.Map;
 
 /** Interface describing contract for all collectors
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public interface ICollector {
     /**
      * @throws IOException IOException
      */
-    void CollectData() throws IOException;
+    void collectData() throws IOException;
 
     /**
      * @param list {@link List}&lt;{@link String}&gt;
@@ -24,6 +24,9 @@ public interface ICollector {
      * @param value {@link String}
      */
     void setSetting(Setting key, String value);
+
+    void setCompressionOn(boolean b);
+
 
     /**
      * @param settings {@link Map}&lt;{@link Setting}, {@link String}&gt;
@@ -49,8 +52,6 @@ public interface ICollector {
      * @return {@link Class}&lt;?&gt;
      */
     Class<?> getClazz();
-
-
 
     /**
      * @return {@link List}&lt;{@link Object}&gt;

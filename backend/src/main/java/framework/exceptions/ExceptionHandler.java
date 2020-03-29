@@ -9,7 +9,7 @@ import java.io.PrintStream;
 /** Class for describing a code and a message describing the error
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public enum ExceptionHandler {
     ERROR_MISSING_RESOURCE(1, "Missing resource, make sure no files are missing"),
@@ -17,7 +17,10 @@ public enum ExceptionHandler {
     ERROR_NO_EXISTING_COLUMN(3, "ERROR, there are no existing column with that name"),
     ERROR_NO_PRIMARY_COLUMNS(4, "ERROR, can not find any primary columns"),
     ERROR_WRONG_URL(5, "This URL is not accurate or does not exist"),
-    ERROR_WRONG_FILE_PATH(6, "This file path is not accurate or does not exist");
+    ERROR_WRONG_FILE_PATH(6, "This file path is not accurate or does not exist"),
+    ERROR_FILE_DOES_NOT_EXIST(7, "The file execute, does not exist"),
+    ERROR_LOAD_RESOURCE(8, "ERROR, can't load resource"),
+    ERROR_FILE_EXISTS(9, "ERROR, this file already exists");
 
     public final int CODE;
     public final String ERROR_MSG;

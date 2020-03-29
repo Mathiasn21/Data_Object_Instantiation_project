@@ -13,12 +13,11 @@ import java.util.*;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  * @version 1.0
  */
-public final class Extractor<T extends ICollector> implements IExtractor {
-
-    private final T collector;
+public final class Extractor<C extends ICollector> implements IExtractor {
+    private final C collector;
     private final List<Object> allColumns;
 
-    public Extractor(@NotNull T collector) {
+    public Extractor(@NotNull C collector) {
         this.collector = collector;
         this.allColumns = collector.getAllColumns();
     }
@@ -52,26 +51,6 @@ public final class Extractor<T extends ICollector> implements IExtractor {
 
 
     /**
-     * @return returns the columns given by the user from the file.
-     */
-    @NotNull
-    public final List<Object> extractColumns(){
-        //TODO: Alter method as intellij reports many warnings due to degenerated code
-        //TODO: Might be better to remove or move the code to another more appropriate method
-        List<Object> data = null;
-        List<String> primaryKeys = collector.getPrimaryKeys();
-        for(int i = 0; i < primaryKeys.size(); i++){
-            for(int j = 0; j < allColumns.size(); j++){
-                if (primaryKeys.get(i).toString().equals(allColumns.get(j).toString())){
-                    data.add(allColumns.get(j));
-                }
-            }
-        }
-        return Collections.unmodifiableList(data);
-    }
-
-
-    /**
      * @return returns all columns from dataset
      */
     @Contract(pure = true)
@@ -97,14 +76,13 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     @Nullable
     @Contract(pure = true)
     @Override
-    public final Map<String, Integer> extractReportFrom(@NotNull String columnName) {
+    public final Map<String, Double> extractReportFom(@NotNull String columnName) {
         return null;
     }
 
     @NotNull
-    @Contract(value = " -> new", pure = true)
     @Override
-    public <O> List<O> extractAllColumnsAsT() {
-        return (List<O>) collector.getAllColumns();
+    public <T> List<T> extractAllColumnsAsT(Class<T> tClass) {
+        return new ArrayList<>();
     }
 }

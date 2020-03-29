@@ -6,7 +6,7 @@ import framework.annotations.DataObjectField;
 /**
  * ComplexDTO that contains custom field that require mapping
  */
-@DataObject(resourceName = "test")
+@DataObject
 public class ComplexDTO {
 
     @DataObjectField
@@ -23,7 +23,6 @@ public class ComplexDTO {
     public ComplexDTO(String string, double doubles, int integer) {
         this.integer = integer;
         this.string = string;
-        this.thing = thing;
         this.doubles = doubles;
     }
 

@@ -23,19 +23,6 @@ public final class CollectorBuilder {
 
     @Contract("_ -> this")
     @NotNull
-    public final CollectorBuilder setDataHandler(IHandle dataHandler) {
-        return this;
-    }
-
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorBuilder setResource(Resource resource) {
-        return this;
-    }
-
-
-    @Contract("_ -> this")
-    @NotNull
     public final CollectorBuilder setPrimaryColumns(List<String> primaryColumns){
         collector.setPrimaryKeys(primaryColumns);
         return this;
