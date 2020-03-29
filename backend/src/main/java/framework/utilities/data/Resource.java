@@ -42,7 +42,6 @@ public final class Resource {
         while((line = bufferedReader.readLine()) != null ){
             builder.append(line);
         }
-
         return builder.toString();
     }
 

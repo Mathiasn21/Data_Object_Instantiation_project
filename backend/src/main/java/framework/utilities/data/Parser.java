@@ -58,7 +58,7 @@ public final class Parser {
     }
 
     /**
-     * Returns if execute class is a primitive or a primtitve wrapper
+     * Returns if clazz is a primitive or a primtitve wrapper
      * @param clazz {@link Class}&lt;?&gt;
      * @return boolean
      */
@@ -76,7 +76,9 @@ public final class Parser {
 
 
     /**
-     * Gets a comparator for a execute primtitve type, or throws an error
+     * Gets corresponding comparator for given primtitve type,
+     * throws error if none is found. It is an error as this is
+     * considered fatal if no comparator was found.
      * @param clazz {@link Class}&lt;?&gt;
      * @return {@link Comparator}&lt;?&gt;
      */
