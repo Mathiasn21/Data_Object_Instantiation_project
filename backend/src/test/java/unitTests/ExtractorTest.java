@@ -49,12 +49,14 @@ public class ExtractorTest {
 
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
-        List<Object> res = extractor.extractAllColumns();
+        List<Object[]> res = extractor.extractColumns();
 
         assertFalse(res.isEmpty());
         int i = 0;
         while (i < res.size()) {
-            assertTrue(res.get(i) instanceof ComplexDTOCSV);
+            assertTrue(res.get(i)[0] instanceof String);
+            assertTrue(res.get(i)[1] instanceof Double);
+            assertTrue(res.get(i)[2] instanceof Integer);
             i++;
         }
     }
@@ -71,12 +73,13 @@ public class ExtractorTest {
         Class<?>[] types = collector.getPrimaryKeyTypes();
         Class<?> clazz = collector.getClazz();
 
-        List<ComplexDTOCSV> res = extractor.extractAllColumns(clazz);
+        List<Object[]> res = extractor.extractColumns(clazz);
         assertFalse(res.isEmpty());
-        assertEquals(list, res);
         int i = 0;
         while (i < res.size()) {
-            assertNotNull(res.get(i));
+            assertTrue(res.get(i)[0] instanceof String);
+            assertTrue(res.get(i)[1] instanceof Double);
+            assertTrue(res.get(i)[2] instanceof Integer);
             i++;
         }
     }

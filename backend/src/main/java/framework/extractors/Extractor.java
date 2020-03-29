@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,17 +66,35 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @NotNull
     @Override
-    public final List<Object> extractAllColumns(){
-        return collector.getAllColumns();
+    public final List<Object[]> extractColumns(){
+        return new ArrayList<>();
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    public List<Object[]> extractColumns(@NotNull Class<?> clazz) {
+        List<Object> allColumns = collector.getAllColumns();
+        Class<?> collectorClazz = collector.getClazz();
+        return new ArrayList<>();
     }
 
     @NotNull
     @Contract(pure = true)
     @Override
-    public <O> List<O> extractAllColumns(Class<?> clazz) {
-        List<Object> allColumns = collector.getAllColumns();
-        Class<?> collectorClazz = collector.getClazz();
-        return (List<O>) allColumns;
+    public List<Object[]> extractColumns(@NotNull Field... fields) {
+        return null;
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public List<Object[]> extractColumns(@NotNull String... columns) {
+        return null;
+    }
+
+    @Override
+    public @NotNull List<Object[]> extractColumns(@NotNull int... indexes) {
+        return null;
     }
 
     /**

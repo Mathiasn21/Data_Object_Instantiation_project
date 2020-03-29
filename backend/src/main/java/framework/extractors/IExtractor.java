@@ -1,6 +1,9 @@
 package framework.extractors;
 
 
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +17,13 @@ public interface IExtractor{
      * @param columnName String
      * @return double[]
      */
-    List<Object> extractColumnFrom (String columnName) throws NoSuchFieldException, IllegalAccessException;
-    List<Object> extractAllColumns();
-    <T>List<T> extractAllColumns(Class<?> clazz);
-    Map<String, Double> extractReportFom(String columnName);
+    @NotNull List<Object> extractColumnFrom (String columnName) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object[]> extractColumns();
+    @NotNull List<Object[]> extractColumns(@NotNull Class<?> clazz);
+    @NotNull List<Object[]> extractColumns(@NotNull Field ...fields);
+    @NotNull List<Object[]> extractColumns(@NotNull String ...columns);
+    @NotNull List<Object[]> extractColumns(@NotNull int ...indexes);
+    @NotNull <T> List<T> extractAllColumnsAsT(Class<T> tClass);
 
-    <T> List<T> extractAllColumnsAsT(Class<T> tClass);
+    @NotNull Map<String, Double> extractReportFom(String columnName);
 }
