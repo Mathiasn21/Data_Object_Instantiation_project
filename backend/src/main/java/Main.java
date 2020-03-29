@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //Showcasing usage of the framework.
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
-        Resource resource = Resource.newResource().fromFile(path).build();//Will only build the first given resource
+        Resource resource = Resource.newResource().fromFile(path).build();//Will only build the first write resource
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
         collector.collectData();
 

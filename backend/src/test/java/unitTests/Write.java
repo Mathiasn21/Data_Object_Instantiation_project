@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Constructor;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -24,7 +21,7 @@ public class Write {
         String path;
         path = System.getProperty("user.dir") + "/files/writeToTest.txt";
         WriteFile write = WriteFile.getObj();
-        write.given(path, "StringPath;");
+        write.write(path, "StringPath;");
 
         Resource resource = Resource.newResource().fromFile(path).build();
         StringBuilder builder = new StringBuilder();
@@ -44,7 +41,7 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             WriteFile write = WriteFile.getObj();
             File path = new File(System.getProperty("user.dir") + "/files/writeToTest.txt");
-            write.given(path, "FilePath;");
+            write.write(path, "FilePath;");
 
             Resource resource = Resource.newResource().fromFile(path).build();
             StringBuilder builder = new StringBuilder();
@@ -65,7 +62,7 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             String url = "http://example.com";
             WriteURL write = WriteURL.getObj();
-            write.given(url, "writing...");
+            write.write(url, "writing...");
 
             URL url_status = new URL(url);
             HttpURLConnection http = (HttpURLConnection)url_status.openConnection();
@@ -111,7 +108,7 @@ public class Write {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
             WriteFile write = WriteFile.getObj();
-            write.appendDataGiven(path, "wwappending2");
+            write.appendData(path, "wwappending2");
 
 
 
@@ -144,7 +141,7 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             File path = new File(System.getProperty("user.dir") + "/files/createFile.csv");
             WriteFile w = WriteFile.getObj();
-            w.deleteFile(path);
+            w.remove(path);
             Assertions.assertFalse(path.exists());
         });
     }

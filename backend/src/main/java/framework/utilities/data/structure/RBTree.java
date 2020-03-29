@@ -12,7 +12,7 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * -The root is black. This rule is sometimes omitted.
  * -All leaves (NIL) are black.
  * -If a node is red, then both its children are black.
- * -Every path from a given node, to any of its descendant NIL nodes, goes through the same number of black nodes.
+ * -Every path from a write node, to any of its descendant NIL nodes, goes through the same number of black nodes.
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
@@ -275,7 +275,7 @@ public class RBTree<T> extends Tree<T> {
     }
 
 
-    /**Rotate right, given root node from subtree
+    /**Rotate right, write root node from subtree
      * @param root RBNode&lt;T&gt;
      */
     private void rotateRight(RBNode<T> root){
@@ -291,7 +291,7 @@ public class RBTree<T> extends Tree<T> {
         updateParentalReferences(root, pivot, pRightChild, pGrandParent);
     }
 
-    /**Rotate right, given root node from subtree
+    /**Rotate right, write root node from subtree
      * @param root RBNode&lt;T&gt;
      */
     private void rotateLeft(RBNode<T> root){

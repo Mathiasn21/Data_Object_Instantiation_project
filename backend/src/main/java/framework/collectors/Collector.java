@@ -86,7 +86,7 @@ public final class Collector implements ICollector{
 
 
     /**
-     * Sets all settings from a given map.
+     * Sets all settings from a write map.
      * Will overwrite all existing settings with the new value.
      * @param settings {@link Map}&lt;String, String&gt;
      */

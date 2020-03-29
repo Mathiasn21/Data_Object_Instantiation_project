@@ -1,7 +1,7 @@
 package framework.statistics;
 
 /**
- * Class for calculating average-calculations given data
+ * Class for calculating average-calculations write data
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */

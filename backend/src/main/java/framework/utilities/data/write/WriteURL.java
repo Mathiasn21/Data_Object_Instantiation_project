@@ -11,95 +11,37 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * Primary function of this class is to, POST data to a
+ * URL.
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
 public final class WriteURL implements IWriteURL {
+    private final URL url;
+    private final String data;
 
-    WriteURL() {
+    public WriteURL(@NotNull URL url, @NotNull String data) {
+        this.url = url;
+        this.data = data;
+    }
+
+    public WriteURL(@NotNull String url, @NotNull String data) throws MalformedURLException {
+        this(new URL(url), data);
     }
 
     /**
-     * Standard method for wriing data to a given URL.
+     * Standard method for writing data to a write URL.
      * This method does not append but overwrites.
-     * @param resource String
-     * @param data String
-     * @throws IOException IOException
-     */
-    @Override
-    public final void given(@NotNull URL resource, @NotNull String data) throws IOException {
-        URLConnection conn = resource.openConnection();
-        conn.setDoOutput(true);
-        OutputStream out = conn.getOutputStream();
-
-        try (Writer w = new OutputStreamWriter(out, StandardCharsets.UTF_8)) {
-            w.write(data);
-        }
-    }
-
-
-    /**
-     * Standard method for writing data to a given URL.
-     * This method does not append but overwrites.
-     * @param resource URL
-     * @param data String
-     * @throws IOException IOException
-     */
-    @Override
-    public void appendDataGiven(@NotNull URL resource, @NotNull String data) throws IOException {
-        //TODO: test this, i think this is the wrong way to append
-        URLConnection conn = resource.openConnection();
-        conn.setDoOutput(true);
-        OutputStream out = conn.getOutputStream();
-
-        try (Writer w = new OutputStreamWriter(out, StandardCharsets.UTF_8)) {
-            w.append(data);
-        }
-    }
-
-    /**
-     * Standard method for writing data to a given URL.
-     * This method does not append but overwrites.
-     * @param resource String
-     * @param data String
      * @throws IOException IOException
      */
     @Contract(pure = true)
     @Override
-    public final void given(@NotNull String resource, @NotNull String data) throws IOException {
-        URL url1 = new URL(resource);
-        URLConnection conn = url1.openConnection();
-        conn.setDoOutput(true);
-        OutputStream out = conn.getOutputStream();
-
-        try (Writer w = new OutputStreamWriter(out, StandardCharsets.UTF_8)) {
-            w.write(data);
-        }
-
-    }
-
-    /**
-     * Standard method for writing data to a given URL.
-     * This method does not append but overwrites.
-     * @param resource String
-     * @param data String
-     * @throws IOException IOException
-     */
-    @Override
-    public void appendDataGiven(@NotNull String resource, @NotNull String data) throws IOException {
-        //TODO: test this, i think this is the wrong way to append
-        URL url = new URL(resource);
+    public final void write() throws IOException {
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         OutputStream out = conn.getOutputStream();
-
         try (Writer w = new OutputStreamWriter(out, StandardCharsets.UTF_8)) {
-            w.append(data);
+            w.write(data);
         }
-    }
-    public static WriteURL getObj()
-    {
-        //TODO: find a better method to reach private class
-        return new WriteURL();
     }
 }
