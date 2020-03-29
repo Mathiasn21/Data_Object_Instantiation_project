@@ -49,10 +49,10 @@ public class Node<T> implements Cloneable{
         if (!(o instanceof Node)) return false;
 
         Node<?> node = (Node<?>) o;
-        if (!Objects.equals(t, node.t)) return false;
-        if (!Objects.equals(left, node.left)) return false;
-        if (!Objects.equals(right, node.right)) return false;
-        return Objects.equals(parent, node.parent);
+        if (!t.equals(node.t)) return false;
+        if (left != node.left) return false;
+        if (right != node.right) return false;
+        return parent == node.parent;
     }
 
     @Override

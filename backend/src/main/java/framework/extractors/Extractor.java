@@ -30,7 +30,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
      */
     @NotNull
     @Override
-    public final List<Object> extractColumnFrom(@NotNull String columnName) throws NoSuchFieldException, IllegalAccessException {
+    public final List<Object> extractColumnFrom(@NotNull String columnName) throws NoSuchFieldException {
         List<Object> data = null;
         List<Object> allColumns = collector.getAllColumns();
         //Grab fields from class
@@ -50,7 +50,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         System.out.println(keys.get(0)); //IS EMPTY???
         //grab primarykeys if exists from collector.*/
 
-        return ;
+        return null;
     }
 
 
