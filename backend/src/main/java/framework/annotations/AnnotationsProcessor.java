@@ -33,13 +33,14 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     //                2.Class Fields                     //
     // --------------------------------------------------//
-    private final Map<String, Class<?>> resourceMappedToDataObject = new HashMap<>();
-    private final Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
-    private final Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
-    private final List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
-
+    private final static Map<String, Class<?>> resourceMappedToDataObject = new HashMap<>();
+    private final static Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
+    private final static Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
+    private final static List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
 
     public AnnotationsProcessor() {
+        if(!objectMappedToConstructor.isEmpty()){return;}
+
         Set<Class<?>> clazzes = getAllDataObjectClasses();
         clazzes.iterator().forEachRemaining((clazz) -> {
 
