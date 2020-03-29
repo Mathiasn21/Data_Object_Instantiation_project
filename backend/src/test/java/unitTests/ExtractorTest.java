@@ -1,6 +1,5 @@
 package unitTests;
 
-import DTOs.ComplexDTO;
 import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
@@ -10,7 +9,6 @@ import framework.utilities.data.Resource;
 import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
