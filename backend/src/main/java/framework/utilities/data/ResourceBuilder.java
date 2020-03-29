@@ -29,34 +29,31 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @throws IOException e
      * @param path String
      * @return {@link ResourceBuilder}
      */
-    public ResourceBuilder fromFile(@NotNull String path) throws IOException {
+    public ResourceBuilder fromFile(@NotNull String path) {
         ReadFileCommand readFileCommand = new ReadFileCommand(path);
         readers.add(readFileCommand);
         return this;
     }
 
     /**
-     * @throws IOException e
      * @param file {@link File}
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromFile(@NotNull File file) throws IOException {
+    public ResourceBuilder fromFile(@NotNull File file) {
         ReadFileCommand readFileCommand = new ReadFileCommand(file);
         readers.add(readFileCommand);
         return this;
     }
 
     /**
-     * @throws IOException e
      * @param paths String...
      * @return {@link ResourceBuilder}
      */
-    public ResourceBuilder fromFile(@NotNull String... paths) throws IOException {
+    public ResourceBuilder fromFile(@NotNull String... paths) {
         for (String path : paths) {
             IReadCommand readFile = new ReadFileCommand(path);
             readers.add(readFile);
@@ -65,12 +62,11 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @throws IOException e
      * @param files {@link File...}
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromFile(@NotNull File... files) throws IOException {
+    public ResourceBuilder fromFile(@NotNull File... files) {
         for (File file : files) {
             IReadCommand readFile = new ReadFileCommand(file);
             readers.add(readFile);
@@ -91,12 +87,11 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @throws IOException e
      * @param url {@link URL}
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURL(@NotNull URL url) throws IOException {
+    public ResourceBuilder fromURL(@NotNull URL url) {
         IReadCommand readURL = new ReadURLCommand(url);
         readers.add(readURL);
         return this;
@@ -117,12 +112,11 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @throws IOException e
      * @param urls {@link URL...}
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURLs(@NotNull URL... urls) throws IOException {
+    public ResourceBuilder fromURLs(@NotNull URL... urls) {
         for (URL url : urls) {
             IReadCommand readURL = new ReadURLCommand(url);
             readers.add(readURL);
