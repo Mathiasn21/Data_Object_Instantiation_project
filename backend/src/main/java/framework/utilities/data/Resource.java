@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /** Class representing a data source. Aka a place to fetch data from.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public final class Resource {
     private final IReadCommand readData;

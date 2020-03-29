@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 /** Class for parsing string values to primitive types execute a clazz
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
- * @version 1.0
+ * @version 1.0.0
  */
 public final class Parser {
     /**

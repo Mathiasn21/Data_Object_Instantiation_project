@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.utilities.data.IWriteCommand;
+import framework.utilities.data.write.IWriteCommand;
 import framework.utilities.data.Resource;
 import framework.utilities.data.write.WriteFileWriteCommand;
 import framework.utilities.data.write.WriteURLWriteCommand;
@@ -98,7 +98,7 @@ public class Write {
         //TODO: implement method
         fail();
     }
-    
+
     @Test
     void to_file_using_string_appending(){
         Assertions.assertDoesNotThrow(() -> {

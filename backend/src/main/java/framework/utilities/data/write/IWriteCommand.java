@@ -1,4 +1,4 @@
-package framework.utilities.data;
+package framework.utilities.data.write;
 
 import java.io.IOException;
 /**

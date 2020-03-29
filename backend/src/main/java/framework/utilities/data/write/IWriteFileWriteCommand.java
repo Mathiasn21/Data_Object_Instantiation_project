@@ -1,7 +1,5 @@
 package framework.utilities.data.write;
 
-import framework.utilities.data.IWriteCommand;
-
 /**
  * Describes a contract for writing to a file.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21

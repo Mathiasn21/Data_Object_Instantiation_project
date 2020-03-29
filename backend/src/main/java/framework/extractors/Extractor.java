@@ -13,11 +13,11 @@ import java.util.*;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  * @version 1.0
  */
-public final class Extractor<T extends ICollector> implements IExtractor {
-    private final T collector;
+public final class Extractor<C extends ICollector> implements IExtractor {
+    private final C collector;
     private final List<Object> allColumns;
 
-    public Extractor(@NotNull T collector) {
+    public Extractor(@NotNull C collector) {
         this.collector = collector;
         this.allColumns = collector.getAllColumns();
     }
@@ -63,9 +63,8 @@ public final class Extractor<T extends ICollector> implements IExtractor {
     }
 
     @NotNull
-    @Contract(value = " -> new", pure = true)
     @Override
-    public <O> List<O> extractAllColumnsAsT() {
+    public <T> List<T> extractAllColumnsAsT(Class<T> tClass) {
         return new ArrayList<>();
     }
 }
