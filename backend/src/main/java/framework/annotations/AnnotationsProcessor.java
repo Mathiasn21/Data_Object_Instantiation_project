@@ -13,13 +13,11 @@ package framework.annotations;
 import framework.errors.NoMatchingDataObject;
 import framework.errors.NoSuchConstructor;
 import framework.utilities.data.Parser;
-import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -88,7 +86,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         throw new NoSuchConstructor();
     }
 
-
     /**
      * PrimaryTypes refers to the types that describes a dataset
      * @param clazz Class&lt;?&gt;&gt;
@@ -117,6 +114,16 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     private Set<Class<?>> getAllDataObjectClasses(){
         Reflections reflections = new Reflections("");
         return reflections.getTypesAnnotatedWith(DataObject.class);
+    }
+
+    /**
+     * @param name {@link String}
+     * @return {@link Class}&lt;?&gt;
+     */
+    @Override
+    @Nullable
+    public Class<?> getClassFromObjectSample(@NotNull String name){
+        return resourceMappedToDataObject.get(name);
     }
 
 
@@ -157,16 +164,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @Nullable
     public Class<?> getClassFromObjectSample(@NotNull Object... objects){
         return getDataObjectWithoutFile(objects);
-    }
-
-    /**
-     * @param name {@link String}
-     * @return {@link Class}&lt;?&gt;
-     */
-    @Override
-    @Nullable
-    public Class<?> getClassFromObjectSample(@NotNull String name){
-        return resourceMappedToDataObject.get(name);
     }
 
 

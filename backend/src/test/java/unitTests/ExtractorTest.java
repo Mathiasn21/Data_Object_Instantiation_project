@@ -1,5 +1,6 @@
 package unitTests;
 
+import DTOs.ComplexDTO;
 import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
@@ -31,14 +32,12 @@ public class ExtractorTest {
         Class<?>[] types = collector.getPrimaryKeyTypes();
         List<Object> column1 = extractor.extractColumnFrom("Column1");
 
-        //System.out.println(list);
-
-        Assertions.assertFalse(column1.isEmpty());
-        Assertions.assertEquals(list, column1);
+        assertFalse(column1.isEmpty());
+        assertEquals(list, column1);
 
         int i = 0;
         while (i < column1.size()) {
-            Assertions.assertTrue(column1.get(i) instanceof String);
+            assertTrue(column1.get(i) instanceof String);
             i++;
         }
     }
@@ -54,10 +53,10 @@ public class ExtractorTest {
         IExtractor extractor = new Extractor<>(collector);
         List<Object> res = extractor.extractAllColumns();
 
-        Assertions.assertFalse(res.isEmpty());
+        assertFalse(res.isEmpty());
         int i = 0;
         while (i < res.size()) {
-            Assertions.assertTrue(res.get(i) instanceof ComplexDTOCSV);
+            assertTrue(res.get(i) instanceof ComplexDTOCSV);
             i++;
         }
     }
@@ -75,10 +74,8 @@ public class ExtractorTest {
         Class<?> clazz = collector.getClazz();
 
         List<ComplexDTOCSV> res = extractor.extractAllColumns(clazz);
-
-        Assertions.assertFalse(res.isEmpty());
-        Assertions.assertEquals(list, res);
-
+        assertFalse(res.isEmpty());
+        assertEquals(list, res);
         int i = 0;
         while (i < res.size()) {
             assertNotNull(res.get(i));
@@ -95,10 +92,10 @@ public class ExtractorTest {
 
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
-        List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT();
+        List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT(ComplexDTOCSV.class);
 
-        Assertions.assertFalse(res.isEmpty());
-        Assertions.assertEquals(list, res);
+        assertFalse(res.isEmpty());
+        assertEquals(list, res);
         int i = 0;
         while (i < res.size()) {
             assertNotNull(res.get(i));

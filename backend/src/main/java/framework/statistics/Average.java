@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Class for calculating average methods given the data {@link IAverage}
+ * Class for calculating average methods execute the data {@link IAverage}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
