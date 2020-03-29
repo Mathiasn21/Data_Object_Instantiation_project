@@ -39,6 +39,7 @@ public final class Extractor<T extends ICollector> implements IExtractor {
         System.out.println(fields[1].getName());
 
         if(fields[1].getName().equals(columnName)){
+            assert data != null;
             data.add(fields[1]);
         }
 
