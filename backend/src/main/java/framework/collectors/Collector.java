@@ -24,7 +24,7 @@ public final class Collector implements ICollector{
     private final Map<Setting, String> settings = new HashMap<>();
     private final IHandle dataHandler;
     private final Resource resource;
-    private List<String> primaryKeys = new ArrayList<>();
+    private List<String> primaryKeys;
     private Class<?>[] primaryTypes;
     private Class<?> clazz;
     private ITree<Object> rbTree;
@@ -55,7 +55,6 @@ public final class Collector implements ICollector{
 
             primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;
-            dataObjects = objectList;
 
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
