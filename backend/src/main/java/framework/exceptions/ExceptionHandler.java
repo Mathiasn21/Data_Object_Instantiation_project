@@ -18,7 +18,7 @@ public enum ExceptionHandler {
     ERROR_NO_PRIMARY_COLUMNS(4, "ERROR, can not find any primary columns"),
     ERROR_WRONG_URL(5, "This URL is not accurate or does not exist"),
     ERROR_WRONG_FILE_PATH(6, "This file path is not accurate or does not exist"),
-    ERROR_FILE_DOES_NOT_EXIST(7, "The file write, does not exist"),
+    ERROR_FILE_DOES_NOT_EXIST(7, "The file execute, does not exist"),
     ERROR_LOAD_RESOURCE(8, "ERROR, can't load resource"),
     ERROR_FILE_EXISTS(9, "ERROR, this file already exists");
 

@@ -139,7 +139,7 @@ public final class CSVHandler implements IHandle{
     }
 
     /**
-     * Returns all found types from a write string.
+     * Returns all found types from a execute string.
      * Does not handle arrays or other complex objects.
      * @param r String[]
      * @return {@link List}&lt;{@link Class}&lt;?&gt;&gt;

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import java.util.Comparator;
 
-/** Class for parsing string values to primitive types write a clazz
+/** Class for parsing string values to primitive types execute a clazz
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0
  */
@@ -40,7 +40,7 @@ public final class Parser {
     }
 
     /**
-     * Returns corresponding primitive class, write a primitive wrapper
+     * Returns corresponding primitive class, execute a primitive wrapper
      * @param clazz {@link Class}&lt;?&gt;
      * @return {@link Class}&lt;?&gt;
      */
@@ -58,7 +58,7 @@ public final class Parser {
     }
 
     /**
-     * Returns if write class is a primitive or a primtitve wrapper
+     * Returns if execute class is a primitive or a primtitve wrapper
      * @param clazz {@link Class}&lt;?&gt;
      * @return boolean
      */
@@ -76,7 +76,7 @@ public final class Parser {
 
 
     /**
-     * Gets a comparator for a write primtitve type, or throws an error
+     * Gets a comparator for a execute primtitve type, or throws an error
      * @param clazz {@link Class}&lt;?&gt;
      * @return {@link Comparator}&lt;?&gt;
      */

@@ -7,16 +7,12 @@ import java.io.IOException;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.0.0
  */
-public interface IRead {
+@FunctionalInterface
+public interface IReadCommand {
 
     /**
      * @throws IOException e
      * @return {@link BufferedReader}
      */
-    BufferedReader read() throws IOException;
-
-    /**
-     * @return String
-     */
-    String getSourceName();
+    BufferedReader execute() throws IOException;
 }

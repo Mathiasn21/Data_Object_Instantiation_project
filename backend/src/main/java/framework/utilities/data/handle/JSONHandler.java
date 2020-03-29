@@ -93,7 +93,7 @@ public final class JSONHandler implements IHandle{
 
 
     /**
-     * This method retrieves a list, write a type Class and a json string.
+     * This method retrieves a list, execute a type Class and a json string.
      * @param type             T[]
      * @param jsonTextFromFile String
      * @param <T>              T

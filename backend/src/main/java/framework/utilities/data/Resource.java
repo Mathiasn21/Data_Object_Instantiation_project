@@ -1,6 +1,6 @@
 package framework.utilities.data;
 
-import framework.utilities.data.read.IRead;
+import framework.utilities.data.read.IReadCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,22 +13,22 @@ import java.io.IOException;
  * @version 1.0
  */
 public final class Resource {
-    private final IRead readData;
+    private final IReadCommand readData;
     private final String name;
 
     /**
-     * @param readData {@link IRead}
+     * @param readData {@link IReadCommand}
      */
-    Resource(@NotNull IRead readData) {
+    Resource(@NotNull IReadCommand readData) {
         this.readData = readData;
-        this.name = readData.getSourceName();
+        this.name = "";
     }
 
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
-    public final @NotNull BufferedReader getData() throws IOException { return readData.read(); }
+    public final @NotNull BufferedReader getData() throws IOException { return readData.execute(); }
 
     /**
      * @return {@link String}
@@ -37,7 +37,7 @@ public final class Resource {
     @NotNull
     public final String getDataAsString() throws IOException {
         StringBuilder builder = new StringBuilder();
-        BufferedReader bufferedReader = readData.read();
+        BufferedReader bufferedReader = readData.execute();
         String line;
         while((line = bufferedReader.readLine()) != null ){
             builder.append(line);

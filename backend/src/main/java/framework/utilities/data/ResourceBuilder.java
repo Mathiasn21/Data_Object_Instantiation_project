@@ -1,8 +1,8 @@
 package framework.utilities.data;
 
-import framework.utilities.data.read.IRead;
-import framework.utilities.data.read.ReadFile;
-import framework.utilities.data.read.ReadURL;
+import framework.utilities.data.read.IReadCommand;
+import framework.utilities.data.read.ReadFileCommand;
+import framework.utilities.data.read.ReadURLCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Builds a resource from which to fetch data
@@ -19,7 +18,7 @@ import java.util.Map;
  * @version 1.0.0
  */
 public final class ResourceBuilder {
-    private final List<IRead> readers = new ArrayList<>();
+    private final List<IReadCommand> readers = new ArrayList<>();
 
     /**
      * Leave be, prevents unwanted instantiation.
@@ -35,8 +34,8 @@ public final class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     public ResourceBuilder fromFile(@NotNull String path) throws IOException {
-        ReadFile readFile = new ReadFile(path);
-        readers.add(readFile);
+        ReadFileCommand readFileCommand = new ReadFileCommand(path);
+        readers.add(readFileCommand);
         return this;
     }
 
@@ -47,8 +46,8 @@ public final class ResourceBuilder {
      */
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromFile(@NotNull File file) throws IOException {
-        ReadFile readFile = new ReadFile(file);
-        readers.add(readFile);
+        ReadFileCommand readFileCommand = new ReadFileCommand(file);
+        readers.add(readFileCommand);
         return this;
     }
 
@@ -59,7 +58,7 @@ public final class ResourceBuilder {
      */
     public ResourceBuilder fromFile(@NotNull String... paths) throws IOException {
         for (String path : paths) {
-            IRead readFile = new ReadFile(path);
+            IReadCommand readFile = new ReadFileCommand(path);
             readers.add(readFile);
         }
         return this;
@@ -73,7 +72,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromFile(@NotNull File... files) throws IOException {
         for (File file : files) {
-            IRead readFile = new ReadFile(file);
+            IReadCommand readFile = new ReadFileCommand(file);
             readers.add(readFile);
         }
         return this;
@@ -86,7 +85,7 @@ public final class ResourceBuilder {
      */
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromURL(@NotNull String url) throws IOException {
-        IRead readURL = new ReadURL(url);
+        IReadCommand readURL = new ReadURLCommand(url);
         readers.add(readURL);
         return this;
     }
@@ -98,7 +97,7 @@ public final class ResourceBuilder {
      */
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromURL(@NotNull URL url) throws IOException {
-        IRead readURL = new ReadURL(url);
+        IReadCommand readURL = new ReadURLCommand(url);
         readers.add(readURL);
         return this;
     }
@@ -111,7 +110,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromURLs(@NotNull String... urls) throws IOException {
         for (String url : urls) {
-            IRead readURL = new ReadURL(url);
+            IReadCommand readURL = new ReadURLCommand(url);
             readers.add(readURL);
         }
         return this;
@@ -125,7 +124,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder fromURLs(@NotNull URL... urls) throws IOException {
         for (URL url : urls) {
-            IRead readURL = new ReadURL(url);
+            IReadCommand readURL = new ReadURLCommand(url);
             readers.add(readURL);
         }
         return this;
@@ -147,7 +146,7 @@ public final class ResourceBuilder {
     @NotNull
     public List<Resource> buildAll() {
         List<Resource> resources = new ArrayList<>(readers.size());
-        for (IRead reader : readers) {
+        for (IReadCommand reader : readers) {
             resources.add(new Resource(reader));
         }
         return resources;

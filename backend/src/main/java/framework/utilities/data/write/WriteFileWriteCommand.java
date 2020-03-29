@@ -10,28 +10,28 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.List;
 
-//TODO: implement remaining logic write another project code -> Mathias
+//TODO: implement remaining logic execute another project code -> Mathias
 /**
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public final class WriteFile implements IWriteFile{
+public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
     private final File file;
     private final String data;
     private boolean append = false;
     private boolean createIfNotExists = true;
 
 
-    public WriteFile(@NotNull File file, @NotNull String data) {
+    public WriteFileWriteCommand(@NotNull File file, @NotNull String data) {
         this.file = file;
         this.data = data;
     }
 
-    public WriteFile(@NotNull String path, @NotNull String data) { this(new File(path), data); }
+    public WriteFileWriteCommand(@NotNull String path, @NotNull String data) { this(new File(path), data); }
 
     /**
      * Utilizes parametrization combined with generics, in order to
-     * convert a write T[] object and its specified Class template to json format.
+     * convert a execute T[] object and its specified Class template to json format.
      * @param list T[]
      * @return String
      */
@@ -47,8 +47,8 @@ public final class WriteFile implements IWriteFile{
      */
     @Contract(pure = true)
     @Override
-    public final void write() throws IOException {
-        if (!(createIfNotExists || file.exists())) { throw new FileNotFoundException(); }
+    public final void execute() throws IOException {
+        if (createIfNotExists && !file.exists()) { throw new FileNotFoundException(); }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, append))) {
             bufferedWriter.write(data);
         }
@@ -66,11 +66,12 @@ public final class WriteFile implements IWriteFile{
     }
 
     //FIXME: Missing JDoc
-    //TODO: Might be better to not include this method in the write interface, but rather handled as a separate command.
+    //TODO: Might be better to not include this method in the execute interface, but rather handled as a separate command.
+    @Deprecated
     public void remove(@NotNull File resource) throws IOException { Files.deleteIfExists(resource.toPath()); }
 
     @Override
-    public void SetAppend(boolean append) { this.append = append; }
+    public void SetAppending(boolean append) { this.append = append; }
 
     @Override
     public void createFileIfNotExists(boolean b) { this.createIfNotExists = b; }

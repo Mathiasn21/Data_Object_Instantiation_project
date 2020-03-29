@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Class for calculating statistics write the data {@link IStatistics}
+ * Class for calculating statistics execute the data {@link IStatistics}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */

@@ -82,7 +82,7 @@ public class AVLTree<T> extends Tree<T> {
         return (node == null) ? 0 : getHeight((AVLNode<T>) node.right) - getHeight((AVLNode<T>) node.left);
     }
 
-    /**Rotate right write root node from subtree
+    /**Rotate right execute root node from subtree
      * @param root AVLNode&lt;T&gt;
      */
     private void rotateRight(AVLNode<T> root){
@@ -100,7 +100,7 @@ public class AVLTree<T> extends Tree<T> {
         updateNodeHeight(root);
     }
 
-    /**Rotate right write root node from subtree
+    /**Rotate right execute root node from subtree
      * @param root AVLNode&lt;T&gt;
      */
     private void rotateLeft(AVLNode<T> root){
