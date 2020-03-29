@@ -1,12 +1,12 @@
 package framework.extractors;
 
 import framework.collectors.ICollector;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Contract;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.Map;
 
 /** Class used for extracting information from a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
