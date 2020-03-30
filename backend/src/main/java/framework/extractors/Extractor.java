@@ -25,41 +25,43 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         this.allColumns = collector.getAllColumns();
     }
 
-    /**
-     * @param columnName String
-     * @return T extends {@link ICollector}
-     */
-    @NotNull
+
+    //TODO: implement this method
+    @Contract(pure = true)
     @Override
-    public final List<Object> extractColumnFrom(@NotNull String columnName) throws NoSuchFieldException {
+    public @NotNull List<Object> extractColumnFrom(@NotNull Field... field) throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull List<Object> extractColumnFrom(@NotNull String... column) throws NoSuchFieldException, IllegalAccessException {
         List<Object> data = null;
+        //Get all data from collector
         List<Object> allColumns = collector.getAllColumns();
-        //Grab fields from class
-        //Class<?> clazz = allColumns.get(0).getClass();
-        //Field[] fields = clazz.getFields();
 
-        //System.out.println(fields[1].getName());
+        //Grab thoose fields that match with the following column names.
+        //If none, try grabbing methods/getters that match with the column name
 
-        assert false;
-        data.add(Arrays.stream(allColumns.getClass().getDeclaredFields())
-                .filter(e -> e.getName().startsWith(columnName))
-                .findFirst()
-                .map(f -> {
-                    f.setAccessible(true);
-                    try {
-                        return (String) f.get(columnName);
-                    } catch (IllegalAccessException e) {
-                        return null;
-                    }
-                }).orElseThrow(IllegalArgumentException::new));
+        //Either, use the get data by using the fields or by invoking methods
 
-        /*List<String> keys = collector.getPrimaryKeys();
-        System.out.println(keys.get(0)); //IS EMPTY???
-        //grab primarykeys if exists from collector.*/
-        return data;
+
+        //Return Object[] where each index is a column
+
+        return new ArrayList<>();
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull List<Object> extractColumnFrom(@NotNull int... indexe) throws NoSuchFieldException, IllegalAccessException {
+        return null;
     }
 
 
+
+    //TODO: implement this method
     /**
      * @return returns all columns from dataset
      */
@@ -70,6 +72,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return new ArrayList<>();
     }
 
+    //TODO: implement this method
     @NotNull
     @Contract(pure = true)
     public List<Object[]> extractColumns(@NotNull Class<?> clazz) {
@@ -78,6 +81,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return new ArrayList<>();
     }
 
+    //TODO: implement this method
     @NotNull
     @Contract(pure = true)
     @Override
@@ -85,6 +89,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return null;
     }
 
+    //TODO: implement this method
     @NotNull
     @Contract(pure = true)
     @Override
@@ -92,25 +97,39 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return null;
     }
 
+    //TODO: implement this method
+    @Contract(pure = true)
     @Override
     public @NotNull List<Object[]> extractColumns(@NotNull int... indexes) {
         return null;
     }
 
-    /**
-     * @param columnName String
-     * @return T extends {@link ICollector}
-     */
-    @Nullable
+
+    //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public final Map<String, Double> extractReportFom(@NotNull String columnName) {
+    public @NotNull Map<String, Double> extractReportFom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
-    @NotNull
+    //TODO: implement this method
+    @Contract(pure = true)
     @Override
-    public <T> List<T> extractAllColumnsAsT(Class<T> tClass) {
-        return new ArrayList<>();
+    public @NotNull Map<String, Double> extractReportFom(@NotNull Field... fields) throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Double> extractReportFom(@NotNull String... columns) throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Double> extractReportFom(@NotNull int... indexes) throws NoSuchFieldException, IllegalAccessException {
+        return null;
     }
 }

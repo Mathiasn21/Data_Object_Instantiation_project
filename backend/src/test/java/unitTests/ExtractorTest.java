@@ -41,7 +41,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void all_columns() throws IOException {
+    void all_columns() throws IOException, NoSuchFieldException, IllegalAccessException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
             list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
@@ -62,7 +62,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void all_columns_as_type_T() throws IOException {
+    void all_columns_as_type_T() throws IOException, NoSuchFieldException, IllegalAccessException {
         List<ComplexDTOCSV> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
             list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
@@ -83,27 +83,6 @@ public class ExtractorTest {
             i++;
         }
     }
-
-    @Test
-    void all_columns_as_type_T_not_given() throws IOException {
-        List<ComplexDTOCSV> list = new ArrayList<>();
-        for(int i = 0; i < 24; i++){
-            list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
-        }
-
-        ICollector collector = genCollector();
-        IExtractor extractor = new Extractor<>(collector);
-        List<ComplexDTOCSV> res = extractor.extractAllColumnsAsT(ComplexDTOCSV.class);
-
-        assertFalse(res.isEmpty());
-        assertEquals(list, res);
-        int i = 0;
-        while (i < res.size()) {
-            assertNotNull(res.get(i));
-            i++;
-        }
-    }
-
 
 
     @NotNull

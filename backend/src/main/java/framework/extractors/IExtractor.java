@@ -13,17 +13,18 @@ import java.util.Map;
  * @version 1.0
  */
 public interface IExtractor{
-    /**
-     * @param columnName String
-     * @return double[]
-     */
-    @NotNull List<Object> extractColumnFrom (String columnName) throws NoSuchFieldException, IllegalAccessException;
-    @NotNull List<Object[]> extractColumns();
-    @NotNull List<Object[]> extractColumns(@NotNull Class<?> clazz);
-    @NotNull List<Object[]> extractColumns(@NotNull Field ...fields);
-    @NotNull List<Object[]> extractColumns(@NotNull String ...columns);
-    @NotNull List<Object[]> extractColumns(@NotNull int ...indexes);
-    @NotNull <T> List<T> extractAllColumnsAsT(Class<T> tClass);
+    @NotNull List<Object> extractColumnFrom (@NotNull Field ...field) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object> extractColumnFrom (@NotNull String ...column) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object> extractColumnFrom (@NotNull int ...indexe) throws NoSuchFieldException, IllegalAccessException;
 
-    @NotNull Map<String, Double> extractReportFom(String columnName);
+    @NotNull List<Object[]> extractColumns() throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object[]> extractColumns(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object[]> extractColumns(@NotNull Field ...fields) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object[]> extractColumns(@NotNull String ...columns) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull List<Object[]> extractColumns(@NotNull int ...indexes) throws NoSuchFieldException, IllegalAccessException;
+
+    @NotNull Map<String, Double> extractReportFom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull Map<String, Double> extractReportFom(@NotNull Field ...fields) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull Map<String, Double> extractReportFom(@NotNull String ...columns) throws NoSuchFieldException, IllegalAccessException;
+    @NotNull Map<String, Double> extractReportFom(@NotNull int ...indexes) throws NoSuchFieldException, IllegalAccessException;
 }
