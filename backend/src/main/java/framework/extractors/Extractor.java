@@ -3,11 +3,9 @@ package framework.extractors;
 import framework.collectors.ICollector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +16,11 @@ import java.util.Map;
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final C collector;
-    private final List<Object> allColumns;
+    private final List<Object> columns;//List of data objects
 
     public Extractor(@NotNull C collector) {
         this.collector = collector;
-        this.allColumns = collector.getAllColumns();
+        this.columns = collector.getAllColumns();
     }
 
 
