@@ -29,14 +29,14 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object> extractColumnFrom(@NotNull Field... field) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object> extractColumnFrom(@NotNull String... column) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws NoSuchFieldException, IllegalAccessException {
         List<Object> data = null;
         //Get all data from collector
         List<Object> allColumns = collector.getAllColumns();
@@ -55,7 +55,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object> extractColumnFrom(@NotNull int... indexe) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull List<Object> extractColumnFrom(int index) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
@@ -101,6 +101,11 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull List<Object[]> extractColumns(@NotNull int... indexes) {
+        return null;
+    }
+
+    @Override
+    public @NotNull Map<String, Double> extractReportFom() throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
