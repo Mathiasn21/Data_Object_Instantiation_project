@@ -10,6 +10,6 @@ public interface IWriteURLWriteCommand extends IWriteCommand {
     /*TODO: implement configs for the following:
     *   -Headers
     *   -Body
-    *   -HTTPS - cert factory
+    *   -HTTPS - cert factory ? 
     * */
 }
