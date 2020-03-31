@@ -20,7 +20,7 @@ import java.util.Map;
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
     private final ICollector collector;//Leave this be!
-    private List<Throwable> throwables = new ArrayList<>();
+    private List<Exception> throwables = new ArrayList<>();
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -95,19 +95,16 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @NotNull
     @Contract(pure = true)
-    public List<Object[]> extractColumns(@NotNull Class<?> clazz) {
-        return new ArrayList<>();
-    }
-
-    //TODO: implement this method
-    @NotNull
-    @Contract(pure = true)
     @Override
-    public List<Object[]> extractColumns(@NotNull Field... fields) { return null; }
+    public List<Object[]> extractColumns(@NotNull Field... fields) {
+        //FIXME: Here you are supposed to utilize the field you get and just get data using that......
+        return null;
+    }
 
     @Contract(pure = true)
     @Override
     public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
+        //FIXME: Here you are supposed to utilize the methods you get and just get data using that......
         return null;
     }
 
@@ -149,7 +146,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @NotNull
     @Contract(pure = true)
-    public List<Throwable> getErrors() {
+    public List<Exception> getErrors() {
         return Collections.unmodifiableList(throwables);
     }
 }
