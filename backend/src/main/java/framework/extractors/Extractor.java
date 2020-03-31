@@ -14,7 +14,7 @@ import java.util.Map;
 /** Class used for extracting information from a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
- * @version 1.0
+ * @version 2.0.1
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final C collector;
@@ -55,7 +55,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
                     if(method != null){
                         for (Object object : columns) {
                             try { res.add(method.invoke(object));
-                            } catch (InvocationTargetException e) { }
+                            } catch (InvocationTargetException e) { }//TODO: implement a way to contain/package errors
                         }
                     }
                 }
@@ -76,6 +76,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Override
     public List<Object[]> extractColumns(@NotNull Field... fields) { return null; }
 
+    @Contract(pure = true)
     @Override
     public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
         return null;

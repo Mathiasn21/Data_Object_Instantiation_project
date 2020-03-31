@@ -28,18 +28,6 @@ public final class Parser {
     }
 
     /**
-     * @param clazz {@link Class}&lt;?&gt;
-     * @param value String
-     * @return {@link Object}[]
-     */
-    @NotNull
-    @Contract(value = "_, _ -> new", pure = true)
-    public static Object[] parseToArray(@NotNull Class<?> clazz, @NotNull String value){
-        //TODO: implement ability to parse from a string eg: [2,4,5,6,7,7] || [2.0,3.9] to the array
-        return new Object[0];
-    }
-
-    /**
      * Returns corresponding primitive class, execute a primitive wrapper
      * @param clazz {@link Class}&lt;?&gt;
      * @return {@link Class}&lt;?&gt;

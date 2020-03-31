@@ -280,20 +280,18 @@ public class Tree<T> implements ITree<T> {
      * @return int
      */
     protected int compare(@NotNull T thiz, @NotNull T that){
-        if(thiz instanceof Comparable){
-            if(method == null){ setupComparableMethod(thiz); }
-
-            //Guaranteed to return int by interface
-            try { return (int) method.invoke(thiz, that);
-            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
-        }
-        if(comparator == null && experimentalComparator == null){
-            try { tryToSetupComparator(thiz, that);
-            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
-        }
-
         try {
-            //Error is thrown in setupComparable if it is null. Thereby making this safe
+            if(thiz instanceof Comparable){
+                if(method == null){ setupComparableMethod(thiz); }
+
+                //Guaranteed to return int by interface
+                return (int) method.invoke(thiz, that);
+            }
+
+            if(comparator == null && experimentalComparator == null){
+                tryToSetupComparator(thiz, that);
+            }
+
             if(comparator != null){
                 return comparator.compare(thiz, that);
             }else if (experimentalComparator != null){
@@ -302,9 +300,7 @@ public class Tree<T> implements ITree<T> {
                 }
                 return experimentalComparator.compare(methodToUse.invoke(thiz), methodToUse.invoke(that));
             }
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
         throw new Error();
     }
 

@@ -1,6 +1,5 @@
 package unitTests;
 
-import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
 import framework.extractors.Extractor;
@@ -39,51 +38,6 @@ public class ExtractorTest {
             i++;
         }
     }
-
-    @Test
-    void all_columns() throws IOException, NoSuchFieldException, IllegalAccessException {
-        List<Object> list = new ArrayList<>();
-        for(int i = 0; i < 24; i++){
-            list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
-        }
-
-        ICollector collector = genCollector();
-        IExtractor extractor = new Extractor<>(collector);
-        List<Object[]> res = extractor.extractColumns("2");
-
-        assertFalse(res.isEmpty());
-        int i = 0;
-        while (i < res.size()) {
-            assertTrue(res.get(i)[0] instanceof String);
-            assertTrue(res.get(i)[1] instanceof Double);
-            assertTrue(res.get(i)[2] instanceof Integer);
-            i++;
-        }
-    }
-
-    @Test
-    void all_columns_as_type_T() throws IOException, NoSuchFieldException, IllegalAccessException {
-        List<ComplexDTOCSV> list = new ArrayList<>();
-        for(int i = 0; i < 24; i++){
-            list.add(new ComplexDTOCSV("\"dwada\"", 5.5, 5));
-        }
-
-        ICollector collector = genCollector();
-        IExtractor extractor = new Extractor<>(collector);
-        Class<?>[] types = collector.getPrimaryKeyTypes();
-        Class<?> clazz = collector.getClazz();
-
-        List<Object[]> res = extractor.extractColumns(clazz);
-        assertFalse(res.isEmpty());
-        int i = 0;
-        while (i < res.size()) {
-            assertTrue(res.get(i)[0] instanceof String);
-            assertTrue(res.get(i)[1] instanceof Double);
-            assertTrue(res.get(i)[2] instanceof Integer);
-            i++;
-        }
-    }
-
 
     @NotNull
     private ICollector genCollector() throws IOException {
