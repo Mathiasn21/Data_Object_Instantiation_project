@@ -34,28 +34,16 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
         //FIXME: Here you are supposed to utilize the field you get and just get data using that......
         List<Object> res = new ArrayList<>();
-        Object o = columns.get(0);
-        Class<?> clazz = o.getClass();
+        Class<?> fieldClass = field.getClass();
 
-        Method method = null;
-        Field fieldFound = null;
+        Method fieldFound = null;
         try{
-            fieldFound = clazz.getField("column");
-            method = clazz.getMethod("get" + fieldFound);
-        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+            fieldFound = fieldClass.getMethod("get" + field);
+        } catch (SecurityException | NoSuchMethodException e) {
             throwables.add(e);
         }finally{
             if(fieldFound != null){
-                for (Object object : columns) { res.add(fieldFound.get(object)); }
-            }else{
-                if(method != null){
-                    for (Object object : columns) {
-                        try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) {
-                            throwables.add(e);
-                        }
-                    }
-                }
+                for (Object object : columns) { res.add(fieldFound); }
             }
         }
         return res;
