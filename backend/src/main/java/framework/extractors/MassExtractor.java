@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class MassExtractor implements IMassExtract{
 
@@ -38,5 +39,20 @@ public class MassExtractor implements IMassExtract{
     @Override
     public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<? extends DataObject>, List<Method>> classListMap) throws IllegalAccessException {
         return null;
+    }
+
+    @Override
+    public @NotNull List<IExtractor> getAllExtractors() {
+        return null;
+    }
+
+    @Override
+    public void setNumberOfThreads(byte number) {
+
+    }
+
+    @Override
+    public void setThreadPoolExecutor(@NotNull ThreadPoolExecutor pool) {
+
     }
 }

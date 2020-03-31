@@ -21,5 +21,5 @@ interface IMassExtract {
     @NotNull List<IExtractor> getAllExtractors();
 
     void setNumberOfThreads(byte number);
-    void setThreadPoolExecutor(ThreadPoolExecutor pool);
+    void setThreadPoolExecutor(@NotNull ThreadPoolExecutor pool);
 }
