@@ -30,7 +30,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
         List<Object> res = new ArrayList<>();
         Object o = columns.get(0);
         Class<?> clazz = o.getClass();
@@ -103,7 +103,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
         return null;
     }
 
@@ -118,36 +118,28 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom() throws NoSuchFieldException, IllegalAccessException {
-        return null;
-    }
-
-
-    //TODO: implement this method
-    @Contract(pure = true)
-    @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws IllegalAccessException {
         return null;
     }
 
