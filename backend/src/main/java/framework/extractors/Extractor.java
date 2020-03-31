@@ -43,7 +43,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             fieldFound = clazz.getField("column");
             method = clazz.getMethod("get" + fieldFound);
         } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-
+            throwables.add(e);
         }finally{
             if(fieldFound != null){
                 for (Object object : columns) { res.add(fieldFound.get(object)); }
@@ -51,7 +51,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
                 if(method != null){
                     for (Object object : columns) {
                         try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) { }//TODO: implement a way to contain/package errors
+                        } catch (InvocationTargetException e) {
+                            throwables.add(e);
+                        }
                     }
                 }
             }
@@ -72,7 +74,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             field = clazz.getField("column");
             method = clazz.getMethod("get" + column);
         } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-
+            throwables.add(e);
         }finally{
             if(field != null){
                 for (Object object : columns) { res.add(field.get(object)); }
