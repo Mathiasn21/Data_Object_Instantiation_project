@@ -19,7 +19,6 @@ import java.util.Map;
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
-    private List<Field> errors;
     private final ICollector collector;//Leave this be!
     private List<Throwable> throwables = new ArrayList<>();
 
