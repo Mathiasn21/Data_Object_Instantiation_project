@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -19,16 +20,20 @@ import java.util.Map;
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
     private List<Field> errors;
+    private final ICollector collector;//Leave this be!
+    private List<Throwable> throwables = new ArrayList<>();
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
+        this.collector = collector;
     }
 
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
+        //FIXME: Here you are supposed to utilize the field you get and just get data using that......
         List<Object> res = new ArrayList<>();
         Object o = columns.get(0);
         Class<?> clazz = o.getClass();
@@ -36,7 +41,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         Method method = null;
         Field fieldFound = null;
         try{
-            fieldFound = clazz.getField("field");
+            fieldFound = clazz.getField("column");
             method = clazz.getMethod("get" + fieldFound);
         } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
 
@@ -57,32 +62,32 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @Contract(pure = true)
     @Override
-        public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
-            List<Object> res = new ArrayList<>();
-            Object o = columns.get(0);
-            Class<?> clazz = o.getClass();
+    public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
+        List<Object> res = new ArrayList<>();
+        Object o = columns.get(0);
+        Class<?> clazz = o.getClass();
 
-            Method method = null;
-            Field field = null;
-            try{
-                field = clazz.getField("column");
-                method = clazz.getMethod("get" + column);
-            } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+        Method method = null;
+        Field field = null;
+        try{
+            field = clazz.getField("column");
+            method = clazz.getMethod("get" + column);
+        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
 
-            }finally{
-                if(field != null){
-                    for (Object object : columns) { res.add(field.get(object)); }
-                }else{
-                    if(method != null){
-                        for (Object object : columns) {
-                            try { res.add(method.invoke(object));
-                            } catch (InvocationTargetException e) {
-                                errors = (Field) e;
-                            }//TODO: implement a way to contain/package errors
+        }finally{
+            if(field != null){
+                for (Object object : columns) { res.add(field.get(object)); }
+            }else{
+                if(method != null){
+                    for (Object object : columns) {
+                        try { res.add(method.invoke(object));
+                        } catch (InvocationTargetException e) {
+                            throwables.add(e);
                         }
                     }
                 }
             }
+        }
         return res;
     }
 
@@ -90,96 +95,19 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @NotNull
     @Contract(pure = true)
     public List<Object[]> extractColumns(@NotNull Class<?> clazz) {
-        List<Object[]> res = new ArrayList<>();
-        Object o = columns.get(0);
-        Class<?> objectClazz = o.getClass();
-
-        Method method = null;
-        Field field = null;
-        try{
-            field = objectClazz.getField("clazz");
-            method = objectClazz.getMethod("get" + clazz);
-        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-
-        }finally{
-            if(field != null){
-                for (Object object : columns) { res.add(field.get(object)); }
-            }else{
-                if(method != null){
-                    for (Object object : columns) {
-                        try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) {
-                            errors = (Field) e;
-                        }//TODO: implement a way to contain/package errors
-                    }
-                }
-            }
-        }
-        return res;
+        return new ArrayList<>();
     }
 
     //TODO: implement this method
     @NotNull
     @Contract(pure = true)
     @Override
-    public List<Object[]> extractColumns(@NotNull Field... fields) {
-        List<Object[]> res = new ArrayList<>();
-        Object o = columns.get(0);
-        Class<?> objectClazz = o.getClass();
-
-        Method method = null;
-        Field field = null;
-        try{
-            field = objectClazz.getField("clazz");
-            method = objectClazz.getMethod("get" + field);
-        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-
-        }finally{
-            if(field != null){
-                for (Object object : columns) { res.add(field.get(object)); }
-            }else{
-                if(method != null){
-                    for (Object object : columns) {
-                        try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) {
-                            errors = (Field) e;
-                        }//TODO: implement a way to contain/package errors
-                    }
-                }
-            }
-        }
-        return res;
-    }
+    public List<Object[]> extractColumns(@NotNull Field... fields) { return null; }
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
-        List<Object[]> res = new ArrayList<>();
-        Object o = columns.get(0);
-        Class<?> objectClazz = o.getClass();
-
-        Method method = null;
-        Field field = null;
-        try{
-            field = objectClazz.getField("metod");
-            method = objectClazz.getMethod("get" + method);
-        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-
-        }finally{
-            if(field != null){
-                for (Object object : columns) { res.add(field.get(object)); }
-            }else{
-                if(method != null){
-                    for (Object object : columns) {
-                        try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) {
-                            errors = (Field) e;
-                        }//TODO: implement a way to contain/package errors
-                    }
-                }
-            }
-        }
-        return res;
+    public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
+        return null;
     }
 
     //TODO: implement this method
@@ -187,71 +115,40 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public List<Object[]> extractColumns(@NotNull String... columns) {
-        List<Object[]> res = new ArrayList<>();
-        Object o = columns.get(0);
-        Class<?> objectClazz = o.getClass();
-
-        Method method = null;
-        Field field = null;
-        try{
-            field = objectClazz.getField("column");
-            method = objectClazz.getMethod("get" + column);
-        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-
-        }finally{
-            if(field != null){
-                for (Object object : columns) { res.add(field.get(object)); }
-            }else{
-                if(method != null){
-                    for (Object object : columns) {
-                        try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) {
-                            errors = (Field) e;
-                        }//TODO: implement a way to contain/package errors
-                    }
-                }
-            }
-        }
-        return res;
-    }
-
-    //TODO: implement this method
-    @Contract(pure = true)
-    @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom() throws NoSuchFieldException, IllegalAccessException {
-        return null;
-    }
-
-
-    //TODO: implement this method
-    @Contract(pure = true)
-    @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws IllegalAccessException {
         return null;
     }
 
-    public List<Field> getErrors() {
-        return errors;
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws IllegalAccessException {
+        return null;
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    public List<Throwable> getErrors() {
+        return Collections.unmodifiableList(throwables);
     }
 }
