@@ -18,8 +18,8 @@ import java.util.Map;
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
-    private final ICollector collector;
-    private Field errors;
+    private final ICollector collector;//Leave this be!
+    private List<Throwable> throwables = new ArrayList<>();
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -31,6 +31,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
+        //FIXME: Here you are supposed to utilize the field you get and just get data using that......
         List<Object> res = new ArrayList<>();
         Object o = columns.get(0);
         Class<?> clazz = o.getClass();
@@ -59,32 +60,32 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @Contract(pure = true)
     @Override
-        public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
-            List<Object> res = new ArrayList<>();
-            Object o = columns.get(0);
-            Class<?> clazz = o.getClass();
+    public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
+        List<Object> res = new ArrayList<>();
+        Object o = columns.get(0);
+        Class<?> clazz = o.getClass();
 
-            Method method = null;
-            Field field = null;
-            try{
-                field = clazz.getField("column");
-                method = clazz.getMethod("get" + column);
-            } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+        Method method = null;
+        Field field = null;
+        try{
+            field = clazz.getField("column");
+            method = clazz.getMethod("get" + column);
+        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
 
-            }finally{
-                if(field != null){
-                    for (Object object : columns) { res.add(field.get(object)); }
-                }else{
-                    if(method != null){
-                        for (Object object : columns) {
-                            try { res.add(method.invoke(object));
-                            } catch (InvocationTargetException e) {
-                                errors = (Field) e;
-                            }//TODO: implement a way to contain/package errors
+        }finally{
+            if(field != null){
+                for (Object object : columns) { res.add(field.get(object)); }
+            }else{
+                if(method != null){
+                    for (Object object : columns) {
+                        try { res.add(method.invoke(object));
+                        } catch (InvocationTargetException e) {
+                            throwables.add(e);
                         }
                     }
                 }
             }
+        }
         return res;
     }
 
