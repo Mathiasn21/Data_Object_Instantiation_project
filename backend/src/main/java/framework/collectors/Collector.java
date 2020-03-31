@@ -55,7 +55,6 @@ public final class Collector implements ICollector{
 
             primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;
-
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }

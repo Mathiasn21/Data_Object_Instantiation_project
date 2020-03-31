@@ -21,7 +21,6 @@ public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
     private boolean append = false;
     private boolean createIfNotExists = true;
 
-
     public WriteFileWriteCommand(@NotNull File file, @NotNull String data) {
         this.file = file;
         this.data = data;

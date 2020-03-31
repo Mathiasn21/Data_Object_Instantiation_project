@@ -51,6 +51,9 @@ public final class Resource {
     @Contract(value = " -> new", pure = true)
     public static @NotNull ResourceBuilder newResource(){ return new ResourceBuilder(); }
 
+    /**
+     * @return {@link String}
+     */
     public final String getName() { return name; }
 
 
