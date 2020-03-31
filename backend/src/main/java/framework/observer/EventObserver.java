@@ -17,11 +17,11 @@ public final class EventObserver {
         registeredEvents.put(ExceptionEvent.class, new ArrayList<>());
     }
 
-    public static void observeEvents(Subject subject, Class<? extends IEvent> event){
+    public static void observeEvents(@NotNull Subject subject, @NotNull Class<? extends IEvent> event){
         registeredEvents.get(event).add(subject);
     }
 
-    public static <E extends IEvent> void registerEventFrom(IObservable observable, E event){
+    public static <E extends IEvent> void registerEventFrom(@NotNull IObservable observable, @NotNull E event){
         if(observedEvents.containsKey(observable)) {
             observedEvents.get(observable).add(event);
             return;
@@ -32,7 +32,7 @@ public final class EventObserver {
         notifyAllSubjects(event);
     }
 
-    public static void registerEventHandlerFor(Subject subject, EventCommand command, Class<? extends IEvent> event){
+    public static void registerEventHandlerFor(@NotNull Subject subject, @NotNull EventCommand command, @NotNull Class<? extends IEvent> event){
         Map<Class<? extends IEvent>, EventCommand> map = new HashMap<>();
         map.put(event, command);
         registeredEventCommands.put(subject, map);
