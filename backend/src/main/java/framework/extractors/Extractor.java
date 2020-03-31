@@ -1,30 +1,111 @@
 package framework.extractors;
 
 import framework.collectors.ICollector;
-import framework.extractors.IExtractor;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-/** Class used for extracting information from
+/** Class used for extracting information from a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  * @version 1.0
  */
-public class Extractor implements IExtractor {
-    @Override
-    public <T extends ICollector> double[] extractColumnFrom(@NotNull T collector, String columnName) {
-        String[] data = collector.getColumnBy(columnName);
-        return new double[0];
+public final class Extractor<C extends ICollector> implements IExtractor {
+    private final C collector;
+    private final List<Object> columns;//List of data objects
+
+    public Extractor(@NotNull C collector) {
+        this.collector = collector;
+        this.columns = collector.getAllColumns();
     }
 
-    /**
-     * @param collector {@link ICollector}
-     * @param columnName String
-     * @param <T> T extends {@link ICollector}
-     * @return T extends {@link ICollector}
-     */
+
+    //TODO: implement this method
+    @Contract(pure = true)
     @Override
-    public <T extends ICollector> Map<String, Integer> extractReportFom(T collector, String columnName) {
+    public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+        public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws NoSuchFieldException, IllegalAccessException {
+            List<Object> res = new ArrayList<>();
+            Object o = columns.get(0);
+            Method method = null;
+            Field field = null;
+            try{
+                field = o.getClass().getField("column");
+                method = o.getClass().getMethod("get" + column);
+            } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+
+            }finally{
+                if(field != null){
+                    for (Object object : columns) { res.add(field.get(object)); }
+                }else{
+                    if(method != null){
+                        for (Object object : columns) {
+                            try { res.add(method.invoke(object));
+                            } catch (InvocationTargetException e) { }
+                        }
+                    }
+                }
+            }
+        return res;
+    }
+
+    //TODO: implement this method
+    @NotNull
+    @Contract(pure = true)
+    public List<Object[]> extractColumns(@NotNull Class<?> clazz) {
+        return new ArrayList<>();
+    }
+
+    //TODO: implement this method
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public List<Object[]> extractColumns(@NotNull Field... fields) { return null; }
+
+    //TODO: implement this method
+    @NotNull
+    @Contract(pure = true)
+    @Override
+    public List<Object[]> extractColumns(@NotNull String... columns) {
+        return null;
+    }
+
+    @Override
+    public @NotNull Map<String, Double> extractReportFom() throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Double> extractReportFom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Double> extractReportFom(@NotNull Field... fields) throws NoSuchFieldException, IllegalAccessException {
+        return null;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Double> extractReportFom(@NotNull String... columns) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 }

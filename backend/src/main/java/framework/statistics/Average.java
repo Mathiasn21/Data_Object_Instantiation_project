@@ -4,13 +4,12 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Class for calculating average methods from the data {@link IAverage}
+ * Class for calculating average methods execute the data {@link IAverage}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public class Average implements IAverage{
+public final class Average implements IAverage{
 
-    //TODO: get this to work with integer/float/long
     private final double[] data;
     private final int length;
     private double sum = 0;
@@ -29,9 +28,10 @@ public class Average implements IAverage{
      */
     @Override
     public double calcSum() {
-        double sum = 0;
-        for(double i : data){
-            sum += i;
+        if(sum <= 0){
+            for(double i : data){
+                sum += i;
+            }
         }
         return sum;
     }

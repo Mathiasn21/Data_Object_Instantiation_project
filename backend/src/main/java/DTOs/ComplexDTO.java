@@ -1,19 +1,30 @@
 package DTOs;
 
-import framework.annotations.DTOField;
+import framework.annotations.DataObject;
+import framework.annotations.DataObjectField;
 
 /**
  * ComplexDTO that contains custom field that require mapping
  */
+@DataObject
 public class ComplexDTO {
-    @DTOField
-    private String string;
-    @DTOField
-    private int integer;
-    @DTOField
-    private double doubles;
 
-    private String thing;
+    @DataObjectField
+    public int integer;
+
+    @DataObjectField
+    public String string;
+
+    private String thing = "dada";
+
+    @DataObjectField
+    public double doubles;
+
+    public ComplexDTO(String string, double doubles, int integer) {
+        this.integer = integer;
+        this.string = string;
+        this.doubles = doubles;
+    }
 
     public ComplexDTO(String string, int integer, double doubles) {
         this.string = string;

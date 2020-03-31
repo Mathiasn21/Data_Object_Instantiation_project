@@ -4,11 +4,11 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Class for calculating statistics from the data {@link IStatistics}
+ * Class for calculating statistics execute the data {@link IStatistics}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public class SimpleStatistics implements IStatistics {
+public final class SimpleStatistics implements IStatistics {
 
     private final double[] data;
     private final int length;
@@ -29,7 +29,7 @@ public class SimpleStatistics implements IStatistics {
      * @return double
      */
     @Override
-    public double sampleVariance() {
+    public double calcSampleVariance() {
         double sum = 0;
         double avg = average.calcMean();
         for (double value : data) {
@@ -45,7 +45,7 @@ public class SimpleStatistics implements IStatistics {
      * @return double
      */
     @Override
-    public double populationVariance() {
+    public double calcPopulationVariance() {
         double sumDiffsSquared = 0.0;
         double avg = average.calcMean();
         for (double value : data) {
@@ -60,8 +60,8 @@ public class SimpleStatistics implements IStatistics {
      * @return double
      */
     @Override
-    public double standardDeviationFromSample() {
-        double variance = sampleVariance();
+    public double calcStandardDeviationFromSample() {
+        double variance = calcSampleVariance();
         return Math.sqrt(variance);
     }
 
@@ -69,19 +69,19 @@ public class SimpleStatistics implements IStatistics {
      * @return double
      */
     @Override
-    public double standardDeviationFromPopulation() {
-        double variance = populationVariance();
+    public double calcStandardDeviationFromPopulation() {
+        double variance = calcPopulationVariance();
         return Math.sqrt(variance);
     }
 
     @Override
-    public double covariance() {
+    public double calcCovariance() {
         //TODO: implement method
         return 0;
     }
 
     @Override
-    public double correlation() {
+    public double calcCorrelation() {
         //TODO: implement method
         return 0;
     }
