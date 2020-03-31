@@ -28,24 +28,6 @@ public class CollectorPoolBuilder {
         return this;
     }
 
-    @Contract("_, _ -> this")
-    @NotNull
-    public final CollectorPoolBuilder setGloballySetting(Setting key, String value) {
-        for (CollectorBuilder builder : collectorBuilders) {
-            builder.setSetting(key, value);
-        }
-        return this;
-    }
-
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorPoolBuilder setGloballyAllSettings(Map<Setting, String> settings){
-        for (CollectorBuilder builder : collectorBuilders) {
-            builder.setAllSettings(settings);
-        }
-        return this;
-    }
-
     @Contract("_ -> this")
     @NotNull
     public final CollectorPoolBuilder setGloballyMaxMemoryMB(int mb){

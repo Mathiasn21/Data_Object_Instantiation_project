@@ -28,21 +28,6 @@ public final class CollectorBuilder {
         return this;
     }
 
-    @Contract("_, _ -> this")
-    @NotNull
-    public final CollectorBuilder setSetting(Setting key, String value) {
-        collector.setSetting(key, value);
-        return this;
-    }
-
-
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorBuilder setAllSettings(Map<Setting, String> settings){
-        collector.setAllSettings(settings);
-        return this;
-    }
-
     @Contract("_ -> this")
     @NotNull
     public final CollectorBuilder setMaxMemoryMB(int mb){
