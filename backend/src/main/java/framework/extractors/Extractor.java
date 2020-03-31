@@ -36,14 +36,16 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-        public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws NoSuchFieldException, IllegalAccessException {
+        public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
             List<Object> res = new ArrayList<>();
             Object o = columns.get(0);
+            Class<?> clazz = o.getClass();
+
             Method method = null;
             Field field = null;
             try{
-                field = o.getClass().getField("column");
-                method = o.getClass().getMethod("get" + column);
+                field = clazz.getField("column");
+                method = clazz.getMethod("get" + column);
             } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
 
             }finally{
