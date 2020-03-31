@@ -17,11 +17,10 @@ import java.util.Map;
  * @version 2.0.1
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
-    private final C collector;
     private final List<Object> columns;//List of data objects
+    private Field errors;
 
     public Extractor(@NotNull C collector) {
-        this.collector = collector;
         this.columns = collector.getAllColumns();
     }
 
@@ -30,10 +29,32 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws NoSuchFieldException, IllegalAccessException {
-        return null;
+        List<Object> res = new ArrayList<>();
+        Object o = columns.get(0);
+        Class<?> clazz = o.getClass();
+
+        Method method = null;
+        Field fieldFound = null;
+        try{
+            fieldFound = clazz.getField("column");
+            method = clazz.getMethod("get" + fieldFound);
+        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+
+        }finally{
+            if(fieldFound != null){
+                for (Object object : columns) { res.add(fieldFound.get(object)); }
+            }else{
+                if(method != null){
+                    for (Object object : columns) {
+                        try { res.add(method.invoke(object));
+                        } catch (InvocationTargetException e) { }//TODO: implement a way to contain/package errors
+                    }
+                }
+            }
+        }
+        return res;
     }
 
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
         public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
@@ -55,7 +76,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
                     if(method != null){
                         for (Object object : columns) {
                             try { res.add(method.invoke(object));
-                            } catch (InvocationTargetException e) { }//TODO: implement a way to contain/package errors
+                            } catch (InvocationTargetException e) {
+                                errors = (Field) e;
+                            }//TODO: implement a way to contain/package errors
                         }
                     }
                 }
@@ -93,7 +116,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Double> extractReportFom() throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom() throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
@@ -101,28 +124,32 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Double> extractReportFom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Double> extractReportFom(@NotNull Field... fields) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Double> extractReportFom(@NotNull String... columns) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws NoSuchFieldException, IllegalAccessException {
         return null;
     }
 
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Double> extractReportFom(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws NoSuchFieldException, IllegalAccessException {
         return null;
+    }
+
+    public Field getErrors() {
+        return errors;
     }
 }
