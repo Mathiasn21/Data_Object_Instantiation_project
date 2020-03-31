@@ -15,17 +15,13 @@ import java.util.Map;
 public interface IExtractor{
     @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws NoSuchFieldException, IllegalAccessException;
     @NotNull List<Object> extractColumnFrom (@NotNull String column) throws NoSuchFieldException, IllegalAccessException;
-    @NotNull List<Object> extractColumnFrom (int index) throws NoSuchFieldException, IllegalAccessException;
 
-    @NotNull List<Object[]> extractColumns() throws NoSuchFieldException, IllegalAccessException;
     @NotNull List<Object[]> extractColumns(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException;
     @NotNull List<Object[]> extractColumns(@NotNull Field ...fields) throws NoSuchFieldException, IllegalAccessException;
     @NotNull List<Object[]> extractColumns(@NotNull String ...columns) throws NoSuchFieldException, IllegalAccessException;
-    @NotNull List<Object[]> extractColumns(@NotNull int ...indexes) throws NoSuchFieldException, IllegalAccessException;
 
     @NotNull Map<String, Double> extractReportFom() throws NoSuchFieldException, IllegalAccessException;
     @NotNull Map<String, Double> extractReportFom(@NotNull Class<?> clazz) throws NoSuchFieldException, IllegalAccessException;
     @NotNull Map<String, Double> extractReportFom(@NotNull Field ...fields) throws NoSuchFieldException, IllegalAccessException;
     @NotNull Map<String, Double> extractReportFom(@NotNull String ...columns) throws NoSuchFieldException, IllegalAccessException;
-    @NotNull Map<String, Double> extractReportFom(@NotNull int ...indexes) throws NoSuchFieldException, IllegalAccessException;
 }

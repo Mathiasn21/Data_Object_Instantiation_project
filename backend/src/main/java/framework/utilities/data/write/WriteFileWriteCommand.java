@@ -18,8 +18,7 @@ import java.util.List;
 public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
     private final File file;
     private final String data;
-    private boolean append = false;
-    private boolean createIfNotExists = true;
+    private boolean append = false, createIfNotExists = true;
 
     public WriteFileWriteCommand(@NotNull File file, @NotNull String data) {
         this.file = file;
@@ -51,17 +50,6 @@ public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, append))) {
             bufferedWriter.write(data);
         }
-    }
-
-    //FIXME: Missing JDoc
-    //TODO: Might be better to remove this
-    @Deprecated//As this method does not bring any value. Creation of a file is auto done, if it doesn't exists.
-    public void createFile(@NotNull File resource) throws IOException {
-        if (resource.createNewFile()) {
-            new File(resource.getPath());
-            return;
-        }
-        throw new FileAlreadyExistsException(resource.getPath());
     }
 
     //FIXME: Missing JDoc

@@ -49,7 +49,7 @@ public class ExtractorTest {
 
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
-        List<Object[]> res = extractor.extractColumns();
+        List<Object[]> res = extractor.extractColumns("2");
 
         assertFalse(res.isEmpty());
         int i = 0;

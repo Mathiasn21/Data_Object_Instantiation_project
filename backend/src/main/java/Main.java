@@ -23,6 +23,5 @@ public class Main {
         List<Resource> resources = Resource.newResource().fromFile(path2).fromFile(path2).buildAll();
         ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
         collectorPool.collectAllDataAsync((ThreadPoolExecutor) Executors.newFixedThreadPool(2));
-        System.out.println("herro");
     }
 }

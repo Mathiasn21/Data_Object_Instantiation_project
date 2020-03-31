@@ -122,16 +122,6 @@ public class Write {
     }
 
     @Test
-    void create_file()  {
-        Assertions.assertDoesNotThrow(() -> {
-            File path = new File(System.getProperty("user.dir") + "/files/createFile.csv");
-            WriteFileWriteCommand w = new WriteFileWriteCommand(path, "thing");
-            w.createFile(path);
-            assertTrue(path.exists());
-        });
-    }
-
-    @Test
     void delete_file()  {
         Assertions.assertDoesNotThrow(() -> {
             File path = new File(System.getProperty("user.dir") + "/files/createFile.csv");
