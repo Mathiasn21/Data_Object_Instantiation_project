@@ -19,19 +19,10 @@ public interface ICollector {
      */
     void setPrimaryKeys(List<String> list);
 
-    /**
-     * @param key {@link Setting}
-     * @param value {@link String}
+    /**Toggles compression of objects in the data structure on or off.
+     * @param b boolean
      */
-    void setSetting(Setting key, String value);
-
     void setCompressionOn(boolean b);
-
-
-    /**
-     * @param settings {@link Map}&lt;{@link Setting}, {@link String}&gt;
-     */
-    void setAllSettings(Map<Setting, String> settings);
 
     /**
      * @param mb int

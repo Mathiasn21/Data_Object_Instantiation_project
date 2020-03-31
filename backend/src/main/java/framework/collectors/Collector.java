@@ -21,7 +21,6 @@ import java.util.*;
 public final class Collector implements ICollector{
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
-    private final Map<Setting, String> settings = new HashMap<>();
     private final IHandle dataHandler;
     private final Resource resource;
     private List<String> primaryKeys;
@@ -67,33 +66,10 @@ public final class Collector implements ICollector{
     @Override
     public final void setPrimaryKeys(List<String> primaryKeys){ this.primaryKeys = primaryKeys; }
 
-
-    /**
-     *
-     * @param key {@link Setting}
-     * @param value String
-     */
-    @Override
-    public final void setSetting(@NotNull Setting key, @NotNull String value) {
-        settings.put(key, value);
-    }
-
     @Override
     public void setCompressionOn(boolean b) {
         this.compression = b;
     }
-
-
-    /**
-     * Sets all settings from a execute map.
-     * Will overwrite all existing settings with the new value.
-     * @param settings {@link Map}&lt;String, String&gt;
-     */
-    @Override
-    public final void setAllSettings(Map<@NotNull Setting, @NotNull String> settings){
-        this.settings.putAll(settings);
-    }
-
 
     /**
      * Sets max memory that this collector is allowed to utilize.
@@ -144,14 +120,6 @@ public final class Collector implements ICollector{
         while(iterator.hasNext()){ res.add(iterator.next().getT()); }
         return res;
     }
-
-    /**
-     * Returns an unmodifiable map see {@link Collections}
-     * for more information
-     * @return Map {@link Setting}, String.
-     */
-    @Contract(pure = true)
-    public final @NotNull Map<@NotNull Setting, @NotNull String> getSettings(){ return Collections.unmodifiableMap(settings); }
 
     /**
      * @param resource {@link Resource}
