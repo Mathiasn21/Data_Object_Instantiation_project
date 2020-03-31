@@ -16,7 +16,7 @@ public class Main {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         Resource resource = Resource.newResource().fromFile(path).build();//Will only build the first execute resource
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
-        collector.collectData();
+        collector.collectData();//Data tries to be instantiated
 
         //Showcasing more complex usage of the framework.
         String path2 = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
