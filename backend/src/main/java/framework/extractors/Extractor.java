@@ -32,16 +32,13 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
         List<Object> res = new ArrayList<>();
         Class<?> fieldClass = field.getClass();
-
         Method fieldFound = null;
-        try{
-            fieldFound = fieldClass.getMethod("get" + field);
-        } catch (SecurityException | NoSuchMethodException e) {
-            exceptions.add(e);
-        }finally{
-            if(fieldFound != null){
-                for (Object object : columns) { res.add(field.get(object)); }
-            }
+
+        try{ fieldFound = fieldClass.getMethod("get" + field);
+        } catch (SecurityException | NoSuchMethodException e) { exceptions.add(e); }
+
+        if(fieldFound != null){
+            for (Object object : columns) { res.add(field.get(object)); }
         }
         return res;
     }
