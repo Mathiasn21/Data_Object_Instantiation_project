@@ -11,16 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Parse {
     private final Class<?>[] wrappers = {Double.class, Float.class, Integer.class, String.class, Byte.class, Short.class, Long.class, Boolean.class};
     private final Class<?>[] primitives = {double.class, float.class, int.class, String.class, byte.class, short.class, long.class, boolean.class};
-    private final Comparator<?>[] comparators = new Comparator[]{
-            (Comparator<Double>) Double::compareTo,
-            (Comparator<Float>) Float::compareTo,
-            (Comparator<Integer>) Integer::compareTo,
-            (Comparator<String>) String::compareTo,
-            (Comparator<Byte>) Byte::compareTo,
-            (Comparator<Short>) Short::compareTo,
-            (Comparator<Long>) Long::compareTo,
-            (Comparator<Boolean>) Boolean::compareTo
-    };
 
     @Test
     void from_string_to_primitive_value(){
