@@ -7,6 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public final class EventObserver {
     private static final Map<Class<? extends IEvent>, List<Subject>> registeredEvents = new HashMap<>();
     private static final Map<Subject, Map<Class<? extends IEvent>, EventCommand>> registeredEventCommands = new HashMap<>();

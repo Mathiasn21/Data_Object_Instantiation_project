@@ -8,28 +8,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.net.URL;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class Read {
     @Test
-    void from_file_using_string() {
-        Assertions.assertDoesNotThrow(() -> {
-            String path = System.getProperty("user.dir") + "/files/DTOJson.json";
-            Resource resource = Resource.newResource().fromFile(path).build();
-
-            StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = resource.getData();
-
-            String line;
-            while((line = bufferedReader.readLine()) != null){
-                builder.append(line);
-            }
-            Assertions.assertFalse(builder.toString().isEmpty());
-            Assertions.assertFalse(builder.toString().isBlank());
-        });
-    }
-
-    @Test
     void from_file_using_file() {
-        Assertions.assertDoesNotThrow(() -> {
+        assertDoesNotThrow(() -> {
             File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
             Resource resource = Resource.newResource().fromFile(path).build();
 
@@ -40,14 +24,14 @@ public class Read {
             while((line = bufferedReader.readLine()) != null){
                 builder.append(line);
             }
-            Assertions.assertFalse(builder.toString().isEmpty());
-            Assertions.assertFalse(builder.toString().isBlank());
+            assertFalse(builder.toString().isEmpty());
+            assertFalse(builder.toString().isBlank());
         });
     }
 
     @Test
     void from_URL_using_URL() {
-        Assertions.assertDoesNotThrow(() -> {
+        assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
             Resource resource = Resource.newResource().fromURL(url).build();
 
@@ -58,13 +42,14 @@ public class Read {
             while((line = bufferedReader.readLine()) != null){
                 builder.append(line);
             }
-            Assertions.assertFalse(builder.toString().isEmpty());
-            Assertions.assertFalse(builder.toString().isBlank());
+            assertFalse(builder.toString().isEmpty());
+            assertFalse(builder.toString().isBlank());
         });
     }
+
     @Test
     void from_URL_using_string() {
-        Assertions.assertDoesNotThrow(() -> {
+        assertDoesNotThrow(() -> {
             String URL = "http://example.com";
             Resource resource = Resource.newResource().fromURL(URL).build();
 
@@ -75,8 +60,8 @@ public class Read {
             while((line = bufferedReader.readLine()) != null){
                 builder.append(line);
             }
-            Assertions.assertFalse(builder.toString().isEmpty());
-            Assertions.assertFalse(builder.toString().isBlank());
+            assertFalse(builder.toString().isEmpty());
+            assertFalse(builder.toString().isBlank());
         });
     }
 }

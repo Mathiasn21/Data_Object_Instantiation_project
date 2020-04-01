@@ -18,7 +18,7 @@ import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
 /** Class that contains concrete instruction for handling JSON data.
  *  By default it utilizes the delimiter ","
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public final class CSVHandler implements IHandle{
     private String delimiter = ",";
