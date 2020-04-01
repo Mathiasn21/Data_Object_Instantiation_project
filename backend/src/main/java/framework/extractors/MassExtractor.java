@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public class MassExtractor implements IMassExtract{
 
     @Override

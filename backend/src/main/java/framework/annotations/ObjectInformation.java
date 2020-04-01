@@ -3,7 +3,7 @@ package framework.annotations;
 import java.util.List;
 
 /**
- * Allows passing usefull information from {@link AnnotationsProcessor}
+ * Allows passing usefull external information from {@link AnnotationsProcessor}
  * to other classes.
  */
 public final class ObjectInformation {

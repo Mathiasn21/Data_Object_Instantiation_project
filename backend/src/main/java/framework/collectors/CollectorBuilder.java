@@ -23,13 +23,6 @@ public final class CollectorBuilder {
 
     @Contract("_ -> this")
     @NotNull
-    public final CollectorBuilder setPrimaryColumns(List<String> primaryColumns){
-        collector.setPrimaryKeys(primaryColumns);
-        return this;
-    }
-
-    @Contract("_ -> this")
-    @NotNull
     public final CollectorBuilder setMaxMemoryMB(int mb){
         collector.setMaxMemoryMB(mb);
         return this;

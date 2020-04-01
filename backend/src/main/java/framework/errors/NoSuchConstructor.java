@@ -3,7 +3,7 @@ package framework.errors;
 /**
  * Thrown whenver the framework can't find a apropriate constructor
  * from {@link framework.utilities.data.Resource} data.
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */
 public final class NoSuchConstructor extends Error {

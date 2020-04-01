@@ -2,6 +2,8 @@ package framework.collectors;
 
 import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
+import framework.observer.IObservable;
+import framework.observer.events.IEvent;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import framework.utilities.data.structure.ITree;
@@ -15,10 +17,9 @@ import java.util.*;
 
 /** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @version 1.0.0
+ * @version 2.9.4
  */
-public final class Collector implements ICollector{
+public final class Collector implements ICollector, IObservable {
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
     private final IHandle dataHandler;
@@ -84,23 +85,6 @@ public final class Collector implements ICollector{
     }
 
     /**
-     * Columns that describe the values inherent in a dataset.
-     * @return {@link List}&lt;{@link String}&gt;
-     */
-    @Override
-    public final List<String> getPrimaryKeys() {
-        return primaryKeys;
-    }
-
-    /**
-     * @return Class&lt;?&gt;&gt;[]
-     */
-    @NotNull
-    @Contract(pure = true)
-    @Override
-    public Class<?>[] getPrimaryKeyTypes() { return primaryTypes; }
-
-    /**
      * @return Class&lt;?&gt;&gt;
      */
     @NotNull
@@ -119,6 +103,11 @@ public final class Collector implements ICollector{
         List<Object> res = new ArrayList<>();
         while(iterator.hasNext()){ res.add(iterator.next().getT()); }
         return res;
+    }
+
+    @Override
+    public void raise(IEvent event) {
+
     }
 
     /**

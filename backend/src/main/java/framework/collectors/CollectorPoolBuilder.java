@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public class CollectorPoolBuilder {
     private final List<CollectorBuilder> collectorBuilders;
     CollectorPoolBuilder(@NotNull List<Resource> resources, @NotNull IHandle handler) {
@@ -17,15 +20,6 @@ public class CollectorPoolBuilder {
             collectorBuilders.add(Collector.newCollector(resource, handler));
         }
         this.collectorBuilders = collectorBuilders;
-    }
-
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorPoolBuilder setGloballyPrimaryColumns(List<String> primaryColumns){
-        for (CollectorBuilder builder : collectorBuilders) {
-            builder.setPrimaryColumns(primaryColumns);
-        }
-        return this;
     }
 
     @Contract("_ -> this")
