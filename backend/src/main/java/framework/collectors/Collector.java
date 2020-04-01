@@ -49,7 +49,7 @@ public final class Collector implements ICollector{
         rbTree = new RBTree<>(comparator, compression);
 
         try {
-            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getNameSpace());
+            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getNameSpace()[0]);
             for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
 
             primaryTypes = objectObjectInformation.primaryKeyTypes;

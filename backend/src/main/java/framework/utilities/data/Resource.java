@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public final class Resource {
     private final IReadCommand readData;
-    private final String nameSpace;
+    private final String[] nameSpace;
 
     /**
      * @param readData {@link IReadCommand}
@@ -25,7 +25,7 @@ public final class Resource {
      * @param readData {@link IReadCommand}
      * @param nameSpace {@link String}
      */
-    public Resource(IReadCommand readData, String nameSpace) {
+    public Resource(IReadCommand readData, String ...nameSpace) {
         this.readData = readData;
         this.nameSpace = nameSpace;
     }
@@ -60,7 +60,7 @@ public final class Resource {
     /**
      * @return {@link String}
      */
-    public final String getNameSpace() { return nameSpace; }
+    public final String[] getNameSpace() { return nameSpace; }
 
 
     /*TODO: Allow this class to be extended with its own implementations
