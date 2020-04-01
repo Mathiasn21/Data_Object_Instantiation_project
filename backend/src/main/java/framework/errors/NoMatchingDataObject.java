@@ -7,14 +7,10 @@ package framework.errors;
  */
 public final class NoMatchingDataObject extends Error {
     private static final String BASE_MSG = "Could not find proper DataObject.";
-    public NoMatchingDataObject() {
-        this(BASE_MSG);
-    }
+    public NoMatchingDataObject() { this(BASE_MSG); }
 
     /**
      * @param msg String
      */
-    private NoMatchingDataObject(String msg) {
-        super(BASE_MSG + " " + msg);
-    }
+    private NoMatchingDataObject(String msg) { super(BASE_MSG + " " + msg); }
 }
