@@ -150,8 +150,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Nullable
     private Field getField(@NotNull Class<?> clazz) {
         Field field = null;
-
-        //First try getting the field data
         try{ field = clazz.getField("column");
         } catch (NoSuchFieldException | SecurityException e) { exceptions.add(e); }
         return field;
