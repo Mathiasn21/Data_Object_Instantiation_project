@@ -27,12 +27,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         this.collector = collector;
     }
 
-
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
-        //FIXME: Here you are supposed to utilize the field you get and just get data using that......
         List<Object> res = new ArrayList<>();
         Class<?> fieldClass = field.getClass();
 
@@ -43,7 +40,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             throwables.add(e);
         }finally{
             if(fieldFound != null){
-                for (Object object : columns) { res.add(fieldFound); }
+                for (Object object : columns) { res.add(field.get(object)); }
             }
         }
         return res;
@@ -84,15 +81,32 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @NotNull
     @Contract(pure = true)
     @Override
-    public List<Object[]> extractColumns(@NotNull Field... fields) {
-        //FIXME: Here you are supposed to utilize the field you get and just get data using that......
-        return null;
+    public List<Object[]> extractColumns(@NotNull Field... fields) throws IllegalAccessException {
+        List<Object[]> res = new ArrayList<>();
+        for(Field fld:fields) {
+            Class<?> fieldClass = fld.getClass();
+
+            Method fieldFound = null;
+            try{
+                fieldFound = fieldClass.getMethod("get" + fld);
+            } catch (SecurityException | NoSuchMethodException e) {
+                throwables.add(e);
+            }finally{
+                if(fieldFound != null){
+                    for (Object object : columns) { res.add((Object[]) fld.get(object)); }
+                }
+            }
+        }
+        return res;
     }
 
     @Contract(pure = true)
     @Override
     public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
         //FIXME: Here you are supposed to utilize the methods you get and just get data using that......
+        for(Method mthd:methods) {
+
+        }
         return null;
     }
 
@@ -100,8 +114,35 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @NotNull
     @Contract(pure = true)
     @Override
-    public List<Object[]> extractColumns(@NotNull String... columns) {
-        return null;
+    public List<Object[]> extractColumns(@NotNull String... columns) throws IllegalAccessException {
+        List<Object[]> res = new ArrayList<>();
+        Object o = this.columns.get(0);
+        Class<?> clazz = o.getClass();
+
+        Method method = null;
+        Field field = null;
+        for(String str:columns) {
+            try{
+                field = clazz.getField("column");
+                method = clazz.getMethod("get" + str);
+            } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+                throwables.add(e);
+            }finally{
+                if(field != null){
+                    for (Object object : this.columns) { res.add((Object[]) field.get(object)); }
+                }else{
+                    if(method != null){
+                        for (Object object : this.columns) {
+                            try { res.add((Object[]) method.invoke(object));
+                            } catch (InvocationTargetException | IllegalAccessException e) {
+                                throwables.add(e);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return res;
     }
 
     //TODO: implement this method
@@ -115,6 +156,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws IllegalAccessException {
+        for(Field fld:fields) {
+
+        }
         return null;
     }
 
@@ -122,6 +166,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws IllegalAccessException {
+        for(String str:columns) {
+
+        }
         return null;
     }
 
@@ -129,6 +176,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws IllegalAccessException {
+        for(Method mthd:methods) {
+
+        }
         return null;
     }
 
