@@ -7,13 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /** Class used for extracting information from a collector
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture and most of the technical implementation
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  * @version 2.0.1
  */
@@ -31,15 +28,16 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
         List<Object> res = new ArrayList<>();
-        Class<?> fieldClass = field.getClass();
-        Method fieldFound = null;
+        for (Object object : columns) { res.add(field.get(object)); }
+        return res;
+    }
 
-        try{ fieldFound = fieldClass.getMethod("get" + field);
-        } catch (SecurityException | NoSuchMethodException e) { exceptions.add(e); }
-
-        if(fieldFound != null){
-            for (Object object : columns) { res.add(field.get(object)); }
-        }
+    @Contract(pure = true)
+    @Override
+    public @NotNull List<Object> extractColumnFrom(@NotNull Method method) throws IllegalAccessException {
+        List<Object> res = new ArrayList<>();
+        try{ for (Object object : columns) { res.add(method.invoke(object)); }//Assumes there aint any params
+        } catch (InvocationTargetException e) { }
         return res;
     }
 
@@ -47,8 +45,8 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull String column) throws IllegalAccessException {
         List<Object> res = new ArrayList<>();
-        Object o = columns.get(0);
-        Class<?> clazz = o.getClass();
+        Object sample = columns.get(0);//Geta sample object
+        Class<?> clazz = sample.getClass();
 
         Method method = null;
         Field field = null;
@@ -64,78 +62,40 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         }else if(method != null){
             for (Object object : columns) {
                 try { res.add(method.invoke(object));
-                } catch (InvocationTargetException e) {
-                    exceptions.add(e);
-                }
+                } catch (InvocationTargetException e) { }
             }
         }
         return res;
     }
 
     //TODO: implement this method
-    @NotNull
     @Contract(pure = true)
     @Override
-    public List<Object[]> extractColumns(@NotNull Field... fields) throws IllegalAccessException {
-        List<Object[]> res = new ArrayList<>();
-        for(Field fld:fields) {
-            Class<?> fieldClass = fld.getClass();
-
-            Method fieldFound = null;
-            try{
-                fieldFound = fieldClass.getMethod("get" + fld);
-            } catch (SecurityException | NoSuchMethodException e) {
-                exceptions.add(e);
-            }finally{
-                if(fieldFound != null){
-                    for (Object object : columns) { res.add((Object[]) fld.get(object)); }
-                }
-            }
+    public @NotNull Map<Field, Object> extractColumns(@NotNull Field... fields) throws IllegalAccessException {
+        Map<Field, Object> res = new HashMap<>();
+        for (Field field : fields) {
+            res.put(field, this.extractColumnFrom(field));
         }
         return res;
     }
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<Object[]> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
-        //FIXME: Here you are supposed to utilize the methods you get and just get data using that......
-        for(Method mthd:methods) {
-
+    public @NotNull Map<Method, Object> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
+        Map<Method, Object> res = new HashMap<>();
+        for (Method method : methods) {
+            res.put(method, this.extractColumnFrom(method));
         }
-        return null;
+        return res;
     }
 
     //TODO: implement this method
-    @NotNull
     @Contract(pure = true)
     @Override
-    public List<Object[]> extractColumns(@NotNull String... columns) throws IllegalAccessException {
-        List<Object[]> res = new ArrayList<>();
-        Object o = this.columns.get(0);
-        Class<?> clazz = o.getClass();
-
-        Method method = null;
-        Field field = null;
-        for(String str:columns) {
-            try{
-                field = clazz.getField("column");
-                method = clazz.getMethod("get" + str);
-            } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-                exceptions.add(e);
-            }finally{
-                if(field != null){
-                    for (Object object : this.columns) { res.add((Object[]) field.get(object)); }
-                }else{
-                    if(method != null){
-                        for (Object object : this.columns) {
-                            try { res.add((Object[]) method.invoke(object));
-                            } catch (InvocationTargetException | IllegalAccessException e) {
-                                exceptions.add(e);
-                            }
-                        }
-                    }
-                }
-            }
+    public @NotNull Map<String, Object> extractColumns(@NotNull String... columns) throws IllegalAccessException {
+        Map<String, Object> res = new HashMap<>();
+        for (String column : columns) {
+            res.put(column, this.extractColumnFrom(column));
         }
         return res;
     }
