@@ -13,18 +13,20 @@ import java.util.*;
 public final class EventObserver {
     private static final Map<Class<? extends IEvent>, List<Subject>> registeredEvents = new HashMap<>();
     private static final Map<Subject, Map<Class<? extends IEvent>, EventCommand>> registeredEventCommands = new HashMap<>();
-    private static final Map<IObservable, List<IEvent>> observedEvents = new HashMap<>();
+    private static final Map<Object, List<IEvent>> observedEvents = new HashMap<>();
+
+    EventObserver(){}
 
     static{
         registeredEvents.put(IEvent.class, new ArrayList<>());
         registeredEvents.put(ExceptionEvent.class, new ArrayList<>());
     }
 
-    public static void observeEvents(@NotNull Subject subject, @NotNull Class<? extends IEvent> event){
+    public static void subscribeToEvents(@NotNull Subject subject, @NotNull Class<? extends IEvent> event){
         registeredEvents.get(event).add(subject);
     }
 
-    public static <E extends IEvent> void registerEventFrom(@NotNull IObservable observable, @NotNull E event){
+    public static <E extends IEvent> void registerEventFrom(@NotNull Object observable, @NotNull E event){
         if(observedEvents.containsKey(observable)) {
             observedEvents.get(observable).add(event);
             return;

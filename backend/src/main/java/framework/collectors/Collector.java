@@ -2,7 +2,7 @@ package framework.collectors;
 
 import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
-import framework.observer.IObservable;
+import framework.observer.EventObserver;
 import framework.observer.events.IEvent;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
@@ -19,7 +19,7 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.9.4
  */
-public final class Collector implements ICollector, IObservable {
+public final class Collector implements ICollector {
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
     private final IHandle dataHandler;
@@ -105,10 +105,11 @@ public final class Collector implements ICollector, IObservable {
         return res;
     }
 
-    @Override
-    public void raise(IEvent event) {
-
+    private void raise(IEvent event) {
+        EventObserver.registerEventFrom(this, event);
     }
+
+
 
     /**
      * @param resource {@link Resource}
