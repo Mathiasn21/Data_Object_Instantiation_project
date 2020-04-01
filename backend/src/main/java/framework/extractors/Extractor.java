@@ -20,7 +20,7 @@ import java.util.Map;
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
     private final ICollector collector;//Leave this be!
-    private List<Exception> throwables = new ArrayList<>();
+    private List<Exception> exceptions = new ArrayList<>();
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -37,7 +37,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         try{
             fieldFound = fieldClass.getMethod("get" + field);
         } catch (SecurityException | NoSuchMethodException e) {
-            throwables.add(e);
+            exceptions.add(e);
         }finally{
             if(fieldFound != null){
                 for (Object object : columns) { res.add(field.get(object)); }
@@ -55,22 +55,20 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
         Method method = null;
         Field field = null;
-        try{
-            field = clazz.getField("column");
-            method = clazz.getMethod("get" + column);
-        } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-            throwables.add(e);
-        }finally{
-            if(field != null){
-                for (Object object : columns) { res.add(field.get(object)); }
-            }else{
-                if(method != null){
-                    for (Object object : columns) {
-                        try { res.add(method.invoke(object));
-                        } catch (InvocationTargetException e) {
-                            throwables.add(e);
-                        }
-                    }
+
+        try{ field = clazz.getField("column");
+        } catch (NoSuchFieldException | SecurityException e) { exceptions.add(e); }
+
+        try { method = clazz.getMethod("get" + column);
+        } catch (NoSuchMethodException e) { }
+
+        if(field != null){
+            for (Object object : columns) { res.add(field.get(object)); }
+        }else if(method != null){
+            for (Object object : columns) {
+                try { res.add(method.invoke(object));
+                } catch (InvocationTargetException e) {
+                    exceptions.add(e);
                 }
             }
         }
@@ -90,7 +88,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             try{
                 fieldFound = fieldClass.getMethod("get" + fld);
             } catch (SecurityException | NoSuchMethodException e) {
-                throwables.add(e);
+                exceptions.add(e);
             }finally{
                 if(fieldFound != null){
                     for (Object object : columns) { res.add((Object[]) fld.get(object)); }
@@ -126,7 +124,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
                 field = clazz.getField("column");
                 method = clazz.getMethod("get" + str);
             } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
-                throwables.add(e);
+                exceptions.add(e);
             }finally{
                 if(field != null){
                     for (Object object : this.columns) { res.add((Object[]) field.get(object)); }
@@ -135,7 +133,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
                         for (Object object : this.columns) {
                             try { res.add((Object[]) method.invoke(object));
                             } catch (InvocationTargetException | IllegalAccessException e) {
-                                throwables.add(e);
+                                exceptions.add(e);
                             }
                         }
                     }
@@ -185,6 +183,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @NotNull
     @Contract(pure = true)
     public List<Exception> getErrors() {
-        return Collections.unmodifiableList(throwables);
+        return Collections.unmodifiableList(exceptions);
     }
 }
