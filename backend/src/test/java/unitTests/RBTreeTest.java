@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RBTreeTest {
     ITree<Integer> tree = new RBTree<>(), tree2 = new RBTree<>();
-    int[] fibonacci = {1, 1, 2, 3, 5, 8, 13, 21, 34}, scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21}, fibonacciEightRemoved = {1, 1, 2, 3, 5, 13, 21, 34};
+    int[] fibonacci = {1, 1, 2, 3, 5, 8, 13, 21, 34}, scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
 
     @Test
     void insertion_of_node(){
@@ -35,6 +35,7 @@ public class RBTreeTest {
     @Test
     void removal_of_node(){
         assertEquals(0, tree.size()); //makes sure tree is empty beforehand
+        int[] fibonacciEightRemoved = {1, 1, 2, 3, 5, 13, 21, 34};
 
         for(int numbers : scrambledFibonacci){
             tree.insert(numbers);
@@ -54,5 +55,62 @@ public class RBTreeTest {
         }
 
         System.out.println("Removal of node in RBTree is possible");
+    }
+
+    @Test
+    void levelorder_traversal(){
+        assertEquals(0, tree.size()); //makes sure tree is empty beforehand
+        int[] fibonacciLevelordered = {5, 1, 13, 1, 2, 8, 34, 3, 21};
+
+        for(int numbers : scrambledFibonacci) {
+            tree.insert(numbers);
+        }
+
+        Iterator<Node<Integer>> iterator = tree.levelorderTraversal();
+
+        for(int numbers : fibonacciLevelordered){
+            assertEquals(numbers, iterator.next().getT());
+        }
+
+        System.out.println("RBTree traverses correctly in levelordered traversal");
+
+    }
+
+    @Test
+    void postorder_traversal(){
+        assertEquals(0, tree.size()); //makes sure tree is empty beforehand
+        int[] fibonacciPostordered = {1, 3, 2, 1, 8, 21, 34, 13, 5};
+
+        for(int numbers : scrambledFibonacci) {
+            tree.insert(numbers);
+        }
+
+        Iterator<Node<Integer>> iterator = tree.postorderTraversal();
+
+        for(int numbers : fibonacciPostordered){
+            assertEquals(numbers, iterator.next().getT());
+        }
+
+        System.out.println("RBTree traverses correctly in postordered traversal");
+
+    }
+
+    @Test
+    void preorder_traversal(){
+        assertEquals(0, tree.size()); //makes sure tree is empty beforehand
+        int[] fibonacciPreordered = {5, 1, 1, 2, 3, 13, 8, 34, 21};
+
+        for(int numbers : scrambledFibonacci) {
+            tree.insert(numbers);
+        }
+
+        Iterator<Node<Integer>> iterator = tree.preorderTraversal();
+
+        for(int numbers : fibonacciPreordered){
+            assertEquals(numbers, iterator.next().getT());
+        }
+
+        System.out.println("RBTree traverses correctly in preordered traversal");
+
     }
 }
