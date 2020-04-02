@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,7 +30,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull Field field) throws IllegalAccessException {
         List<Object> res = new ArrayList<>();
-        for (Object object : columns) { res.add(field.get(object)); }
+        for (Object object : columns) {
+            res.add(field.get(object));
+        }
         return res;
     }
 
@@ -37,8 +40,13 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Override
     public @NotNull List<Object> extractColumnFrom(@NotNull Method method) throws IllegalAccessException {
         List<Object> res = new ArrayList<>();
-        try{ for (Object object : columns) { res.add(method.invoke(object)); }//Assumes there aint any params
-        } catch (InvocationTargetException e) { }
+        try {
+            for (Object object : columns) {
+                res.add(method.invoke(object));
+            }//Assumes there aint any params
+        } catch (InvocationTargetException e) {
+            exceptions.add(e);
+        }
         return res;
     }
 
@@ -53,12 +61,17 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         Field field = getField(clazz, column);
         Method method = getMethod(clazz, column);
 
-        if(field != null){
-            for (Object object : columns) { res.add(field.get(object)); }
-        }else if(method != null){
+        if (field != null) {
             for (Object object : columns) {
-                try { res.add(method.invoke(object));
-                } catch (InvocationTargetException e) { }
+                res.add(field.get(object));
+            }
+        } else if (method != null) {
+            for (Object object : columns) {
+                try {
+                    res.add(method.invoke(object));
+                } catch (InvocationTargetException e) {
+                    exceptions.add(e);
+                }
             }
         }
         return res;
@@ -108,7 +121,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) throws IllegalAccessException {
-        for(Field fld:fields) {
+        for (Field fld : fields) {
 
         }
         return null;
@@ -118,7 +131,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) throws IllegalAccessException {
-        for(String str:columns) {
+        for (String str : columns) {
 
         }
         return null;
@@ -128,7 +141,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) throws IllegalAccessException {
-        for(Method mthd:methods) {
+        for (Method mthd : methods) {
 
         }
         return null;
@@ -136,22 +149,29 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @NotNull
     @Contract(pure = true)
-    public List<Exception> getErrors() { return Collections.unmodifiableList(exceptions); }
+    public List<Exception> getErrors() {
+        return Collections.unmodifiableList(exceptions);
+    }
 
 
     @Nullable
     private Method getMethod(@NotNull Class<?> clazz, @NotNull String column) {
         Method method = null;
-        try { method = clazz.getMethod("get" + column);
-        } catch (NoSuchMethodException e) { }
+        try {
+            method = clazz.getMethod("get" + column);
+        } catch (NoSuchMethodException e) {
+        }
         return method;
     }
 
     @Nullable
     private Field getField(@NotNull Class<?> clazz, String name) {
         Field field = null;
-        try{ field = clazz.getField(name);
-        } catch (NoSuchFieldException | SecurityException e) { exceptions.add(e); }
+        try {
+            field = clazz.getField(name);
+        } catch (NoSuchFieldException | SecurityException e) {
+            exceptions.add(e);
+        }
         return field;
     }
 }
