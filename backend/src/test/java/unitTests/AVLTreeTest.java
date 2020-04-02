@@ -1,8 +1,6 @@
 package unitTests;
 
-import framework.utilities.data.structure.AVLTree;
-import framework.utilities.data.structure.ITree;
-import framework.utilities.data.structure.Node;
+import framework.utilities.data.structure.*;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 
