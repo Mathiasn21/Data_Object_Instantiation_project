@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.0
  */
 public final class Average implements IAverage{
-
     private final double[] data;
     private final int length;
     private double sum = 0;
