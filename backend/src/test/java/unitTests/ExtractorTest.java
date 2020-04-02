@@ -26,7 +26,7 @@ public class ExtractorTest {
 
         ICollector collector = genCollector();
         IExtractor extractor = new Extractor<>(collector);
-        List<Object> column1 = extractor.extractColumnFrom("Column1");
+        List<Object> column1 = extractor.extractColumnFrom("string");
 
         assertFalse(column1.isEmpty());
         assertEquals(list, column1);

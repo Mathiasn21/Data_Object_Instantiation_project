@@ -50,8 +50,8 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         Class<?> clazz = sample.getClass();
 
         //First try to gather either a field and or a method to utilize
-        Field field = getField(clazz);
-        Method method = getMethod(column, clazz);
+        Field field = getField(clazz, column);
+        Method method = getMethod(clazz, column);
 
         if(field != null){
             for (Object object : columns) { res.add(field.get(object)); }
@@ -140,7 +140,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
 
     @Nullable
-    private Method getMethod(@NotNull String column, @NotNull Class<?> clazz) {
+    private Method getMethod(@NotNull Class<?> clazz, @NotNull String column) {
         Method method = null;
         try { method = clazz.getMethod("get" + column);
         } catch (NoSuchMethodException e) { }
@@ -148,9 +148,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     }
 
     @Nullable
-    private Field getField(@NotNull Class<?> clazz) {
+    private Field getField(@NotNull Class<?> clazz, String name) {
         Field field = null;
-        try{ field = clazz.getField("column");
+        try{ field = clazz.getField(name);
         } catch (NoSuchFieldException | SecurityException e) { exceptions.add(e); }
         return field;
     }
