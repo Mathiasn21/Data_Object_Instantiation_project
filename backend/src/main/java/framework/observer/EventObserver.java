@@ -1,5 +1,6 @@
 package framework.observer;
 
+import framework.observer.events.CollectorFinishedEvent;
 import framework.observer.events.ExceptionEvent;
 import framework.observer.events.IEvent;
 import framework.observer.events.EventCommand;
@@ -20,13 +21,23 @@ public final class EventObserver {
     static{
         registeredEvents.put(IEvent.class, new ArrayList<>());
         registeredEvents.put(ExceptionEvent.class, new ArrayList<>());
+        registeredEvents.put(CollectorFinishedEvent.class, new ArrayList<>());
     }
 
-    public static void subscribeToEvents(@NotNull Subject subject, @NotNull Class<? extends IEvent> event){
-        registeredEvents.get(event).add(subject);
+    public static void subscribeToEvents(@NotNull Subject subject, @NotNull List<Class<? extends IEvent>> events){
+        for (Class<? extends IEvent> event : events) {
+            subscribeToEvent(subject, event);
+        }
     }
 
-    public static <E extends IEvent> void registerEventFrom(@NotNull Object observable, @NotNull E event){
+    public static void subscribeToEvent(@NotNull Subject subject, @NotNull Class<? extends IEvent> event){
+        List<Subject> subjects = registeredEvents.get(event);
+        if(subjects == null || subjects.contains(subject)){ return; }
+        subjects.add(subject);
+    }
+
+    public static <E extends IEvent> void registerEventFrom(@NotNull E event){
+        Object observable = event.raisedBy();
         if(observedEvents.containsKey(observable)) {
             observedEvents.get(observable).add(event);
             return;
@@ -44,7 +55,9 @@ public final class EventObserver {
     }
 
     private static void notifyAllSubjects(@NotNull IEvent event){
-        registeredEvents.get(event.getClass()).iterator().forEachRemaining((subject) -> {
+        Class<? extends IEvent> eventClazz = event.getClass();
+        List<Subject> subjects = registeredEvents.get(eventClazz);
+        subjects.iterator().forEachRemaining((subject) -> {
             executeCommand(subject, event);
             subject.update(event);
         });

@@ -2,6 +2,8 @@ import framework.collectors.Collector;
 import framework.collectors.CollectorPool;
 import framework.collectors.ICollector;
 import framework.collectors.ICollectorPool;
+import framework.observer.EventObserver;
+import framework.observer.events.CollectorFinishedEvent;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.JSONHandler;
 
@@ -22,6 +24,8 @@ public class Main {
         String path2 = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         List<Resource> resources = Resource.newResource().fromFile(path2).fromFile(path2).buildAll();
         ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
+
+        EventObserver.subscribeToEvent(event -> System.out.println("Got event: " + event), CollectorFinishedEvent.class);
         collectorPool.collectAllDataAsync((ThreadPoolExecutor) Executors.newFixedThreadPool(2));
     }
 }

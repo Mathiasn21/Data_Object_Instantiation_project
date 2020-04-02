@@ -3,6 +3,8 @@ package framework.collectors;
 import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
 import framework.observer.EventObserver;
+import framework.observer.events.CollectorFinishedEvent;
+import framework.observer.events.ExceptionEvent;
 import framework.observer.events.IEvent;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
@@ -24,8 +26,6 @@ public final class Collector implements ICollector {
 
     private final IHandle dataHandler;
     private final Resource resource;
-    private List<String> primaryKeys;
-    private Class<?>[] primaryTypes;
     private Class<?> clazz;
     private ITree<Object> rbTree;
     private Comparator<Object> comparator = null;
@@ -53,11 +53,9 @@ public final class Collector implements ICollector {
             ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getNameSpace()[0]);
             for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
 
-            primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-        }
+            raise(new CollectorFinishedEvent(this));
+        } catch (ReflectiveOperationException e) { raise(new ExceptionEvent(this, e)); }
     }
 
     /**
@@ -65,7 +63,8 @@ public final class Collector implements ICollector {
      * @param primaryKeys {@link List}&lt;{@link String}&gt;
      */
     @Override
-    public final void setPrimaryKeys(List<String> primaryKeys){ this.primaryKeys = primaryKeys; }
+    public final void setPrimaryKeys(List<String> primaryKeys){
+    }
 
     @Override
     public void setCompressionOn(boolean b) {
@@ -106,7 +105,7 @@ public final class Collector implements ICollector {
     }
 
     private void raise(IEvent event) {
-        EventObserver.registerEventFrom(this, event);
+        EventObserver.registerEventFrom(event);
     }
 
 

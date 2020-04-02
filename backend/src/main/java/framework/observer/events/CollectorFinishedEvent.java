@@ -8,8 +8,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public class CollectorFinishedEvent implements IEvent {
     private final ICollector collector;
-    public CollectorFinishedEvent(ICollector collector) { this.collector = collector; }
+    public CollectorFinishedEvent(@NotNull ICollector collector) {
+        this.collector = collector;
+    }
 
     @Override
     public @NotNull ICollector raisedBy() { return collector; }
+
+    @Override
+    public String toString() {
+        return "CollectorFinishedEvent: " + collector;
+    }
 }

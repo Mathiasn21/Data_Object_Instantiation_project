@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ExtractorTest {
     @Test
-    void single_column() throws IOException, NoSuchFieldException, IllegalAccessException {
+    void single_column() throws IOException, IllegalAccessException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
             list.add("\"dwada\"");
