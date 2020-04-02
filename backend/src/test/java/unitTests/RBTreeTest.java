@@ -22,19 +22,4 @@ public class RBTreeTest {
     void removal_of_node(){
 
     }
-
-    @Test
-    void rotates_right(){
-
-    }
-
-    @Test
-    void rotates_left(){
-
-    }
-
-    @Test
-    void rebalances_correctly(){
-
-    }
 }
