@@ -104,10 +104,7 @@ public final class Collector implements ICollector {
         return res;
     }
 
-    private void raise(IEvent event) {
-        EventObserver.registerEventFrom(event);
-    }
-
+    private void raise(IEvent event) { EventObserver.registerEventFrom(event); }
 
 
     /**

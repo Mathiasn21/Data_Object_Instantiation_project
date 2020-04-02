@@ -7,6 +7,7 @@ import java.util.Objects;
 
 /**
  * ComplexDTO that contains custom field that require mapping
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
 @DataObject
 public class ComplexDTOCSV {

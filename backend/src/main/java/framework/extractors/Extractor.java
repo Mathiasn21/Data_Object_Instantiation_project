@@ -13,7 +13,7 @@ import java.util.*;
 /** Class used for extracting information from a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture and most of the technical implementation
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
- * @version 2.0.1
+ * @version 2.2.0
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
@@ -68,8 +68,8 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<Field, Object> extractColumns(@NotNull Field... fields) throws IllegalAccessException {
-        Map<Field, Object> res = new HashMap<>();
+    public @NotNull Map<Field, List<Object>> extractColumns(@NotNull Field... fields) throws IllegalAccessException {
+        Map<Field, List<Object>> res = new HashMap<>();
         for (Field field : fields) {
             res.put(field, this.extractColumnFrom(field));
         }
@@ -78,8 +78,8 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @Contract(pure = true)
     @Override
-    public @NotNull Map<Method, Object> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
-        Map<Method, Object> res = new HashMap<>();
+    public @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method... methods) throws IllegalAccessException {
+        Map<Method, List<Object>> res = new HashMap<>();
         for (Method method : methods) {
             res.put(method, this.extractColumnFrom(method));
         }
@@ -89,8 +89,8 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Object> extractColumns(@NotNull String... columns) throws IllegalAccessException {
-        Map<String, Object> res = new HashMap<>();
+    public @NotNull Map<String, List<Object>> extractColumns(@NotNull String... columns) throws IllegalAccessException {
+        Map<String, List<Object>> res = new HashMap<>();
         for (String column : columns) {
             res.put(column, this.extractColumnFrom(column));
         }

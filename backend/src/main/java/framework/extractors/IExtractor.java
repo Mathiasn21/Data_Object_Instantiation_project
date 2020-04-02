@@ -25,13 +25,13 @@ public interface IExtractor{
 
 
     @Contract(pure = true)
-    @NotNull Map<Field, Object> extractColumns(@NotNull Field ...fields) throws IllegalAccessException;
+    @NotNull Map<Field, List<Object>> extractColumns(@NotNull Field ...fields) throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<Method, Object> extractColumns(@NotNull Method ...methods) throws IllegalAccessException;
+    @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method ...methods) throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Object> extractColumns(@NotNull String ...columns) throws IllegalAccessException;
+    @NotNull Map<String, List<Object>> extractColumns(@NotNull String ...columns) throws IllegalAccessException;
 
 
     @Contract(pure = true)
