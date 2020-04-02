@@ -3,7 +3,6 @@ package unitTests;
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
 import framework.extractors.Extractor;
-import framework.extractors.IExtractor;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.IHandle;
@@ -24,9 +23,9 @@ public class ExtractorTest {
             list.add("\"dwada\"");
         }
 
-        ICollector collector = genCollector();
-        IExtractor extractor = new Extractor<>(collector);
-        List<Object> column1 = extractor.extractColumnFrom("string");
+        var collector = genCollector();
+        var extractor = new Extractor<>(collector);
+        var column1 = extractor.extractColumnFrom("string");
 
         assertFalse(column1.isEmpty());
         assertEquals(list, column1);

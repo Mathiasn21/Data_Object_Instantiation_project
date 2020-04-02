@@ -24,6 +24,17 @@ public final class Average implements IAverage{
     }
 
     /**
+     * @param data double[]
+     */
+    @Contract(pure = true)
+    public Average(@NotNull Double[] data){
+        double[] doubles = new double[data.length];
+        for(int i = 0; i < data.length; i++){ doubles[i] = data[i]; }
+        this.data = doubles;
+        this.length = data.length;
+    }
+
+    /**
      * @return double
      */
     @Override
