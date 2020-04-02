@@ -14,7 +14,27 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RBTreeTest {
     @Test
-    void insertion(){
+    void insertion_of_node(){
+
+    }
+
+    @Test
+    void removal_of_node(){
+
+    }
+
+    @Test
+    void rotates_right(){
+
+    }
+
+    @Test
+    void rotates_left(){
+
+    }
+
+    @Test
+    void rebalances_correctly(){
 
     }
 }
