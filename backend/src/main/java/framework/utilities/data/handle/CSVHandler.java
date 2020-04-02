@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public final class CSVHandler implements IHandle{
+public class CSVHandler implements IHandle{
     private String delimiter = ",";
     private boolean isSingleColumn = false;
 
