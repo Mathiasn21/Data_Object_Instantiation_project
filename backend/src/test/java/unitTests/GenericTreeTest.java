@@ -29,7 +29,7 @@ public class GenericTreeTest {
         int[] res = {2, 3, 3, 4, 5, 6, 7, 13, 14, 15};
         int[] arr = {13, 4, 5, 14, 3, 6, 2, 3, 15, 7};
 
-        ITree<Integer> tree = new Tree<>(false);
+        ITree<Integer> tree = new Tree<>();
         for(int integer : arr) { tree.insert(integer); }
         Iterator<Node<Integer>> iterator = tree.inorderTraversal();
 
