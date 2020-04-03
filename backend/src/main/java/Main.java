@@ -16,9 +16,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class Main {
     public static void main(String[] args) throws IOException {
         //Showcasing usage of the framework.
+        EventObserver.subscribeToEvent(event -> System.out.println("Got event: " + event), CollectorFinishedEvent.class);
         collectFromJson();
         collectDataWithPool();
         collectDataSingleColumnFromCSV();
+
     }
 
     private static void collectDataSingleColumnFromCSV() throws IOException {
@@ -39,8 +41,6 @@ public class Main {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         List<Resource> resources = Resource.newResource().fromFile(path).fromFile(path).buildAll();
         ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
-
-        EventObserver.subscribeToEvent(event -> System.out.println("Got event: " + event), CollectorFinishedEvent.class);
         collectorPool.collectAllDataAsync((ThreadPoolExecutor) Executors.newFixedThreadPool(2));
     }
 
