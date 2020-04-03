@@ -137,8 +137,6 @@ public class AVLTreeTest {
         }
     }
 
-
-
     @NotNull
     private ITree<Integer> genTree(){
         ITree<Integer> tree = new AVLTree<>();
