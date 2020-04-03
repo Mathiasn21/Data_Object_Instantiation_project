@@ -12,10 +12,11 @@ import java.nio.charset.StandardCharsets;
 /**
  * Primary function of this class is to, POST data to a
  * URL.
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture - Refactoring
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @version 1.0.0
- */
+
+ * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture - Refactoring
+ * @version 1.0
+**/
 public final class WriteURLWriteCommand implements IWriteURLWriteCommand {
     private final URL url;
     private final String data;

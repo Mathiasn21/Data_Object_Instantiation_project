@@ -9,7 +9,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 2.0.0
  */
