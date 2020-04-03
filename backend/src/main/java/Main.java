@@ -35,9 +35,9 @@ public class Main {
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
         csvHandler.setSkipEmptyLines(true);
-        ICollector collector2 = Collector.newCollector(resource2, csvHandler).build();
-        collector2.setCompressionOn(true);
-        collector2.collectData();
+        ICollector collector = Collector.newCollector(resource2, csvHandler).build();
+        collector.setCompressionOn(true);
+        collector.collectData();
     }
 
     private static void collectDataWithPool() {
