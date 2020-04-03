@@ -18,12 +18,16 @@ import java.util.*;
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
-    private final ICollector collector;//Leave this be!
+    private ICollector collector;//Leave this be!
     private List<Exception> exceptions = new ArrayList<>();
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
         this.collector = collector;
+    }
+
+    public Extractor(@NotNull List<Object> rows) {
+        this.columns = rows;
     }
 
     @Contract(pure = true)
