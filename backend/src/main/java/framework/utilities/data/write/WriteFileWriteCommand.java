@@ -12,6 +12,7 @@ import java.util.List;
 
 //TODO: implement remaining logic execute another project code -> Mathias
 /**
+ * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */

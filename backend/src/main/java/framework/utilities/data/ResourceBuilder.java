@@ -25,7 +25,6 @@ public final class ResourceBuilder {
      */
     @Contract(pure = true)
     ResourceBuilder() {
-
     }
 
     /**
@@ -123,9 +122,6 @@ public final class ResourceBuilder {
         }
         return this;
     }
-
-
-
 
     /**
      * @return {@link Resource}
