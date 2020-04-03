@@ -8,11 +8,16 @@ import framework.utilities.data.Parser;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.JSONHandler;
+import framework.utilities.data.structure.AVLTree;
+import framework.utilities.data.structure.ITree;
+import framework.utilities.data.structure.Node;
 import framework.utilities.data.write.IWriteCommand;
 import framework.utilities.data.write.WriteFileWriteCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -95,5 +100,27 @@ public class Main {
     public static boolean is_primitve_class() {
         String s = "Hei";
         return Parser.isPrimitiveType(s.getClass());
+    }
+
+    public final int[] fibonacci = {1, 1, 2, 3, 5, 8, 13, 21, 34}, scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
+    @NotNull
+    private ITree<Integer> genTree(){
+        ITree<Integer> tree = new AVLTree<>();
+        for(int numbers : scrambledFibonacci){ tree.insert(numbers); }
+        return tree;
+    }
+    public List<Integer> levelorder_traversal(){
+        var tree = genTree();
+        int[] fibonacciLevelordered = {5, 1, 13, 1, 2, 8, 34, 3, 21};
+
+        for(int numbers : scrambledFibonacci) {
+            tree.insert(numbers);
+        }
+        Iterator<Node<Integer>> iterator = tree.levelorderTraversal();
+        List<Integer> num = new ArrayList<>();
+        for(int numbers : fibonacciLevelordered){
+            num.add(numbers);
+        }
+        return num;
     }
 }
