@@ -26,7 +26,7 @@ import java.util.*;
 /**
  * Class responsible for handling all processing related to annotations.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.4
  */
 public final class AnnotationsProcessor implements IAnnotationsProcessor {
 
@@ -37,6 +37,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     private final static Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
     private final static Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
     private final static List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
+    private final static List<Class<?>> nameSpaceMappedToNameSpaces = new ArrayList<>();
 
     public AnnotationsProcessor() {
         if(!objectMappedToConstructor.isEmpty()){return;}
@@ -123,7 +124,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      */
     @Override
     @Nullable
-    public Class<?> getClassFromObjectSample(@NotNull String name){
+    public final Class<?> getClassFromObjectSample(@NotNull String name){
         return resourceMappedToDataObject.get(name);
     }
 
@@ -141,7 +142,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      */
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
-    public @NotNull ObjectInformation initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
+    public final @NotNull ObjectInformation initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
             throws ReflectiveOperationException {
 
         List<Object> listOfDataObjects = new ArrayList<>();
@@ -163,7 +164,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @Contract(pure = true)
     @Override
     @Nullable
-    public Class<?> getClassFromObjectSample(@NotNull Object... objects){
+    public final Class<?> getClassFromObjectSample(@NotNull Object... objects){
         return getDataObjectWithoutFile(objects);
     }
 

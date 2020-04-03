@@ -5,12 +5,14 @@ import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
-import java.nio.file.FileAlreadyExistsException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-//TODO: implement remaining logic execute another project code -> Mathias
 /**
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
@@ -19,8 +21,7 @@ import java.util.List;
 public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
     private final File file;
     private final String data;
-    private boolean append = false;
-    private boolean createIfNotExists = true;
+    private boolean append = false, createIfNotExists = true;
 
     public WriteFileWriteCommand(@NotNull File file, @NotNull String data) {
         this.file = file;
@@ -52,17 +53,6 @@ public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, append))) {
             bufferedWriter.write(data);
         }
-    }
-
-    //FIXME: Missing JDoc
-    //TODO: Might be better to remove this
-    @Deprecated//As this method does not bring any value. Creation of a file is auto done, if it doesn't exists.
-    public void createFile(@NotNull File resource) throws IOException {
-        if (resource.createNewFile()) {
-            new File(resource.getPath());
-            return;
-        }
-        throw new FileAlreadyExistsException(resource.getPath());
     }
 
     //FIXME: Missing JDoc

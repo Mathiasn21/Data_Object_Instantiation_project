@@ -1,4 +1,4 @@
-package unitTests;
+package integrationTests;
 
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class CollectorTest {
     @Test
-    void data_from_file() throws IOException {
+    void json_simple_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
@@ -21,7 +21,7 @@ public class CollectorTest {
     }
 
     @Test
-    void data_from_file2() throws IOException {
+    void json_array_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/testingJSONFile.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
@@ -29,7 +29,7 @@ public class CollectorTest {
     }
 
     @Test
-    void data_from_file3() throws IOException {
+    void json_primitive_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/primitiveJSONtypes.json" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
@@ -38,23 +38,17 @@ public class CollectorTest {
 
 
     @Test
-    void data_from_file4() throws IOException {
+    void csv_data_from_single_column() throws IOException {
         String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
         Resource resource = Resource.newResource().fromFile(path).build();
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
-        csvHandler.setRemoveDoubleQuotes(true);
         csvHandler.setSkipEmptyLines(true);
-
-        Class<?>[] s = new Class[]{String.class};
-        csvHandler.setPrimaryKeyTypes(s);
 
         ICollector collector = Collector.newCollector(resource, csvHandler).build();
         collector.setCompressionOn(true);
         collector.collectData();
-        List<Object> l = collector.getAllColumns();
-        System.out.println(l);
     }
 
     @Test

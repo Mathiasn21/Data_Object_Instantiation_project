@@ -2,6 +2,10 @@ package framework.collectors;
 
 import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
+import framework.observer.EventObserver;
+import framework.observer.events.CollectorFinishedEvent;
+import framework.observer.events.ExceptionEvent;
+import framework.observer.events.IEvent;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import framework.utilities.data.structure.ITree;
@@ -15,17 +19,13 @@ import java.util.*;
 
 /** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @version 1.0.0
+ * @version 2.9.4
  */
-public final class Collector implements ICollector{
+public final class Collector implements ICollector {
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
-    private final Map<Setting, String> settings = new HashMap<>();
     private final IHandle dataHandler;
     private final Resource resource;
-    private List<String> primaryKeys;
-    private Class<?>[] primaryTypes;
     private Class<?> clazz;
     private ITree<Object> rbTree;
     private Comparator<Object> comparator = null;
@@ -50,14 +50,12 @@ public final class Collector implements ICollector{
         rbTree = new RBTree<>(comparator, compression);
 
         try {
-            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getName());
+            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getNameSpace()[0]);
             for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
 
-            primaryTypes = objectObjectInformation.primaryKeyTypes;
             clazz = objectObjectInformation.clazz;
-        } catch (ReflectiveOperationException e) {
-            e.printStackTrace();
-        }
+            raise(new CollectorFinishedEvent(this));
+        } catch (ReflectiveOperationException e) { raise(new ExceptionEvent(this, e)); }
     }
 
     /**
@@ -65,35 +63,13 @@ public final class Collector implements ICollector{
      * @param primaryKeys {@link List}&lt;{@link String}&gt;
      */
     @Override
-    public final void setPrimaryKeys(List<String> primaryKeys){ this.primaryKeys = primaryKeys; }
-
-
-    /**
-     *
-     * @param key {@link Setting}
-     * @param value String
-     */
-    @Override
-    public final void setSetting(@NotNull Setting key, @NotNull String value) {
-        settings.put(key, value);
+    public final void setPrimaryKeys(List<String> primaryKeys){
     }
 
     @Override
     public void setCompressionOn(boolean b) {
         this.compression = b;
     }
-
-
-    /**
-     * Sets all settings from a execute map.
-     * Will overwrite all existing settings with the new value.
-     * @param settings {@link Map}&lt;String, String&gt;
-     */
-    @Override
-    public final void setAllSettings(Map<@NotNull Setting, @NotNull String> settings){
-        this.settings.putAll(settings);
-    }
-
 
     /**
      * Sets max memory that this collector is allowed to utilize.
@@ -106,23 +82,6 @@ public final class Collector implements ICollector{
         //TODO: implement setMaxMemoryMB()
         //TODO: Describe set max memory of what????
     }
-
-    /**
-     * Columns that describe the values inherent in a dataset.
-     * @return {@link List}&lt;{@link String}&gt;
-     */
-    @Override
-    public final List<String> getPrimaryKeys() {
-        return primaryKeys;
-    }
-
-    /**
-     * @return Class&lt;?&gt;&gt;[]
-     */
-    @NotNull
-    @Contract(pure = true)
-    @Override
-    public Class<?>[] getPrimaryKeyTypes() { return primaryTypes; }
 
     /**
      * @return Class&lt;?&gt;&gt;
@@ -145,13 +104,8 @@ public final class Collector implements ICollector{
         return res;
     }
 
-    /**
-     * Returns an unmodifiable map see {@link Collections}
-     * for more information
-     * @return Map {@link Setting}, String.
-     */
-    @Contract(pure = true)
-    public final @NotNull Map<@NotNull Setting, @NotNull String> getSettings(){ return Collections.unmodifiableMap(settings); }
+    private void raise(IEvent event) { EventObserver.registerEventFrom(event); }
+
 
     /**
      * @param resource {@link Resource}

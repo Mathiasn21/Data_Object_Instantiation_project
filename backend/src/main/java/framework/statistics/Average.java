@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
  * @version 1.0
  */
 public final class Average implements IAverage{
-
     private final double[] data;
     private final int length;
     private double sum = 0;
@@ -20,6 +19,17 @@ public final class Average implements IAverage{
     @Contract(pure = true)
     public Average(@NotNull double[] data){
         this.data = data;
+        this.length = data.length;
+    }
+
+    /**
+     * @param data double[]
+     */
+    @Contract(pure = true)
+    public Average(@NotNull Double[] data){
+        double[] doubles = new double[data.length];
+        for(int i = 0; i < data.length; i++){ doubles[i] = data[i]; }
+        this.data = doubles;
         this.length = data.length;
     }
 

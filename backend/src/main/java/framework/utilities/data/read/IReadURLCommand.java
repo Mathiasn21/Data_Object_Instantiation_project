@@ -1,6 +1,6 @@
 package framework.utilities.data.read;
 
-/** Represents a command interface for reading from a File resource
+/** Represents a command interface for reading from a URL resource
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */

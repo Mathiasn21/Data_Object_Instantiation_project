@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public class CollectorPool implements ICollectorPool{
     private byte numberOfThreads = 2;
     private final List<ICollector> collectors;

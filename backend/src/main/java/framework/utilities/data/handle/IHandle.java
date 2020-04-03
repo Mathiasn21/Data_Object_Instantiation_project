@@ -6,7 +6,7 @@ import java.util.List;
 
 /** Contract for handling data.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0
+ * @version 1.0.0
  */
 public interface IHandle {
     /**

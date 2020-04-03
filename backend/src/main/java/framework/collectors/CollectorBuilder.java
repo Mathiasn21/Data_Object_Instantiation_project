@@ -23,28 +23,6 @@ public final class CollectorBuilder {
 
     @Contract("_ -> this")
     @NotNull
-    public final CollectorBuilder setPrimaryColumns(List<String> primaryColumns){
-        collector.setPrimaryKeys(primaryColumns);
-        return this;
-    }
-
-    @Contract("_, _ -> this")
-    @NotNull
-    public final CollectorBuilder setSetting(Setting key, String value) {
-        collector.setSetting(key, value);
-        return this;
-    }
-
-
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorBuilder setAllSettings(Map<Setting, String> settings){
-        collector.setAllSettings(settings);
-        return this;
-    }
-
-    @Contract("_ -> this")
-    @NotNull
     public final CollectorBuilder setMaxMemoryMB(int mb){
         collector.setMaxMemoryMB(mb);
         return this;
@@ -62,8 +40,4 @@ public final class CollectorBuilder {
     public final String toString() {
         return "Collector builder";
     }
-
-    /*TODO: Allow this class to be extended with its own implementations
-     *  This could be done either through interfaces or a better way, through inheritance.
-     * */
 }
