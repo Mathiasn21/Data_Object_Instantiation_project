@@ -10,6 +10,7 @@ import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.JSONHandler;
 import framework.utilities.data.write.IWriteCommand;
 import framework.utilities.data.write.WriteFileWriteCommand;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Main {
         collectFromJson();
         collectDataWithPool();
         collectDataSingleColumnFromCSV();
-
+        System.out.println(from_string_to_primitive_value());
     }
 
     private static void collectDataSingleColumnFromCSV() throws IOException {
@@ -56,6 +57,7 @@ public class Main {
     }
 
     //Shows how to read from a file
+    @NotNull
     public static StringBuilder from_file_using_file() throws IOException {
         File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
         Resource resource = Resource.newResource().fromFile(path).build();
@@ -70,6 +72,7 @@ public class Main {
     }
 
     //Shows how to write to a file
+    @NotNull
     public static StringBuilder to_file_using_string() throws IOException {
         String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
         IWriteCommand writer = new WriteFileWriteCommand(path, "StringPath;");
@@ -85,10 +88,9 @@ public class Main {
         return builder;
     }
 
-    public static Object from_string_to_primitive_value(){
+    public static double from_string_to_primitive_value(){
         String value = "22.34";
-        Parser.classToValueFromObject(value.getClass(), value);
-        return value;
+        return (double) Parser.classToValueFromObject(Double.class, value);
     }
 
     public static boolean is_primitve_class() {
