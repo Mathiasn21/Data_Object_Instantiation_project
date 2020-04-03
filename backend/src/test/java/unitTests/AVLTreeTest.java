@@ -18,18 +18,58 @@ public class AVLTreeTest {
 
     /*
     checklist for testing tree:
-    * Creating a new tree.
-    * Inserting the first value.
-    * Inserting a bigger value.
-    * Inserting a smaller value.
-    * Inserting a value that causes LL Rotation.
-    * Same for the other rotations.
     * Same for Removing.
     * All the variants of Finding values.
     *
     * */
 
+    //TODO: IMPLEMENT TEST
+    @Test
+    void creation_of_tree(){
 
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void can_insert_first_value(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void can_insert_bigger_value(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void can_insert_smaller_value(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void insertion_causes_LL_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void insertion_causes_LR_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void insertion_causes_RL_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void insertion_causes_RR_rotation(){
+
+    }
 
     @Test
     void insertion_of_node(){
