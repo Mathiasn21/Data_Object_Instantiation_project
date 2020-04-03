@@ -71,6 +71,31 @@ public class AVLTreeTest {
 
     }
 
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_LL_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_LR_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_RL_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_RR_rotation(){
+
+    }
+
+
     @Test
     void insertion_of_node(){
         ITree<Integer> tree = genTree();
