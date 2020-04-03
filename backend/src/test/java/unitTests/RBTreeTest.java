@@ -28,7 +28,15 @@ public class RBTreeTest {
         for(int numbers : fibonacci){
             assertEquals(numbers, iterator.next().getT());
         }
+        assertEquals(0, tree.size()); //makes sure tree is empty beforehand
 
+        for(int numbers : scrambledFibonacci){
+            tree.insert(numbers);
+        }
+
+        for(int numbers : fibonacci){
+            assertEquals(numbers, iterator.next().getT());
+        }
         System.out.println("Insertion into RBTree is possible");
     }
 
