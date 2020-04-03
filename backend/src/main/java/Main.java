@@ -29,7 +29,9 @@ public class Main {
         collectFromJson();
         collectDataWithPool();
         collectDataSingleColumnFromCSV();
-        System.out.println(from_string_to_primitive_value());
+        levelorder_traversal();
+
+        System.out.println("Converting to value from string based on class: " + from_string_to_primitive_value());
     }
 
     private static void collectDataSingleColumnFromCSV() throws IOException {
@@ -103,25 +105,24 @@ public class Main {
         return Parser.isPrimitiveType(s.getClass());
     }
 
-    public final int[]  scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
+    public static final int[]  scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
+
     @NotNull
-    private ITree<Integer> genTree(){
+    private static ITree<Integer> genTree(){
         ITree<Integer> tree = new AVLTree<>();
         for(int numbers : scrambledFibonacci){ tree.insert(numbers); }
         return tree;
     }
-    public List<Integer> levelorder_traversal(){
-        var tree = genTree();
-        int[] fibonacciLevelordered = {5, 1, 13, 1, 2, 8, 34, 3, 21};
 
+    public static void levelorder_traversal(){
+        var tree = genTree();
         for(int numbers : scrambledFibonacci) {
             tree.insert(numbers);
         }
         Iterator<Node<Integer>> iterator = tree.levelorderTraversal();
-        List<Integer> num = new ArrayList<>();
-        for(int numbers : fibonacciLevelordered){
-            num.add(numbers);
+        System.out.println("Iterating over AVL-tree in level order:");
+        while(iterator.hasNext()){
+            System.out.println(iterator.next().getT());
         }
-        return num;
     }
 }
