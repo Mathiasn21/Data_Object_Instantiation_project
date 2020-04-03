@@ -18,9 +18,7 @@ public class AVLTreeTest {
 
     /*
     checklist for testing tree:
-    * Same for Removing.
     * All the variants of Finding values.
-    *
     * */
 
     //TODO: IMPLEMENT TEST
@@ -70,6 +68,31 @@ public class AVLTreeTest {
     void insertion_causes_RR_rotation(){
 
     }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_LL_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_LR_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_RL_rotation(){
+
+    }
+
+    //TODO: IMPLEMENT TEST
+    @Test
+    void removal_causes_RR_rotation(){
+
+    }
+
 
     @Test
     void insertion_of_node(){

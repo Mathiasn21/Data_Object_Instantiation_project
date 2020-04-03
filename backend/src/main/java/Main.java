@@ -40,9 +40,9 @@ public class Main {
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
         csvHandler.setSkipEmptyLines(true);
-        ICollector collector2 = Collector.newCollector(resource2, csvHandler).build();
-        collector2.setCompressionOn(true);
-        collector2.collectData();
+        ICollector collector = Collector.newCollector(resource2, csvHandler).build();
+        collector.setCompressionOn(true);
+        collector.collectData();
     }
 
     private static void collectDataWithPool() {
@@ -62,6 +62,7 @@ public class Main {
     }
 
     //Shows how to read from a file
+    @NotNull
     public static StringBuilder from_file_using_file() throws IOException {
         File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
         Resource resource = Resource.newResource().fromFile(path).build();
