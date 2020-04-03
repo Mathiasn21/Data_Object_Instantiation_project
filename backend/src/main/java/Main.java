@@ -16,7 +16,6 @@ import framework.utilities.data.write.WriteFileWriteCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -42,8 +41,9 @@ public class Main {
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
         csvHandler.setSkipEmptyLines(true);
+
         ICollector collector = Collector.newCollector(resource2, csvHandler).build();
-        collector.setCompressionOn(true);
+        collector.setCompression(true);
         collector.collectData();
     }
 

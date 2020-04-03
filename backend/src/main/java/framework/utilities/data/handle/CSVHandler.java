@@ -29,6 +29,7 @@ public class CSVHandler implements IHandle{
     private boolean skipEmptyLines = false;
     private boolean removeDoubleQuotes = false;
     private boolean convertFloatToDouble = true;
+    private boolean sampleEachLine;
 
     /**
      * @param types {@link Class}&lt;?&gt;[]
@@ -57,6 +58,8 @@ public class CSVHandler implements IHandle{
      * @param delimiter String
      */
     public final void setDelimiter(String delimiter) { this.delimiter = delimiter; }
+
+    public void setSampleEachLine(boolean sampleEachLine) { this.sampleEachLine = sampleEachLine; }
 
 
     /**
@@ -103,7 +106,7 @@ public class CSVHandler implements IHandle{
             String[] r = splitLineOn(line);
 
             //Find primary types if not already
-            if(!foundTypes){
+            if(sampleEachLine || !foundTypes){
                 if(isSingleColumn){
                     Class<?> type = r.length > 1 ? singleColumnPrimitiveTypeFrom(r[0], r[1]) : primitiveTypeFrom(r[0]);
                     types.add(type);

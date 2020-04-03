@@ -22,7 +22,7 @@ public interface ICollector {
     /**Toggles compression of objects in the data structure on or off.
      * @param b boolean
      */
-    void setCompressionOn(boolean b);
+    void setCompression(boolean b);
 
     /**
      * @param mb int

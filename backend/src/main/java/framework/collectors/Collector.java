@@ -67,7 +67,7 @@ public final class Collector implements ICollector {
     }
 
     @Override
-    public void setCompressionOn(boolean b) {
+    public void setCompression(boolean b) {
         this.compression = b;
     }
 

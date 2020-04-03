@@ -25,7 +25,7 @@ public final class Resource {
      * @param readData {@link IReadCommand}
      * @param nameSpace {@link String}
      */
-    public Resource(IReadCommand readData, String ...nameSpace) {
+    Resource(IReadCommand readData, String ...nameSpace) {
         this.readData = readData;
         this.nameSpace = nameSpace;
     }

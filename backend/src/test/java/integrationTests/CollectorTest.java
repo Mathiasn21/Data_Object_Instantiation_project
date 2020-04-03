@@ -7,7 +7,6 @@ import framework.utilities.data.handle.CSVHandler;
 import framework.utilities.data.handle.JSONHandler;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -47,7 +46,7 @@ public class CollectorTest {
         csvHandler.setSkipEmptyLines(true);
 
         ICollector collector = Collector.newCollector(resource, csvHandler).build();
-        collector.setCompressionOn(true);
+        collector.setCompression(true);
         collector.collectData();
     }
 

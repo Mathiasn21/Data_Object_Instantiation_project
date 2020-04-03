@@ -3,6 +3,7 @@ package unitTests;
 import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
+import framework.exceptions.NoSuchColumnException;
 import framework.extractors.Extractor;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.CSVHandler;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ExtractorTest {
     @Test
-    void single_column_by_string() throws IOException, IllegalAccessException {
+    void single_column_by_string() throws IOException, NoSuchColumnException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
             list.add("\"dwada\"");
@@ -44,7 +45,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void single_column_by_field() throws IOException, IllegalAccessException, NoSuchFieldException {
+    void single_column_by_field() throws IOException, NoSuchFieldException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
             list.add("\"dwada\"");
@@ -66,7 +67,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void single_column_by_method() throws IOException, IllegalAccessException, NoSuchMethodException {
+    void single_column_by_method() throws IOException, NoSuchMethodException, NoSuchColumnException {
         List<Object> list = new ArrayList<>();
         for(int i = 0; i < 24; i++){
             list.add("\"dwada\"");
@@ -88,7 +89,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void multiple_columns_by_fields() throws IOException, IllegalAccessException, NoSuchFieldException {
+    void multiple_columns_by_fields() throws IOException, NoSuchFieldException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
@@ -112,7 +113,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void multiple_columns_by_methods() throws IOException, IllegalAccessException, NoSuchMethodException {
+    void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
@@ -137,7 +138,7 @@ public class ExtractorTest {
 
 
     @Test
-    void multiple_columns_by_strings() throws IOException, IllegalAccessException {
+    void multiple_columns_by_strings() throws IOException, NoSuchColumnException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         String[] strings = {"string", "Doubles", "integer"};
