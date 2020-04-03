@@ -1,6 +1,7 @@
 package framework.extractors;
 
 
+import framework.exceptions.NoSuchColumnException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,23 +16,23 @@ import java.util.Map;
  */
 public interface IExtractor{
     @Contract(pure = true)
-    @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws IllegalAccessException;
+    @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
-    @NotNull List<Object> extractColumnFrom(@NotNull Method method) throws IllegalAccessException;
+    @NotNull List<Object> extractColumnFrom(@NotNull Method method) throws IllegalAccessException, NoSuchMethodException, NoSuchColumnException;
 
     @Contract(pure = true)
-    @NotNull List<Object> extractColumnFrom (@NotNull String column) throws IllegalAccessException;
+    @NotNull List<Object> extractColumnFrom (@NotNull String column) throws IllegalAccessException, NoSuchColumnException;
 
 
     @Contract(pure = true)
-    @NotNull Map<Field, List<Object>> extractColumns(@NotNull Field ...fields) throws IllegalAccessException;
+    @NotNull Map<Field, List<Object>> extractColumns(@NotNull Field ...fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
-    @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method ...methods) throws IllegalAccessException;
+    @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method ...methods) throws IllegalAccessException, NoSuchColumnException;
 
     @Contract(pure = true)
-    @NotNull Map<String, List<Object>> extractColumns(@NotNull String ...columns) throws IllegalAccessException;
+    @NotNull Map<String, List<Object>> extractColumns(@NotNull String ...columns) throws IllegalAccessException, NoSuchColumnException;
 
 
     @Contract(pure = true)

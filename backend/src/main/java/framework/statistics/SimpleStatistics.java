@@ -24,7 +24,6 @@ public final class SimpleStatistics implements IStatistics {
         this.average = new Average(data);
     }
 
-
     /**
      * @return double
      */
@@ -39,7 +38,6 @@ public final class SimpleStatistics implements IStatistics {
         }
         return sum  / (length -1);
     }
-
 
     /**
      * @return double
@@ -86,6 +84,8 @@ public final class SimpleStatistics implements IStatistics {
         return 0;
     }
 
+    @NotNull
+    @Contract(pure = true)
     @Override
     public String toString() {
         return "SimpleStatistics calculation";

@@ -10,8 +10,8 @@ package framework.annotations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import framework.errors.NoMatchingDataObject;
-import framework.errors.NoSuchConstructor;
+import framework.errors.NoMatchingDataObjectError;
+import framework.errors.NoSuchConstructorError;
 import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -85,7 +85,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         if(partialMatch != null){
             return partialMatch;
         }
-        throw new NoSuchConstructor();
+        throw new NoSuchConstructorError();
     }
 
     /**
@@ -136,9 +136,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param name String
      * @return {@link ObjectInformation}
-     * @throws InstantiationException InstantiationException
-     * @throws InvocationTargetException InvocationTargetException
-     * @throws IllegalAccessException IllegalAccessException
      */
     @SuppressWarnings("unchecked")//Only one possible type of constructor class
     @Override
@@ -201,7 +198,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         }
 
         if(partialMatch != null){ return partialMatch; }
-        throw new NoMatchingDataObject();
+        throw new NoMatchingDataObjectError();
     }
 
 

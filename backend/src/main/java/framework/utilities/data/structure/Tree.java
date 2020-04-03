@@ -4,7 +4,7 @@ package framework.utilities.data.structure;
   ///////////////////////////////////////////////
  //             Import statements             //
 ///////////////////////////////////////////////
-import framework.errors.NotComparable;
+import framework.errors.NotComparableError;
 import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +37,7 @@ public class Tree<T> implements ITree<T> {
     /**
      * Sets the current comparator to null.
      * Asserts that any T object implement comparable else
-     * this will throw an error {@link NotComparable}
+     * this will throw an error {@link NotComparableError}
      */
     @Contract(pure = true)
     public Tree() { this(null); }
@@ -339,7 +339,7 @@ public class Tree<T> implements ITree<T> {
             }
         }
         //R.I.P
-        throw new NotComparable("Missing comparator or object is not comparable");
+        throw new NotComparableError("Missing comparator or object is not comparable");
     }
 
     @SuppressWarnings("unchecked")//As this is guaranteed before this method

@@ -6,16 +6,16 @@ package framework.errors;
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */
-public final class NoSuchConstructor extends Error {
+public final class NoSuchConstructorError extends Error {
     private static final String BASE_MSG = "Could not find proper constructor";
-    public NoSuchConstructor() {
+    public NoSuchConstructorError() {
         this(BASE_MSG);
     }
 
     /**
      * @param msg String
      */
-    private NoSuchConstructor(String msg) {
+    private NoSuchConstructorError(String msg) {
         super(BASE_MSG + " " + msg);
     }
 }

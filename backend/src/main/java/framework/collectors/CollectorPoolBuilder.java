@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public class CollectorPoolBuilder {
+public final class CollectorPoolBuilder {
     private final List<CollectorBuilder> collectorBuilders;
     CollectorPoolBuilder(@NotNull List<Resource> resources, @NotNull IHandle handler) {
         List<CollectorBuilder> collectorBuilders = new ArrayList<>(resources.size());

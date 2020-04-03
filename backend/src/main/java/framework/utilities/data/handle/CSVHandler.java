@@ -26,7 +26,6 @@ public class CSVHandler implements IHandle{
 
     private Class<?>[] primaryKeyTypes;
     private String[] primaryKeys;
-    private Map<String, Boolean> settings = new HashMap<>();
     private boolean skipEmptyLines = false;
     private boolean removeDoubleQuotes = false;
     private boolean convertFloatToDouble = true;
@@ -162,28 +161,6 @@ public class CSVHandler implements IHandle{
     @Contract(pure = true)
     private String[] splitLineOn(@NotNull String line){
         return line.split(delimiter);
-    }
-
-
-    /**
-     * @param row String[]
-     * @return boolean
-     */
-    @Deprecated
-    @Contract(pure = true)
-    private static boolean calcPRowContainsPrimaryColumns(@NotNull String[] row){
-        //TODO: Delegate settings to config file
-        //TODO: Change out this method with one that utilizes probability instead
-
-        if(row.length == 0){return false;}
-        String isNumber = "^-?\\d*\\.?\\d+$";
-        final Pattern digitPattern = Pattern.compile(isNumber, Pattern.MULTILINE);
-        for(String str : row) {
-            if (digitPattern.matcher(isNumber).find() || str.isBlank()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private Class<?> primitiveTypeFrom(@NotNull String element) {

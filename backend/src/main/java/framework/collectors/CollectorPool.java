@@ -1,5 +1,7 @@
 package framework.collectors;
 
+import framework.observer.EventObserver;
+import framework.observer.events.ExceptionEvent;
 import framework.utilities.data.Resource;
 import framework.utilities.data.handle.IHandle;
 import org.jetbrains.annotations.Contract;
@@ -15,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public class CollectorPool implements ICollectorPool{
+public final class CollectorPool implements ICollectorPool{
     private byte numberOfThreads = 2;
     private final List<ICollector> collectors;
 
@@ -29,20 +31,13 @@ public class CollectorPool implements ICollectorPool{
     /**
      * Utilizes mutliple threads that does not block the main thread from exectuing.
      * By default this utlizes a default {@link ThreadPoolExecutor} with 2 threads
-     * @throws IOException IOException {@link IOException}
      */
     @Override
-    public void collectAllDataAsync() throws IOException {
+    public void collectAllDataAsync() {
         ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(numberOfThreads);
         collectAllDataAsync(pool);
     }
 
-
-    /*
-    TODO: Add more proper error handling.
-     Like: Error has occoured boolean,
-     and a map or list of stacktraces.
-    */
     /**
      * @param pool {@link ThreadPoolExecutor}
      */
@@ -50,17 +45,21 @@ public class CollectorPool implements ICollectorPool{
     public void collectAllDataAsync(ThreadPoolExecutor pool){
         for (ICollector collector : collectors) {
             pool.submit(() -> {
-                try { collector.collectData();
-                } catch (IOException e) { e.printStackTrace(); }
-                return null;
+                try { collector.collectData(); }
+                catch (IOException e) {
+                    EventObserver.registerEventFrom(new ExceptionEvent(this, e));
+                }
             });
         }
         pool.shutdown();
     }
 
+    @NotNull
     @Override
     public Iterator<ICollector> iterator() { return collectors.iterator(); }
 
+    @NotNull
+    @Contract(pure = true)
     @Override
     public List<ICollector> getAllCollectors() { return Collections.unmodifiableList(collectors); }
 

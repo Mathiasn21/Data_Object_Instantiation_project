@@ -17,9 +17,7 @@ import java.util.Map;
 public final class CollectorBuilder {
     private final ICollector collector;
 
-    CollectorBuilder(Resource resource, IHandle dataHandler){
-        this.collector = new Collector(resource, dataHandler);
-    }
+    CollectorBuilder(Resource resource, IHandle dataHandler){ this.collector = new Collector(resource, dataHandler); }
 
     @Contract("_ -> this")
     @NotNull
@@ -37,7 +35,5 @@ public final class CollectorBuilder {
     @NotNull
     @Contract(pure = true)
     @Override
-    public final String toString() {
-        return "Collector builder";
-    }
+    public final String toString() { return "Collector builder"; }
 }
