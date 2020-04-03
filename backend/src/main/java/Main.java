@@ -103,7 +103,7 @@ public class Main {
         return Parser.isPrimitiveType(s.getClass());
     }
 
-    public final int[] fibonacci = {1, 1, 2, 3, 5, 8, 13, 21, 34}, scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
+    public final int[]  scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
     @NotNull
     private ITree<Integer> genTree(){
         ITree<Integer> tree = new AVLTree<>();
