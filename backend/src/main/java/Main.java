@@ -57,6 +57,7 @@ public class Main {
     }
 
     //Shows how to read from a file
+    @NotNull
     public static StringBuilder from_file_using_file() throws IOException {
         File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
         Resource resource = Resource.newResource().fromFile(path).build();
