@@ -16,24 +16,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class Main {
     public static void main(String[] args) throws IOException {
         //Showcasing usage of the framework.
+        collectFromJson();
+        collectDataWithPool();
+        collectDataSingleColumnFromCSV();
+    }
 
-        //Showcases how to collect data from a json file
-        String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
-        Resource resource = Resource.newResource().fromFile(path).build();//Will only build the first execute resource
-        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
-        collector.collectData();//Data tries to be instantiated
-
-        //Showcasing more complex usage of the framework.
-        String path2 = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
-        List<Resource> resources = Resource.newResource().fromFile(path2).fromFile(path2).buildAll();
-        ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
-
-        EventObserver.subscribeToEvent(event -> System.out.println("Got event: " + event), CollectorFinishedEvent.class);
-        collectorPool.collectAllDataAsync((ThreadPoolExecutor) Executors.newFixedThreadPool(2));
-
+    private static void collectDataSingleColumnFromCSV() throws IOException {
         //Shows how to collect data from a csv file
-        String path3 = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
-        Resource resource2 = Resource.newResource().fromFile(path3).build();
+        String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
+        Resource resource2 = Resource.newResource().fromFile(path).build();
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
@@ -41,5 +32,23 @@ public class Main {
         ICollector collector2 = Collector.newCollector(resource2, csvHandler).build();
         collector2.setCompressionOn(true);
         collector2.collectData();
+    }
+
+    private static void collectDataWithPool() {
+        //Showcasing more complex usage of the framework.
+        String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
+        List<Resource> resources = Resource.newResource().fromFile(path).fromFile(path).buildAll();
+        ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
+
+        EventObserver.subscribeToEvent(event -> System.out.println("Got event: " + event), CollectorFinishedEvent.class);
+        collectorPool.collectAllDataAsync((ThreadPoolExecutor) Executors.newFixedThreadPool(2));
+    }
+
+    private static void collectFromJson() throws IOException {
+        //Showcases how to collect data from a json file
+        String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
+        Resource resource = Resource.newResource().fromFile(path).build();//Will only build the first execute resource
+        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        collector.collectData();//Data tries to be instantiated
     }
 }
