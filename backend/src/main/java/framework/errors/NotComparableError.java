@@ -5,7 +5,7 @@ package framework.errors;
  * {@link Comparable}
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public class NotComparableError extends Error{
+public final class NotComparableError extends Error{
     public NotComparableError() { super(); }
     public NotComparableError(String message) { super(message); }
 }
