@@ -45,7 +45,6 @@ public class AVLTreeTest {
     @Test
     void removal_of_node(){
         var tree = genTree();
-
         for(int numbers : scrambledFibonacci){
             tree.insert(numbers);
         }
