@@ -19,7 +19,6 @@ public class AVLTreeTest {
     /*
     checklist for testing tree:
     * Same for Removing.
-    * All the variants of Finding values.
     *
     * */
 
