@@ -1,7 +1,7 @@
 package framework.exceptions;
 
 /**
- * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
+ * @author Maria Pedersen
  */
 public class NoExistingColumn extends Exception{
     public NoExistingColumn() {
