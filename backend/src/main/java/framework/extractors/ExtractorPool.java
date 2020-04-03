@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public class MassExtractor implements IMassExtract{
+public class ExtractorPool implements IExtractPool {
 
     @Override
     public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromFields(@NotNull Map<Class<? extends DataObject>, List<Field>> classListMap) throws IllegalAccessException {
