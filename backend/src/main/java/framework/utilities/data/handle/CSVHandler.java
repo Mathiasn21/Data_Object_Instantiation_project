@@ -161,7 +161,7 @@ public class CSVHandler implements IHandle{
     @NotNull
     @Contract(pure = true)
     private String[] splitLineOn(@NotNull String line){
-        return line.split(String.valueOf(delimiter));
+        return line.split(delimiter);
     }
 
 
@@ -176,7 +176,7 @@ public class CSVHandler implements IHandle{
         //TODO: Change out this method with one that utilizes probability instead
 
         if(row.length == 0){return false;}
-        String isNumber = "^-?\\d*\\.{0,1}\\d+$";
+        String isNumber = "^-?\\d*\\.?\\d+$";
         final Pattern digitPattern = Pattern.compile(isNumber, Pattern.MULTILINE);
         for(String str : row) {
             if (digitPattern.matcher(isNumber).find() || str.isBlank()) {
