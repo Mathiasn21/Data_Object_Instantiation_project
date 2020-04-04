@@ -40,7 +40,7 @@ public class Main {
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
-        csvHandler.setSkipEmptyLines(true);
+        csvHandler.skipEmptyLines(true);
 
         ICollector collector = Collector.newCollector(resource2, csvHandler).build();
         collector.setCompression(true);

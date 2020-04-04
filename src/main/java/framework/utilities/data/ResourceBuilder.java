@@ -14,12 +14,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Builds a resource from which to fetch data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0.0
+ * @version 1.6.0
  */
 public final class ResourceBuilder {
     private final List<IReadCommand> readers = new ArrayList<>();

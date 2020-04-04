@@ -17,7 +17,7 @@ import java.io.IOException;
 public final class Resource {
     private final IReadCommand readCommand;
     private final IWriteCommand writeCommand;
-    private final String[] nameSpace;
+    private final String[] nameSpaces;
     private String data = null;
 
     /**
@@ -37,20 +37,20 @@ public final class Resource {
 
     /**
      * @param readCommand {@link IReadCommand}
-     * @param nameSpace {@link String}
+     * @param nameSpaces {@link String}
      */
-    Resource(IReadCommand readCommand, String ...nameSpace) {
-        this(readCommand, null, nameSpace);
+    Resource(IReadCommand readCommand, String ... nameSpaces) {
+        this(readCommand, null, nameSpaces);
     }
 
     /**
      * @param writeCommand {@link IWriteCommand}
      * @param readCommand {@link IReadCommand}
-     * @param nameSpace {@link String}
+     * @param nameSpaces {@link String}
      */
-    Resource(IReadCommand readCommand, IWriteCommand writeCommand, String ...nameSpace) {
+    Resource(IReadCommand readCommand, IWriteCommand writeCommand, String ... nameSpaces) {
         this.readCommand = readCommand;
-        this.nameSpace = nameSpace;
+        this.nameSpaces = nameSpaces;
         this.writeCommand = writeCommand;
     }
 
@@ -85,11 +85,10 @@ public final class Resource {
     /**
      * @return {@link String}
      */
-    public final String[] getNameSpace() { return nameSpace; }
+    public final String[] getNameSpaces() { return nameSpaces; }
 
 
     /**
-     * @return boolean
      * @throws IOException IOException {@link IOException}
      */
     public final void writeData() throws IOException { writeCommand.execute(data); }
