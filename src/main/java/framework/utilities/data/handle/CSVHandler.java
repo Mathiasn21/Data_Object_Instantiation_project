@@ -103,6 +103,7 @@ public class CSVHandler implements IHandle{
         List<Class<?>> types = new ArrayList<>(1);
         while ((line = bufferedReader.readLine()) != null) {
             List<Object> args = new ArrayList<>();
+            if(removeDoubleQuotes){ line = line.replace("\"", ""); }
             String[] r = splitLineOn(line);
 
             //Find primary types if not already
@@ -128,9 +129,7 @@ public class CSVHandler implements IHandle{
                 args.add(Parser.classToValueFromObject(types.get(i), value));
             }
             //If it's multiple column, append thoose to the row
-            if(!isSingleColumn){
-                rows.add(args.toArray());
-            }
+            if(!isSingleColumn){ rows.add(args.toArray()); }
         }
 
         //This is pretty much always true, but, better to be safe
