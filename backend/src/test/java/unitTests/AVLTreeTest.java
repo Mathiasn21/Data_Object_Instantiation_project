@@ -16,11 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AVLTreeTest {
     private final int[] fibonacci = {1, 1, 2, 3, 5, 8, 13, 21, 34}, scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21}, fibonacciEightRemoved = {1, 1, 2, 3, 5, 13, 21, 34};
 
-    /*
-    checklist for testing tree:
-    * All the variants of Finding values.
-    * */
-
     //TODO: IMPLEMENT TEST
     @Test
     void creation_of_tree(){
