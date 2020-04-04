@@ -1,12 +1,15 @@
 package framework.utilities.data.structure.utils;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Arrays;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class Stack<T> {
+public final class Stack<T> {
     private int size;
     private static final int DEFAULT_SIZE = 25;
     private T[] tArr;
@@ -20,26 +23,29 @@ public class Stack<T> {
         this.tArr = (T[])new Object[this.size];
     }
 
-    public void push(T t){
+    public final void push(T t){
         if(isFull()){
             tArr = Arrays.copyOf(tArr, size*2);
         }
         tArr[++top] = t;
     }
 
-    private boolean isFull() {
+    private final boolean isFull() {
         return size() >= size;
     }
 
-    public T pop(){
+    @Nullable
+    public final T pop(){
         if(isEmpty()){return null;}
         return tArr[top--];
     }
 
-    public T peek(){
+    @Nullable
+    @Contract(pure = true)
+    public final T peek(){
         if(isEmpty()){return null;}
         return tArr[top];}
 
-    public boolean isEmpty(){return top == -1;}
-    public int size(){return top+1;}
+    public final boolean isEmpty(){return top == -1;}
+    public final int size(){return top+1;}
 }

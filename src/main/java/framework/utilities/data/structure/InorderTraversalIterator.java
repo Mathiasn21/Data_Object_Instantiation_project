@@ -9,18 +9,18 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class InorderTraversalIterator<T> implements Iterator<Node<T>> {
+public final class InorderTraversalIterator<T> implements Iterator<Node<T>> {
     private Node<T> next;
 
-    public InorderTraversalIterator(Node<T> rootNode) {
+    InorderTraversalIterator(Node<T> rootNode) {
         next = rootNode;
         next = next != null ? getBottomLeftChild(rootNode) : null;
     }
     @Override
-    public boolean hasNext() {return next != null;}
+    public final boolean hasNext() {return next != null;}
 
     @Override
-    public Node<T> next() {
+    public final Node<T> next() {
         if (!hasNext()) throw new NoSuchElementException();
         Node<T> r = next;
 

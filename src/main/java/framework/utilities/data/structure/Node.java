@@ -1,6 +1,7 @@
 package framework.utilities.data.structure;
 
-import java.util.Objects;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
@@ -11,34 +12,34 @@ public class Node<T> implements Cloneable{
     protected T t;
     protected Node<T> left, right, parent;
 
-    public Node(T t, Node<T> parent) {
+    Node(T t, Node<T> parent) {
         this.t = t;
         left = null; right = null; this.parent = parent;
     }
 
-    public T getT() { return t; }
+    public final T getT() { return t; }
 
-    protected boolean hasLeftChild(){ return left != null;}
-    protected boolean hasRightChild(){ return right != null;}
-    protected boolean hasParent(){ return parent != null;}
-    protected boolean isLeaf(){ return left == null && right == null;}
+    protected final boolean hasLeftChild(){ return left != null;}
+    protected final boolean hasRightChild(){ return right != null;}
+    protected final boolean hasParent(){ return parent != null;}
+    protected final boolean isLeaf(){ return left == null && right == null;}
 
-    protected void setLeftChild(Node<T> node) { left = node; }
-    protected void setRightChild(Node<T> node) { right = node; }
+    protected final void setLeftChild(Node<T> node) { left = node; }
+    protected final void setRightChild(Node<T> node) { right = node; }
 
-    protected Node<T> getLeft() { return left; }
-    protected Node<T> getRight() { return right; }
-    protected Node<T> getParent() { return parent; }
-    protected Node<T> getLonelyChild(){ return left == null ? right : left; }
+    protected final Node<T> getLeft() { return left; }
+    protected final Node<T> getRight() { return right; }
+    protected final Node<T> getParent() { return parent; }
+    protected final Node<T> getLonelyChild(){ return left == null ? right : left; }
 
-    protected int getNumOfChildren(){
+    protected final int getNumOfChildren(){
         short num = 0;
         if(hasLeftChild()){num++;}
         if(hasRightChild()){num++;}
         return num;
     }
 
-    public int getTCounter(){ return tCounter; }
+    public final int getTCounter(){ return tCounter; }
 
     @Override
     public String toString() { return t.toString(); }
@@ -55,6 +56,7 @@ public class Node<T> implements Cloneable{
         return parent == node.parent;
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {

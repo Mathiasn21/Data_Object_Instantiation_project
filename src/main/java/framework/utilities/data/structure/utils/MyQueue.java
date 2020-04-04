@@ -4,7 +4,7 @@ package framework.utilities.data.structure.utils;
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class MyQueue<T> implements IQueue<T> {
+public final class MyQueue<T> implements IQueue<T> {
     private T[] object;
     private int size, head, tail;
 
@@ -18,7 +18,7 @@ public class MyQueue<T> implements IQueue<T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void grow() {
+    public final void grow() {
         T[] newObject = (T[]) (new Object[object.length * 2]);
         for (int i = 0; i < size; i++) {
             newObject[i] = object[head];
@@ -30,7 +30,7 @@ public class MyQueue<T> implements IQueue<T> {
     }
 
     @Override
-    public void enqueue(T t) {
+    public final void enqueue(T t) {
         if(size() == object.length){grow();}
         object[tail] = t;
         size++;
@@ -38,7 +38,7 @@ public class MyQueue<T> implements IQueue<T> {
     }
 
     @Override
-    public T dequeue() throws EmptyQueueError {
+    public final T dequeue() throws EmptyQueueError {
         if(isEmpty())throw new EmptyQueueError();
         T res = object[head];
         object[head] = null;
@@ -49,21 +49,21 @@ public class MyQueue<T> implements IQueue<T> {
     }
 
     @Override
-    public int size() {return size;}
+    public final int size() {return size;}
 
     @Override
-    public T first() throws EmptyQueueError {
+    public final T first() throws EmptyQueueError {
         if(isEmpty())throw new EmptyQueueError();
         return object[head];
     }
 
     @Override
-    public boolean isEmpty() {
+    public final boolean isEmpty() {
         return size == 0;
     }
 
     @Override
-    public boolean isFull() {
+    public final boolean isFull() {
         return size == object.length;
     }
 }

@@ -5,6 +5,6 @@ package framework.utilities.data.structure;
  * @param <T> T
  */
 public class AVLNode<T> extends Node<T> {
-    public int height;
-    public AVLNode(T t, AVLNode<T> parent) { super(t, parent); }
+    int height;
+    AVLNode(T t, AVLNode<T> parent) { super(t, parent); }
 }

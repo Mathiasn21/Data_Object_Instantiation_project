@@ -10,10 +10,10 @@ import java.util.NoSuchElementException;
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class PostorderTraversalIterator<T> implements Iterator<Node<T>> {
+public final class PostorderTraversalIterator<T> implements Iterator<Node<T>> {
     private final Stack<Node<T>> s = new Stack<>();
 
-    public PostorderTraversalIterator(Node<T> rootNode) { traverse(rootNode); }
+    PostorderTraversalIterator(Node<T> rootNode) { traverse(rootNode); }
 
     private void traverse(Node<T> node) {
         if(node == null){return;}
