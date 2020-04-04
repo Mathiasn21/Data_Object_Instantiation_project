@@ -76,7 +76,7 @@ public class CSVHandler implements IHandle{
      * as a single column or several.
      * @param singleColumn boolean
      */
-    public void isSingleColumn(boolean singleColumn) { isSingleColumn = singleColumn; }
+    public final void isSingleColumn(boolean singleColumn) { isSingleColumn = singleColumn; }
 
     /**
      * Changes the setting for auto converting
@@ -85,7 +85,7 @@ public class CSVHandler implements IHandle{
      * in a dataobject constructor.
      * @param convertFloatToDouble boolean
      */
-    public void isConvertintFloatToDouble(boolean convertFloatToDouble) {
+    public final void isConvertintFloatToDouble(boolean convertFloatToDouble) {
         this.convertFloatToDouble = convertFloatToDouble;
     }
 
