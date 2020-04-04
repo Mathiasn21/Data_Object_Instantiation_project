@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/**
+/** Class for deletion of file.
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class DeleteFileDeleteCommand implements IDeleteFileDeleteCommand {
@@ -23,10 +23,5 @@ public class DeleteFileDeleteCommand implements IDeleteFileDeleteCommand {
         catch (IOException e){
             System.out.println(e.toString());
         }
-    }
-
-    @Override
-    public void execute(@NotNull String data) throws IOException {
-
     }
 }
