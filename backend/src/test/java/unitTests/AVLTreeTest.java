@@ -29,20 +29,10 @@ public class AVLTreeTest {
 
     //TODO: IMPLEMENT TEST
     @Test
-    void can_insert_first_value(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void can_insert_bigger_value(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void can_insert_smaller_value(){
-
+    void insertion(){
+        //insert a value
+        //insert a bigger value
+        //insert a smaller value
     }
 
     //TODO: IMPLEMENT TEST
