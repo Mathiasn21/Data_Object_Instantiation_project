@@ -9,10 +9,10 @@ import java.util.NoSuchElementException;
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class PreorderTraversalIterator<T> implements Iterator<Node<T>> {
+final class PreorderTraversalIterator<T> implements Iterator<Node<T>> {
     private final Stack<Node<T>> s = new Stack<>();
 
-    public PreorderTraversalIterator(Node<T> rootNode) { traverse(rootNode); }
+    PreorderTraversalIterator(Node<T> rootNode) { traverse(rootNode); }
 
     private void traverse(Node<T> node) {
         if(node == null){return;}
@@ -20,11 +20,12 @@ public class PreorderTraversalIterator<T> implements Iterator<Node<T>> {
         traverse(node.getLeft());
         s.push(node);
     }
-    @Override
-    public boolean hasNext() { return !s.isEmpty(); }
 
     @Override
-    public Node<T> next() {
+    public final boolean hasNext() { return !s.isEmpty(); }
+
+    @Override
+    public final Node<T> next() {
         if (!hasNext()) throw new NoSuchElementException();
         return s.pop();
     }
