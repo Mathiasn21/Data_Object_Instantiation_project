@@ -1,8 +1,10 @@
 package framework.utilities.data.delete;
 
+import java.io.File;
+
 /**
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public interface IDeleteFileDeleteCommand extends IDeleteCommand {
-//TODO: Implement Interface for deleting file
+    void deleteFileIfExists(File file);
 }
