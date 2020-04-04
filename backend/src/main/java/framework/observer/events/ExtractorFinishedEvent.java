@@ -12,5 +12,5 @@ public class ExtractorFinishedEvent implements IEvent {
     }
 
     @Override
-    public @NotNull Object raisedBy() { return raisedBy; }
+    public final @NotNull Object raisedBy() { return raisedBy; }
 }
