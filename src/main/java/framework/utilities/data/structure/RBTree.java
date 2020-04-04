@@ -1,5 +1,9 @@
 package framework.utilities.data.structure;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +29,9 @@ public final class RBTree<T> extends Tree<T> {
       ///////////////////////////////////////////////
      //                 SETTERS                   //
     ///////////////////////////////////////////////
+    @Nullable
     @Override
-    public void insert(T data) {
+    public final void insert(T data) {
         RBNode<T> node = new RBNode<>(data, null);
         insert(getRootNode(), node);//Calls super method
 
@@ -43,7 +48,7 @@ public final class RBTree<T> extends Tree<T> {
     /**Re balances the tree after a insertion
      * @param node RBNode&lt;T&gt;
      */
-    private void reBalanceAfterInsertion(RBNode<T> node){
+    private void reBalanceAfterInsertion(@NotNull RBNode<T> node){
         RBNode<T> parent = (RBNode<T>) node.parent;
         RBNode<T> parentSibling = getSiblingFrom(parent);
         RBNode<T> grandParent = getGrandparentFrom(node);
@@ -92,9 +97,10 @@ public final class RBTree<T> extends Tree<T> {
      * @param t T
      * @return Node or null if none was removed
      */
+    @Nullable
     @Override
     @SuppressWarnings("unchecked")
-    public Node<T> remove(T t) {
+    public final Node<T> remove(T t) {
         if (t == null){ return null; }
         RBNode<T> node = (RBNode<T>) searchNode(t);
         if(node == null){ return null; }
@@ -125,7 +131,7 @@ public final class RBTree<T> extends Tree<T> {
     }
 
     @Override
-    public int size() {
+    public final int size() {
         return 0;
     }
 
@@ -134,6 +140,7 @@ public final class RBTree<T> extends Tree<T> {
      * @param isRoot boolean
      * @return Map&lt;String, RBNode&lt;T&gt;&gt;
      */
+    @NotNull
     private Map<String, RBNode<T>> binaryRemoval(RBNode<T> node, boolean isRoot) {
         Map<String, RBNode<T>> results = new HashMap<>();
 
@@ -217,9 +224,9 @@ public final class RBTree<T> extends Tree<T> {
         }
     }
 
-    private void removalCase0(RBNode<T> x) { x.color = false; }
+    private void removalCase0(@NotNull RBNode<T> x) { x.color = false; }
 
-    private void removalCase1(RBNode<T> x, RBNode<T> w, RBNode<T> xParent, boolean xIsLeft) {
+    private void removalCase1(RBNode<T> x, @NotNull RBNode<T> w, @NotNull RBNode<T> xParent, boolean xIsLeft) {
         //step 1 - color w black
         //step 2 - color x parent red
         w.color = false;
@@ -237,7 +244,7 @@ public final class RBTree<T> extends Tree<T> {
         pickRemovalCase(x, w, xParent);
     }
 
-    private void removalCase2(RBNode<T> w, RBNode<T> xParent) {
+    private void removalCase2(@NotNull RBNode<T> w, RBNode<T> xParent) {
         w.color = true;
         if(isRed(xParent)){
             xParent.color = false;
@@ -246,7 +253,7 @@ public final class RBTree<T> extends Tree<T> {
         pickRemovalCase(xParent, w, xParent);
     }
 
-    private void removalCase3(RBNode<T> w, RBNode<T> xParent, boolean xIsLeft) {
+    private void removalCase3(@NotNull RBNode<T> w, RBNode<T> xParent, boolean xIsLeft) {
         w.color = true;
         if(xIsLeft){
             getLeftOf(w).color = false;
@@ -261,7 +268,7 @@ public final class RBTree<T> extends Tree<T> {
         removalCase4(w, xParent, xIsLeft);
     }
 
-    private void removalCase4(RBNode<T> w, RBNode<T> xParent, boolean xIsLeft) {
+    private void removalCase4(@NotNull RBNode<T> w, @NotNull RBNode<T> xParent, boolean xIsLeft) {
         w.color = xParent.color;
         xParent.color = false;
 
@@ -315,7 +322,7 @@ public final class RBTree<T> extends Tree<T> {
      * @param pLeftChild Node&lt;T&gt;
      * @param pGrandParent Node&lt;T&gt;
      */
-    private void updateParentalReferences(RBNode<T> root, RBNode<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
+    private void updateParentalReferences(RBNode<T> root, @NotNull RBNode<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
         pivot.parent = pGrandParent;
         if(pLeftChild != null) pLeftChild.parent = root;
 
@@ -332,7 +339,7 @@ public final class RBTree<T> extends Tree<T> {
      * @param thiz RBNode&lt;T&gt;
      * @param that RBNode&lt;T&gt;
      */
-    private void replace(RBNode<T> thiz, RBNode<T> that) {
+    private void replace(@NotNull RBNode<T> thiz, @NotNull RBNode<T> that) {
         thiz.tCounter = that.tCounter;
         thiz.t = that.t;
     }
@@ -353,7 +360,9 @@ public final class RBTree<T> extends Tree<T> {
         return parent.getNumOfChildren() == 2 ? (RBNode<T>) (parent.left.equals(node) ? parent.right : parent.left) : null;
     }
 
-    private RBNode<T> getGrandparentFrom(RBNode<T> node){
+    @Nullable
+    @Contract(pure = true)
+    private RBNode<T> getGrandparentFrom(@NotNull RBNode<T> node){
         return node.parent != null ? (RBNode<T>) node.parent.parent : null;
     }
 
