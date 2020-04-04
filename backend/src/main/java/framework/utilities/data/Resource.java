@@ -1,8 +1,10 @@
 package framework.utilities.data;
 
 import framework.utilities.data.read.IReadCommand;
+import framework.utilities.data.write.IWriteCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,31 +12,53 @@ import java.io.IOException;
 
 /** Class representing a data source. Aka a place to fetch data from.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.5.1
+ * @version 1.6.1
  */
 public final class Resource {
-    private final IReadCommand readData;
+    private final IReadCommand readCommand;
+    private final IWriteCommand writeCommand;
     private final String[] nameSpace;
 
     /**
-     * @param readData {@link IReadCommand}
+     * @param readCommand {@link IReadCommand}
      */
-    Resource(@NotNull IReadCommand readData) { this(readData, ""); }
+    Resource(@NotNull IReadCommand readCommand) {
+        this(readCommand, "");
+    }
 
     /**
-     * @param readData {@link IReadCommand}
+     * @param writeCommand {@link IWriteCommand}
+     * @param readCommand {@link IReadCommand}
+     */
+    Resource(@NotNull IReadCommand readCommand, @Nullable IWriteCommand writeCommand) {
+        this(readCommand, writeCommand, "");
+    }
+
+    /**
+     * @param readCommand {@link IReadCommand}
      * @param nameSpace {@link String}
      */
-    Resource(IReadCommand readData, String ...nameSpace) {
-        this.readData = readData;
-        this.nameSpace = nameSpace;
+    Resource(IReadCommand readCommand, String ...nameSpace) {
+        this(readCommand, null, nameSpace);
     }
+
+    /**
+     * @param writeCommand {@link IWriteCommand}
+     * @param readCommand {@link IReadCommand}
+     * @param nameSpace {@link String}
+     */
+    Resource(IReadCommand readCommand, IWriteCommand writeCommand, String ...nameSpace) {
+        this.readCommand = readCommand;
+        this.nameSpace = nameSpace;
+        this.writeCommand = writeCommand;
+    }
+
 
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
      */
-    public final @NotNull BufferedReader getData() throws IOException { return readData.execute(); }
+    public final @NotNull BufferedReader getData() throws IOException { return readCommand.execute(); }
 
     /**
      * @return {@link String}
@@ -43,7 +67,7 @@ public final class Resource {
     @NotNull
     public final String getDataAsString() throws IOException {
         StringBuilder builder = new StringBuilder();
-        BufferedReader bufferedReader = readData.execute();
+        BufferedReader bufferedReader = readCommand.execute();
         String line;
         while((line = bufferedReader.readLine()) != null ){
             builder.append(line);
@@ -63,7 +87,9 @@ public final class Resource {
     public final String[] getNameSpace() { return nameSpace; }
 
 
-    /*TODO: Allow this class to be extended with its own implementations
-    *  This could be done either through inheritance or a better way, through interfaces.
-    * */
+    /**
+     * @return boolean
+     * @throws IOException IOException {@link IOException}
+     */
+    public final void writeData() throws IOException { writeCommand.execute(); }
 }
