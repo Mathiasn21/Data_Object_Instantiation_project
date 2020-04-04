@@ -1,20 +1,22 @@
 package framework.utilities.data.structure;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Comparator;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class AVLTree<T> extends Tree<T> {
+public final class AVLTree<T> extends Tree<T> {
     public AVLTree(Comparator<T> comparator) { super(comparator); }
-    public AVLTree() {super();}
+    public AVLTree() { super(); }
 
     ///////////////////////////////////////////////
      //              SETTERS                      //
     ///////////////////////////////////////////////
     @Override
-    public void insert(T data) {
+    public final void insert(T data) {
         AVLNode<T> node = new AVLNode<>(data, null);
         insert(getRootNode(), node);//Calls super method
 
@@ -32,14 +34,14 @@ public class AVLTree<T> extends Tree<T> {
      //              Utility Methods              //
     ///////////////////////////////////////////////
     @Override
-    public Node<T> remove(T t) {
+    public final Node<T> remove(T t) {
         Node<T> removedNode = super.remove(t);//Calls super method;
         propagateReBalancing(removedNode);
         return removedNode;
     }
 
     @Override
-    public int size() {
+    public final int size() {
         return 0;
     }
 
@@ -121,7 +123,7 @@ public class AVLTree<T> extends Tree<T> {
     /**
      * @param node AVLNode
      */
-    private void updateNodeHeight(AVLNode<T> node){
+    private void updateNodeHeight(@NotNull AVLNode<T> node){
         node.height = 1 + Math.max(getHeight((AVLNode<T>) node.left), getHeight((AVLNode<T>) node.right));
     }
 
@@ -140,7 +142,7 @@ public class AVLTree<T> extends Tree<T> {
      * @param pLeftChild Node&lt;T&gt;
      * @param pGrandParent Node&lt;T&gt;
      */
-    private void updateParentalReferences(AVLNode<T> root, AVLNode<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
+    private void updateParentalReferences(AVLNode<T> root, @NotNull AVLNode<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
         pivot.parent = pGrandParent;
         if(pLeftChild != null) pLeftChild.parent = root;
 

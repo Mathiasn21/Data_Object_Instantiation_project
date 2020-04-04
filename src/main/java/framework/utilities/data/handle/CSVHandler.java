@@ -49,7 +49,7 @@ public class CSVHandler implements IHandle{
      */
     public final void setDelimiter(char delimiter) { this.delimiter = String.valueOf(delimiter); }
 
-    public void setSkipEmptyLines(boolean skipEmptyLines) {
+    public final void setSkipEmptyLines(boolean skipEmptyLines) {
         this.skipEmptyLines = skipEmptyLines;
     }
 
@@ -59,7 +59,7 @@ public class CSVHandler implements IHandle{
      */
     public final void setDelimiter(String delimiter) { this.delimiter = delimiter; }
 
-    public void setSampleEachLine(boolean sampleEachLine) { this.sampleEachLine = sampleEachLine; }
+    public final void setSampleEachLine(boolean sampleEachLine) { this.sampleEachLine = sampleEachLine; }
 
 
     /**
@@ -67,7 +67,7 @@ public class CSVHandler implements IHandle{
      * By default this is off.
      * @param removeDoubleQuotes boolean
      */
-    public void setRemoveDoubleQuotes(boolean removeDoubleQuotes) {
+    public final void setRemoveDoubleQuotes(boolean removeDoubleQuotes) {
         this.removeDoubleQuotes = removeDoubleQuotes;
     }
 
@@ -95,7 +95,7 @@ public class CSVHandler implements IHandle{
      * @throws IOException IOException
      */
     @Override
-    public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
+    public @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         String line;
         List<Object[]> rows = new ArrayList<>();
         boolean foundTypes = false;
