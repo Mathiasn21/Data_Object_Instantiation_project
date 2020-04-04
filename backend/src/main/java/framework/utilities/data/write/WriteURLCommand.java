@@ -16,18 +16,12 @@ import java.nio.charset.StandardCharsets;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture - Refactoring
  * @version 1.0
 **/
-public final class WriteURLWriteCommand implements IWriteURLWriteCommand {
+public final class WriteURLCommand implements IWriteURLWriteCommand {
     private final URL url;
-    private final String data;
 
-    public WriteURLWriteCommand(@NotNull URL url, @NotNull String data) {
-        this.url = url;
-        this.data = data;
-    }
+    public WriteURLCommand(@NotNull URL url) { this.url = url; }
 
-    public WriteURLWriteCommand(@NotNull String url, @NotNull String data) throws MalformedURLException {
-        this(new URL(url), data);
-    }
+    public WriteURLCommand(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
 
     /**
      * Standard method for writing data to a execute URL.
@@ -36,7 +30,7 @@ public final class WriteURLWriteCommand implements IWriteURLWriteCommand {
      */
     @Contract(pure = true)
     @Override
-    public final void execute() throws IOException {
+    public final void execute(@NotNull String data) throws IOException {
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         OutputStream out = conn.getOutputStream();

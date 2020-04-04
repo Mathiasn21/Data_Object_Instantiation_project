@@ -1,5 +1,7 @@
 package framework.utilities.data.write;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 /**
  * Describes a contract for executing commands for a resource.
@@ -11,5 +13,5 @@ public interface IWriteCommand {
     /**
      * @throws IOException {@link IOException} IOException
      */
-    void execute() throws IOException;
+    void execute(@NotNull String data) throws IOException;
 }

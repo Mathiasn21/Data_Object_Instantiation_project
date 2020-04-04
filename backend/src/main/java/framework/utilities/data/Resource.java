@@ -18,6 +18,7 @@ public final class Resource {
     private final IReadCommand readCommand;
     private final IWriteCommand writeCommand;
     private final String[] nameSpace;
+    private String data = null;
 
     /**
      * @param readCommand {@link IReadCommand}
@@ -91,5 +92,5 @@ public final class Resource {
      * @return boolean
      * @throws IOException IOException {@link IOException}
      */
-    public final void writeData() throws IOException { writeCommand.execute(); }
+    public final void writeData() throws IOException { writeCommand.execute(data); }
 }

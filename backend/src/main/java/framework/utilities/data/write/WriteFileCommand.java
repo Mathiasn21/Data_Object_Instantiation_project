@@ -18,17 +18,13 @@ import java.util.List;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
+public final class WriteFileCommand implements IWriteFileWriteCommand {
     private final File file;
-    private final String data;
     private boolean append = false, createIfNotExists = true;
 
-    public WriteFileWriteCommand(@NotNull File file, @NotNull String data) {
-        this.file = file;
-        this.data = data;
-    }
+    public WriteFileCommand(@NotNull File file) { this.file = file; }
 
-    public WriteFileWriteCommand(@NotNull String path, @NotNull String data) { this(new File(path), data); }
+    public WriteFileCommand(@NotNull String path) { this(new File(path)); }
 
     /**
      * Utilizes parametrization combined with generics, in order to
@@ -48,7 +44,7 @@ public final class WriteFileWriteCommand implements IWriteFileWriteCommand {
      */
     @Contract(pure = true)
     @Override
-    public final void execute() throws IOException {
+    public final void execute(@NotNull String data) throws IOException {
         if (createIfNotExists && !file.exists()) { throw new FileNotFoundException(); }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, append))) {
             bufferedWriter.write(data);

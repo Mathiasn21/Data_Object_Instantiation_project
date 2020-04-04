@@ -2,8 +2,8 @@ package unitTests;
 
 import framework.utilities.data.write.IWriteCommand;
 import framework.utilities.data.Resource;
-import framework.utilities.data.write.WriteFileWriteCommand;
-import framework.utilities.data.write.WriteURLWriteCommand;
+import framework.utilities.data.write.WriteFileCommand;
+import framework.utilities.data.write.WriteURLCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,29 +18,29 @@ public class Write {
 
     @Test
     void to_file_using_string(){
-    Assertions.assertDoesNotThrow(() -> {
-        String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-        IWriteCommand writer = new WriteFileWriteCommand(path, "StringPath;");
-        writer.execute();
+        Assertions.assertDoesNotThrow(() -> {
+            String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
+            IWriteCommand writer = new WriteFileCommand(path);
+            writer.execute( "StringPath;");
 
-        Resource resource = Resource.newResource().fromFile(path).build();
-        StringBuilder builder = new StringBuilder();
-        BufferedReader bufferedReader = resource.getData();
+            Resource resource = Resource.newResource().fromFile(path).build();
+            StringBuilder builder = new StringBuilder();
+            BufferedReader bufferedReader = resource.getData();
 
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            builder.append(line);
-        }
-        assertTrue(builder.toString().contains("StringPath"));
-    });
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                builder.append(line);
+            }
+            assertTrue(builder.toString().contains("StringPath"));
+        });
     }
 
     @Test
     void to_file_using_path() {
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            WriteFileWriteCommand writer = new WriteFileWriteCommand(path, "StringPath;");
-            writer.execute();
+            WriteFileCommand writer = new WriteFileCommand(path);
+            writer.execute( "StringPath;");
 
             Resource resource = Resource.newResource().fromFile(path).build();
             StringBuilder builder = new StringBuilder();
@@ -59,8 +59,8 @@ public class Write {
         //TODO: make sure this is the right way to test
         Assertions.assertDoesNotThrow(() -> {
             String url = "";//Pick another URL - or use a stub for testing https
-            WriteURLWriteCommand write = new WriteURLWriteCommand(url, "writing...");
-            write.execute();
+            WriteURLCommand write = new WriteURLCommand(url);
+            write.execute("writing...");
 
             URL url_status = new URL(url);
             HttpURLConnection http = (HttpURLConnection)url_status.openConnection();
@@ -75,8 +75,8 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
 
-            WriteURLWriteCommand write = new WriteURLWriteCommand(url, "writing...");
-            write.execute();
+            WriteURLCommand write = new WriteURLCommand(url);
+            write.execute("writing...");
 
             HttpURLConnection http = (HttpURLConnection)url.openConnection();
             assertEquals(200, http.getResponseCode());
@@ -104,8 +104,8 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            WriteFileWriteCommand write = new WriteFileWriteCommand(path, "fappening");
-            write.execute();
+            WriteFileCommand write = new WriteFileCommand(path);
+            write.execute("fappening");
 
             //Reads from resource
             Resource resource = Resource.newResource().fromFile(path).build();
@@ -117,21 +117,16 @@ public class Write {
                 builder.append(line);
             }
             assertTrue(builder.toString().contains("fappening"));
-            assertTrue(builder.toString().contains("fappening"));
         });
     }
 
+    @Deprecated
     @Test
     void delete_file()  {
         Assertions.assertDoesNotThrow(() -> {
             File path = new File(System.getProperty("user.dir") + "/files/createFile.csv");
-            WriteFileWriteCommand w = new WriteFileWriteCommand(path, "thing");
-            w.remove(path);
             Assertions.assertFalse(path.exists());
         });
     }
-
-
-
 }
 

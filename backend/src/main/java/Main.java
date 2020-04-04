@@ -12,7 +12,7 @@ import framework.utilities.data.structure.AVLTree;
 import framework.utilities.data.structure.ITree;
 import framework.utilities.data.structure.Node;
 import framework.utilities.data.write.IWriteCommand;
-import framework.utilities.data.write.WriteFileWriteCommand;
+import framework.utilities.data.write.WriteFileCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -82,8 +82,8 @@ public class Main {
     @NotNull
     public static StringBuilder to_file_using_string() throws IOException {
         String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-        IWriteCommand writer = new WriteFileWriteCommand(path, "StringPath;");
-        writer.execute();
+        IWriteCommand writer = new WriteFileCommand(path);
+        writer.execute("StringPath;");
         Resource resource = Resource.newResource().fromFile(path).build();
         StringBuilder builder = new StringBuilder();
         BufferedReader bufferedReader = resource.getData();

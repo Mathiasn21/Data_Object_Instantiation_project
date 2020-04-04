@@ -3,11 +3,15 @@ package framework.utilities.data;
 import framework.utilities.data.read.IReadCommand;
 import framework.utilities.data.read.ReadFileCommand;
 import framework.utilities.data.read.ReadURLCommand;
+import framework.utilities.data.write.IWriteCommand;
+import framework.utilities.data.write.WriteFileCommand;
+import framework.utilities.data.write.WriteURLCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.List;
  */
 public final class ResourceBuilder {
     private final List<IReadCommand> readers = new ArrayList<>();
+    private final List<IWriteCommand> writers = new ArrayList<>();
 
     /**
      * Leave be, prevents unwanted instantiation.
@@ -119,6 +124,103 @@ public final class ResourceBuilder {
         for (URL url : urls) {
             IReadCommand readURL = new ReadURLCommand(url);
             readers.add(readURL);
+        }
+        return this;
+    }
+
+
+    /**
+     * @param file {@link File}
+     * @return {@link ResourceBuilder}
+     */
+    public ResourceBuilder toFile(@NotNull File file) {
+        IWriteCommand writeFile = new WriteFileCommand(file);
+        writers.add(writeFile);
+        return this;
+    }
+
+    /**
+     * @param file {@link URL}
+     * @return {@link ResourceBuilder}
+     */
+    public ResourceBuilder toFile(@NotNull String file) {
+        IWriteCommand writeFile = new WriteFileCommand(file);
+        writers.add(writeFile);
+        return this;
+    }
+
+    /**
+     * @param files String...
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
+    public ResourceBuilder toFiles(@NotNull String ...files) {
+        for (String file : files) {
+            IWriteCommand writeFile = new WriteFileCommand(file);
+            writers.add(writeFile);
+        }
+        return this;
+    }
+
+    /**
+     * @param files String...
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
+    public ResourceBuilder toFiles(@NotNull File ...files) {
+        for (File file : files) {
+            IWriteCommand writeFile = new WriteFileCommand(file);
+            writers.add(writeFile);
+        }
+        return this;
+    }
+
+
+
+    /**
+     * @param url {@link URL}
+     * @return {@link ResourceBuilder}
+     */
+    public ResourceBuilder toURL(@NotNull URL url) {
+        IWriteCommand writeURL = new WriteURLCommand(url);
+        writers.add(writeURL);
+        return this;
+    }
+
+    /**
+     * @param url {@link URL}
+     * @return {@link ResourceBuilder}
+     */
+    public ResourceBuilder toURL(@NotNull String url) throws MalformedURLException {
+        IWriteCommand writeURL = new WriteURLCommand(url);
+        writers.add(writeURL);
+        return this;
+    }
+
+    /**
+     * @throws IOException e
+     * @param urls String...
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
+    public ResourceBuilder toURLs(@NotNull String ...urls) throws IOException {
+        for (String url : urls) {
+            IWriteCommand writeURL = new WriteURLCommand(url);
+            writers.add(writeURL);
+        }
+        return this;
+    }
+
+    /**
+     * @throws IOException e
+     * @param urls String...
+     * @return {@link ResourceBuilder}
+     */
+    @Contract(value = "_ -> this", pure = true)
+    public ResourceBuilder toURLs(@NotNull URL ...urls) throws IOException {
+        for (URL url : urls) {
+            IWriteCommand writeURL = new WriteURLCommand(url);
+            writers.add(writeURL);
         }
         return this;
     }
