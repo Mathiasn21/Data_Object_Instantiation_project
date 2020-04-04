@@ -1,4 +1,4 @@
-package framework.utilities.data.write;
+package framework.utilities.data.delete;
 
 /**
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing

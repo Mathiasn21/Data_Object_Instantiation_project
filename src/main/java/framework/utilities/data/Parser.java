@@ -70,6 +70,7 @@ public final class Parser {
     @Contract(pure = true)
     public static boolean isPrimitiveNumber(@NotNull Class<?> clazz){
         return  (clazz == Double.class  || clazz == double.class ) ||
+                (clazz == Float.class   || clazz == float.class  ) ||
                 (clazz == Integer.class || clazz == int.class    ) ||
                 (clazz == Short.class   || clazz == short.class  ) ||
                 (clazz == Byte.class    || clazz == byte.class   );
