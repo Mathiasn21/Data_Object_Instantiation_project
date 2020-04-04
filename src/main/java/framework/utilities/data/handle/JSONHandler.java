@@ -17,21 +17,6 @@ import static org.apache.commons.lang3.math.NumberUtils.*;
  */
 public class JSONHandler implements IHandle{
     private Class<?>[] primaryKeyTypes;
-    private String[] primaryKeys;
-
-    /**
-     * @param types {@link Class}&lt;?&gt;[]
-     */
-    @Override
-    public final void setPrimaryKeyTypes(@NotNull Class<?>[] types) {
-        primaryKeyTypes = types;
-    }
-
-    /**
-     * @param keys String[]
-     */
-    @Override
-    public final void setPrimaryKeys(@NotNull String[] keys) { primaryKeys = keys; }
 
     /**
      * @param bufferedReader {@link BufferedReader}

@@ -25,23 +25,10 @@ public class CSVHandler implements IHandle{
     private boolean isSingleColumn = false;
 
     private Class<?>[] primaryKeyTypes;
-    private String[] primaryKeys;
     private boolean skipEmptyLines = false;
     private boolean removeDoubleQuotes = false;
     private boolean convertFloatToDouble = true;
     private boolean sampleEachLine;
-
-    /**
-     * @param types {@link Class}&lt;?&gt;[]
-     */
-    @Override
-    public final void setPrimaryKeyTypes(@NotNull Class<?>[] types) { primaryKeyTypes = types; }
-
-    /**
-     * @param keys String[]
-     */
-    @Override
-    public final void setPrimaryKeys(@NotNull String[] keys) { primaryKeys = keys; }
 
     /**
      * A char to split each column for each row
@@ -134,7 +121,7 @@ public class CSVHandler implements IHandle{
 
         //This is pretty much always true, but, better to be safe
         if(primaryKeyTypes == null || primaryKeyTypes.length == 0){
-            setPrimaryKeyTypes(types.toArray(Class<?>[]::new));
+            primaryKeyTypes = types.toArray(Class<?>[]::new);
         }
         return rows;
     }

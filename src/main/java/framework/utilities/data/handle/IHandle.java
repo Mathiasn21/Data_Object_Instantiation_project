@@ -10,16 +10,6 @@ import java.util.List;
  */
 public interface IHandle {
     /**
-     * @param types {@link Class}&lt;?&gt;[]
-     */
-    void setPrimaryKeyTypes(Class<?>... types);
-
-    /**
-     * @param keys String[]
-     */
-    void setPrimaryKeys(String[] keys);
-
-    /**
      * @param bufferedReader {@link BufferedReader}
      * @return {@link List}&lt;{@link List}&lt;{@link Object}&gt;&gt;
      * @throws IOException IOException
