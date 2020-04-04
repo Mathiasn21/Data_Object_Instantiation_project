@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -95,10 +96,10 @@ public class ExtractorTest {
         var extractor = new Extractor<>(collector);
         Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
         List<Field> fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
-        var columnMap = extractor.extractColumns(fields);
+        var columnMap = extractor.extractColumnsUsingFields(fields);
         assertFalse(columnMap.isEmpty());
 
-        System.out.println(extractor.extractReportFrom(fields).values());
+        System.out.println(extractor.extractReportFromFields(fields).values());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
         for (int i = 0; i < fields.size(); i++) {
@@ -120,13 +121,13 @@ public class ExtractorTest {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
-        Method[] methods = {clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger")};
-        var columnMap = extractor.extractColumns(methods);
+        List<Method> methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
+        var columnMap = extractor.extractColumnsUsingMethods(methods);
         assertFalse(columnMap.isEmpty());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
-        for (int i = 0; i < methods.length; i++) {
-            Method method = methods[i];
+        for (int i = 0; i < methods.size(); i++) {
+            Method method = methods.get(i);
 
             var objectList = columnMap.get(method);
             assertFalse(objectList.isEmpty());
@@ -144,13 +145,13 @@ public class ExtractorTest {
     void multiple_columns_by_strings() throws IOException, NoSuchColumnException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
-        String[] strings = {"string", "Doubles", "integer"};
-        var columnMap = extractor.extractColumns(strings);
+        List<String> strings = Arrays.asList("string", "Doubles", "integer");
+        var columnMap = extractor.extractColumnsUsingStrings(strings);
         assertFalse(columnMap.isEmpty());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
-        for (int i = 0; i < strings.length; i++) {
-            String string = strings[i];
+        for (int i = 0; i < strings.size(); i++) {
+            String string = strings.get(i);
 
             var objectList = columnMap.get(string);
             assertFalse(objectList.isEmpty());

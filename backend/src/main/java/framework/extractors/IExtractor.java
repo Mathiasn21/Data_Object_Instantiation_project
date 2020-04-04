@@ -32,24 +32,23 @@ public interface IExtractor{
 
 
     @Contract(pure = true)
-    @NotNull Map<Field, List<Object>> extractColumns(List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
-    @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method ...methods) throws IllegalAccessException, NoSuchColumnException;
+    @NotNull Map<Method, List<Object>> extractColumnsUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchColumnException;
 
     @Contract(pure = true)
-    @NotNull Map<String, List<Object>> extractColumns(@NotNull String ...columns) throws IllegalAccessException, NoSuchColumnException;
-
+    @NotNull Map<String, List<Object>> extractColumnsUsingStrings(@NotNull List<String> columns) throws IllegalAccessException, NoSuchColumnException;
 
     @Contract(pure = true)
     @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<String, Map<String, Double>> extractReportFromFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String ...columns) throws IllegalAccessException;
+    @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method ...methods) throws IllegalAccessException;
+    @NotNull Map<String, Map<String, Double>> extractReportFromStrings(@NotNull List<String> columns) throws IllegalAccessException;
 }

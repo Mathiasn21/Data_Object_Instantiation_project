@@ -120,7 +120,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<Field, List<Object>> extractColumns(List<Field> fields) throws NoSuchFieldException {
+    public @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException {
         Map<Field, List<Object>> res = new HashMap<>();
         for (Field field : fields) {
             res.put(field, this.extractColumnFrom(field));
@@ -131,7 +131,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
 
     @Contract(pure = true)
     @Override
-    public @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method... methods) throws NoSuchColumnException {
+    public @NotNull Map<Method, List<Object>> extractColumnsUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException {
         Map<Method, List<Object>> res = new HashMap<>();
         for (Method method : methods) {
             res.put(method, this.extractColumnFrom(method));
@@ -143,7 +143,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, List<Object>> extractColumns(@NotNull String... columns) throws NoSuchColumnException {
+    public @NotNull Map<String, List<Object>> extractColumnsUsingStrings(@NotNull List<String> columns) throws NoSuchColumnException {
         Map<String, List<Object>> res = new HashMap<>();
         for (String column : columns) {
             res.put(column, this.extractColumnFrom(column));
@@ -164,15 +164,10 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull List<Field> fields) throws NoSuchFieldException {
+    public @NotNull Map<String, Map<String, Double>> extractReportFromFields(@NotNull List<Field> fields) throws NoSuchFieldException {
         Map<String, Map<String, Double>> res = new HashMap<>();
-        List<Field> filteredFields = new ArrayList<>();
-        fields.forEach((field) -> {
-            if(Parser.isPrimitiveNumber(field.getType())){
-                filteredFields.add(field);
-            }
-        });
-        Map<Field, List<Object>> columns = extractColumns(filteredFields);
+        List<Field> filteredFields = filterFieldsForPrimitiveNumbers(fields);
+        Map<Field, List<Object>> columns = extractColumnsUsingFields(filteredFields);
 
         for (Field field : filteredFields) {
             Map<String, Double> report = new HashMap<>();
@@ -191,7 +186,30 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String... columns) {
+    @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
+    public @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException {
+        Map<String, Map<String, Double>> res = new HashMap<>();
+        List<Method> filteredMethods = filterMethodsForPrimitiveNumbers(methods);
+        Map<Method, List<Object>> columns = extractColumnsUsingMethods(filteredMethods);
+
+        for (Method method : filteredMethods) {
+            Map<String, Double> report = new HashMap<>();
+            List<Number> column = (List<Number>)(Object)columns.get(method);//Safe as this is ensured beforehand
+
+            for (ReportOptions option : reportOptions) {
+                IAverage average = new Average(column);
+                report.put(option.option, option.calculate.execute(average));
+            }
+            res.put(method.getName(), report);
+        }
+        raise(new ExtractorFinishedEvent(this));
+        return res;
+    }
+
+    //TODO: implement this method
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<String, Map<String, Double>> extractReportFromStrings(@NotNull List<String> columns) {
         for (String string : columns) {
 
         }
@@ -199,15 +217,26 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return null;
     }
 
-    //TODO: implement this method
-    @Contract(pure = true)
-    @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Method... methods) {
-        for (Method method : methods) {
+    @NotNull
+    private List<Field> filterFieldsForPrimitiveNumbers(@NotNull List<Field> fields) {
+        List<Field> filteredFields = new ArrayList<>();
+        fields.forEach((field) -> {
+            if(Parser.isPrimitiveNumber(field.getType())){
+                filteredFields.add(field);
+            }
+        });
+        return filteredFields;
+    }
 
-        }
-        raise(new ExtractorFinishedEvent(this));
-        return null;
+    @NotNull
+    private List<Method> filterMethodsForPrimitiveNumbers(@NotNull List<Method> methods) {
+        List<Method> filteredFields = new ArrayList<>();
+        methods.forEach((field) -> {
+            if(Parser.isPrimitiveNumber(field.getReturnType())){
+                filteredFields.add(field);
+            }
+        });
+        return filteredFields;
     }
 
     @Nullable
