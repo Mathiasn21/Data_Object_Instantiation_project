@@ -15,7 +15,7 @@ import static org.apache.commons.lang3.math.NumberUtils.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public final class JSONHandler implements IHandle{
+public class JSONHandler implements IHandle{
     private Class<?>[] primaryKeyTypes;
     private String[] primaryKeys;
 
@@ -39,7 +39,7 @@ public final class JSONHandler implements IHandle{
      * @throws IOException IOException
      */
     @Override
-    public final @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
+    public @NotNull List<Object[]> handle(@NotNull BufferedReader bufferedReader) throws IOException {
         List<Object[]> res = new ArrayList<>();
         StringBuilder textFromFile = getJSONStringFrom(bufferedReader);
         JsonElement jsonObject = JsonParser.parseString(textFromFile.toString());
