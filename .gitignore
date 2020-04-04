@@ -59,4 +59,4 @@ baseline.json
 #Rule Exceptions
 !logs/.gitkeep
 !logs/
-!backend/.idea/runConfigurations/
+!.idea/runConfigurations/
