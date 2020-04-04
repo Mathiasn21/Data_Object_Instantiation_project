@@ -57,6 +57,7 @@ public final class EventObserver {
     private static void notifyAllSubjects(@NotNull IEvent event){
         Class<? extends IEvent> eventClazz = event.getClass();
         List<Subject> subjects = registeredEvents.get(eventClazz);
+        if(subjects == null || subjects.size() == 0){ return; }
         subjects.iterator().forEachRemaining((subject) -> {
             executeCommand(subject, event);
             subject.update(event);

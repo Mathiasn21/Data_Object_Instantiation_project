@@ -46,7 +46,7 @@ public final class Parser {
     }
 
     /**
-     * Returns if clazz is a primitive or a primtitve wrapper
+     * Returns true if clazz is a primitive or a primtitve wrapper
      * @param clazz {@link Class}&lt;?&gt;
      * @return boolean
      */
@@ -58,6 +58,19 @@ public final class Parser {
                 (clazz == Integer.class || clazz == int.class    ) ||
                 (clazz == Long.class    || clazz == long.class   ) ||
                 (clazz == Boolean.class || clazz == boolean.class) ||
+                (clazz == Short.class   || clazz == short.class  ) ||
+                (clazz == Byte.class    || clazz == byte.class   );
+    }
+
+    /**
+     * Returns true if clazz is a primitive number or a primtitve wrapper number
+     * @param clazz {@link Class}&lt;?&gt;
+     * @return boolean
+     */
+    @Contract(pure = true)
+    public static boolean isPrimitiveNumber(@NotNull Class<?> clazz){
+        return  (clazz == Double.class  || clazz == double.class ) ||
+                (clazz == Integer.class || clazz == int.class    ) ||
                 (clazz == Short.class   || clazz == short.class  ) ||
                 (clazz == Byte.class    || clazz == byte.class   );
     }

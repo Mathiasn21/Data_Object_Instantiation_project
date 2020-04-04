@@ -3,6 +3,8 @@ package framework.statistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Class for calculating average methods execute the data {@link IAverage}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
@@ -32,6 +34,18 @@ public final class Average implements IAverage{
         this.data = doubles;
         this.length = data.length;
     }
+
+    /**
+     * @param data {@link List}&lt;{@link Number}&gt;
+     */
+    @Contract(pure = true)
+    public Average(@NotNull List<Number> data){
+        double[] doubles = new double[data.size()];
+        for(int i = 0; i < data.size(); i++){ doubles[i] = data.get(i).doubleValue(); }
+        this.data = doubles;
+        this.length = data.size();
+    }
+
 
     /**
      * @return double

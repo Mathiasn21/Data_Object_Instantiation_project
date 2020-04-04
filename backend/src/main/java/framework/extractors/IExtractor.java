@@ -15,6 +15,12 @@ import java.util.Map;
  * @version 1.0.0
  */
 public interface IExtractor{
+    void setReportOptions(@NotNull List<ReportOptions> reportOptions);
+
+    @Contract(pure = true)
+    @NotNull List<ReportOptions> getReportOptions();
+
+
     @Contract(pure = true)
     @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws IllegalAccessException, NoSuchFieldException;
 
@@ -26,7 +32,7 @@ public interface IExtractor{
 
 
     @Contract(pure = true)
-    @NotNull Map<Field, List<Object>> extractColumns(@NotNull Field ...fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<Field, List<Object>> extractColumns(List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
     @NotNull Map<Method, List<Object>> extractColumns(@NotNull Method ...methods) throws IllegalAccessException, NoSuchColumnException;
@@ -39,7 +45,7 @@ public interface IExtractor{
     @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field ...fields) throws IllegalAccessException;
+    @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
     @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull String ...columns) throws IllegalAccessException;

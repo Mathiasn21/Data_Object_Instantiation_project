@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -93,13 +94,15 @@ public class ExtractorTest {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
-        Field[] fields = {clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer")};
+        List<Field> fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
         var columnMap = extractor.extractColumns(fields);
-           assertFalse(columnMap.isEmpty());
+        assertFalse(columnMap.isEmpty());
+
+        System.out.println(extractor.extractReportFrom(fields).values());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
-        for (int i = 0; i < fields.length; i++) {
-            Field field = fields[i];
+        for (int i = 0; i < fields.size(); i++) {
+            Field field = fields.get(i);
 
             var objectList = columnMap.get(field);
             assertFalse(objectList.isEmpty());

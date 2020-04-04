@@ -6,6 +6,9 @@ import framework.observer.EventObserver;
 import framework.observer.events.ExceptionEvent;
 import framework.observer.events.ExtractorFinishedEvent;
 import framework.observer.events.IEvent;
+import framework.statistics.Average;
+import framework.statistics.IAverage;
+import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,8 +25,9 @@ import java.util.*;
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of data objects
-    private ICollector collector;//Leave this be!
+    private ICollector collector;
     private List<Exception> exceptions = new ArrayList<>();
+    private List<ReportOptions> reportOptions = Arrays.asList(ReportOptions.values());
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -33,6 +37,18 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     public Extractor(@NotNull List<Object> rows) {
         this.columns = rows;
     }
+
+    @Override
+    public void setReportOptions(@NotNull List<ReportOptions> reportOptions) {
+        this.reportOptions = reportOptions;
+    }
+
+    @Contract(pure = true)
+    @Override
+    public @NotNull List<ReportOptions> getReportOptions() {
+        return Collections.unmodifiableList(reportOptions);
+    }
+
 
     @Contract(pure = true)
     @Override
@@ -104,7 +120,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<Field, List<Object>> extractColumns(@NotNull Field... fields) throws NoSuchFieldException {
+    public @NotNull Map<Field, List<Object>> extractColumns(List<Field> fields) throws NoSuchFieldException {
         Map<Field, List<Object>> res = new HashMap<>();
         for (Field field : fields) {
             res.put(field, this.extractColumnFrom(field));
@@ -147,12 +163,29 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull Field... fields) {
-        for (Field field : fields) {
+    @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
+    public @NotNull Map<String, Map<String, Double>> extractReportFrom(@NotNull List<Field> fields) throws NoSuchFieldException {
+        Map<String, Map<String, Double>> res = new HashMap<>();
+        List<Field> filteredFields = new ArrayList<>();
+        fields.forEach((field) -> {
+            if(Parser.isPrimitiveNumber(field.getType())){
+                filteredFields.add(field);
+            }
+        });
+        Map<Field, List<Object>> columns = extractColumns(filteredFields);
 
+        for (Field field : filteredFields) {
+            Map<String, Double> report = new HashMap<>();
+            List<Number> column = (List<Number>)(Object)columns.get(field);//Safe as this is ensured beforehand
+
+            for (ReportOptions option : reportOptions) {
+                IAverage average = new Average(column);
+                report.put(option.option, option.calculate.execute(average));
+            }
+            res.put(field.getName(), report);
         }
         raise(new ExtractorFinishedEvent(this));
-        return null;
+        return res;
     }
 
     //TODO: implement this method

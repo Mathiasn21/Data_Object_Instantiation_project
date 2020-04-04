@@ -6,7 +6,6 @@ package framework.statistics;
  * @version 1.0
  */
 public interface IStatistics {
-
     double calcSampleVariance();
     double calcPopulationVariance();
     double calcStandardDeviationFromSample();
