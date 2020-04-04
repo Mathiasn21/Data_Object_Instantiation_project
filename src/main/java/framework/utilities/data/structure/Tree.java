@@ -22,7 +22,16 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * A simple binary search tree and
  * By default root is null, comparator is null and it does not compress
  * duplicates, as this option is set to false.
- * Compression of duplicates is done by calling equals on T
+ * The compression will only count objects that gets a compare result = 0,
+ * and are equal in terms of using the object method equal.
+ *
+ * If no comparator is specified it will try to find an appropriate one.
+ * It will start by finding a primitive public field and using corresponding
+ * primitive comparator. If no appropriate fields are found it will will then use a
+ * public method that does return a primitive variable.
+ *
+ * This functionality is easily overridden either by sending in a custom comparator
+ * or by implementing Comparable.
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
@@ -30,31 +39,29 @@ public class Tree<T> implements ITree<T> {
     private Comparator<T> comparator;
     private final boolean compressDuplicates;
     private Node<T> rootNode;
-    private Method method = null;
     private Comparator<Object> experimentalComparator;
-    private Field fieldToutilize = null;
+    private Field fieldToUtilize = null;
+    private Method method = null;
     private Method methodToUse = null;
 
     /**
-     * Sets the current comparator to null.
-     * Asserts that any T object implement comparable else
-     * this will throw an error {@link NotComparableError}
+     * The default constructor sets comparator to null.
      */
     @Contract(pure = true)
     public Tree() { this(null); }
 
-    /**
+    /**Toggles compression.
      * @param compressDuplicates {@link Comparator}&lt;{@link T}&gt;
      */
     @Contract(pure = true)
     public Tree(boolean compressDuplicates) { this(null, compressDuplicates); }
 
-    /**
+    /**Sets a custom made comparator.
      * @param comparator {@link Comparator}&lt;{@link T}&gt;
      */
     public Tree(Comparator<T> comparator) { this(comparator, false); }
 
-    /**Main constructor for customizing this
+    /**Sets custom comparator and toggles compression.
      * @param comparator  {@link Comparator}&lt;{@link T}&gt;
      * @param compressDuplicates boolean
      */
@@ -68,24 +75,46 @@ public class Tree<T> implements ITree<T> {
       ///////////////////////////////////////////////
      //               GETTERS                     //
     ///////////////////////////////////////////////
+    /**Returns root node of this tree.
+     * @return {@link Node}&lt;{@link T}&gt;
+     */
+    @Contract(pure = true)
     final Node<T> getRootNode() { return rootNode; }
 
-    @Override
-    public final int getNumberOfLeaves() { return getNumberOfLeaves(rootNode); }
-
+    /**
+     * @return int
+     */
     @Override
     public int size() { return 0; }
 
+    /**
+     * @return int
+     */
+    @Override
+    public final int getNumberOfLeaves() { return getNumberOfLeaves(rootNode); }
+
+    /**
+     * @param root {@link Node}&lt;{@link T}&gt;
+     * @return int
+     */
     private int getNumberOfLeaves(Node<T> root) {
         if(root == null){ return 0; }
         if(!(root.hasLeftChild() || root.hasRightChild())){ return 1; }
         return getNumberOfLeaves(root.getLeft()) + getNumberOfLeaves(root.getRight());
     }
 
+    /**
+     * @return int
+     */
     @Override
     public final int getNumberOfNodesWithOneChild(){
         return getNumberOfNodesWithOneChild(rootNode);
     }
+
+    /**
+     * @param root {@link Node}&lt;{@link T}&gt;
+     * @return int
+     */
     private int getNumberOfNodesWithOneChild(Node<T> root) {
         if(root == null){return  0;}
 
@@ -100,10 +129,18 @@ public class Tree<T> implements ITree<T> {
         return sum;
     }
 
+    /**
+     * @return int
+     */
     @Override
     public final int getNumberOfNodesWithTwoChild(){
         return getNumberOfNodesWithTwoChild(rootNode);
     }
+
+    /**
+     * @param root {@link Node}&lt;{@link T}&gt;
+     * @return int
+     */
     private int getNumberOfNodesWithTwoChild(Node<T> root) {
         if(root == null){return  0;}
         int sum = 0;
@@ -115,11 +152,19 @@ public class Tree<T> implements ITree<T> {
       ///////////////////////////////////////////////
      //              SETTERS                      //
     ///////////////////////////////////////////////
+    /**
+     * @param data {@link T}
+     */
     @Override
     public void insert(T data) {
         Node<T> newNode = new Node<>(data, null);
         insert(rootNode, newNode);
     }
+
+    /**
+     * @param thiz {@link Node}&lt;{@link T}&gt;
+     * @param that {@link Node}&lt;{@link T}&gt;
+     */
     protected final void insert(Node<T> thiz, Node<T> that) {
         if(rootNode == null){
             rootNode = that;
@@ -128,7 +173,7 @@ public class Tree<T> implements ITree<T> {
         int compareRes = compare(thiz.t, that.t);
 
 
-        //If oject exists and equals then increment counter
+        //If object exists and equals then increment counter
         if(compareRes == 0 && compressDuplicates){
             thiz.tCounter++;
             return;
@@ -143,28 +188,47 @@ public class Tree<T> implements ITree<T> {
             thiz.setRightChild(that);
             that.parent = thiz;
 
-        }else if (compare && thiz.hasLeftChild()){ insert(thiz.getLeft(), that);
-        }else if (!compare && thiz.hasRightChild()){ insert(thiz.getRight(), that); }
+        }else if (compare){ insert(thiz.getLeft(), that);
+        }else { insert(thiz.getRight(), that); }
     }
 
+    /**
+     * @param root {@link Node}&lt;{@link T}&gt;
+     */
     protected final void setRootNode(Node<T> root) { rootNode = root; }
 
 
       ///////////////////////////////////////////////
      //               ITERATORS                   //
     ///////////////////////////////////////////////
+
+    /**
+     * @return {@link Iterator}&lt;{@link Node}&lt;{@link T}&gt;&gt;
+     */
     @NotNull
     @Contract(" -> new")
     @Override
     public final Iterator<Node<T>> inorderTraversal() { return new InorderTraversalIterator<>(rootNode); }
+
+    /**
+     * @return {@link Iterator}&lt;{@link Node}&lt;{@link T}&gt;&gt;
+     */
     @NotNull
     @Contract(" -> new")
     @Override
     public final Iterator<Node<T>> postorderTraversal() { return new PostorderTraversalIterator<>(rootNode); }
+
+    /**
+     * @return {@link Iterator}&lt;{@link Node}&lt;{@link T}&gt;&gt;
+     */
     @NotNull
     @Contract(" -> new")
     @Override
     public final Iterator<Node<T>> preorderTraversal() { return new PreorderTraversalIterator<>(rootNode); }
+
+    /**
+     * @return {@link Iterator}&lt;{@link Node}&lt;{@link T}&gt;&gt;
+     */
     @NotNull
     @Contract(" -> new")
     @Override
@@ -174,13 +238,17 @@ public class Tree<T> implements ITree<T> {
       ///////////////////////////////////////////////
      //              Utility Methods              //
     ///////////////////////////////////////////////
+    /**
+     * @param t {@link T}
+     * @return boolean
+     */
     @Override
     public final boolean contains(T t) { return search(t) == null; }
 
     /**
      * Returns T or null if none was found
-     * @param t T
-     * @return T
+     * @param t {@link T}
+     * @return T {@link T}
      */
     @Nullable
     @Override
@@ -195,6 +263,10 @@ public class Tree<T> implements ITree<T> {
         return null;
     }
 
+    /**
+     * @param t {@link T}
+     * @return {@link Node}&lt;{@link T}&gt;
+     */
     protected Node<T> searchNode(T t) {
         Node<T> res = rootNode;
         while(res != null){
@@ -211,7 +283,7 @@ public class Tree<T> implements ITree<T> {
      * Removes the node with T object if it exists in tree.
      * It returns the removed node or null if none.
      * @param t T
-     * @return Node&lt;T&gt;
+     * @return {@link Node}&lt;{@link T}&gt;
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -267,6 +339,9 @@ public class Tree<T> implements ITree<T> {
         return orgNode;
     }
 
+    /**Copies all the data from one tree, to a new tree, and returns new tree.
+     * @return {@link ITree}&lt;{@link T}&gt;
+     */
     @NotNull
     @Override
     public final ITree<T> copyToNewTree(){
@@ -278,6 +353,10 @@ public class Tree<T> implements ITree<T> {
         return tree;
     }
 
+    /**
+     * @param node {@link Node}&lt;{@link T}&gt;
+     * @param copy {@link Node}&lt;{@link T}&gt;
+     */
     private void appendNodesToCopy(@NotNull Node<T> node, @NotNull Node<T> copy){
         if(node.hasLeftChild()){ copy.setLeftChild(node.getLeft()); }
         if(node.hasRightChild()){ copy.setRightChild(node.getRight()); }
@@ -305,8 +384,8 @@ public class Tree<T> implements ITree<T> {
             if(comparator != null){
                 return comparator.compare(thiz, that);
             }else if (experimentalComparator != null){
-                if(fieldToutilize != null){
-                    return experimentalComparator.compare( fieldToutilize.get(thiz),fieldToutilize.get(that));
+                if(fieldToUtilize != null){
+                    return experimentalComparator.compare( fieldToUtilize.get(thiz), fieldToUtilize.get(that));
                 }
                 return experimentalComparator.compare(methodToUse.invoke(thiz), methodToUse.invoke(that));
             }
@@ -314,6 +393,12 @@ public class Tree<T> implements ITree<T> {
         throw new Error();
     }
 
+    /**
+     * @param thiz {@link T}
+     * @param that {@link T}
+     * @throws IllegalAccessException IllegalAccessException
+     * @throws InvocationTargetException InvocationTargetException
+     */
     //FIXME: cleanup this sick method...
     @SuppressWarnings("unchecked")//All instances are of type Object - guaranteed
     private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
@@ -325,7 +410,7 @@ public class Tree<T> implements ITree<T> {
                 Object o2 = field.get(that);
                 if(!o.equals(o2) || !o.toString().toUpperCase().equals(o2.toString())){
                     this.experimentalComparator = (Comparator<Object>) Parser.getComparatorForPrimitive(type);
-                    this.fieldToutilize = field;
+                    this.fieldToUtilize = field;
                     return;
                 }
             }
@@ -352,6 +437,9 @@ public class Tree<T> implements ITree<T> {
         throw new NotComparableError("Missing comparator or object is not comparable");
     }
 
+    /**
+     * @param thiz {@link T}
+     */
     @SuppressWarnings("unchecked")//As this is guaranteed before this method
     private void setupComparableMethod(@NotNull T thiz) {
         try { method = ((Comparable<T>) thiz).getClass().getMethod("compareTo", thiz.getClass());

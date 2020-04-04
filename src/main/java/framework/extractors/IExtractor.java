@@ -15,10 +15,10 @@ import java.util.Map;
  * @version 1.0.0
  */
 public interface IExtractor{
-    void setReportOptions(@NotNull List<ReportOptions> reportOptions);
+    void setReportOptions(@NotNull List<AverageReport> reportOptions);
 
     @Contract(pure = true)
-    @NotNull List<ReportOptions> getReportOptions();
+    @NotNull List<AverageReport> getReportOptions();
 
 
     @Contract(pure = true)

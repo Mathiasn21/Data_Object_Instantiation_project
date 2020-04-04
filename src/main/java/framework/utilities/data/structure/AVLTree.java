@@ -1,10 +1,9 @@
 package framework.utilities.data.structure;
 
+import java.util.Comparator;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Comparator;
-
-/**
+/**Generic AVL tree. It extends binary tree.
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */

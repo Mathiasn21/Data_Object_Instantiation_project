@@ -1,8 +1,8 @@
 package framework.utilities.data.write;
 
+import java.io.IOException;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 /**
  * Describes a contract for executing commands for a resource.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
