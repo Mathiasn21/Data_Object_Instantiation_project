@@ -202,7 +202,7 @@ public class GraphTest {
     @NotNull
     private List<Object[]> getInfo(String path) throws IOException {
         var csvHandler = new CSVHandler();
-        csvHandler.setSkipEmptyLines(true);
+        csvHandler.skipEmptyLines(true);
         csvHandler.setSampleEachLine(true);
         csvHandler.setDelimiter("\\s+");
 

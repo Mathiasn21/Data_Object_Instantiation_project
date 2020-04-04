@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Builds a resource from which to fetch data
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
- * @version 1.0.0
+ * @version 1.6.0
  */
 public final class ResourceBuilder {
     private final List<IReadCommand> readers = new ArrayList<>();

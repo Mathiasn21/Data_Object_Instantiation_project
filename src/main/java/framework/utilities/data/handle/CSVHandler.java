@@ -36,7 +36,7 @@ public class CSVHandler implements IHandle{
      */
     public final void setDelimiter(char delimiter) { this.delimiter = String.valueOf(delimiter); }
 
-    public final void setSkipEmptyLines(boolean skipEmptyLines) {
+    public final void skipEmptyLines(boolean skipEmptyLines) {
         this.skipEmptyLines = skipEmptyLines;
     }
 
