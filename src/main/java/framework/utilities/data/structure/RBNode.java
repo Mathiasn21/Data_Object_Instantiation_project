@@ -5,7 +5,7 @@ package framework.utilities.data.structure;
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class RBNode<T> extends Node<T> implements Cloneable {
+public final class RBNode<T> extends Node<T> implements Cloneable {
     public boolean color = false;
 
     RBNode(T t, RBNode<T> parent) {
@@ -14,7 +14,7 @@ public class RBNode<T> extends Node<T> implements Cloneable {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object clone() {
+    public final Object clone() {
         RBNode<T> t = null;
         try {
             t = (RBNode<T>) super.clone();

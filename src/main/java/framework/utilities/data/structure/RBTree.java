@@ -16,7 +16,7 @@ import static framework.utilities.data.structure.QuickTraversals.getBottomLeftCh
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public class RBTree<T> extends Tree<T> {
+public final class RBTree<T> extends Tree<T> {
     public RBTree(Comparator<T> comparator) { super(comparator); }
     public RBTree(Comparator<T> comparator, boolean compression) { super(comparator, compression); }
     public RBTree() { super(); }

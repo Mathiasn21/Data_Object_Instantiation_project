@@ -8,6 +8,7 @@ import framework.errors.NotComparableError;
 import framework.utilities.data.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -67,10 +68,10 @@ public class Tree<T> implements ITree<T> {
       ///////////////////////////////////////////////
      //               GETTERS                     //
     ///////////////////////////////////////////////
-    public Node<T> getRootNode() { return rootNode; }
+    final Node<T> getRootNode() { return rootNode; }
 
     @Override
-    public int getNumberOfLeaves() { return getNumberOfLeaves(rootNode); }
+    public final int getNumberOfLeaves() { return getNumberOfLeaves(rootNode); }
 
     @Override
     public int size() { return 0; }
@@ -82,7 +83,7 @@ public class Tree<T> implements ITree<T> {
     }
 
     @Override
-    public int getNumberOfNodesWithOneChild(){
+    public final int getNumberOfNodesWithOneChild(){
         return getNumberOfNodesWithOneChild(rootNode);
     }
     private int getNumberOfNodesWithOneChild(Node<T> root) {
@@ -100,7 +101,7 @@ public class Tree<T> implements ITree<T> {
     }
 
     @Override
-    public int getNumberOfNodesWithTwoChild(){
+    public final int getNumberOfNodesWithTwoChild(){
         return getNumberOfNodesWithTwoChild(rootNode);
     }
     private int getNumberOfNodesWithTwoChild(Node<T> root) {
@@ -119,7 +120,7 @@ public class Tree<T> implements ITree<T> {
         Node<T> newNode = new Node<>(data, null);
         insert(rootNode, newNode);
     }
-    protected void insert(Node<T> thiz, Node<T> that) {
+    protected final void insert(Node<T> thiz, Node<T> that) {
         if(rootNode == null){
             rootNode = that;
             return;
@@ -127,7 +128,6 @@ public class Tree<T> implements ITree<T> {
         int compareRes = compare(thiz.t, that.t);
 
 
-        boolean b = thiz.t.equals(that.t);
         //If oject exists and equals then increment counter
         if(compareRes == 0 && compressDuplicates){
             thiz.tCounter++;
@@ -153,29 +153,38 @@ public class Tree<T> implements ITree<T> {
       ///////////////////////////////////////////////
      //               ITERATORS                   //
     ///////////////////////////////////////////////
+    @NotNull
+    @Contract(" -> new")
     @Override
-    public Iterator<Node<T>> inorderTraversal() { return new InorderTraversalIterator<>(rootNode); }
+    public final Iterator<Node<T>> inorderTraversal() { return new InorderTraversalIterator<>(rootNode); }
+    @NotNull
+    @Contract(" -> new")
     @Override
-    public Iterator<Node<T>> postorderTraversal() { return new PostorderTraversalIterator<>(rootNode); }
+    public final Iterator<Node<T>> postorderTraversal() { return new PostorderTraversalIterator<>(rootNode); }
+    @NotNull
+    @Contract(" -> new")
     @Override
-    public Iterator<Node<T>> preorderTraversal() { return new PreorderTraversalIterator<>(rootNode); }
+    public final Iterator<Node<T>> preorderTraversal() { return new PreorderTraversalIterator<>(rootNode); }
+    @NotNull
+    @Contract(" -> new")
     @Override
-    public Iterator<Node<T>> levelorderTraversal() { return new LevelOrderIterator<>(rootNode); }
+    public final Iterator<Node<T>> levelorderTraversal() { return new LevelOrderIterator<>(rootNode); }
 
 
       ///////////////////////////////////////////////
      //              Utility Methods              //
     ///////////////////////////////////////////////
     @Override
-    public boolean contains(T t) { return search(t) == null; }
+    public final boolean contains(T t) { return search(t) == null; }
 
     /**
      * Returns T or null if none was found
      * @param t T
      * @return T
      */
+    @Nullable
     @Override
-    public T search(T t) {
+    public final T search(T t) {
         Node<T> res = rootNode;
         while(res != null){
             if(!(res.hasLeftChild() || res.hasRightChild())){ return null; }
@@ -258,8 +267,9 @@ public class Tree<T> implements ITree<T> {
         return orgNode;
     }
 
+    @NotNull
     @Override
-    public ITree<T> copyToNewTree(){
+    public final ITree<T> copyToNewTree(){
         Tree<T> tree = new Tree<>(this.comparator);
         if (rootNode != null) {
             tree.insert(rootNode.t);
@@ -268,7 +278,7 @@ public class Tree<T> implements ITree<T> {
         return tree;
     }
 
-    private void appendNodesToCopy(Node<T> node, Node<T> copy){
+    private void appendNodesToCopy(@NotNull Node<T> node, @NotNull Node<T> copy){
         if(node.hasLeftChild()){ copy.setLeftChild(node.getLeft()); }
         if(node.hasRightChild()){ copy.setRightChild(node.getRight()); }
     }
@@ -279,7 +289,7 @@ public class Tree<T> implements ITree<T> {
      * @param that {@link T}
      * @return int
      */
-    protected int compare(@NotNull T thiz, @NotNull T that){
+    protected final int compare(@NotNull T thiz, @NotNull T that){
         try {
             if(thiz instanceof Comparable){
                 if(method == null){ setupComparableMethod(thiz); }
