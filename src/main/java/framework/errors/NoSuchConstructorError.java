@@ -1,6 +1,6 @@
 package framework.errors;
 
-import framework.utilities.data.Resource;
+import framework.data.Resource;
 
 /**
  * Thrown whenver the framework can't find a apropriate constructor

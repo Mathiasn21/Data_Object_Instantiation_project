@@ -1,11 +1,11 @@
-package framework.utilities.data;
+package framework.data;
 
-import framework.utilities.data.commands.read.IReadCommand;
-import framework.utilities.data.commands.read.ReadFileCommand;
-import framework.utilities.data.commands.read.ReadURLCommand;
-import framework.utilities.data.commands.write.IWriteCommand;
-import framework.utilities.data.commands.write.WriteFileCommand;
-import framework.utilities.data.commands.write.WriteURLCommand;
+import framework.data.commands.read.IReadCommand;
+import framework.data.commands.read.ReadFileCommand;
+import framework.data.commands.read.ReadURLCommand;
+import framework.data.commands.write.IWriteCommand;
+import framework.data.commands.write.WriteFileCommand;
+import framework.data.commands.write.WriteURLCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

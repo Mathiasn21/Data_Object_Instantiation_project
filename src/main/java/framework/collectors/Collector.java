@@ -6,7 +6,7 @@ import framework.observer.EventObserver;
 import framework.observer.events.CollectorFinishedEvent;
 import framework.observer.events.ExceptionEvent;
 import framework.observer.events.IEvent;
-import framework.utilities.data.Resource;
+import framework.data.Resource;
 import framework.utilities.handlers.IHandle;
 import framework.utilities.collections.ITree;
 import framework.utilities.collections.Node;

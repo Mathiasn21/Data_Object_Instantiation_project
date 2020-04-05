@@ -5,14 +5,14 @@ import framework.collectors.ICollectorPool;
 import framework.observer.EventObserver;
 import framework.observer.events.CollectorFinishedEvent;
 import framework.utilities.Parser;
-import framework.utilities.data.Resource;
+import framework.data.Resource;
 import framework.utilities.handlers.CSVHandler;
 import framework.utilities.handlers.JSONHandler;
 import framework.utilities.collections.AVLTree;
 import framework.utilities.collections.ITree;
 import framework.utilities.collections.Node;
-import framework.utilities.data.commands.write.IWriteCommand;
-import framework.utilities.data.commands.write.WriteFileCommand;
+import framework.data.commands.write.IWriteCommand;
+import framework.data.commands.write.WriteFileCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;

@@ -1,4 +1,4 @@
-package framework.utilities.data.commands.delete;
+package framework.data.commands.delete;
 
 import java.io.File;
 import java.io.IOException;

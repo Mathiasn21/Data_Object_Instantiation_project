@@ -1,4 +1,4 @@
-package framework.utilities.data.commands.read;
+package framework.data.commands.read;
 
 import java.io.BufferedReader;
 import java.io.IOException;

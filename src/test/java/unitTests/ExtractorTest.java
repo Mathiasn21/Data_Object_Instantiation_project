@@ -5,7 +5,7 @@ import framework.collectors.Collector;
 import framework.collectors.ICollector;
 import framework.exceptions.NoSuchColumnException;
 import framework.extractors.Extractor;
-import framework.utilities.data.Resource;
+import framework.data.Resource;
 import framework.utilities.handlers.CSVHandler;
 import framework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.NotNull;

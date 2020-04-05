@@ -1,4 +1,4 @@
-package framework.utilities.data.commands.write;
+package framework.data.commands.write;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

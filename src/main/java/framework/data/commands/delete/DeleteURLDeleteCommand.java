@@ -1,4 +1,4 @@
-package framework.utilities.data.commands.delete;
+package framework.data.commands.delete;
 
 import org.jetbrains.annotations.NotNull;
 

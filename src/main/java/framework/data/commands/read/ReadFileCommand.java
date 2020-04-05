@@ -1,4 +1,4 @@
-package framework.utilities.data.commands.read;
+package framework.data.commands.read;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

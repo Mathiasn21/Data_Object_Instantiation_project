@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.utilities.data.Resource;
+import framework.data.Resource;
 import framework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 
