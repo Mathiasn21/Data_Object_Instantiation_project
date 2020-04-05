@@ -109,6 +109,7 @@ public class Main {
     public static boolean is_primitve_class() {
         String s = "Hei";
         return Parser.isPrimitiveType(s.getClass());
+
     }
 
     public static final int[]  scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21};
