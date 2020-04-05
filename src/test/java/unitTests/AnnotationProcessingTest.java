@@ -15,6 +15,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public class AnnotationProcessingTest {
     private static final String field1 = "This string";
     private static final int field2 = 22;

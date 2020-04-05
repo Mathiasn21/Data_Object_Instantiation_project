@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public class GenericTreeTest {
     @Test
     void insertion_with_comparator_set_using_Tree(){
