@@ -58,14 +58,6 @@ public final class Collector implements ICollector {
         } catch (ReflectiveOperationException e) { raise(new ExceptionEvent(this, e)); }
     }
 
-    /**
-     * Sets the primary columns to match and find
-     * @param primaryKeys {@link List}&lt;{@link String}&gt;
-     */
-    @Override
-    public final void setPrimaryKeys(List<String> primaryKeys){
-    }
-
     @Override
     public void setCompression(boolean b) {
         this.compression = b;
@@ -92,7 +84,7 @@ public final class Collector implements ICollector {
     public Class<?> getClazz() { return clazz; }
 
     /**
-     * Returns all column data excluding primary keys
+     * Returns all collected data
      * @return {@link List}&lt;{@link Object}&gt;
      */
     @NotNull
