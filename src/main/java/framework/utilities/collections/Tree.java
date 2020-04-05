@@ -43,6 +43,7 @@ public class Tree<T> implements ITree<T> {
     private Field fieldToUtilize = null;
     private Method method = null;
     private Method methodToUse = null;
+    protected int size = 0;
 
     /**
      * The default constructor sets comparator to null.
@@ -85,7 +86,7 @@ public class Tree<T> implements ITree<T> {
      * @return int
      */
     @Override
-    public int size() { return 0; }
+    public int size() { return size; }
 
     /**
      * @return int
@@ -159,6 +160,7 @@ public class Tree<T> implements ITree<T> {
     public void insert(T data) {
         Node<T> newNode = new Node<>(data, null);
         insert(rootNode, newNode);
+        size++;
     }
 
     /**
@@ -336,6 +338,7 @@ public class Tree<T> implements ITree<T> {
                 node.right = smallestNode.right;
             }
         }
+        size--;
         return orgNode;
     }
 

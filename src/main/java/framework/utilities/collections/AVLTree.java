@@ -26,6 +26,7 @@ public final class AVLTree<T> extends Tree<T> {
             reBalanceTree(node);
             node = (AVLNode<T>)node.parent;
         }
+        size++;
     }
 
 
@@ -37,11 +38,6 @@ public final class AVLTree<T> extends Tree<T> {
         Node<T> removedNode = super.remove(t);//Calls super method;
         propagateReBalancing(removedNode);
         return removedNode;
-    }
-
-    @Override
-    public final int size() {
-        return 0;
     }
 
     /**

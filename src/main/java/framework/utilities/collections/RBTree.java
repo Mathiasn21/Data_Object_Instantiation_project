@@ -42,6 +42,7 @@ public final class RBTree<T> extends Tree<T> {
         node.color = true;
         reBalanceAfterInsertion(node);
         ((RBNode<T>) getRootNode()).color = false;//Set root black
+        size++;
     }
 
     /**Re balances the tree after a insertion
@@ -126,12 +127,8 @@ public final class RBTree<T> extends Tree<T> {
 
         RBNode<T> w = x == null ? (RBNode<T>) parent.getLonelyChild() : getSiblingFrom(x);
         pickRemovalCase(x, w, parent);
+        size--;
         return orgNode;
-    }
-
-    @Override
-    public final int size() {
-        return 0;
     }
 
     /**
