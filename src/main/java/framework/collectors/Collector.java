@@ -84,7 +84,7 @@ public final class Collector implements ICollector {
     public Class<?> getClazz() { return clazz; }
 
     /**
-     * Returns all collected data
+     * Returns all collected data traversed in order
      * @return {@link List}&lt;{@link Object}&gt;
      */
     @NotNull

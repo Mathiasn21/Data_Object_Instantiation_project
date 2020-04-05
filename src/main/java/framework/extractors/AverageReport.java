@@ -17,7 +17,7 @@ public enum AverageReport {
     AVERAGE_MODE("Mode", IAverage::calcMode);
 
     public final String option;
-    final IAverageCalculate calculate;
+    final IAverageCalculate calculate;//Package private for a reason
 
     @Contract(pure = true)
     AverageReport(String option, IAverageCalculate calculate) {
