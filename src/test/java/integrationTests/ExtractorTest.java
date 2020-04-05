@@ -54,7 +54,7 @@ public class ExtractorTest {
 
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
-        Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
+        var clazz = ComplexDTOCSV.class;
         var column = extractor.extractColumnFrom(clazz.getField("string"));
 
         assertFalse(column.isEmpty());
