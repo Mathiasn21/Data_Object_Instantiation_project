@@ -1,7 +1,7 @@
 package framework.utilities.collections;
 
 /**
- * A tree utility class for ease of traversals
+ * A tree utility class for traversing to either bottom of given node.
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
 final class QuickTraversals{
