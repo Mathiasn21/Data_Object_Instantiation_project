@@ -1,4 +1,4 @@
-package unitTests;
+package integrationTests;
 
 import DTOs.ComplexDTOCSV;
 import framework.collectors.Collector;
