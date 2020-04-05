@@ -103,7 +103,7 @@ public class CSVHandler implements IHandle{
                 String value = r[i];
                 if(skipEmptyLines && (value.isEmpty() || value.isBlank())){ continue; }
 
-                //Add args to row array and create a new ArrayList if theres only one column
+                //Add args to row array and create a new ArrayList if there's only one column
                 if (isSingleColumn) {
                     args.add(Parser.classToValueFromObject(types.get(0), value));
                     rows.add(args.toArray());

@@ -44,7 +44,15 @@ public class JSONHandler implements IHandle{
         for(Map.Entry<String, JsonElement> entry: entries) {
             JsonElement element = entry.getValue();
             if(element.isJsonPrimitive()){
-                arrayList.add(entry.getValue().getAsString());
+                String value = entry.getValue().getAsString();
+
+                if(isCreatable(value)){
+                    Number number = createNumber(value);
+                    arrayList.add(number);
+                    continue;
+                }
+                arrayList.add(value);
+
             }else if(element.isJsonArray()){
                 Object arr = parseToPrimitiveArray(element.getAsJsonArray());
                 arrayList.add(arr);
