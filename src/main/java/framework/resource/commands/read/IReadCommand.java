@@ -9,7 +9,6 @@ import java.io.IOException;
  */
 @FunctionalInterface
 public interface IReadCommand {
-
     /**
      * @throws IOException e
      * @return {@link BufferedReader}
