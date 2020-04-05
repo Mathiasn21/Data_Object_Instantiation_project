@@ -1,7 +1,7 @@
 package DTOs;
 
 import framework.annotations.DataObject;
-import framework.annotations.DataObjectField;
+import framework.annotations.DataField;
 
 /**
  * ComplexDTO that contains custom field that require mapping
@@ -9,15 +9,15 @@ import framework.annotations.DataObjectField;
 @DataObject
 public class ComplexDTO {
 
-    @DataObjectField
+    @DataField
     public int integer;
 
-    @DataObjectField
+    @DataField
     public String string;
 
     private String thing = "dada";
 
-    @DataObjectField
+    @DataField
     public double doubles;
 
     public ComplexDTO(String string, double doubles, int integer) {

@@ -20,7 +20,6 @@ import org.reflections.Reflections;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -103,7 +102,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         for (Field field : fields) {
             Class<?> type = field.getType();
 
-            if (field.isAnnotationPresent(DataObjectField.class)) { dataFields.add(type);
+            if (field.isAnnotationPresent(DataField.class)) { dataFields.add(type);
             } else { listOfFields.add(type); }
         }
         return (dataFields.isEmpty() ? listOfFields : dataFields).toArray(new Class[0]);
