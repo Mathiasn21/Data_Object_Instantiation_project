@@ -14,12 +14,7 @@ public interface ICollector {
      */
     void collectData() throws IOException;
 
-    /**
-     * @param list {@link List}&lt;{@link String}&gt;
-     */
-    void setPrimaryKeys(List<String> list);
-
-    /**Toggles compression of objects in the data structure on or off.
+    /**Toggles compression of objects in the resource collections on or off.
      * @param b boolean
      */
     void setCompression(boolean b);

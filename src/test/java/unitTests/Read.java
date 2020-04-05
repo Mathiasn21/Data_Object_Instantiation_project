@@ -1,7 +1,6 @@
 package unitTests;
 
-import framework.utilities.data.Resource;
-import org.junit.jupiter.api.Assertions;
+import framework.resource.Resource;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -17,8 +16,8 @@ public class Read {
             File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
             Resource resource = Resource.newResource().fromFile(path).build();
 
-            StringBuilder builder = new StringBuilder();
             BufferedReader bufferedReader = resource.getData();
+            StringBuilder builder = new StringBuilder();
 
             String line;
             while((line = bufferedReader.readLine()) != null){

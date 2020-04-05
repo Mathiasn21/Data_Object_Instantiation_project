@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * Class for calculating average methods execute the data {@link IAverage}
+ * Class for calculating average methods execute the resource {@link IAverage}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */

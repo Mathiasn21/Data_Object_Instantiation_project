@@ -2,8 +2,8 @@ package framework.collectors;
 
 import framework.observer.EventObserver;
 import framework.observer.events.ExceptionEvent;
-import framework.utilities.data.Resource;
-import framework.utilities.data.handle.IHandle;
+import framework.resource.Resource;
+import framework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

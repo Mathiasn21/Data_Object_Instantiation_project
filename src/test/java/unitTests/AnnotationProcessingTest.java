@@ -5,8 +5,8 @@ import DTOs.DTO;
 import DTOs.DTONoFile;
 import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
-import framework.utilities.data.Resource;
-import framework.utilities.data.handle.JSONHandler;
+import framework.resource.Resource;
+import framework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,6 +15,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
+ */
 public class AnnotationProcessingTest {
     private static final String field1 = "This string";
     private static final int field2 = 22;

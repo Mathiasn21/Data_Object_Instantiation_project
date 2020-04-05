@@ -12,7 +12,7 @@ package framework.annotations;
 // --------------------------------------------------//
 import framework.errors.NoMatchingDataObjectError;
 import framework.errors.NoSuchConstructorError;
-import framework.utilities.data.Parser;
+import framework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +20,6 @@ import org.reflections.Reflections;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -103,7 +102,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         for (Field field : fields) {
             Class<?> type = field.getType();
 
-            if (field.isAnnotationPresent(DataObjectField.class)) { dataFields.add(type);
+            if (field.isAnnotationPresent(DataField.class)) { dataFields.add(type);
             } else { listOfFields.add(type); }
         }
         return (dataFields.isEmpty() ? listOfFields : dataFields).toArray(new Class[0]);
@@ -177,7 +176,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         Class<?>[] types = new Class[sample.length];
         int i = 0;
         while (i < sample.length) {
-            types[i] = Parser.primitiveParseFromObjectClass(sample[i].getClass());
+            types[i] = Parser.wrapperToPrimitiveType(sample[i].getClass());
             i++;
         }
 

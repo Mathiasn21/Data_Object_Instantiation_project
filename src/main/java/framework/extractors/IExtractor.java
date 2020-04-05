@@ -10,15 +10,15 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-/** interface describing a contract for extracting primitive data, execute a collector
+/** interface describing a contract for extracting primitive resource, execute a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
 public interface IExtractor{
-    void setReportOptions(@NotNull List<ReportOptions> reportOptions);
+    void setReportOptions(@NotNull List<AverageReport> reportOptions);
 
     @Contract(pure = true)
-    @NotNull List<ReportOptions> getReportOptions();
+    @NotNull List<AverageReport> getReportOptions();
 
 
     @Contract(pure = true)
@@ -44,7 +44,7 @@ public interface IExtractor{
     @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFromFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
     @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException;

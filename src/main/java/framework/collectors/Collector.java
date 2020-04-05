@@ -6,18 +6,18 @@ import framework.observer.EventObserver;
 import framework.observer.events.CollectorFinishedEvent;
 import framework.observer.events.ExceptionEvent;
 import framework.observer.events.IEvent;
-import framework.utilities.data.Resource;
-import framework.utilities.data.handle.IHandle;
-import framework.utilities.data.structure.ITree;
-import framework.utilities.data.structure.Node;
-import framework.utilities.data.structure.RBTree;
+import framework.resource.Resource;
+import framework.utilities.handlers.IHandle;
+import framework.utilities.collections.ITree;
+import framework.utilities.collections.Node;
+import framework.utilities.collections.RBTree;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.*;
 
-/** Class responsible for collecting data from a resource {@link Resource} using a handler {@link IHandle}
+/** Class responsible for collecting resource from a resource {@link Resource} using a handler {@link IHandle}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.9.4
  */
@@ -41,7 +41,7 @@ public final class Collector implements ICollector {
     }
 
     /**
-     * Collects all data from a resource utilizing the stored handler.
+     * Collects all resource from a resource utilizing the stored handler.
      * @throws IOException IOException
      */
     @Override
@@ -58,14 +58,6 @@ public final class Collector implements ICollector {
         } catch (ReflectiveOperationException e) { raise(new ExceptionEvent(this, e)); }
     }
 
-    /**
-     * Sets the primary columns to match and find
-     * @param primaryKeys {@link List}&lt;{@link String}&gt;
-     */
-    @Override
-    public final void setPrimaryKeys(List<String> primaryKeys){
-    }
-
     @Override
     public void setCompression(boolean b) {
         this.compression = b;
@@ -73,7 +65,7 @@ public final class Collector implements ICollector {
 
     /**
      * Sets max memory that this collector is allowed to utilize.
-     * Keeps the internal data structure from filling up.
+     * Keeps the internal resource collections from filling up.
      * @param mb int
      */
     @Contract(pure = true)
@@ -92,7 +84,7 @@ public final class Collector implements ICollector {
     public Class<?> getClazz() { return clazz; }
 
     /**
-     * Returns all column data excluding primary keys
+     * Returns all collected resource traversed in order
      * @return {@link List}&lt;{@link Object}&gt;
      */
     @NotNull

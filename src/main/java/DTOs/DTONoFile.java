@@ -1,13 +1,12 @@
 package DTOs;
 
 import framework.annotations.DataObject;
-import framework.annotations.DataObjectField;
-import org.jetbrains.annotations.NotNull;
+import framework.annotations.DataField;
 
 @DataObject
 public class DTONoFile{
 
-    @DataObjectField
+    @DataField
     public String string;
 
     public int anInt;

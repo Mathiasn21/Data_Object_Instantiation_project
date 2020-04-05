@@ -1,7 +1,7 @@
 package DTOs;
 
 import framework.annotations.DataObject;
-import framework.annotations.DataObjectField;
+import framework.annotations.DataField;
 
 import java.util.Objects;
 
@@ -12,15 +12,15 @@ import java.util.Objects;
 @DataObject
 public class ComplexDTOCSV {
 
-    @DataObjectField
+    @DataField
     public int integer;
 
-    @DataObjectField(primaryColumnName = "Column1")
+    @DataField(primaryColumnName = "Column1")
     public String string;
 
     private String thing = "dada";
 
-    @DataObjectField
+    @DataField
     public double doubles;
 
     public ComplexDTOCSV(String string, int integer, double doubles) {

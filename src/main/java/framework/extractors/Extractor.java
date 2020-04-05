@@ -8,7 +8,7 @@ import framework.observer.events.ExtractorFinishedEvent;
 import framework.observer.events.IEvent;
 import framework.statistics.Average;
 import framework.statistics.IAverage;
-import framework.utilities.data.Parser;
+import framework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,14 +20,13 @@ import java.util.*;
 
 /** Class used for extracting information from a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture and most of the technical implementation
- * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  * @version 2.2.0
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
-    private final List<Object> columns;//List of data objects
+    private final List<Object> columns;//List of resource objects
     private ICollector collector;
     private List<Exception> exceptions = new ArrayList<>();
-    private List<ReportOptions> reportOptions = Arrays.asList(ReportOptions.values());
+    private List<AverageReport> reportOptions = Arrays.asList(AverageReport.values());
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -39,13 +38,13 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     }
 
     @Override
-    public void setReportOptions(@NotNull List<ReportOptions> reportOptions) {
+    public void setReportOptions(@NotNull List<AverageReport> reportOptions) {
         this.reportOptions = reportOptions;
     }
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<ReportOptions> getReportOptions() {
+    public @NotNull List<AverageReport> getReportOptions() {
         return Collections.unmodifiableList(reportOptions);
     }
 
@@ -164,7 +163,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportFromFields(@NotNull List<Field> fields) throws NoSuchFieldException {
+    public @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException {
         Map<String, Map<String, Double>> res = new HashMap<>();
         List<Field> filteredFields = filterFieldsForPrimitiveNumbers(fields);
         Map<Field, List<Object>> columns = extractColumnsUsingFields(filteredFields);
@@ -173,7 +172,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             Map<String, Double> report = new HashMap<>();
             List<Number> column = (List<Number>)(Object)columns.get(field);//Safe as this is ensured beforehand
 
-            for (ReportOptions option : reportOptions) {
+            for (AverageReport option : reportOptions) {
                 IAverage average = new Average(column);
                 report.put(option.option, option.calculate.execute(average));
             }
@@ -196,7 +195,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             Map<String, Double> report = new HashMap<>();
             List<Number> column = (List<Number>)(Object)columns.get(method);//Safe as this is ensured beforehand
 
-            for (ReportOptions option : reportOptions) {
+            for (AverageReport option : reportOptions) {
                 IAverage average = new Average(column);
                 report.put(option.option, option.calculate.execute(average));
             }

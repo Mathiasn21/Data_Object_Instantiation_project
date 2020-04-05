@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.utilities.data.structure.*;
+import framework.utilities.collections.*;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;
@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class for testing AVLTree
- * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  * @version 1.0.0
  */
