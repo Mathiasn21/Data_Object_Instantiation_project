@@ -76,7 +76,7 @@ public class ExtractorTest {
 
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
-        Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
+        var clazz = ComplexDTOCSV.class;
         var column = extractor.extractColumnFrom(clazz.getMethod("getString"));
 
         assertFalse(column.isEmpty());
@@ -93,8 +93,8 @@ public class ExtractorTest {
     void multiple_columns_by_fields() throws IOException, NoSuchFieldException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
-        Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
-        List<Field> fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
+        var clazz = ComplexDTOCSV.class;
+        var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
         var columnMap = extractor.extractColumnsUsingFields(fields);
         assertFalse(columnMap.isEmpty());
 
@@ -119,8 +119,8 @@ public class ExtractorTest {
     void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
-        Class<ComplexDTOCSV> clazz = ComplexDTOCSV.class;
-        List<Method> methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
+        var clazz = ComplexDTOCSV.class;
+        var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
         var columnMap = extractor.extractColumnsUsingMethods(methods);
         assertFalse(columnMap.isEmpty());
 
@@ -144,7 +144,7 @@ public class ExtractorTest {
     void multiple_columns_by_strings() throws IOException, NoSuchColumnException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
-        List<String> strings = Arrays.asList("string", "Doubles", "integer");
+        var strings = Arrays.asList("string", "Doubles", "integer");
         var columnMap = extractor.extractColumnsUsingStrings(strings);
         assertFalse(columnMap.isEmpty());
 
