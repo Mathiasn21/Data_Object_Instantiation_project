@@ -34,7 +34,7 @@ public final class Parser {
      */
     @NotNull
     @Contract(value = "_ -> new", pure = true)
-    public static Class<?> primitiveParseFromObjectClass(@NotNull Class<?> clazz){
+    public static Class<?> wrapperToPrimitiveType(@NotNull Class<?> clazz){
         return clazz == Double.class    ?      double.class    :
                clazz == Float.class     ?      float.class     :
                clazz == Integer.class   ?      int.class       :

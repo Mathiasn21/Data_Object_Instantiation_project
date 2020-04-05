@@ -63,7 +63,7 @@ public class JSONHandler implements IHandle{
 
     private Object parseToPrimitiveArray(@NotNull JsonArray array){
         int size = array.size();
-        Class<?> type = Parser.primitiveParseFromObjectClass(findPrimitiveTypeFrom(array.get(0), array.get(size - 1)));
+        Class<?> type = Parser.wrapperToPrimitiveType(findPrimitiveTypeFrom(array.get(0), array.get(size - 1)));
         Object arr = Array.newInstance(type, size);
 
         for (int i = 0; i < size; i++){

@@ -20,7 +20,7 @@ public class Parse {
     @Test
     void from_primitive_object_to_primitive_class(){
         for(int i = 0; i < wrappers.length; i++){
-            assertEquals(Parser.primitiveParseFromObjectClass(wrappers[i]), primitives[i]);
+            assertEquals(Parser.wrapperToPrimitiveType(wrappers[i]), primitives[i]);
         }
     }
 
