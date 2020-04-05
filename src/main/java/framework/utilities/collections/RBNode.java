@@ -1,6 +1,8 @@
 package framework.utilities.collections;
 
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
@@ -12,6 +14,7 @@ public final class RBNode<T> extends Node<T> implements Cloneable {
         super(t, parent);
     }
 
+    @NotNull
     @Override
     @SuppressWarnings("unchecked")
     public final Object clone() {
