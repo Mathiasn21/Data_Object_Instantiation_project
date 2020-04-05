@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-/** interface describing a contract for extracting primitive data, execute a collector
+/** interface describing a contract for extracting primitive resource, execute a collector
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */

@@ -1,4 +1,4 @@
-package framework.data.commands.write;
+package framework.resource.commands.write;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +10,7 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Primary function of this class is to, POST data to a
+ * Primary function of this class is to, POST resource to a
  * URL.
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture - Refactoring
@@ -24,7 +24,7 @@ public final class WriteURLCommand implements IWriteURLWriteCommand {
     public WriteURLCommand(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
 
     /**
-     * Standard method for writing data to a execute URL.
+     * Standard method for writing resource to a execute URL.
      * This method does not append but overwrites.
      * @throws IOException IOException
      */

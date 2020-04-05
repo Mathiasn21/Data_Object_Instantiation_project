@@ -1,4 +1,4 @@
-package framework.data.commands.write;
+package framework.resource.commands.write;
 
 /**
  * Describes a contract for writing to a file.

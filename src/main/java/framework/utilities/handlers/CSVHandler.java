@@ -12,7 +12,7 @@ import java.util.List;
 import static org.apache.commons.lang3.math.NumberUtils.createNumber;
 import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
 
-/** Class that contains concrete instruction for handling JSON data.
+/** Class that contains concrete instruction for handling JSON resource.
  *  By default it utilizes the delimiter ","
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.5.0
@@ -56,7 +56,7 @@ public class CSVHandler implements IHandle{
     }
 
     /**
-     * Decides whether or not to treat each all data
+     * Decides whether or not to treat each all resource
      * as a single column or several.
      * @param singleColumn boolean
      */

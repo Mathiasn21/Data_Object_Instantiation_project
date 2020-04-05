@@ -1,4 +1,4 @@
-package framework.data.commands.delete;
+package framework.resource.commands.delete;
 
 import java.io.File;
 

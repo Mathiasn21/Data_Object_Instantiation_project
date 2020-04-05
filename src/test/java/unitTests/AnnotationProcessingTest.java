@@ -5,7 +5,7 @@ import DTOs.DTO;
 import DTOs.DTONoFile;
 import framework.annotations.AnnotationsProcessor;
 import framework.annotations.ObjectInformation;
-import framework.data.Resource;
+import framework.resource.Resource;
 import framework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 

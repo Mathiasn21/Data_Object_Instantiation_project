@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.data.Resource;
+import framework.resource.Resource;
 import framework.utilities.handlers.CSVHandler;
 import framework.utilities.collections.Graph;
 import framework.utilities.collections.GraphNode;

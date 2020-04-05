@@ -1,11 +1,11 @@
-package framework.data;
+package framework.resource;
 
-import framework.data.commands.read.IReadCommand;
-import framework.data.commands.read.ReadFileCommand;
-import framework.data.commands.read.ReadURLCommand;
-import framework.data.commands.write.IWriteCommand;
-import framework.data.commands.write.WriteFileCommand;
-import framework.data.commands.write.WriteURLCommand;
+import framework.resource.commands.read.IReadCommand;
+import framework.resource.commands.read.ReadFileCommand;
+import framework.resource.commands.read.ReadURLCommand;
+import framework.resource.commands.write.IWriteCommand;
+import framework.resource.commands.write.WriteFileCommand;
+import framework.resource.commands.write.WriteURLCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Builds a resource from which to fetch data
+ * Builds a resource from which to fetch resource
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.6.0
  */

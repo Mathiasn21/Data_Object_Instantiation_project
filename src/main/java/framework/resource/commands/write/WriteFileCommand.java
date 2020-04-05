@@ -1,4 +1,4 @@
-package framework.data.commands.write;
+package framework.resource.commands.write;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,7 +38,7 @@ public final class WriteFileCommand implements IWriteFileWriteCommand {
     }
 
     /**
-     * Standard method for writing data to a file.
+     * Standard method for writing resource to a file.
      * This method does not append but overwrites ny default.
      * @throws IOException IOException
      */

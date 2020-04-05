@@ -1,7 +1,7 @@
 package framework.statistics;
 
 /**
- * Class for calculating statistics execute data
+ * Class for calculating statistics execute resource
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0.0
  */

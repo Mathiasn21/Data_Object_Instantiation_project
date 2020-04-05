@@ -2,7 +2,7 @@ package integrationTests;
 
 import framework.collectors.Collector;
 import framework.collectors.ICollector;
-import framework.data.Resource;
+import framework.resource.Resource;
 import framework.utilities.handlers.CSVHandler;
 import framework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;

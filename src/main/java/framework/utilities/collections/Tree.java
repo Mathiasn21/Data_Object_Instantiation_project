@@ -339,7 +339,7 @@ public class Tree<T> implements ITree<T> {
         return orgNode;
     }
 
-    /**Copies all the data from one tree, to a new tree, and returns new tree.
+    /**Copies all the resource from one tree, to a new tree, and returns new tree.
      * @return {@link ITree}&lt;{@link T}&gt;
      */
     @NotNull

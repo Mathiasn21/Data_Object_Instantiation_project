@@ -1,7 +1,7 @@
-package framework.data;
+package framework.resource;
 
-import framework.data.commands.read.IReadCommand;
-import framework.data.commands.write.IWriteCommand;
+import framework.resource.commands.read.IReadCommand;
+import framework.resource.commands.write.IWriteCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/** Class representing a data source. Aka a place to fetch data from.
+/** Class representing a resource source. Aka a place to fetch resource from.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.6.1
  */

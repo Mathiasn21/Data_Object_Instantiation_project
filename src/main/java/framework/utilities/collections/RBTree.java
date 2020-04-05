@@ -335,7 +335,7 @@ public final class RBTree<T> extends Tree<T> {
     }
 
 
-    /**Replaces vital data from this node with that node...
+    /**Replaces vital resource from this node with that node...
      * @param thiz RBNode&lt;T&gt;
      * @param that RBNode&lt;T&gt;
      */

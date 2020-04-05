@@ -11,7 +11,7 @@ import java.util.*;
 
 import static org.apache.commons.lang3.math.NumberUtils.*;
 
-/** Class that contains concrete instructions for handling JSON data.
+/** Class that contains concrete instructions for handling JSON resource.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.4.0
  */

@@ -1,4 +1,4 @@
-package framework.data.commands.write;
+package framework.resource.commands.write;
 
 import java.io.IOException;
 import org.jetbrains.annotations.NotNull;

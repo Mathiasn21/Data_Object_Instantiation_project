@@ -1,4 +1,4 @@
-package framework.data.commands.read;
+package framework.resource.commands.read;
 
 /** Represents a command interface for reading from a URL resource
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/

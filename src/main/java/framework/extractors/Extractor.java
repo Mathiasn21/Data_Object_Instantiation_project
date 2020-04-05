@@ -23,7 +23,7 @@ import java.util.*;
  * @version 2.2.0
  */
 public final class Extractor<C extends ICollector> implements IExtractor {
-    private final List<Object> columns;//List of data objects
+    private final List<Object> columns;//List of resource objects
     private ICollector collector;
     private List<Exception> exceptions = new ArrayList<>();
     private List<AverageReport> reportOptions = Arrays.asList(AverageReport.values());

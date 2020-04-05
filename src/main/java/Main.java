@@ -5,14 +5,14 @@ import framework.collectors.ICollectorPool;
 import framework.observer.EventObserver;
 import framework.observer.events.CollectorFinishedEvent;
 import framework.utilities.Parser;
-import framework.data.Resource;
+import framework.resource.Resource;
 import framework.utilities.handlers.CSVHandler;
 import framework.utilities.handlers.JSONHandler;
 import framework.utilities.collections.AVLTree;
 import framework.utilities.collections.ITree;
 import framework.utilities.collections.Node;
-import framework.data.commands.write.IWriteCommand;
-import framework.data.commands.write.WriteFileCommand;
+import framework.resource.commands.write.IWriteCommand;
+import framework.resource.commands.write.WriteFileCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -34,7 +34,7 @@ public class Main {
     }
 
     private static void collectDataSingleColumnFromCSV() throws IOException {
-        //Shows how to collect data from a csv file
+        //Shows how to collect resource from a csv file
         String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
         Resource resource2 = Resource.newResource().fromFile(path).build();
         CSVHandler csvHandler = new CSVHandler();
@@ -56,7 +56,7 @@ public class Main {
     }
 
     private static void collectFromJson() throws IOException {
-        //Showcases how to collect data from a json file
+        //Showcases how to collect resource from a json file
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         Resource resource = Resource.newResource().fromFile(path).build();//Will only build the first execute resource
         ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
