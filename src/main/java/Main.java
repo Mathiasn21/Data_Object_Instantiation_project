@@ -42,13 +42,13 @@ public class Main {
     private static void collectDataSingleColumnFromCSV() throws IOException {
         //Shows how to collect resource from a csv file
         String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
-        Resource resource2 = Resource.newResource().fromFile(path).build();
+        Resource resource = Resource.newResource().fromFile(path).build();
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
         csvHandler.skipEmptyLines(true);
 
-        ICollector collector = Collector.newCollector(resource2, csvHandler).build();
+        ICollector collector = Collector.newCollector(resource, csvHandler).build();
         collector.setCompression(true);
         collector.collectData();
     }
