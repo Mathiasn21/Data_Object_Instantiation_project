@@ -23,6 +23,7 @@ public class DeleteURLDeleteCommand implements IDeleteURLDeleteCommand{
             httpCon.connect();
         }
         catch (IOException e){
+            //TODO: Add proper handling of exception
             System.out.println(e.toString());
         }
     }
@@ -39,6 +40,7 @@ public class DeleteURLDeleteCommand implements IDeleteURLDeleteCommand{
             httpCon.connect();
         }
         catch (IOException e){
+            //TODO: Add proper handling of exception
             System.out.println(e.toString());
         }
     }

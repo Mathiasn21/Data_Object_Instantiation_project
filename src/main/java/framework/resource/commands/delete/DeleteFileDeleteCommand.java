@@ -19,6 +19,7 @@ public class DeleteFileDeleteCommand implements IDeleteFileDeleteCommand {
             }
         }
         catch (IOException e){
+            //TODO: Add proper handling of exception
             System.out.println(e.toString());
         }
     }
