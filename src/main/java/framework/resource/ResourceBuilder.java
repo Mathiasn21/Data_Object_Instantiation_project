@@ -66,7 +66,7 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @param files {@link File...}
+     * @param files {@link File}...
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
@@ -116,7 +116,7 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @param urls {@link URL...}
+     * @param urls {@link URL}...
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
@@ -189,6 +189,7 @@ public final class ResourceBuilder {
 
     /**
      * @param url {@link URL}
+     * @throws MalformedURLException MalformedURLException
      * @return {@link ResourceBuilder}
      */
     public ResourceBuilder toURL(@NotNull String url) throws MalformedURLException {

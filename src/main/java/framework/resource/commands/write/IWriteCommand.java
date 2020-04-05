@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 @FunctionalInterface
 public interface IWriteCommand {
     /**
+     * @param data String
      * @throws IOException {@link IOException} IOException
      */
     void execute(@NotNull String data) throws IOException;
