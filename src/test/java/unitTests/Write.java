@@ -55,51 +55,6 @@ public class Write {
     }
 
     @Test
-    void to_URL_using_string()  {
-        //TODO: make sure this is the right way to test
-        Assertions.assertDoesNotThrow(() -> {
-            String url = "";//Pick another URL - or use a stub for testing https
-            WriteURLCommand write = new WriteURLCommand(url);
-            write.execute("writing...");
-
-            URL url_status = new URL(url);
-            HttpURLConnection http = (HttpURLConnection)url_status.openConnection();
-            assertEquals(200, http.getResponseCode());
-        });
-    }
-
-    @Test
-    void to_URL_using_URL()  {
-        //TODO: make sure this is the right way to test
-
-        Assertions.assertDoesNotThrow(() -> {
-            URL url = new URL("http://example.com");
-
-            WriteURLCommand write = new WriteURLCommand(url);
-            write.execute("writing...");
-
-            HttpURLConnection http = (HttpURLConnection)url.openConnection();
-            assertEquals(200, http.getResponseCode());
-        });
-    }
-
-    @Test
-    void to_URL_using_URL_appending(){
-        //TODO: implement method
-        fail();
-    }
-    @Test
-    void to_URL_using_string_appending(){
-        //TODO: implement method
-        fail();
-    }
-    @Test
-    void to_file_using_file_appending(){
-        //TODO: implement method
-        fail();
-    }
-
-    @Test
     void to_file_using_string_appending(){
         Assertions.assertDoesNotThrow(() -> {
             String path;
@@ -120,13 +75,22 @@ public class Write {
         });
     }
 
-    @Deprecated
     @Test
-    void delete_file()  {
-        Assertions.assertDoesNotThrow(() -> {
-            File path = new File(System.getProperty("user.dir") + "/files/createFile.csv");
-            Assertions.assertFalse(path.exists());
-        });
+    void to_URL_using_string()  {
+        //TODO: make sure this is the right way to test - eg: execute POST request
+        fail();
+    }
+
+    @Test
+    void to_URL_using_URL() {
+        //TODO: Implement test and make sure you utilize mocks for this
+        fail();
+    }
+
+    @Test
+    void to_file_using_file_appending(){
+        //TODO: implement method
+        fail();
     }
 }
 
