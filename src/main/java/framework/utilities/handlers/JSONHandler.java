@@ -67,7 +67,7 @@ public class JSONHandler implements IHandle{
         Object arr = Array.newInstance(type, size);
 
         for (int i = 0; i < size; i++){
-            Array.set(arr, i, Parser.classToValueFromObject(type, array.get(i).toString()));
+            Array.set(arr, i, Parser.toPrimitiveValueFromObject(type, array.get(i).toString()));
         }
         return arr;
     }

@@ -7,7 +7,6 @@ import framework.observer.events.CollectorFinishedEvent;
 import framework.utilities.Parser;
 import framework.resource.Resource;
 import framework.utilities.handlers.CSVHandler;
-import framework.utilities.handlers.IHandle;
 import framework.utilities.handlers.JSONHandler;
 import framework.utilities.collections.AVLTree;
 import framework.utilities.collections.ITree;
@@ -104,7 +103,7 @@ public class Main {
 
     public static double from_string_to_primitive_value(){
         String value = "22.34";
-        return (double) Parser.classToValueFromObject(Double.class, value);
+        return (double) Parser.toPrimitiveValueFromObject(Double.class, value);
     }
 
     public static boolean is_primitve_class() {
