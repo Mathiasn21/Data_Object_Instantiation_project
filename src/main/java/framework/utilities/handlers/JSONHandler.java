@@ -77,6 +77,14 @@ public class JSONHandler implements IHandle{
     }
 
 
+    @NotNull
+    private StringBuilder getJSONStringFrom(@NotNull BufferedReader bufferedReader) throws IOException {
+        StringBuilder textFromFile = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) { textFromFile.append(line); }
+        return textFromFile;
+    }
+
     /**
      * This method retrieves a list, execute a type Class and a json string.
      * @param type             T[]
@@ -92,13 +100,5 @@ public class JSONHandler implements IHandle{
         Class<T[]> arrClass = (Class<T[]>) Array.newInstance(type, 0).getClass();
         T[] arrangementArray = gson.fromJson(jsonTextFromFile, arrClass);
         return (Arrays.asList(arrangementArray));
-    }
-
-    @NotNull
-    private StringBuilder getJSONStringFrom(@NotNull BufferedReader bufferedReader) throws IOException {
-        StringBuilder textFromFile = new StringBuilder();
-        String line;
-        while ((line = bufferedReader.readLine()) != null) { textFromFile.append(line); }
-        return textFromFile;
     }
 }
