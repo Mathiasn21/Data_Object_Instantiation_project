@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -98,7 +99,7 @@ public class ExtractorTest {
         var columnMap = extractor.extractColumnsUsingFields(fields);
         assertFalse(columnMap.isEmpty());
 
-        System.out.println(extractor.extractReportFromFields(fields).values());
+        System.out.println(extractor.extractReportUsingFields(fields).values());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
         for (int i = 0; i < fields.size(); i++) {
@@ -121,6 +122,7 @@ public class ExtractorTest {
         var extractor = new Extractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
+        Map<String, Map<String, Double>> report = extractor.extractReportUsingMethods(methods);
         var columnMap = extractor.extractColumnsUsingMethods(methods);
         assertFalse(columnMap.isEmpty());
 

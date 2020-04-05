@@ -44,7 +44,7 @@ public interface IExtractor{
     @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFromFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
 
     @Contract(pure = true)
     @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException;

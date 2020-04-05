@@ -163,7 +163,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportFromFields(@NotNull List<Field> fields) throws NoSuchFieldException {
+    public @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException {
         Map<String, Map<String, Double>> res = new HashMap<>();
         List<Field> filteredFields = filterFieldsForPrimitiveNumbers(fields);
         Map<Field, List<Object>> columns = extractColumnsUsingFields(filteredFields);
