@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public class GenericTreeTest {
+public class TreeTest {
     @Test
     void insertion_with_comparator_set_using_Tree(){
         int[] res = {2, 3, 4, 5, 6, 7, 13, 14, 15};
