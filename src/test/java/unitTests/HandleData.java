@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class HandleData {
@@ -17,6 +18,11 @@ public class HandleData {
 
         JSONHandler jsonHandler = new JSONHandler();
         List<Object[]> list = jsonHandler.handle(resource.getData());
+
+        Object[] sample = list.get(0);
+        for(int i = 0; i < sample.length; i++){
+            assertTrue(sample[i] instanceof String);
+        }
     }
 
 
