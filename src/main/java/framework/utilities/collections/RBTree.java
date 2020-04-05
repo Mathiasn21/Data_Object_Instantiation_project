@@ -29,7 +29,6 @@ public final class RBTree<T> extends Tree<T> {
       ///////////////////////////////////////////////
      //                 SETTERS                   //
     ///////////////////////////////////////////////
-    @Nullable
     @Override
     public final void insert(T data) {
         RBNode<T> node = new RBNode<>(data, null);
