@@ -1,5 +1,7 @@
 package framework.utilities.collections.utils;
 
+import framework.errors.EmptyQueueError;
+
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T

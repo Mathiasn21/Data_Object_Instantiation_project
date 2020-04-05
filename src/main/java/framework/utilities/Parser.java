@@ -28,7 +28,7 @@ public final class Parser {
     }
 
     /**
-     * Returns corresponding primitive class, execute a primitive wrapper
+     * Returns corresponding primitive class or the class if none was found
      * @param clazz {@link Class}&lt;?&gt;
      * @return {@link Class}&lt;?&gt;
      */
@@ -78,7 +78,7 @@ public final class Parser {
 
 
     /**
-     * Gets corresponding comparator for given primtitve type,
+     * Gets corresponding comparator for given primitive type,
      * throws error if none is found. It is an error as this is
      * considered fatal if no comparator was found.
      * @param clazz {@link Class}&lt;?&gt;

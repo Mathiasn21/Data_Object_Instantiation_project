@@ -1,7 +1,7 @@
 package framework.utilities.collections;
 
 import framework.utilities.collections.utils.IQueue;
-import framework.utilities.collections.utils.MyQueue;
+import framework.utilities.collections.utils.CircularQueue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * @param <T> T
  */
 public final class LevelOrderIterator<T> implements Iterator<Node<T>> {
-    private final IQueue<Node<T>> q = new MyQueue<>();
+    private final IQueue<Node<T>> q = new CircularQueue<>();
     private Node<T> next;
 
     LevelOrderIterator(Node<T> root) {

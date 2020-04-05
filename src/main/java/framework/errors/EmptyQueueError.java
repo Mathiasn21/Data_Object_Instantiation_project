@@ -1,4 +1,4 @@
-package framework.utilities.collections.utils;
+package framework.errors;
 
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/

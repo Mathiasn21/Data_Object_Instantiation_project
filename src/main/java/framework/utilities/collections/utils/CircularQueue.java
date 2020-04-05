@@ -1,17 +1,19 @@
 package framework.utilities.collections.utils;
 
+import framework.errors.EmptyQueueError;
+
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @param <T> T
  */
-public final class MyQueue<T> implements IQueue<T> {
+public final class CircularQueue<T> implements IQueue<T> {
     private T[] object;
     private int size, head, tail;
 
-    public MyQueue() {this(10);}
+    public CircularQueue() {this(10);}
 
     @SuppressWarnings("unchecked")
-    public MyQueue(int i) {
+    public CircularQueue(int i) {
         this.object = (T[]) new Object[i];
         head = tail = size = 0;
     }
