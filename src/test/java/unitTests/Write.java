@@ -75,7 +75,7 @@ public class Write {
         });
     }
 
-    //TODO: Implement this method @Maria
+    //TODO: Implement these methods @Maria
     @Test
     void to_URL_using_string()  {
         //TODO: make sure this is the right way to test - eg: execute POST request
