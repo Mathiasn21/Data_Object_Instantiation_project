@@ -7,6 +7,7 @@ import framework.observer.events.CollectorFinishedEvent;
 import framework.utilities.Parser;
 import framework.resource.Resource;
 import framework.utilities.handlers.CSVHandler;
+import framework.utilities.handlers.IHandle;
 import framework.utilities.handlers.JSONHandler;
 import framework.utilities.collections.AVLTree;
 import framework.utilities.collections.ITree;
@@ -29,6 +30,11 @@ public class Main {
         collectDataWithPool();
         collectDataSingleColumnFromCSV();
         levelorder_traversal();
+
+        String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
+        Resource resource = Resource.newResource().fromFile(path).build();
+        ICollector collector = Collector.newCollector(resource, new CSVHandler()).build();
+        collector.collectData();
 
 
         System.out.println("Converting to value from string based on class: " + from_string_to_primitive_value());
