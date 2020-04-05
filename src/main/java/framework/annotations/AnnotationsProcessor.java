@@ -12,7 +12,7 @@ package framework.annotations;
 // --------------------------------------------------//
 import framework.errors.NoMatchingDataObjectError;
 import framework.errors.NoSuchConstructorError;
-import framework.utilities.data.Parser;
+import framework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

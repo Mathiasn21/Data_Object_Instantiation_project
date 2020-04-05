@@ -1,7 +1,7 @@
 package framework.utilities.data;
 
-import framework.utilities.data.read.IReadCommand;
-import framework.utilities.data.write.IWriteCommand;
+import framework.utilities.data.commands.read.IReadCommand;
+import framework.utilities.data.commands.write.IWriteCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

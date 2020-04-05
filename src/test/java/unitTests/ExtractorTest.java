@@ -6,13 +6,12 @@ import framework.collectors.ICollector;
 import framework.exceptions.NoSuchColumnException;
 import framework.extractors.Extractor;
 import framework.utilities.data.Resource;
-import framework.utilities.data.handle.CSVHandler;
-import framework.utilities.data.handle.IHandle;
+import framework.utilities.handlers.CSVHandler;
+import framework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;

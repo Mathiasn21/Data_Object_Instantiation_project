@@ -14,7 +14,7 @@ public interface ICollector {
      */
     void collectData() throws IOException;
 
-    /**Toggles compression of objects in the data structure on or off.
+    /**Toggles compression of objects in the data collections on or off.
      * @param b boolean
      */
     void setCompression(boolean b);

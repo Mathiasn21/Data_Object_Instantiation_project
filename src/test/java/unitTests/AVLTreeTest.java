@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.utilities.data.structure.*;
+import framework.utilities.collections.*;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;

@@ -1,8 +1,10 @@
 package framework.errors;
 
+import framework.utilities.data.Resource;
+
 /**
  * Thrown whenver the framework can't find a apropriate constructor
- * from {@link framework.utilities.data.Resource} data.
+ * from {@link Resource} data.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */

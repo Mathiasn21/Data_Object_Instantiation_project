@@ -1,12 +1,9 @@
 package framework.collectors;
 
 import framework.utilities.data.Resource;
-import framework.utilities.data.handle.IHandle;
+import framework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Class for creating a builder pattern for Collector class

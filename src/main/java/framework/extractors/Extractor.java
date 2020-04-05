@@ -8,7 +8,7 @@ import framework.observer.events.ExtractorFinishedEvent;
 import framework.observer.events.IEvent;
 import framework.statistics.Average;
 import framework.statistics.IAverage;
-import framework.utilities.data.Parser;
+import framework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

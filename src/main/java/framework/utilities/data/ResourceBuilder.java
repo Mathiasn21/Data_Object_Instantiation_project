@@ -1,11 +1,11 @@
 package framework.utilities.data;
 
-import framework.utilities.data.read.IReadCommand;
-import framework.utilities.data.read.ReadFileCommand;
-import framework.utilities.data.read.ReadURLCommand;
-import framework.utilities.data.write.IWriteCommand;
-import framework.utilities.data.write.WriteFileCommand;
-import framework.utilities.data.write.WriteURLCommand;
+import framework.utilities.data.commands.read.IReadCommand;
+import framework.utilities.data.commands.read.ReadFileCommand;
+import framework.utilities.data.commands.read.ReadURLCommand;
+import framework.utilities.data.commands.write.IWriteCommand;
+import framework.utilities.data.commands.write.WriteFileCommand;
+import framework.utilities.data.commands.write.WriteURLCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Builds a resource from which to fetch data

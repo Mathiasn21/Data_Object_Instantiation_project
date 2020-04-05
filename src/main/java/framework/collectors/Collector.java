@@ -7,10 +7,10 @@ import framework.observer.events.CollectorFinishedEvent;
 import framework.observer.events.ExceptionEvent;
 import framework.observer.events.IEvent;
 import framework.utilities.data.Resource;
-import framework.utilities.data.handle.IHandle;
-import framework.utilities.data.structure.ITree;
-import framework.utilities.data.structure.Node;
-import framework.utilities.data.structure.RBTree;
+import framework.utilities.handlers.IHandle;
+import framework.utilities.collections.ITree;
+import framework.utilities.collections.Node;
+import framework.utilities.collections.RBTree;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,7 +65,7 @@ public final class Collector implements ICollector {
 
     /**
      * Sets max memory that this collector is allowed to utilize.
-     * Keeps the internal data structure from filling up.
+     * Keeps the internal data collections from filling up.
      * @param mb int
      */
     @Contract(pure = true)
