@@ -1,0 +1,5 @@
+site_name: DOIF With statistics - DataObject Instantiation Framework
+nav:
+  - Home: index.md
+  - About: about.md
+theme: readthedocs

@@ -112,7 +112,7 @@ public class CSVHandler implements IHandle{
                 }
                 args.add(Parser.toPrimitiveValueFromObject(types.get(i), value));
             }
-            //If it's multiple column, append thoose to the row
+            //If it's multiple column, append those to the row
             if(!isSingleColumn){ rows.add(args.toArray()); }
         }
 
