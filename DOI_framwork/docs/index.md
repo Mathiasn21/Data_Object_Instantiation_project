@@ -8,8 +8,8 @@ with the information contained inside different resources. Like files or from GE
 This also includes support for various data formats like JSON or CSV.
 
 Its secondary goal aims to execute statistical calculation and analysis on a given dataset. 
-Data format and its internal structure are either set by the user or guessed by the framework through 
-default settings.
+These include things like: 
+Calculating different averages over a data column 
 
 This assumes the user of the framework will specify necessary rules and settings in order 
 to allow the framework to optimally handle any given resource and its content. 
