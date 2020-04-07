@@ -46,7 +46,7 @@ public final class Parser {
     }
 
     /**
-     * Returns true if clazz is a primitive or a primtitve wrapper
+     * Returns true if clazz is a primitive or a primitive wrapper
      * @param clazz {@link Class}&lt;?&gt;
      * @return boolean
      */
