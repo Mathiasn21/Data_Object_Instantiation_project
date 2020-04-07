@@ -1,10 +1,9 @@
-# Scenarios:
+# Scenarios
 
-## Collect data from a resource:
+## Collecting from a single resource:
 
 ### Data used:
-These are actual data used for this page.
-
+Data used for this page.
 JSON:
 
     [{
@@ -54,7 +53,11 @@ public class Main {
 }
 ```
 
+It is possible to substitute string path with an actual file class.
+
 ### Collecting from URL:
+Collecting data from a URL is just as easy as collecting from a file. Do note that this just uses
+a simple URL connection. If one wishes to alter this behaviour then you must create you're own reader.
 
 #### Data formatted as JSON:
 ```java
@@ -83,7 +86,7 @@ public class Main {
     }
 }
 ```
-
+It is possible to substitute string url with an actual URL class from the java.net package.
 
 **Note** the usage of **new CSVHandler** to indicate that this data is formatted as **CSV**.
 And **new JSONHandler** to indicate that it is in **JSON**.
