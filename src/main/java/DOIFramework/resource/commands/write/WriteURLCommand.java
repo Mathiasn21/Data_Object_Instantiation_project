@@ -10,10 +10,8 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Primary function of this class is to, POST resource to a
- * URL.
+ * Primary function of this class is to, POST resource to a URL.
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture - Refactoring
  * @version 1.0
 **/
 public final class WriteURLCommand implements IWriteURLWriteCommand {

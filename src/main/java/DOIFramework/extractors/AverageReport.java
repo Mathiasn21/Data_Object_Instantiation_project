@@ -32,7 +32,6 @@ public enum AverageReport {
     @Override
     public String toString() { return option; }
 
-
     /**
      * @return {@link List}&lt;{@link AverageReport}&gt;
      */

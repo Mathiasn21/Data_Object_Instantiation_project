@@ -10,6 +10,4 @@ public interface IStatistics {
     double calcPopulationVariance();
     double calcStandardDeviationFromSample();
     double calcStandardDeviationFromPopulation();
-    double calcCovariance();
-    double calcCorrelation();
 }

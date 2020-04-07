@@ -16,7 +16,7 @@ public final class SimpleStatistics implements IStatistics {
 
     /**
      * @param data double[]
-     */
+     **/
     @Contract(pure = true)
     public SimpleStatistics(@NotNull double[] data){
         this.data = data;
@@ -70,18 +70,6 @@ public final class SimpleStatistics implements IStatistics {
     public double calcStandardDeviationFromPopulation() {
         double variance = calcPopulationVariance();
         return Math.sqrt(variance);
-    }
-
-    @Override
-    public double calcCovariance() {
-        //TODO: implement method
-        return 0;
-    }
-
-    @Override
-    public double calcCorrelation() {
-        //TODO: implement method
-        return 0;
     }
 
     @NotNull

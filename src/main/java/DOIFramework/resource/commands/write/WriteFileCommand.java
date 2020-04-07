@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * @author Maria Elinor Pedersen Github: https://github.com/marped
- * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
 public final class WriteFileCommand implements IWriteFileWriteCommand {

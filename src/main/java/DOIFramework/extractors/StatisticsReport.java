@@ -10,7 +10,7 @@ import java.util.List;
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
 public enum StatisticsReport {
-    CORRELATION("Correlation", IStatistics::calcCorrelation),
+   /*CORRELATION("Correlation", IStatistics::calcCorrelation),
     COVARIANCE("Covariance", IStatistics::calcCovariance),
     POPULATION_VARIANCE("Population Variance", IStatistics::calcPopulationVariance),
     SAMPLE_VARIANCE("Sample Variance", IStatistics::calcSampleVariance),
@@ -29,7 +29,7 @@ public enum StatisticsReport {
     /**
      * @return String
      */
-    @Contract(pure = true)
+   /* @Contract(pure = true)
     @Override
     public String toString() {
         return option;
@@ -38,9 +38,9 @@ public enum StatisticsReport {
     /**
      * @return {@link List}&lt;{@link StatisticsReport}&gt;
      */
-    @Contract(pure = true)
+   /* @Contract(pure = true)
     @NotNull
     public static List<StatisticsReport> getStandardConfiguration() {
         return Arrays.asList(STANDARD_DEVIATION_SAMPLE, SAMPLE_VARIANCE, CORRELATION, COVARIANCE);
-    }
+    }*/
 }
