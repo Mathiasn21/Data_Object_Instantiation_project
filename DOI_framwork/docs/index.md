@@ -1,17 +1,17 @@
-# Welcome to MkDocs
+# DOIF - DataObject Instantiation Framework with statistics
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Introduction
+The project’s primary goal is to alleviate redundant work related to reading and interacting
+with the information contained inside different resources. Like files or from GET requests.
+This also includes support for various data formats like JSON or CSV.
 
-## Commands
+Its secondary goal aims to execute statistical calculation and analysis on a given dataset.
+These include things like:
+Calculating different averages over a data column
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+This assumes the user of the framework will specify necessary rules and settings in order
+to allow the framework to optimally handle any given resource and its content.
+Necessary rules will involve utilizing annotations when required and/or initializing a
+class with specific constructor parameters or parameter lists. Which further is a compromise that aims
+to displease everyone equally whilst allowing the framework to handle a broader aspect of responsibilities.
+Like allowing for more file formats and/or other types of resources, or even internal data structures.

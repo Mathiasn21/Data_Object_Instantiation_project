@@ -1,10 +1,10 @@
 package integrationTests;
 
-import framework.collectors.Collector;
-import framework.collectors.ICollector;
-import framework.resource.Resource;
-import framework.utilities.handlers.CSVHandler;
-import framework.utilities.handlers.JSONHandler;
+import DOIFramework.collectors.Collector;
+import DOIFramework.collectors.ICollector;
+import DOIFramework.resource.Resource;
+import DOIFramework.utilities.handlers.CSVHandler;
+import DOIFramework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.utilities.collections.*;
+import DOIFramework.utilities.collections.*;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 

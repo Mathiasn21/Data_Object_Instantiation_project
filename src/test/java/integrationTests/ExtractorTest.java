@@ -1,13 +1,13 @@
 package integrationTests;
 
 import DTOs.ComplexDTOCSV;
-import framework.collectors.Collector;
-import framework.collectors.ICollector;
-import framework.exceptions.NoSuchColumnException;
-import framework.extractors.Extractor;
-import framework.resource.Resource;
-import framework.utilities.handlers.CSVHandler;
-import framework.utilities.handlers.IHandle;
+import DOIFramework.collectors.Collector;
+import DOIFramework.collectors.ICollector;
+import DOIFramework.exceptions.NoSuchColumnException;
+import DOIFramework.extractors.Extractor;
+import DOIFramework.resource.Resource;
+import DOIFramework.utilities.handlers.CSVHandler;
+import DOIFramework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 

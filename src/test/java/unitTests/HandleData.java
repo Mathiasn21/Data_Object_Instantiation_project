@@ -1,7 +1,7 @@
 package unitTests;
 
-import framework.resource.Resource;
-import framework.utilities.handlers.JSONHandler;
+import DOIFramework.resource.Resource;
+import DOIFramework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

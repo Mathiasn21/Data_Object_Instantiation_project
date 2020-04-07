@@ -3,10 +3,10 @@ package unitTests;
 import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
-import framework.annotations.AnnotationsProcessor;
-import framework.annotations.ObjectInformation;
-import framework.resource.Resource;
-import framework.utilities.handlers.JSONHandler;
+import DOIFramework.annotations.AnnotationsProcessor;
+import DOIFramework.annotations.ObjectInformation;
+import DOIFramework.resource.Resource;
+import DOIFramework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

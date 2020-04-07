@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.statistics.Average;
+import DOIFramework.statistics.Average;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
