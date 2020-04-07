@@ -1,7 +1,12 @@
-site_name: DOIF With statistics - DataObject Instantiation Framework
+site_name: DOIF With Statistics - DataObject Instantiation Framework
 nav:
   - Home: index.md
   - Getting Started:
       - Setup: ./getting_started/gettingstarted00.md
-  - About: about.md
+      - Scenarios: ./getting_started/gettingstarted01.md
 theme: readthedocs
+repo_url: https://github.com/Mathiasn21/framework_project
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+      use_pygments: true

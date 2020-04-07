@@ -1,6 +1,4 @@
-# Welcome to MkDocs
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+# DOIF - DataObject Instantiation Framework with statistics
 
 ## Introduction
 The project’s primary goal is to alleviate redundant work related to reading and interacting 
@@ -16,13 +14,4 @@ to allow the framework to optimally handle any given resource and its content.
 Necessary rules will involve utilizing annotations when required and/or initializing a 
 class with specific constructor parameters or parameter lists. Which further is a compromise that aims 
 to displease everyone equally whilst allowing the framework to handle a broader aspect of responsibilities.
-Like allowing for more file formats and/or other types of resources, or even internal data structures. 
-
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-    
+Like allowing for more file formats and/or other types of resources, or even internal data structures.
