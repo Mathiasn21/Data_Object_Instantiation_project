@@ -1,9 +1,9 @@
 package unitTests;
 
-import framework.resource.Resource;
-import framework.utilities.handlers.CSVHandler;
-import framework.utilities.collections.Graph;
-import framework.utilities.collections.GraphNode;
+import DOIFramework.resource.Resource;
+import DOIFramework.utilities.handlers.CSVHandler;
+import DOIFramework.utilities.collections.Graph;
+import DOIFramework.utilities.collections.GraphNode;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 

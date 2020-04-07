@@ -1,6 +1,6 @@
 package unitTests;
 
-import framework.resource.Resource;
+import DOIFramework.resource.Resource;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;

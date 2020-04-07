@@ -1,0 +1,7 @@
+site_name: DOIF With statistics - DataObject Instantiation Framework
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Setup: ./getting_started/gettingstarted00.md
+  - About: about.md
+theme: readthedocs

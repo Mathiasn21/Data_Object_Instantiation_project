@@ -1,6 +1,6 @@
 package DTOs;
 
-import framework.annotations.DataObject;
+import DOIFramework.annotations.DataObject;
 
 @DataObject
 public class TestJSONSimple {
