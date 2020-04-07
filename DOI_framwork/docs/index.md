@@ -18,9 +18,11 @@ class with specific constructor parameters or parameter lists. Which further is 
 to displease everyone equally whilst allowing the framework to handle a broader aspect of responsibilities.
 Like allowing for more file formats and/or other types of resources, or even internal data structures. 
 
+
 ## Project layout
 
     mkdocs.yml    # The configuration file.
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+    
