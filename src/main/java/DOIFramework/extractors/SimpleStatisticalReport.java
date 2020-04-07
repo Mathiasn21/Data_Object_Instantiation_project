@@ -9,7 +9,7 @@ import java.util.List;
 /** A enum describing all possible Simple statistical implementations.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum StatisticsReport {
+public enum SimpleStatisticalReport {
     POPULATION_VARIANCE("Population Variance", IStatistics::calcPopulationVariance),
     SAMPLE_VARIANCE("Sample Variance", IStatistics::calcSampleVariance),
     STANDARD_DEVIATION_POPULATION("Standard Deviation - From population", IStatistics::calcStandardDeviationFromPopulation),
@@ -19,7 +19,7 @@ public enum StatisticsReport {
     final IStatisticsCalculate calculate;
 
     @Contract(pure = true)
-    StatisticsReport(String option, IStatisticsCalculate calculate) {
+    SimpleStatisticalReport(String option, IStatisticsCalculate calculate) {
         this.option = option;
         this.calculate = calculate;
     }
@@ -32,11 +32,11 @@ public enum StatisticsReport {
     public String toString() { return option; }
 
     /**
-     * @return {@link List}&lt;{@link StatisticsReport}&gt;
+     * @return {@link List}&lt;{@link SimpleStatisticalReport}&gt;
      */
     @Contract(pure = true)
     @NotNull
-    public static List<StatisticsReport> getStandardConfiguration() {
+    public static List<SimpleStatisticalReport> getStandardConfiguration() {
         return Arrays.asList(STANDARD_DEVIATION_SAMPLE, SAMPLE_VARIANCE);
     }
 }
