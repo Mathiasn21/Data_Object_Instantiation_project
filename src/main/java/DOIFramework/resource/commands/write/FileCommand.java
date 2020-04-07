@@ -17,13 +17,13 @@ import java.util.List;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0.0
  */
-public final class WriteFileCommand implements IWriteFileWriteCommand {
+public final class FileCommand implements IWriteFileCommand {
     private final File file;
     private boolean append = false, createIfNotExists = true;
 
-    public WriteFileCommand(@NotNull File file) { this.file = file; }
+    public FileCommand(@NotNull File file) { this.file = file; }
 
-    public WriteFileCommand(@NotNull String path) { this(new File(path)); }
+    public FileCommand(@NotNull String path) { this(new File(path)); }
 
     /**
      * Utilizes parametrization combined with generics, in order to

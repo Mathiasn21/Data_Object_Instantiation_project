@@ -4,8 +4,8 @@ import DOIFramework.resource.commands.read.IReadCommand;
 import DOIFramework.resource.commands.read.ReadFileCommand;
 import DOIFramework.resource.commands.read.ReadURLCommand;
 import DOIFramework.resource.commands.write.IWriteCommand;
-import DOIFramework.resource.commands.write.WriteFileCommand;
-import DOIFramework.resource.commands.write.WriteURLCommand;
+import DOIFramework.resource.commands.write.FileCommand;
+import DOIFramework.resource.commands.write.URLCommand;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -134,7 +134,7 @@ public final class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     public ResourceBuilder toFile(@NotNull File file) {
-        IWriteCommand writeFile = new WriteFileCommand(file);
+        IWriteCommand writeFile = new FileCommand(file);
         writers.add(writeFile);
         return this;
     }
@@ -144,7 +144,7 @@ public final class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     public ResourceBuilder toFile(@NotNull String file) {
-        IWriteCommand writeFile = new WriteFileCommand(file);
+        IWriteCommand writeFile = new FileCommand(file);
         writers.add(writeFile);
         return this;
     }
@@ -156,7 +156,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder toFiles(@NotNull String ...files) {
         for (String file : files) {
-            IWriteCommand writeFile = new WriteFileCommand(file);
+            IWriteCommand writeFile = new FileCommand(file);
             writers.add(writeFile);
         }
         return this;
@@ -169,7 +169,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder toFiles(@NotNull File ...files) {
         for (File file : files) {
-            IWriteCommand writeFile = new WriteFileCommand(file);
+            IWriteCommand writeFile = new FileCommand(file);
             writers.add(writeFile);
         }
         return this;
@@ -182,7 +182,7 @@ public final class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     public ResourceBuilder toURL(@NotNull URL url) {
-        IWriteCommand writeURL = new WriteURLCommand(url);
+        IWriteCommand writeURL = new URLCommand(url);
         writers.add(writeURL);
         return this;
     }
@@ -193,7 +193,7 @@ public final class ResourceBuilder {
      * @return {@link ResourceBuilder}
      */
     public ResourceBuilder toURL(@NotNull String url) throws MalformedURLException {
-        IWriteCommand writeURL = new WriteURLCommand(url);
+        IWriteCommand writeURL = new URLCommand(url);
         writers.add(writeURL);
         return this;
     }
@@ -206,7 +206,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder toURLs(@NotNull String ...urls) throws IOException {
         for (String url : urls) {
-            IWriteCommand writeURL = new WriteURLCommand(url);
+            IWriteCommand writeURL = new URLCommand(url);
             writers.add(writeURL);
         }
         return this;
@@ -220,7 +220,7 @@ public final class ResourceBuilder {
     @Contract(value = "_ -> this", pure = true)
     public ResourceBuilder toURLs(@NotNull URL ...urls) throws IOException {
         for (URL url : urls) {
-            IWriteCommand writeURL = new WriteURLCommand(url);
+            IWriteCommand writeURL = new URLCommand(url);
             writers.add(writeURL);
         }
         return this;

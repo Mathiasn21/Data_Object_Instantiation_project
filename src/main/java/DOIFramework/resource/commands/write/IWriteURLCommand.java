@@ -6,7 +6,7 @@ package DOIFramework.resource.commands.write;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public interface IWriteURLWriteCommand extends IWriteCommand {
+public interface IWriteURLCommand extends IWriteCommand {
     /*TODO: implement configs for the following:
     *   -Headers
     *   -Body

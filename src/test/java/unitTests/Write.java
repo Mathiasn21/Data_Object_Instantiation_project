@@ -2,15 +2,11 @@ package unitTests;
 
 import DOIFramework.resource.commands.write.IWriteCommand;
 import DOIFramework.resource.Resource;
-import DOIFramework.resource.commands.write.WriteFileCommand;
-import DOIFramework.resource.commands.write.WriteURLCommand;
+import DOIFramework.resource.commands.write.FileCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +16,7 @@ public class Write {
     void to_file_using_string(){
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            IWriteCommand writer = new WriteFileCommand(path);
+            IWriteCommand writer = new FileCommand(path);
             writer.execute( "StringPath;");
 
             Resource resource = Resource.newResource().fromFile(path).build();
@@ -39,7 +35,7 @@ public class Write {
     void to_file_using_path() {
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            WriteFileCommand writer = new WriteFileCommand(path);
+            FileCommand writer = new FileCommand(path);
             writer.execute( "StringPath;");
 
             Resource resource = Resource.newResource().fromFile(path).build();
@@ -59,7 +55,7 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            WriteFileCommand write = new WriteFileCommand(path);
+            FileCommand write = new FileCommand(path);
             write.execute("fappening");
 
             //Reads from resource
