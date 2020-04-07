@@ -29,9 +29,7 @@ public enum StatisticsReport {
      */
     @Contract(pure = true)
     @Override
-    public String toString() {
-        return option;
-    }
+    public String toString() { return option; }
 
     /**
      * @return {@link List}&lt;{@link StatisticsReport}&gt;
