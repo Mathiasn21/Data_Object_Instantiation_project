@@ -37,7 +37,6 @@ public class Main {
     }
 }
 ```
-Note the usage of **new JSONHandler** to indicate that this data is formatted as **JSON**.
 
 
 #### Data formatted as CSV:
@@ -54,8 +53,37 @@ public class Main {
     }
 }
 ```
-Note the usage of **new CSVHandler** to indicate that this data is formatted as **CSV**.
 
 ### Collecting from URL:
 
-### Collecting from file:
+#### Data formatted as JSON:
+```java
+import DOIFramework.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String url = "https://someAPI.com";
+        Resource resource = Resource.newResource().fromURL(url).build();
+        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        collector.collectData();
+    }
+}
+```
+
+#### Data formatted as CSV:
+```java
+import DOIFramework.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String url = "https://someAPI.com";
+        Resource resource = Resource.newResource().fromURL(url).build();
+        ICollector collector = Collector.newCollector(resource, new CSVHandler()).build();
+        collector.collectData();
+    }
+}
+```
+
+
+**Note** the usage of **new CSVHandler** to indicate that this data is formatted as **CSV**.
+And **new JSONHandler** to indicate that it is in **JSON**.
