@@ -3,9 +3,9 @@ package unitTests;
 import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
-import DOIFramework.annotations.AnnotationsProcessor;
-import DOIFramework.annotations.ObjectInformation;
-import DOIFramework.resource.Resource;
+import DOIFramework.core.annotations.AnnotationsProcessor;
+import DOIFramework.core.annotations.ObjectInformation;
+import DOIFramework.core.resource.Resource;
 import DOIFramework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package DTOs;
 
-import DOIFramework.annotations.DataObject;
+import DOIFramework.core.annotations.DataObject;
 
 
 /**

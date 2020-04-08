@@ -1,7 +1,7 @@
 package DOIFramework.errors;
 
 /**
- * Thrown whenever the framework does not find a suitable {@link DOIFramework.annotations.DataObject}
+ * Thrown whenever the framework does not find a suitable {@link DOIFramework.core.annotations.DataObject}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */

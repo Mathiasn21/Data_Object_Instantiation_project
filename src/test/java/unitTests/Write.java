@@ -1,8 +1,8 @@
 package unitTests;
 
-import DOIFramework.resource.commands.write.IWriteCommand;
-import DOIFramework.resource.Resource;
-import DOIFramework.resource.commands.write.FileCommand;
+import DOIFramework.core.resource.commands.write.IWriteCommand;
+import DOIFramework.core.resource.Resource;
+import DOIFramework.core.resource.commands.write.FileCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

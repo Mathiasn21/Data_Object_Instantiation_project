@@ -1,6 +1,6 @@
 package DOIFramework.utilities.handlers;
 
-import DOIFramework.annotations.DataObject;
+import DOIFramework.core.annotations.DataObject;
 import DOIFramework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

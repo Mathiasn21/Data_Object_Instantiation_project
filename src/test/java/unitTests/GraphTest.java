@@ -1,6 +1,6 @@
 package unitTests;
 
-import DOIFramework.resource.Resource;
+import DOIFramework.core.resource.Resource;
 import DOIFramework.utilities.handlers.CSVHandler;
 import DOIFramework.utilities.collections.Graph;
 import DOIFramework.utilities.collections.GraphNode;
