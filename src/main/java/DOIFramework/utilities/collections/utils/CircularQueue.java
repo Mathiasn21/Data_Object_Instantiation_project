@@ -39,7 +39,7 @@ public final class CircularQueue<T> implements IQueue<T> {
 
     @Override
     public final T dequeue() throws EmptyQueueError {
-        if(isEmpty())throw new EmptyQueueError();
+        if(isEmpty()) { throw new EmptyQueueError(); }
         T res = object[head];
         object[head] = null;
         head = (head + 1) % object.length;
@@ -53,7 +53,7 @@ public final class CircularQueue<T> implements IQueue<T> {
 
     @Override
     public final T first() throws EmptyQueueError {
-        if(isEmpty())throw new EmptyQueueError();
+        if(isEmpty()) { throw new EmptyQueueError(); }
         return object[head];
     }
 
