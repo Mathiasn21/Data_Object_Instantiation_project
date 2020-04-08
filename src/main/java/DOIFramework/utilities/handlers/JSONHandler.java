@@ -102,11 +102,22 @@ public class JSONHandler implements IHandle{
      */
     @NotNull
     @SuppressWarnings("unchecked")//Will always be possible unless it's a null value
-    public final <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
+    public final <T> List<T> listFromJson(@NotNull Class<T> type, @NotNull String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
         Class<T[]> arrClass = (Class<T[]>) Array.newInstance(type, 0).getClass();
         T[] arrangementArray = gson.fromJson(jsonTextFromFile, arrClass);
         return (Arrays.asList(arrangementArray));
+    }
+
+    /**
+     * Utilizes parametrization combined with generics, in order to
+     * convert a execute T[] object and its specified Class template to json format.
+     * @param list T[]
+     * @return String
+     */
+    private String toJson(@NotNull List<String> list) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(list);
     }
 }
