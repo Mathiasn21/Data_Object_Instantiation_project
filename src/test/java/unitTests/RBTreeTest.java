@@ -35,7 +35,7 @@ public class RBTreeTest {
 
         for(int numbers : fibonacci){
             assertEquals(numbers, iterator.next().getT());
-        }   
+        }
     }
 
     @Test
