@@ -116,7 +116,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     }
 
 
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
     public @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException {

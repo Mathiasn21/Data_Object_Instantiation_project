@@ -49,8 +49,7 @@ public class relationshipDescribed implements  IRelationshipDescribed {
     public double calcCorrelationCoefficientFromSample() {
         double sX = 0, sY = 0, sXY = 0, sXX = 0, sYY = 0;
 
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             sX = sX + data1[i];
             sY = sY + data2[i];
             sXY = sXY + data1[i] * data2[i];
