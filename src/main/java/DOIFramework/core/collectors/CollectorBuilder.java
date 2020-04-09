@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Class for creating a builder pattern for Collector class
- * @author Maria Pedersen Github: https://github.com/marped
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.0.0
  */
@@ -32,5 +31,5 @@ public final class CollectorBuilder {
     @NotNull
     @Contract(pure = true)
     @Override
-    public final String toString() { return "Collector builder"; }
+    public final String toString() { return this.collector.toString(); }
 }
