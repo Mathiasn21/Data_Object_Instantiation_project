@@ -7,7 +7,8 @@ import java.util.Iterator;
  */
 public class Graph<T> {
     public void insert(int uid, T number, int ...connections) {
-        //TODO: Implement this method
+        GraphNode<T> node = new GraphNode<>(uid, number, connections);
+
     }
 
     public boolean contains(T data) {
