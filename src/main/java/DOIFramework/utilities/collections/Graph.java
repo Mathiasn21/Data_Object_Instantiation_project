@@ -6,7 +6,7 @@ import java.util.Iterator;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    public void insert(int uid, T number, int ...connections) {
+    public void insert(int uid, T number, int... connections) {
         GraphNode<T> node = new GraphNode<>(uid, number, connections);
 
     }
@@ -14,6 +14,7 @@ public class Graph<T> {
     public boolean contains(T data) {
         return false;
     }
+
     public boolean contains(int uid) {
         return false;
     }
@@ -51,4 +52,28 @@ public class Graph<T> {
 
 
 //TODO: Implement generic graph and its functions
+}
+
+class GraphNode<T>{
+    int uid;
+    T number;
+    int[] connections; //array list that will contain this node's connections to other nodes
+
+    public GraphNode(int uid, T number, int ... connections){
+        this.uid = uid;
+        this.number = number;
+        this.connections = connections;
+    }
+
+    public int[] getConnections() {
+        return connections;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public T getNumber() {
+        return number;
+    }
 }
