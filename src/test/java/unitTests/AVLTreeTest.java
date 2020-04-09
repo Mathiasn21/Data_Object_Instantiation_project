@@ -18,7 +18,10 @@ public class AVLTreeTest {
     //TODO: IMPLEMENT TEST
     @Test
     void creation_of_tree(){
-
+        assertDoesNotThrow(() -> {
+            ITree<Integer> tree = new AVLTree<>();
+            assertTrue(tree.isEmpty());
+        });
     }
 
     //TODO: IMPLEMENT TEST
