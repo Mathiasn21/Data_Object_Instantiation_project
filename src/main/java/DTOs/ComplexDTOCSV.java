@@ -1,7 +1,7 @@
 package DTOs;
 
-import DOIFramework.annotations.DataObject;
-import DOIFramework.annotations.DataField;
+import DOIFramework.core.annotations.DataObject;
+import DOIFramework.core.annotations.DataField;
 
 import java.util.Objects;
 

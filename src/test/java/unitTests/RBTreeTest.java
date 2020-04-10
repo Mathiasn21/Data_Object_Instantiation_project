@@ -28,7 +28,6 @@ public class RBTreeTest {
         for(int numbers : fibonacci){
             assertEquals(numbers, iterator.next().getT());
         }
-        assertEquals(0, tree.size()); //makes sure tree is empty beforehand
 
         for(int numbers : scrambledFibonacci){
             tree.insert(numbers);
@@ -37,7 +36,6 @@ public class RBTreeTest {
         for(int numbers : fibonacci){
             assertEquals(numbers, iterator.next().getT());
         }
-        System.out.println("Insertion into RBTree is possible");
     }
 
     @Test
@@ -61,8 +59,6 @@ public class RBTreeTest {
         for(int numbers : fibonacciEightRemoved){
             assertEquals(numbers, iterator2.next().getT()); //makes sure tree has node removed
         }
-
-        System.out.println("Removal of node in RBTree is possible");
     }
 
     @Test
@@ -79,9 +75,6 @@ public class RBTreeTest {
         for(int numbers : fibonacciLevelordered){
             assertEquals(numbers, iterator.next().getT());
         }
-
-        System.out.println("RBTree traverses correctly in levelordered traversal");
-
     }
 
     @Test
@@ -98,9 +91,6 @@ public class RBTreeTest {
         for(int numbers : fibonacciPostordered){
             assertEquals(numbers, iterator.next().getT());
         }
-
-        System.out.println("RBTree traverses correctly in postordered traversal");
-
     }
 
     @Test
@@ -117,8 +107,5 @@ public class RBTreeTest {
         for(int numbers : fibonacciPreordered){
             assertEquals(numbers, iterator.next().getT());
         }
-
-        System.out.println("RBTree traverses correctly in preordered traversal");
-
     }
 }

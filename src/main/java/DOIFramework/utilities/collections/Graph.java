@@ -1,18 +1,24 @@
 package DOIFramework.utilities.collections;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /** Class for handling of generic graph
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    public void insert(int uid, T number, int ...connections) {
-        //TODO: Implement this method
+    GraphNode<T> node;
+    private Map<T, List<T>> toppointsMap;
+
+    public void insert(int uid, T number, int... connections) {
+
     }
 
     public boolean contains(T data) {
         return false;
     }
+
     public boolean contains(int uid) {
         return false;
     }
@@ -36,8 +42,8 @@ public class Graph<T> {
         return null;
     }
 
-    public int[] getConnections(int i) {
-        return new int[0];
+    public int[] getConnections() {
+        return node.getConnections();
     }
 
     public T[] getConnections(T t) {
@@ -50,4 +56,28 @@ public class Graph<T> {
 
 
 //TODO: Implement generic graph and its functions
+}
+
+class GraphNode<T>{
+    int uid;
+    T number;
+    int[] connections; //array list that will contain this node's connections to other nodes
+
+    public GraphNode(int uid, T number, int ... connections){
+        this.uid = uid;
+        this.number = number;
+        this.connections = connections;
+    }
+
+    public int[] getConnections() {
+        return connections;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public T getNumber() {
+        return number;
+    }
 }

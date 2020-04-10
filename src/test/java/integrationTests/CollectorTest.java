@@ -1,8 +1,8 @@
 package integrationTests;
 
-import DOIFramework.collectors.Collector;
-import DOIFramework.collectors.ICollector;
-import DOIFramework.resource.Resource;
+import DOIFramework.core.collectors.Collector;
+import DOIFramework.core.collectors.ICollector;
+import DOIFramework.core.resource.Resource;
 import DOIFramework.utilities.handlers.CSVHandler;
 import DOIFramework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;

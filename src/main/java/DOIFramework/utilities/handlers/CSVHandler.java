@@ -1,5 +1,6 @@
 package DOIFramework.utilities.handlers;
 
+import DOIFramework.core.annotations.DataObject;
 import DOIFramework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +34,9 @@ public class CSVHandler implements IHandle{
      */
     public final void setDelimiter(char delimiter) { this.delimiter = String.valueOf(delimiter); }
 
+    /**
+     * @param skipEmptyLines boolean
+     */
     public final void skipEmptyLines(boolean skipEmptyLines) {
         this.skipEmptyLines = skipEmptyLines;
     }
@@ -66,10 +70,10 @@ public class CSVHandler implements IHandle{
      * Changes the setting for auto converting
      * {@link Class}&lt;{@link Float}&gt; to {@link Class}&lt;{@link Double}&gt;.
      * Change this if you're utilizing floats
-     * in a dataobject constructor.
+     * in a {@link DataObject} constructor.
      * @param convertFloatToDouble boolean
      */
-    public final void isConvertintFloatToDouble(boolean convertFloatToDouble) {
+    public final void isConvertingFloatToDouble(boolean convertFloatToDouble) {
         this.convertFloatToDouble = convertFloatToDouble;
     }
 
@@ -112,7 +116,7 @@ public class CSVHandler implements IHandle{
                 }
                 args.add(Parser.toPrimitiveValueFromObject(types.get(i), value));
             }
-            //If it's multiple column, append thoose to the row
+            //If it's multiple column, append those to the row
             if(!isSingleColumn){ rows.add(args.toArray()); }
         }
 

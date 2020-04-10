@@ -1,6 +1,5 @@
 package DOIFramework.utilities.collections;
 
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,11 +17,13 @@ public final class RBNode<T> extends Node<T> implements Cloneable {
     @Override
     @SuppressWarnings("unchecked")
     public final Object clone() {
-        RBNode<T> t = null;
+        RBNode<T> t;
         try {
             t = (RBNode<T>) super.clone();
             t.color = this.color;
-        } catch (CloneNotSupportedException e) { e.printStackTrace(); }
+        } catch (CloneNotSupportedException e) {
+            throw new Error(e);
+        }
         return t;
     }
 }

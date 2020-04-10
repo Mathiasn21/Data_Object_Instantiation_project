@@ -1,11 +1,11 @@
 package integrationTests;
 
 import DTOs.ComplexDTOCSV;
-import DOIFramework.collectors.Collector;
-import DOIFramework.collectors.ICollector;
+import DOIFramework.core.collectors.Collector;
+import DOIFramework.core.collectors.ICollector;
 import DOIFramework.exceptions.NoSuchColumnException;
-import DOIFramework.extractors.Extractor;
-import DOIFramework.resource.Resource;
+import DOIFramework.core.extractors.Extractor;
+import DOIFramework.core.resource.Resource;
 import DOIFramework.utilities.handlers.CSVHandler;
 import DOIFramework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.NotNull;

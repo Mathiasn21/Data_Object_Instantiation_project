@@ -1,6 +1,6 @@
 package DOIFramework.errors;
 
-import DOIFramework.resource.Resource;
+import DOIFramework.core.resource.Resource;
 
 /**
  * Thrown whenver the framework can't find a apropriate constructor

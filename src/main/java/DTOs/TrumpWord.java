@@ -1,8 +1,8 @@
 package DTOs;
 
-import DOIFramework.annotations.DataConstructor;
-import DOIFramework.annotations.DataField;
-import DOIFramework.annotations.DataObject;
+import DOIFramework.core.annotations.DataConstructor;
+import DOIFramework.core.annotations.DataField;
+import DOIFramework.core.annotations.DataObject;
 import org.jetbrains.annotations.NotNull;
 
 @DataObject
