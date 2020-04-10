@@ -1,19 +1,16 @@
 package DOIFramework.utilities.collections;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /** Class for handling of generic graph
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    List<GraphNode<T>> nodes;
+    List<GraphNode> nodes;
     int nmbrOfNodes;
 
     public void insert(int uid, T number, int... connections) {
-        GraphNode<T> node = new GraphNode<T>(uid, number, connections)
+        GraphNode node = new GraphNode(uid, connections);
         nodes.add(node);
         nmbrOfNodes++;
     }
@@ -38,7 +35,7 @@ public class Graph<T> {
 
     public int size() {
         return nmbrOfNodes;
-    }
+    } //will return the number of nodes
 
     public void remove(T t) {
         nodes.remove(t); //incorrect, but its pseudo code, so it will be implemented later
@@ -53,8 +50,21 @@ public class Graph<T> {
         return 0;
     }
 
-    public Iterator<GraphNode<T>> DFS() { //iterator for distributed file system
-        return null;
+    public static void DFS(GraphNode startingNode) { //graph depth first search
+        ArrayList<GraphNode> visitedNodes = new ArrayList<GraphNode>();
+        Stack<GraphNode> stack= new Stack<GraphNode>();
+        stack.push(startingNode);
+
+        while (stack.empty() == false){
+            GraphNode currentNode = stack.pop();
+            if(!visitedNodes.contains(currentNode)){
+                visitedNodes.add(currentNode);
+                int[] connections = currentNode.getConnections();
+                for(int i = connections.length; i >= 0; i--){
+                    //stack.push(nodes.get(i));
+                }
+            }
+        }
     }
 
     public int[] getConnections(int i) {
