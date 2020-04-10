@@ -3,7 +3,6 @@ package unitTests;
 import DOIFramework.core.resource.Resource;
 import DOIFramework.utilities.handlers.CSVHandler;
 import DOIFramework.utilities.collections.Graph;
-import DOIFramework.utilities.collections.GraphNode;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
