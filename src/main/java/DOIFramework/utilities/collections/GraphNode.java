@@ -1,19 +1,17 @@
 package DOIFramework.utilities.collections;
 
-public class GraphNode<T>{
-    T number;
-    int[] connections; //array list that will contain this node's connections to other nodes
+public class GraphNode{
+    int uid;
+    int[] connections;
 
-    public GraphNode(T number, int ... connections){
-        this.number = number;
+    public GraphNode(int uid, int[] connections){
+        this.uid = uid;
         this.connections = connections;
     }
 
-    public int[] getConnections() {
-        return connections;
+    public int getUid() {
+        return uid;
     }
 
-    public T getNumber() {
-        return number;
-    }
+    public int[] getConnections(){ return connections; }
 }

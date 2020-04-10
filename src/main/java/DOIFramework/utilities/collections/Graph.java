@@ -8,10 +8,12 @@ import java.util.Map;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    List<GraphNode<T>> nodes;
+    List<GraphNode> nodes;
+    int nmbrOfNodes;
 
     public void insert(int uid, T number, int... connections) {
-        nodes.add(uid, new GraphNode<T>(number,connections));
+        nodes.add(new GraphNode(uid, connections));
+        nmbrOfNodes++;
     }
 
     public boolean contains(T data) {
@@ -23,14 +25,15 @@ public class Graph<T> {
     }
 
     public int size() {
-        return 0;
+        return nmbrOfNodes;
     }
 
     public void remove(T t) {
+        nmbrOfNodes--;
     }
 
     public int numConnections(int uid) {
-        return 0;
+        return nodes.get(uid).getConnections().length;
     }
 
     public int numConnections(T t) {
@@ -41,8 +44,8 @@ public class Graph<T> {
         return null;
     }
 
-    public int[] getConnections() {
-        return node.getConnections();
+    public int[] getConnections(int i) {
+        return nodes.get(i).getConnections();
     }
 
     public T[] getConnections(T t) {
@@ -53,6 +56,4 @@ public class Graph<T> {
         return null;
     }
 
-
-//TODO: Implement generic graph and its functions
 }
