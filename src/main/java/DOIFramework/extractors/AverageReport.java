@@ -1,23 +1,26 @@
 package DOIFramework.extractors;
 
-import DOIFramework.statistics.IAverage;
 import java.util.Arrays;
 import java.util.List;
+
+import DOIFramework.statistics.Average;
+import DOIFramework.statistics.IStatistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum AverageReport {
-    AVERAGE_SUM("Total sum", IAverage::calcSum),
-    AVERAGE_MEAN("Average", IAverage::calcMean),
-    AVERAGE_MEDIAN("Median", IAverage::calcMedian),
-    AVERAGE_MID_RANGE("Mid range", IAverage::calcMidRange),
-    AVERAGE_MODE("Mode", IAverage::calcMode);
+public enum AverageReport implements  IReport {
+    AVERAGE_SUM("Total sum", Average::calcSum),
+    AVERAGE_MEAN("Average", Average::calcMean),
+    AVERAGE_MEDIAN("Median", Average::calcMedian),
+    AVERAGE_MID_RANGE("Mid range", Average::calcMidRange),
+    AVERAGE_MODE("Mode", Average::calcMode);
 
     public final String option;
-    final IAverageCalculate calculate;//Package private for a reason
+    final IAverageCalculate calculate;
+    private static Class<? extends IStatistics> clazz = Average.class;
 
     @Contract(pure = true)
     AverageReport(String option, IAverageCalculate calculate) {
@@ -39,5 +42,11 @@ public enum AverageReport {
     @NotNull
     public static List<AverageReport> getStandardConfiguration(){
         return Arrays.asList(AverageReport.values());
+    }
+
+
+    @Override
+    public Class<? extends IStatistics> getMainClass() {
+        return clazz;
     }
 }

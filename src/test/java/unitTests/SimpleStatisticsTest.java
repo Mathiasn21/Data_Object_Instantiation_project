@@ -12,10 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class SimpleStatisticsTest {
     private final double [] data = {1,2,3,4,5,6,6,6};
-    private final double [] data2 = {2,5,6,7,7,8,9};
 
     private final SimpleStatistics simpleStatistics = new SimpleStatistics(data);
-    private final SimpleStatistics simpleStatistics2 = new SimpleStatistics(data2);
 
     @Test
     public void sampleVarianceTest(){
@@ -39,6 +37,18 @@ public class SimpleStatisticsTest {
     public void standardDeviationFromPopulationTest(){
         double STD = simpleStatistics.calcStandardDeviationFromPopulation();
         assertEquals(1.8328597873268975, STD);
+    }
+
+    @Test
+    public void standardErrorFromSampleTest(){
+        double STE = simpleStatistics.calcStandardErrorFromSample();
+        assertEquals(0.692755883617, STE);
+    }
+
+    @Test
+    public void standardErrorFromPopulationTest(){
+        double STE = simpleStatistics.calcStandardErrorFromPopulation();
+        assertEquals(0.648, STE);
     }
 
 }

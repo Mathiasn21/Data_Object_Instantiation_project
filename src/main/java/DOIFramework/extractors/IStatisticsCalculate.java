@@ -1,6 +1,6 @@
 package DOIFramework.extractors;
 
-import DOIFramework.statistics.IStatistics;
+import DOIFramework.statistics.SimpleStatistics;
 
 /**
  * A interface for wrapping statistics calculation.
@@ -8,5 +8,5 @@ import DOIFramework.statistics.IStatistics;
  */
 @FunctionalInterface
 interface IStatisticsCalculate {
-    double execute(IStatistics statistics);
+    double execute(SimpleStatistics statistics);
 }

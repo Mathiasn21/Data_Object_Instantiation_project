@@ -1,6 +1,7 @@
 package DOIFramework.extractors;
 
 import DOIFramework.statistics.IStatistics;
+import DOIFramework.statistics.SimpleStatistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
@@ -9,11 +10,13 @@ import java.util.List;
 /** A enum describing all possible Simple statistical implementations.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum SimpleStatisticalReport {
-    POPULATION_VARIANCE("Population Variance", IStatistics::calcPopulationVariance),
-    SAMPLE_VARIANCE("Sample Variance", IStatistics::calcSampleVariance),
-    STANDARD_DEVIATION_POPULATION("Standard Deviation - From population", IStatistics::calcStandardDeviationFromPopulation),
-    STANDARD_DEVIATION_SAMPLE("Standard Deviation - From sample", IStatistics::calcStandardDeviationFromSample);
+public enum SimpleStatisticalReport implements IReport{
+    POPULATION_VARIANCE("Population Variance", SimpleStatistics::calcPopulationVariance),
+
+    SAMPLE_VARIANCE("Sample Variance", SimpleStatistics::calcSampleVariance),
+    STANDARD_DEVIATION_POPULATION("Standard Deviation - From population", SimpleStatistics::calcStandardDeviationFromPopulation),
+    STANDARD_DEVIATION_SAMPLE("Standard Deviation - From sample", SimpleStatistics::calcStandardDeviationFromSample);
+    private static Class<? extends IStatistics> clazz = SimpleStatistics.class;
 
     public final String option;
     final IStatisticsCalculate calculate;
@@ -38,5 +41,10 @@ public enum SimpleStatisticalReport {
     @NotNull
     public static List<SimpleStatisticalReport> getStandardConfiguration() {
         return Arrays.asList(STANDARD_DEVIATION_SAMPLE, SAMPLE_VARIANCE);
+    }
+
+    @Override
+    public Class<? extends IStatistics> getMainClass() {
+        return clazz;
     }
 }

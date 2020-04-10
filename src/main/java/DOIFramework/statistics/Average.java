@@ -6,13 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * Class for calculating average methods execute the resource {@link IAverage}
+ * Class for calculating average methods execute the resource
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public final class Average implements IAverage{
+public final class Average implements IStatistics{
     private final double[] data;
-    private final int length;
+    private final int n;
     private double sum = 0;
 
     /**
@@ -21,7 +21,7 @@ public final class Average implements IAverage{
     @Contract(pure = true)
     public Average(@NotNull double[] data){
         this.data = data;
-        this.length = data.length;
+        this.n = data.length;
     }
 
     /**
@@ -32,7 +32,7 @@ public final class Average implements IAverage{
         double[] doubles = new double[data.length];
         for(int i = 0; i < data.length; i++){ doubles[i] = data[i]; }
         this.data = doubles;
-        this.length = data.length;
+        this.n = data.length;
     }
 
     /**
@@ -43,13 +43,12 @@ public final class Average implements IAverage{
         double[] doubles = new double[data.size()];
         for(int i = 0; i < data.size(); i++){ doubles[i] = data.get(i).doubleValue(); }
         this.data = doubles;
-        this.length = data.size();
+        this.n = data.size();
     }
 
     /**
      * @return double
      */
-    @Override
     public double calcSum() {
         if(sum <= 0){
             for(double i : data){
@@ -63,18 +62,17 @@ public final class Average implements IAverage{
      * @return double
      */
     public double calcMean() {
-        return (sum == 0 ? calcSum() : sum) / length;
+        return (sum == 0 ? calcSum() : sum) / n;
     }
 
     /**
      * @return double
      */
-    @Override
     public double calcMedian() {
-        double calcMid = length >> 1;
+        double calcMid = n >> 1;
         int lowerBound = (int)(calcMid -1);
         int upperBound = (int)calcMid;
-        if (length % 2 == 0){
+        if (n % 2 == 0){
             return (data[lowerBound] + data[upperBound]) / 2;}
         return data[upperBound];
     }
@@ -82,14 +80,13 @@ public final class Average implements IAverage{
     /**
      * @return double
      */
-    @Override
     public double calcMode() {
         double maxValue = 0, maxCount = 0;
         int i, j;
 
-        for (i = 0; i < length; ++i) {
+        for (i = 0; i < n; ++i) {
             int count = 0;
-            for (j = 0; j < length; ++j) {
+            for (j = 0; j < n; ++j) {
                 if (data[j] == data[i])
                     ++count;
             }
@@ -104,11 +101,14 @@ public final class Average implements IAverage{
     /**
      * @return double
      */
-    @Override
     public double calcMidRange() {
         double minValue = data[0];
-        double maxValue = data[length - 1];
+        double maxValue = data[n - 1];
         return (minValue + maxValue) / 2;
+    }
+
+    public int getN() {
+        return n;
     }
 
     @Override

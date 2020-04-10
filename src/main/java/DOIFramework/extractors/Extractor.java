@@ -7,7 +7,6 @@ import DOIFramework.observer.events.ExceptionEvent;
 import DOIFramework.observer.events.ExtractorFinishedEvent;
 import DOIFramework.observer.events.IEvent;
 import DOIFramework.statistics.Average;
-import DOIFramework.statistics.IAverage;
 import DOIFramework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -173,7 +172,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             List<Number> column = (List<Number>)(Object)columns.get(field);//Safe as this is ensured beforehand
 
             for (AverageReport option : reportOptions) {
-                IAverage average = new Average(column);
+                Average average = new Average(column);
                 report.put(option.option, option.calculate.execute(average));
             }
             res.put(field.getName(), report);
@@ -196,7 +195,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
             List<Number> column = (List<Number>)(Object)columns.get(method);//Safe as this is ensured beforehand
 
             for (AverageReport option : reportOptions) {
-                IAverage average = new Average(column);
+                Average average = new Average(column);
                 report.put(option.option, option.calculate.execute(average));
             }
             res.put(method.getName(), report);

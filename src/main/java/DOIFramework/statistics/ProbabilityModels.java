@@ -1,4 +1,4 @@
 package DOIFramework.statistics;
 
-public class probabilityModel {
+public class ProbabilityModels {
 }

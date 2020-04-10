@@ -8,10 +8,10 @@ import org.jetbrains.annotations.NotNull;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public final class SimpleStatistics implements IStatistics {
+public final class SimpleStatistics implements ISimpleStatistics, IStatistics {
 
     private final double[] data;
-    private final int length;
+    private final int n;
     private final Average average;
 
     /**
@@ -20,7 +20,19 @@ public final class SimpleStatistics implements IStatistics {
     @Contract(pure = true)
     public SimpleStatistics(@NotNull double[] data){
         this.data = data;
-        this.length = data.length;
+        this.n = data.length;
+        this.average = new Average(data);
+    }
+
+    /**
+     * @param data double[]
+     */
+    @Contract(pure = true)
+    public SimpleStatistics(@NotNull Double[] data){
+        double[] doubles = new double[data.length];
+        for(int i = 0; i < data.length; i++){ doubles[i] = data[i]; }
+        this.data = doubles;
+        this.n = data.length;
         this.average = new Average(data);
     }
 
@@ -36,7 +48,7 @@ public final class SimpleStatistics implements IStatistics {
             diff *= diff;
             sum += diff;
         }
-        return sum  / (length -1);
+        return sum  / (n -1);
     }
 
     /**
@@ -51,7 +63,7 @@ public final class SimpleStatistics implements IStatistics {
             diff *= diff;
             sumDiffsSquared += diff;
         }
-        return sumDiffsSquared  / length;
+        return sumDiffsSquared  / n;
     }
 
     /**
@@ -71,6 +83,17 @@ public final class SimpleStatistics implements IStatistics {
         double variance = calcPopulationVariance();
         return Math.sqrt(variance);
     }
+
+    @Override
+    public double calcStandardErrorFromSample() {
+        return calcStandardDeviationFromSample() / Math.sqrt(n);
+    }
+
+    @Override
+    public double calcStandardErrorFromPopulation() {
+        return calcStandardDeviationFromSample() / Math.sqrt(n);
+    }
+
 
     @NotNull
     @Contract(pure = true)
