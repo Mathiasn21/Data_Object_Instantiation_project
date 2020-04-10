@@ -20,7 +20,6 @@ public class AVLTreeTest {
     void creation_of_tree(){
         assertDoesNotThrow(() -> {
             ITree<Integer> tree = new AVLTree<>();
-            assertTrue(tree.isEmpty());
         });
     }
 
