@@ -1,6 +1,7 @@
 package DOIFramework.utilities.collections;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,20 +9,31 @@ import java.util.Map;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    List<GraphNode> nodes;
+    List<GraphNode<T>> nodes;
     int nmbrOfNodes;
 
     public void insert(int uid, T number, int... connections) {
-        nodes.add(new GraphNode(uid, connections));
+        GraphNode<T> node = new GraphNode<T>(uid, number, connections)
+        nodes.add(node);
         nmbrOfNodes++;
     }
 
     public boolean contains(T data) {
-        return false;
+        if(nodes.contains(data) == true){ //temporary pseudo code for checking of list contains the uid
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public boolean contains(int uid) {
-        return false;
+        if(nodes.contains(uid) == true){ //temporary pseudo code for checking of list contains the uid
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public int size() {
@@ -29,6 +41,7 @@ public class Graph<T> {
     }
 
     public void remove(T t) {
+        nodes.remove(t); //incorrect, but its pseudo code, so it will be implemented later
         nmbrOfNodes--;
     }
 
@@ -40,7 +53,7 @@ public class Graph<T> {
         return 0;
     }
 
-    public Iterator<GraphNode> DFS() {
+    public Iterator<GraphNode<T>> DFS() { //iterator for distributed file system
         return null;
     }
 
