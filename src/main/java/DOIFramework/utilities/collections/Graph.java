@@ -47,7 +47,7 @@ public class Graph<T> {
     }
 
     public int numConnections(T t) {
-        return 0;
+        return nodes.get(t).getConnections().size(); //incorrect, but temporery pseudocode
     }
 
     public static void DFS(GraphNode startingNode) { //graph depth first search
@@ -72,11 +72,11 @@ public class Graph<T> {
     }
 
     public T[] getConnections(T t) {
-        return null;
+        return nodes.get(t).getConnections(); //incorrect, but temporery pseudocode
     }
 
     public T get(T inf102) {
-        return null;
+        return nodes.get(inf102); //incorrect, but temporery pseudocode
     }
 
 }
