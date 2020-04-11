@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class GraphNode{
     private int uid;
-    private int[] connections;
+    ArrayList<GraphNode> connections; //array list that contains the neighbours/edges of the node
 
-    public GraphNode(int uid, int... connections){
+    public GraphNode(int uid, ArrayList<GraphNode> connections){
         this.uid = uid;
         this.connections = connections;
     }
@@ -19,5 +19,5 @@ public class GraphNode{
     public int getUid() {
         return uid;
     }
-    public int[] getConnections(){ return connections; }
+    public ArrayList<GraphNode> getConnections(){ return connections; }
 }

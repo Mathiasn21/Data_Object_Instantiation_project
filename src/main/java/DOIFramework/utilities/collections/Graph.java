@@ -9,14 +9,14 @@ public class Graph<T> {
     List<GraphNode> nodes;
     int nmbrOfNodes;
 
-    public void insert(int uid, T number, int... connections) {
+    public void insert(int uid, T number, ArrayList<GraphNode> connections) {
         GraphNode node = new GraphNode(uid, connections);
         nodes.add(node);
         nmbrOfNodes++;
     }
 
     public boolean contains(T data) {
-        if(nodes.contains(data) == true){ //temporary pseudo code for checking of list contains the uid
+        if(nodes.contains(data) == true){ //temporary pseudo code for checking of list contains the data
             return true;
         }
         else{
