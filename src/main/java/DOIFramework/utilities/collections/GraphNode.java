@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 /**
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
- * @param <T>
  */
 
 public class GraphNode{
@@ -19,5 +18,6 @@ public class GraphNode{
     public int getUid() {
         return uid;
     }
+
     public ArrayList<GraphNode> getConnections(){ return connections; }
 }

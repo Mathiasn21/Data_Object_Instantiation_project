@@ -6,7 +6,7 @@ import java.util.*;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    List<GraphNode> nodes;
+    public static List<GraphNode> nodes;
     int nmbrOfNodes;
 
     public void insert(int uid, T number, ArrayList<GraphNode> connections) {
@@ -16,7 +16,7 @@ public class Graph<T> {
     }
 
     public boolean contains(T data) {
-        if(nodes.contains(data) == true){ //temporary pseudo code for checking of list contains the data
+        if(nodes.contains(data)){ //temporary pseudo code for checking of list contains the data
             return true;
         }
         else{
@@ -25,7 +25,7 @@ public class Graph<T> {
     }
 
     public boolean contains(int uid) {
-        if(nodes.contains(uid) == true){ //temporary pseudo code for checking of list contains the uid
+        if(nodes.contains(uid)){ //temporary pseudo code for checking of list contains the uid
             return true;
         }
         else{
@@ -43,7 +43,7 @@ public class Graph<T> {
     }
 
     public int numConnections(int uid) {
-        return nodes.get(uid).getConnections().length;
+        return nodes.get(uid).getConnections().size();
     }
 
     public int numConnections(T t) {
@@ -55,19 +55,19 @@ public class Graph<T> {
         Stack<GraphNode> stack= new Stack<GraphNode>();
         stack.push(startingNode);
 
-        while (stack.empty() == false){
+        while (!stack.empty()){
             GraphNode currentNode = stack.pop();
             if(!visitedNodes.contains(currentNode)){
                 visitedNodes.add(currentNode);
-                int[] connections = currentNode.getConnections();
-                for(int i = connections.length; i >= 0; i--){
-                    //stack.push(nodes.get(i));
+                ArrayList<GraphNode> connections = currentNode.getConnections();
+                for(int i = connections.size(); i >= 0; i--){
+                    stack.push(nodes.get(i));
                 }
             }
         }
     }
 
-    public int[] getConnections(int i) {
+    public ArrayList<GraphNode> getConnections(int i) {
         return nodes.get(i).getConnections();
     }
 
