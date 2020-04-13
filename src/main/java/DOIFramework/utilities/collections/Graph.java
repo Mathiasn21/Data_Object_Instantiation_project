@@ -1,5 +1,7 @@
 package DOIFramework.utilities.collections;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /** Class for handling of generic graph
@@ -79,4 +81,8 @@ public class Graph<T> {
         return null;
     }
 
+    @NotNull
+    public Iterator<GraphNode> DFS() {
+        return null;
+    }
 }

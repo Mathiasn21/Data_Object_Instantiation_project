@@ -3,6 +3,7 @@ package DOIFramework.core.extractors;
 import java.util.Arrays;
 import java.util.List;
 
+import DOIFramework.extractors.IReport;
 import DOIFramework.statistics.Average;
 import DOIFramework.statistics.IStatistics;
 import org.jetbrains.annotations.Contract;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum AverageReport implements  IReport {
+public enum AverageReport implements IReport {
     AVERAGE_SUM("Total sum", Average::calcSum),
     AVERAGE_MEAN("Average", Average::calcMean),
     AVERAGE_MEDIAN("Median", Average::calcMedian),

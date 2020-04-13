@@ -4,7 +4,7 @@ package DOIFramework.statistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class relationshipDescribed implements  IRelationshipDescribed {
+public class relationshipDescribed {
 
     private final double[] data1;
     private final double[] data2;
@@ -35,17 +35,14 @@ public class relationshipDescribed implements  IRelationshipDescribed {
         return sum;
     }
 
-    @Override
     public double calcCovarianceFromPopulation() throws Exception {
         return covariance() / n;
     }
 
-    @Override
     public double calcCovarianceFromSample() throws Exception {
         return covariance() / n-1;
     }
 
-    @Override
     public double calcCorrelationCoefficientFromSample() {
         double sX = 0, sY = 0, sXY = 0, sXX = 0, sYY = 0;
 
@@ -59,12 +56,10 @@ public class relationshipDescribed implements  IRelationshipDescribed {
         return (n * sXY - sX * sY) / Math.sqrt((n * sXX - sX * sX) * (n * sYY - sY * sY));
     }
 
-    @Override
     public double calcStandardError() {
         return 0;
     }
 
-    @Override
     public double covarianceToCorrelation() {
         return 0;
     }
