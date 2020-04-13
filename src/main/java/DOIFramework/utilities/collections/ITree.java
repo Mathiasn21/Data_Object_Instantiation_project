@@ -16,6 +16,7 @@ public interface ITree<T> {
     int size();
 
     boolean contains(T t);
+    boolean isEmpty();
     T search(T t);
 
     Iterator<Node<T>> inorderTraversal();
