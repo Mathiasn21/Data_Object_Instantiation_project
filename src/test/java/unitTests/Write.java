@@ -83,11 +83,5 @@ public class Write {
         //TODO: Implement test and make sure you utilize mocks for this
         fail();
     }
-
-    @Test
-    void to_file_using_file_appending(){
-        //TODO: implement method
-        fail();
-    }
 }
 

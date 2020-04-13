@@ -75,17 +75,4 @@ public class AVLTreeTest {
         for(int numbers : numbers){ tree.insert(numbers); }
         return tree;
     }
-
-    @NotNull
-    private int[] getArrInorder(@NotNull ITree<Integer> tree){
-        int[] arr = new int[tree.size()];
-        var iterator = tree.inorderTraversal();
-
-        int i = 0;
-        while(iterator.hasNext()){
-            arr[i] = iterator.next().getT();
-            i++;
-        }
-        return arr;
-    }
 }
