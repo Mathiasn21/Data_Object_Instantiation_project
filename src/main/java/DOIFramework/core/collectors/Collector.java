@@ -109,4 +109,15 @@ public final class Collector implements ICollector {
     public static CollectorBuilder newCollector(Resource resource, IHandle dataHandler) {
         return new CollectorBuilder(resource, dataHandler);
     }
+
+    @NotNull
+    @Override
+    public String toString() {
+        var iterator = rbTree.inorderTraversal();
+        StringBuilder builder = new StringBuilder();
+        while(iterator.hasNext()){
+            builder.append(iterator.next().getT()).append("\n");
+        }
+        return builder.toString();
+    }
 }

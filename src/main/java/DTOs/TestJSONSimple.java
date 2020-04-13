@@ -13,4 +13,13 @@ public class TestJSONSimple {
         this.itemName = itemName;
         this.thing = thing;
     }
+
+    @Override
+    public String toString() {
+        return "TestJSONSimple{" +
+                "item='" + item + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", thing='" + thing + '\'' +
+                '}';
+    }
 }
