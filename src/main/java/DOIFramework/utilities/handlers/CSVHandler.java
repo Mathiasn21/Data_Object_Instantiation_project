@@ -69,7 +69,7 @@ public class CSVHandler implements IHandle{
     /**
      * Changes the setting for auto converting
      * {@link Class}&lt;{@link Float}&gt; to {@link Class}&lt;{@link Double}&gt;.
-     * Change this if you're utilizing floats
+     * Change this to false if you're utilizing floats
      * in a {@link DataObject} constructor.
      * @param convertFloatToDouble boolean
      */
@@ -153,6 +153,10 @@ public class CSVHandler implements IHandle{
         return line.split(delimiter);
     }
 
+    /**
+     * @param element String
+     * @return {@link Class}&lt;?&gt;
+     */
     private Class<?> primitiveTypeFrom(@NotNull String element) {
         if(isCreatable(element)){
             Number number = createNumber(element);
@@ -162,10 +166,17 @@ public class CSVHandler implements IHandle{
         return String.class;
     }
 
+    /**
+     * @param firstElement String
+     * @param secondElement String
+     * @return {@link Class}&lt;?&gt;
+     */
     private Class<?> singleColumnPrimitiveTypeFrom(@NotNull String firstElement, @NotNull String secondElement) {
         if((isCreatable(firstElement) && isCreatable(secondElement))){
             Number first = createNumber(firstElement);
-            Number second = createNumber(firstElement);
+            Number second = createNumber(secondElement);
+
+            //In case there's a difference the type of number.
             if(first.getClass() != second.getClass()){
                 return Double.class;
             }
