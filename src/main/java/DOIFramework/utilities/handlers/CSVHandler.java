@@ -27,26 +27,26 @@ public class CSVHandler implements IHandle{
     private boolean removeDoubleQuotes = false;
     private boolean convertFloatToDouble = true;
     private boolean sampleEachLine;
+    private int skipFirstXLines = 0;
+    private int[] skipIndexes = new int[0];
 
     /**
-     * A char to split each column for each row
-     * @param delimiter String
+     * A char to split each column for each row.
+     * @param delimiter char
      */
     public final void setDelimiter(char delimiter) { this.delimiter = String.valueOf(delimiter); }
 
     /**
-     * @param skipEmptyLines boolean
-     */
-    public final void skipEmptyLines(boolean skipEmptyLines) {
-        this.skipEmptyLines = skipEmptyLines;
-    }
-
-    /**
-     * A char to split each column for each row
+     * A char to split each column for each row.
      * @param delimiter String
      */
     public final void setDelimiter(String delimiter) { this.delimiter = delimiter; }
 
+    /**Determines whether or not the handler will sample
+     * each line for given types. Eg: Try to determine each type, for every line.
+     * By default this is false/disabled as it requires additional overhead.
+     * @param sampleEachLine boolean
+     */
     public final void setSampleEachLine(boolean sampleEachLine) { this.sampleEachLine = sampleEachLine; }
 
 
@@ -57,6 +57,54 @@ public class CSVHandler implements IHandle{
      */
     public final void setRemoveDoubleQuotes(boolean removeDoubleQuotes) {
         this.removeDoubleQuotes = removeDoubleQuotes;
+    }
+
+    /**
+     * @param skipEmptyLines boolean
+     */
+    public final void skipEmptyLines(boolean skipEmptyLines) {
+        this.skipEmptyLines = skipEmptyLines;
+    }
+
+    /**
+     * Allows one to skip the first lines from the bufferedReader.
+     * By default this is 0. Aka: skip none.
+     * @param xLines int
+     */
+    public final void skipFirstXlines(int xLines){
+        if(xLines < 0){ return; }
+        this.skipFirstXLines = xLines;
+    }
+
+    /**
+     * Allows one to skip certain indexes for each read line.
+     * By default this is -1. Aka: skip none.
+     * @param index int
+     */
+    public final void skipLineIndexes(int index){
+        if(index < 0){ return; }
+        this.skipIndexes = genRange(index, index + 1);
+    }
+
+    /**
+     * Allows one to skip certain indexes for each read line.
+     * By default this is -1. Aka: skip none.
+     * @param indexes int
+     */
+    public final void skipLineIndexes(@NotNull int ...indexes){
+        if(indexes.length == 0){ return; }
+        this.skipIndexes = indexes;
+    }
+
+    /**
+     * Allows one to skip certain indexes for each read line.
+     * By default this is null. Aka: skip none.
+     * @param fromIndex int
+     * @param toIndex int
+     */
+    public final void skipLineIndexes(int fromIndex, int toIndex){
+        if(fromIndex < 0 || toIndex < 0 || fromIndex > toIndex){ return; }
+        this.skipIndexes = genRange(fromIndex, toIndex);
     }
 
     /**
@@ -183,5 +231,20 @@ public class CSVHandler implements IHandle{
             return first.getClass();
         }
         return String.class;
+    }
+
+    /**
+     * @param from int
+     * @param to int
+     * @return int[]
+     */
+    @NotNull
+    @Contract(pure = true)
+    private static int[] genRange(int from, int to) {
+        int[] range = new int[Math.abs(from - to)];
+        for (int i = from, j = 0; i < to; i++, j++) {
+            range[j] = i;
+        }
+        return range;
     }
 }
