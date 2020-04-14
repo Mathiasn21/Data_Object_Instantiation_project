@@ -36,8 +36,7 @@ public class CentralCommand {
         commands.forEach((command) -> {
             try {
                 IStatistics statistic = statFactory.create(command.getIReport().getMainClass(), data.get(0));
-                
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            } catch (ReflectiveOperationException e) {
                 EventObserver.registerEventFrom(new ExceptionEvent(this, e));
             }
         });
