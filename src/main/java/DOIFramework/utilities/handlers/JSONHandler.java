@@ -67,7 +67,7 @@ public class JSONHandler implements IHandle{
         while(true){
             JsonElement element = arr.get(0);
             if(!element.isJsonArray()){
-                primitiveType = Parser.wrapperToPrimitiveType(findPrimitiveTypeFrom(arr.get(0), arr.get(arr.size() - 1)));
+                primitiveType = Parser.PrimitiveWrapperToPrimitiveType(findPrimitiveTypeFrom(arr.get(0), arr.get(arr.size() - 1)));
                 break;
             }
             arr = (JsonArray) element;
@@ -87,7 +87,7 @@ public class JSONHandler implements IHandle{
                 Object arr = Array.newInstance(primitiveType, size);
 
                 for (int j = 0; j < size; j++) {
-                    Array.set(arr, j, Parser.toPrimitiveValueFromObject(primitiveType, array.get(j).toString()));
+                    Array.set(arr, j, Parser.toPrimitiveValueGivenType(primitiveType, array.get(j).toString()));
                 }
                 return arr;
             } else {

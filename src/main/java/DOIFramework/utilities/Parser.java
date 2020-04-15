@@ -15,7 +15,7 @@ public final class Parser {
      * @param value String
      * @return {@link Object}
      */
-    public static Object toPrimitiveValueFromObject(Class<?> clazz, String value) {
+    public static Object toPrimitiveValueGivenType(Class<?> clazz, String value) {
         if(String.class  == clazz)                            { return value; }
         if(Integer.class == clazz || Integer.TYPE == clazz)   { return Integer.parseInt(value); }
         if(Double.class  == clazz || Double.TYPE  == clazz)   { return Double.parseDouble(value); }
@@ -34,7 +34,7 @@ public final class Parser {
      */
     @NotNull
     @Contract(value = "_ -> new", pure = true)
-    public static Class<?> wrapperToPrimitiveType(@NotNull Class<?> clazz){
+    public static Class<?> PrimitiveWrapperToPrimitiveType(@NotNull Class<?> clazz){
         return clazz == Double.class    ?      double.class    :
                clazz == Float.class     ?      float.class     :
                clazz == Integer.class   ?      int.class       :

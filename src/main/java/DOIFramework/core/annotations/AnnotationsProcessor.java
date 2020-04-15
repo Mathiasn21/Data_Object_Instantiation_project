@@ -176,7 +176,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
         Class<?>[] types = new Class[sample.length];
         int i = 0;
         while (i < sample.length) {
-            types[i] = Parser.wrapperToPrimitiveType(sample[i].getClass());
+            types[i] = Parser.PrimitiveWrapperToPrimitiveType(sample[i].getClass());
             i++;
         }
 

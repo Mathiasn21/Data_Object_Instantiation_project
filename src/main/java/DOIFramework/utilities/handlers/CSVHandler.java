@@ -178,12 +178,12 @@ public class CSVHandler implements IHandle{
 
                 //Add args to row array and create a new ArrayList if there's only one column
                 if (isSingleColumn) {
-                    args.add(Parser.toPrimitiveValueFromObject(types.get(0), value));
+                    args.add(Parser.toPrimitiveValueGivenType(types.get(0), value));
                     rows.add(args.toArray());
                     args = new ArrayList<>();
                     continue;
                 }
-                args.add(Parser.toPrimitiveValueFromObject(types.get(i), value));
+                args.add(Parser.toPrimitiveValueGivenType(types.get(i), value));
             }
             //If it's multiple column, append those to the row
             if(!isSingleColumn){ rows.add(args.toArray()); }
