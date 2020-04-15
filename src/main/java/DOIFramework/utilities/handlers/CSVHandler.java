@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.apache.commons.lang3.math.NumberUtils.createNumber;
@@ -25,6 +26,7 @@ public class CSVHandler implements IHandle{
     private Class<?>[] primaryKeyTypes;
     private boolean skipEmptyLines = false;
     private boolean removeDoubleQuotes = false;
+    private boolean removeSingleQuotes = false;
     private boolean convertFloatToDouble = true;
     private boolean sampleEachLine;
     private int skipFirstXLines = 0;
@@ -55,8 +57,12 @@ public class CSVHandler implements IHandle{
      * By default this is off.
      * @param removeDoubleQuotes boolean
      */
-    public final void setRemoveDoubleQuotes(boolean removeDoubleQuotes) {
+    public final void removeDoubleQuotes(boolean removeDoubleQuotes) {
         this.removeDoubleQuotes = removeDoubleQuotes;
+    }
+
+    public final void removeSingleQuotes(boolean removeSingleQuotes) {
+        this.removeSingleQuotes = removeSingleQuotes;
     }
 
     /**
@@ -105,6 +111,7 @@ public class CSVHandler implements IHandle{
     public final void skipLineIndexes(int fromIndex, int toIndex){
         if(fromIndex < 0 || toIndex < 0 || fromIndex > toIndex){ return; }
         this.skipIndexes = genRange(fromIndex, toIndex);
+        Arrays.sort(skipIndexes);
     }
 
     /**
@@ -139,7 +146,17 @@ public class CSVHandler implements IHandle{
         List<Class<?>> types = new ArrayList<>(1);
         while ((line = bufferedReader.readLine()) != null) {
             List<Object> args = new ArrayList<>();
+
+            //Skips lines if this setting is turned on
+            if(skipFirstXLines > 0){
+                skipFirstXLines--;
+                continue;
+            }
+
+            //Handle quotes if necessary
             if(removeDoubleQuotes){ line = line.replace("\"", ""); }
+            if(removeSingleQuotes){ line = line.replace("'", ""); }
+
             String[] r = splitLineOn(line);
 
             //Find primary types if not already
@@ -153,7 +170,11 @@ public class CSVHandler implements IHandle{
 
             for (int i = 0; i < r.length; i++) {
                 String value = r[i];
+
                 if(skipEmptyLines && (value.isEmpty() || value.isBlank())){ continue; }
+
+                //Skips indexes if this has been specified
+                if(skipIndexes.length > 0 && Arrays.binarySearch(skipIndexes, i) >= 0){ continue; }
 
                 //Add args to row array and create a new ArrayList if there's only one column
                 if (isSingleColumn) {
