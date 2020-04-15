@@ -9,13 +9,13 @@ import java.io.*;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0.0
  */
-public final class FileCommand implements IWriteFileCommand {
+public final class WriteFileCommand implements IWriteFileCommand {
     private final File file;
     private boolean append = false, createIfNotExists = true;
 
-    public FileCommand(@NotNull File file) { this.file = file; }
+    public WriteFileCommand(@NotNull File file) { this.file = file; }
 
-    public FileCommand(@NotNull String path) { this(new File(path)); }
+    public WriteFileCommand(@NotNull String path) { this(new File(path)); }
 
     /**
      * Standard method for writing resource to a file.
