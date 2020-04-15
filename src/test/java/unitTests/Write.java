@@ -51,7 +51,7 @@ public class Write {
     }
 
     @Test
-    void to_file_using_string_appending(){
+    void to_file_using_by_appending(){
         Assertions.assertDoesNotThrow(() -> {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
