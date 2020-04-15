@@ -1,7 +1,7 @@
 package DOIFramework.statistics;
 
 
-import DOIFramework.exceptions.DatasetsNotMatichingException;
+import DOIFramework.exceptions.DatasetNotMatchingException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +26,7 @@ public final class Correlation{
         SimpleStatistics s2 = new SimpleStatistics(data2);
 
         if (data1.length != data2.length) {
-            throw new DatasetsNotMatichingException();
+            throw new DatasetNotMatchingException();
         }
         return cov.calcCovarianceFromSample() /
                 (s1.calcStandardDeviationFromSample() * s2.calcStandardDeviationFromSample());
@@ -40,7 +40,7 @@ public final class Correlation{
         SimpleStatistics s2 = new SimpleStatistics(data2);
 
         if (data1.length != data2.length) {
-            throw new DatasetsNotMatichingException();
+            throw new DatasetNotMatchingException();
         }
         return cov.calcCovarianceFromPopulation()/
                 (s1.calcStandardDeviationFromPopulation() * s2.calcStandardDeviationFromPopulation());

@@ -1,6 +1,5 @@
 package DOIFramework.core.extractors;
 
-import DOIFramework.extractors.IReport;
 import DOIFramework.statistics.IStatistics;
 import DOIFramework.statistics.SimpleStatistics;
 import org.jetbrains.annotations.Contract;

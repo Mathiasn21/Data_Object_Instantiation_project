@@ -1,6 +1,6 @@
 package DOIFramework.statistics;
 
-import DOIFramework.exceptions.DatasetsNotMatichingException;
+import DOIFramework.exceptions.DatasetNotMatchingException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,12 +20,12 @@ public final class Covariance {
         this.n = data1.length;
     }
 
-    private double covariance() throws DatasetsNotMatichingException {
+    private double covariance() throws DatasetNotMatchingException {
         double sum = 0;
         Average avg = new Average(data1);
         Average avg2 = new Average(data2);
         if (data1.length != data2.length) {
-            throw new DatasetsNotMatichingException();
+            throw new DatasetNotMatchingException();
         }
         for (int i = 0; i < n; i++) {
             sum = ((data1[i] - avg.calcMean()) * (data2[i] - avg2.calcMean()));

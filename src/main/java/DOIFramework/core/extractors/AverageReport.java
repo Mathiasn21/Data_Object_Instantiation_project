@@ -3,7 +3,6 @@ package DOIFramework.core.extractors;
 import java.util.Arrays;
 import java.util.List;
 
-import DOIFramework.extractors.IReport;
 import DOIFramework.statistics.Average;
 import DOIFramework.statistics.IStatistics;
 import org.jetbrains.annotations.Contract;

@@ -4,11 +4,10 @@ package DOIFramework.statistics;
 import DOIFramework.core.observer.EventObserver;
 import DOIFramework.core.observer.events.ExceptionEvent;
 import DOIFramework.exceptions.NotPrimitiveNumber;
-import DOIFramework.extractors.IReport;
+import DOIFramework.core.extractors.IReport;
 import DOIFramework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
