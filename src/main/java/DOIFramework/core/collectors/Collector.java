@@ -48,7 +48,6 @@ public final class Collector implements ICollector {
     public void collectData() throws IOException {
         List<Object[]> initArgs = dataHandler.handle(resource.getData());
         rbTree = new RBTree<>(comparator, compression);
-
         try {
             ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, resource.getNameSpaces()[0]);
             for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
@@ -58,21 +57,14 @@ public final class Collector implements ICollector {
         } catch (ReflectiveOperationException e) { raise(new ExceptionEvent(this, e)); }
     }
 
+    /** Toggles compression of objects in the resource collections on or off.
+     * By using compression each result from the compare that yields 0, is
+     * only incrementing the existing counter instead of actually storing that object.
+     * @param b boolean
+     */
     @Override
     public void setCompression(boolean b) {
         this.compression = b;
-    }
-
-    /**
-     * Sets max memory that this collector is allowed to utilize.
-     * Keeps the internal resource collections from filling up.
-     * @param mb int
-     */
-    @Contract(pure = true)
-    @Override
-    public final void setMaxMemoryMB(int mb){
-        //TODO: implement setMaxMemoryMB()
-        //TODO: Describe set max memory of what????
     }
 
     /**

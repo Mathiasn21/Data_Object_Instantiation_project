@@ -13,15 +13,12 @@ public interface ICollector {
      */
     void collectData() throws IOException;
 
-    /**Toggles compression of objects in the resource collections on or off.
+    /** Toggles compression of objects in the resource collections on or off.
+     * By using compression each result from the compare that yields 0, is
+     * only incrementing the existing counter instead of actually storing that object.
      * @param b boolean
      */
     void setCompression(boolean b);
-
-    /**
-     * @param mb int
-     */
-    void setMaxMemoryMB(int mb);
 
     /**
      * @return {@link Class}&lt;?&gt;
