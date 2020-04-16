@@ -15,13 +15,6 @@ public final class CollectorBuilder {
 
     CollectorBuilder(Resource resource, IHandle dataHandler){ this.collector = new Collector(resource, dataHandler); }
 
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorBuilder setMaxMemoryMB(int mb){
-        collector.setMaxMemoryMB(mb);
-        return this;
-    }
-
     @Contract(pure = true)
     @NotNull
     public final ICollector build(){

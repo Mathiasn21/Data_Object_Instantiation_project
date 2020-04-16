@@ -21,15 +21,6 @@ public final class CollectorPoolBuilder {
         this.collectorBuilders = collectorBuilders;
     }
 
-    @Contract("_ -> this")
-    @NotNull
-    public final CollectorPoolBuilder setGloballyMaxMemoryMB(int mb){
-        for (CollectorBuilder builder : collectorBuilders) {
-            builder.setMaxMemoryMB(mb);
-        }
-        return this;
-    }
-
     @Contract(pure = true)
     @NotNull
     public final ICollectorPool buildAll(){
