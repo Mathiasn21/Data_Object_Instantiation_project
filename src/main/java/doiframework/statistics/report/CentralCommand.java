@@ -35,8 +35,8 @@ public class CentralCommand {
 
         commands.forEach((command) -> {
             try {
-                IReport report = command.getIReport();
-                IStatistics statistic = statFactory.create(report.getMainClass(), data.get(0));
+                var report = command.getIReport();
+                var statistic = statFactory.create(report.getMainClass(), data.get(0));
                 double d;
                 if(report.getClass() == AverageReport.class){
                     d = ((AverageReport) report).calculate.execute((Average) statistic);
