@@ -1,5 +1,6 @@
 package doiframework.statistics.report;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public enum ReportThings {
@@ -33,7 +34,8 @@ public enum ReportThings {
         return report;
     }
 
-    public static ReportThings[] getFullAverageReport(){
+    @Contract(value = " -> new", pure = true)
+    public static ReportThings @NotNull [] getFullAverageReport(){
         return new ReportThings[]{
                 ReportThings.AVERAGE_MEAN,
                 ReportThings.AVERAGE_MID_RANGE,
@@ -43,7 +45,8 @@ public enum ReportThings {
         };
     }
 
-    public static ReportThings[] getFullReportSimpleStatistics(){
+    @Contract(value = " -> new", pure = true)
+    public static ReportThings @NotNull [] getFullReportSimpleStatistics(){
         return new ReportThings[]{
                 ReportThings.SAMPLE_VARIANCE,
                 ReportThings.POPULATION_VARIANCE,

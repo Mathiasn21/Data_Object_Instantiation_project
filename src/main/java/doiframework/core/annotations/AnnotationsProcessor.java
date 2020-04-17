@@ -41,11 +41,11 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     public AnnotationsProcessor() {
         if(!objectMappedToConstructor.isEmpty()){return;}
 
-        Set<Class<?>> clazzes = getAllDataObjectClasses();
+        var clazzes = getAllDataObjectClasses();
         clazzes.iterator().forEachRemaining((clazz) -> {
 
-            Class<?>[] primaryTypes = getPrimaryTypes(clazz);
-            Constructor<?> constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
+            var primaryTypes = getPrimaryTypes(clazz);
+            var constructor = getCorrespondingConstructor(clazz.getConstructors(), primaryTypes);
             objectMappedToConstructor.put(clazz, constructor);
             constructorToPrimaryTypes.put(constructor, primaryTypes);
 
@@ -65,8 +65,8 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @NotNull
     private Constructor<?> getCorrespondingConstructor(@NotNull Constructor<?>[] constructors, @NotNull Class<?>[] primaryTypes) {
         Constructor<?> partialMatch = null;
-        for (Constructor<?> constructor : constructors) {
-            Class<?>[] params = constructor.getParameterTypes();
+        for (var constructor : constructors) {
+            var params = constructor.getParameterTypes();
             int primaryTypeUniqueHashCode = Arrays.hashCode(primaryTypes);
             int primaryTypeHashCode = calcHashcodeFrom(primaryTypes);
 
