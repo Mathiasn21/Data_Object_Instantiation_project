@@ -213,12 +213,11 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @throws IOException e
      * @param urls String...
      * @return {@link ResourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder toURLs(@NotNull URL ...urls) throws IOException {
+    public ResourceBuilder toURLs(@NotNull URL ...urls) {
         for (URL url : urls) {
             IWriteCommand writeURL = new WriteURLCommand(url);
             writers.add(writeURL);

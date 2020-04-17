@@ -3,7 +3,7 @@ package doiframework.core.annotations;
 import java.util.List;
 
 /**
- * Allows passing usefull external information from {@link AnnotationsProcessor}
+ * Allows passing use full external information from {@link AnnotationsProcessor}
  * to other classes.
  */
 public final class ObjectInformation {

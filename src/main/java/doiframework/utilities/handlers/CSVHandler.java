@@ -77,7 +77,7 @@ public class CSVHandler implements IHandle{
      * By default this is 0. Aka: skip none.
      * @param xLines int
      */
-    public final void skipFirstXlines(int xLines){
+    public final void skipFirstXLines(int xLines){
         if(xLines < 0){ return; }
         this.skipFirstXLines = xLines;
     }

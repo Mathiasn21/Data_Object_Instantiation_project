@@ -29,8 +29,8 @@ public final class CollectorPool implements ICollectorPool{
     }
 
     /**
-     * Utilizes mutliple threads that does not block the main thread from exectuing.
-     * By default this utlizes a default {@link ThreadPoolExecutor} with 2 threads
+     * Utilizes multiple threads that does not block the main thread from executing.
+     * By default this utilizes a default {@link ThreadPoolExecutor} with 2 threads
      */
     @Override
     public void collectAllDataAsync() {

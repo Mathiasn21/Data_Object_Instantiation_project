@@ -75,7 +75,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         try {
             for (Object object : columns) {
                 res.add(method.invoke(object));
-            }//Assumes there aint any params
+            }//Assumes there ain't any params
 
         } catch (InvocationTargetException | IllegalAccessException e) {
             raise(new ExceptionEvent(this, e));

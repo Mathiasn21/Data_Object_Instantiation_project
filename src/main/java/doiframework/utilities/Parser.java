@@ -63,7 +63,7 @@ public final class Parser {
     }
 
     /**
-     * Returns true if clazz is a primitive number or a primtitve wrapper number
+     * Returns true if clazz is a primitive number or a primitive wrapper number
      * @param clazz {@link Class}&lt;?&gt;
      * @return boolean
      */
