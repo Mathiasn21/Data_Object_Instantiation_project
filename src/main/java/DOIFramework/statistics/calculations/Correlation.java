@@ -1,4 +1,4 @@
-package DOIFramework.statistics;
+package DOIFramework.statistics.calculations;
 
 
 import DOIFramework.exceptions.DatasetNotMatchingException;
@@ -18,6 +18,18 @@ public final class Correlation{
     public Correlation(@NotNull double[] data1, @NotNull double[] data2){
         this.data1 = data1;
         this.data2 = data2;
+    }
+
+    @Contract(pure = true)
+    public Correlation(@NotNull Double[] data1, @NotNull Double[] data2){
+        double[] doubles = new double[data1.length];
+        double[] doubles2 = new double[data2.length];
+        for(int i = 0; i < data1.length; i++){ doubles[i] = data1[i]; }
+        for(int i = 0; i < data2.length; i++){ doubles2[i] = data2[i]; }
+
+        this.data1 = doubles;
+        this.data2 = doubles2;
+
     }
 
     public double calcCorrelationCoefficientFromSample() throws Exception {
@@ -44,7 +56,6 @@ public final class Correlation{
         }
         return cov.calcCovarianceFromPopulation()/
                 (s1.calcStandardDeviationFromPopulation() * s2.calcStandardDeviationFromPopulation());
-
     }
 
 }

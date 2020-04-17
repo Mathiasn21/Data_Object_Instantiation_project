@@ -1,4 +1,4 @@
-package DOIFramework.statistics;
+package DOIFramework.statistics.calculations;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

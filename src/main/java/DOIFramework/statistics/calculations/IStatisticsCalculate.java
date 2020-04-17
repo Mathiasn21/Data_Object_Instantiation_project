@@ -1,12 +1,10 @@
-package DOIFramework.core.extractors;
-
-import DOIFramework.statistics.SimpleStatistics;
+package DOIFramework.statistics.calculations;
 
 /**
  * A interface for wrapping statistics calculation.
  * {@link IStatistics}
  */
 @FunctionalInterface
-interface IStatisticsCalculate {
+public interface IStatisticsCalculate {
     double execute(SimpleStatistics statistics);
 }

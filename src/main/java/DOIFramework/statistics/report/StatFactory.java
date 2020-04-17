@@ -1,9 +1,8 @@
-package DOIFramework.statistics;
+package DOIFramework.statistics.report;
 
+import DOIFramework.statistics.calculations.IStatistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class StatFactory {
     @Contract(pure = true)

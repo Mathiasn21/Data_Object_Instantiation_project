@@ -1,6 +1,6 @@
 package unitTests;
 
-import DOIFramework.statistics.Correlation;
+import DOIFramework.statistics.calculations.Correlation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

@@ -1,10 +1,11 @@
-package DOIFramework.core.extractors;
+package DOIFramework.statistics.report;
 
 import java.util.Arrays;
 import java.util.List;
 
-import DOIFramework.statistics.Average;
-import DOIFramework.statistics.IStatistics;
+import DOIFramework.statistics.calculations.Average;
+import DOIFramework.statistics.calculations.IAverageCalculate;
+import DOIFramework.statistics.calculations.IStatistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +20,7 @@ public enum AverageReport implements IReport {
     AVERAGE_MODE("Mode", Average::calcMode);
 
     public final String option;
-    final IAverageCalculate calculate;
+    public final IAverageCalculate calculate;
     private static Class<? extends IStatistics> clazz = Average.class;
 
     @Contract(pure = true)
@@ -44,9 +45,9 @@ public enum AverageReport implements IReport {
         return Arrays.asList(AverageReport.values());
     }
 
-
     @Override
     public Class<? extends IStatistics> getMainClass() {
         return clazz;
     }
+
 }

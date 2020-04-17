@@ -1,4 +1,4 @@
-package DOIFramework.statistics;
+package DOIFramework.statistics.calculations;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public final class SimpleStatistics implements ISimpleStatistics, IStatistics {
+public final class SimpleStatistics implements IStatistics {
 
     private final double[] data;
     private final int n;
@@ -39,7 +39,6 @@ public final class SimpleStatistics implements ISimpleStatistics, IStatistics {
     /**
      * @return double
      */
-    @Override
     public double calcSampleVariance() {
         double sum = 0;
         double avg = average.calcMean();
@@ -54,7 +53,6 @@ public final class SimpleStatistics implements ISimpleStatistics, IStatistics {
     /**
      * @return double
      */
-    @Override
     public double calcPopulationVariance() {
         double sumDiffsSquared = 0.0;
         double avg = average.calcMean();
@@ -69,7 +67,6 @@ public final class SimpleStatistics implements ISimpleStatistics, IStatistics {
     /**
      * @return double
      */
-    @Override
     public double calcStandardDeviationFromSample() {
         double variance = calcSampleVariance();
         return Math.sqrt(variance);
@@ -78,22 +75,18 @@ public final class SimpleStatistics implements ISimpleStatistics, IStatistics {
     /**
      * @return double
      */
-    @Override
     public double calcStandardDeviationFromPopulation() {
         double variance = calcPopulationVariance();
         return Math.sqrt(variance);
     }
 
-    @Override
     public double calcStandardErrorFromSample() {
         return calcStandardDeviationFromSample() / Math.sqrt(n);
     }
 
-    @Override
     public double calcStandardErrorFromPopulation() {
         return calcStandardDeviationFromSample() / Math.sqrt(n);
     }
-
 
     @NotNull
     @Contract(pure = true)

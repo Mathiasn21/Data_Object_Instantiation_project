@@ -2,6 +2,7 @@ package DOIFramework.core.extractors;
 
 
 import DOIFramework.exceptions.NoSuchColumnException;
+import DOIFramework.statistics.report.AverageReport;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
