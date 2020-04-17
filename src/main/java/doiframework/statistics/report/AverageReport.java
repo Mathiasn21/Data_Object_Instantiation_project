@@ -21,7 +21,7 @@ public enum AverageReport implements IReport {
 
     public final String option;
     public final IAverageCalculate calculate;
-    private static Class<? extends IStatistics> clazz = Average.class;
+    private static final Class<? extends IStatistics> clazz = Average.class;
 
     @Contract(pure = true)
     AverageReport(String option, IAverageCalculate calculate) {

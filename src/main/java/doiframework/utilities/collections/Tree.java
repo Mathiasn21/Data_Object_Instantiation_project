@@ -36,7 +36,7 @@ import static doiframework.utilities.collections.QuickTraversals.getBottomLeftCh
  * @param <T> T
  */
 public class Tree<T> implements ITree<T> {
-    private Comparator<T> comparator;
+    private final Comparator<T> comparator;
     private final boolean compressDuplicates;
     private Node<T> rootNode;
     private Comparator<Object> experimentalComparator;

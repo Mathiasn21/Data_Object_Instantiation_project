@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @param <T> T
  */
 public final class Stack<T> {
-    private int size;
+    private final int size;
     private static final int DEFAULT_SIZE = 25;
     private T[] tArr;
     private int top = -1;
@@ -30,7 +30,7 @@ public final class Stack<T> {
         tArr[++top] = t;
     }
 
-    private final boolean isFull() {
+    private boolean isFull() {
         return size() >= size;
     }
 

@@ -19,7 +19,7 @@ public enum SimpleStatisticalReport implements IReport {
     STANDARD_ERROR_SAMPLE("Standard Error - From sample", SimpleStatistics::calcStandardErrorFromSample),
     STANDARD_ERROR_POPULATION("Standard Error - From population", SimpleStatistics::calcStandardErrorFromPopulation);
 
-    private static Class<? extends IStatistics> clazz = SimpleStatistics.class;
+    private static final Class<? extends IStatistics> clazz = SimpleStatistics.class;
 
     public final String option;
     final IStatisticsCalculate calculate;

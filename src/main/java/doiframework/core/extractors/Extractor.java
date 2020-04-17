@@ -25,7 +25,6 @@ import java.util.*;
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of resource objects
     private ICollector collector;
-    private List<Exception> exceptions = new ArrayList<>();
     private List<AverageReport> reportOptions = Arrays.asList(AverageReport.values());
 
     public Extractor(@NotNull C collector) {
@@ -215,6 +214,13 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return null;
     }
 
+    /**
+     * @return ICollector
+     */
+    public ICollector getCollector() {
+        return collector;
+    }
+
     @NotNull
     private List<Field> filterFieldsForPrimitiveNumbers(@NotNull List<Field> fields) {
         List<Field> filteredFields = new ArrayList<>();
@@ -259,5 +265,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return field;
     }
 
+
     private void raise(@NotNull IEvent event) { EventObserver.registerEventFrom(event); }
+
 }

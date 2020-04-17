@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public interface ICollectorPool {
     void collectAllData() throws IOException;
-    void collectAllDataAsync() throws IOException;
+    void collectAllDataAsync();
     void collectAllDataAsync(ThreadPoolExecutor threadPool);
 
     Iterator<ICollector> iterator();

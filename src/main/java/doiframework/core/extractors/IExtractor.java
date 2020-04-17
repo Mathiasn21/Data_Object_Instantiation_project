@@ -23,7 +23,7 @@ public interface IExtractor{
 
 
     @Contract(pure = true)
-    @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws ReflectiveOperationException;
 
     @Contract(pure = true)
     @NotNull List<Object> extractColumnFrom(@NotNull Method method) throws IllegalAccessException, NoSuchMethodException, NoSuchColumnException;
@@ -33,7 +33,7 @@ public interface IExtractor{
 
 
     @Contract(pure = true)
-    @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException;
 
     @Contract(pure = true)
     @NotNull Map<Method, List<Object>> extractColumnsUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchColumnException;
@@ -45,7 +45,7 @@ public interface IExtractor{
     @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws IllegalAccessException, NoSuchFieldException;
+    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException;
 
     @Contract(pure = true)
     @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException;
