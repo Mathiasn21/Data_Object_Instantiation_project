@@ -61,6 +61,11 @@ public class CSVHandler implements IHandle{
         this.removeDoubleQuotes = removeDoubleQuotes;
     }
 
+    /**
+     * Remove any double quotes inside a string.
+     * By default this is off.
+     * @param removeSingleQuotes boolean
+     */
     public final void removeSingleQuotes(boolean removeSingleQuotes) {
         this.removeSingleQuotes = removeSingleQuotes;
     }
