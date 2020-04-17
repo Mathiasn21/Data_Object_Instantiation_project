@@ -16,7 +16,7 @@ JSON:
 
 #### Define resources multiple times:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ Note the chained invocations of fromFile().
  
 #### Define multiple resources once
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) { 

@@ -1,6 +1,6 @@
 package unitTests;
 
-import DOIFramework.utilities.Parser;
+import doiframework.utilities.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

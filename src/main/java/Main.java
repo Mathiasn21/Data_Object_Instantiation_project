@@ -1,6 +1,6 @@
-import DOIFramework.exceptions.NotPrimitiveNumber;
-import DOIFramework.statistics.report.CentralCommand;
-import DOIFramework.statistics.report.ReportThings;
+import doiframework.exceptions.NotPrimitiveNumber;
+import doiframework.statistics.report.CentralCommand;
+import doiframework.statistics.report.ReportThings;
 
 public class Main {
     public static void main(String[] args) throws NotPrimitiveNumber {

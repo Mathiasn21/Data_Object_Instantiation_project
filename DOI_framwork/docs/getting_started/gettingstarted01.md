@@ -24,7 +24,7 @@ CSV - With **default delimiter(,)**:
 
 #### Data formatted as JSON:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,7 +40,7 @@ public class Main {
 
 #### Data formatted as CSV:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -61,7 +61,7 @@ a simple URL connection. If one wishes to alter this behaviour then you must cre
 
 #### Data formatted as JSON:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -75,7 +75,7 @@ public class Main {
 
 #### Data formatted as CSV:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) {
