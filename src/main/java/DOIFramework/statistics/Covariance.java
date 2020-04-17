@@ -28,7 +28,7 @@ public final class Covariance {
             throw new DatasetsNotMatichingException();
         }
         for (int i = 0; i < n; i++) {
-            sum = ((data1[i] - avg.calcMean()) * (data2[i] - avg2.calcMean()));
+            sum = (data1[i] - avg.calcMean()) * (data2[i] - avg2.calcMean());
         }
         return sum;
     }

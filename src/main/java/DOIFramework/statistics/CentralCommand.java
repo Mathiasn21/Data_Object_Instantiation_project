@@ -3,8 +3,8 @@ package DOIFramework.statistics;
 
 import DOIFramework.exceptions.NotPrimitiveNumber;
 import DOIFramework.extractors.IReport;
-import DOIFramework.observer.EventObserver;
-import DOIFramework.observer.events.ExceptionEvent;
+import DOIFramework.core.observer.EventObserver;
+import DOIFramework.core.observer.events.ExceptionEvent;
 import DOIFramework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +33,7 @@ public class CentralCommand {
         commands.forEach((command) -> {
             try {
                 IStatistics statistic = statFactory.create(command.getIReport().getMainClass(), data.get(0));
-                
+
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
                 EventObserver.registerEventFrom(new ExceptionEvent(this, e));
             }
