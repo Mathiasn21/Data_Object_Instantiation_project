@@ -333,16 +333,20 @@ public class Tree<T> implements ITree<T> {
             node.tCounter = smallestNode.tCounter;
 
             //Updates the references
-            if(parent.right == smallestNode){ parent.right = null; }
-            if(parent.left == smallestNode){ parent.left = null; }
-
-            if(smallestNode.right != null){
-                smallestNode.right.parent = node;
-                node.right = smallestNode.right;
-            }
+            updateReferences(node, smallestNode, parent);
         }
         size--;
         return orgNode;
+    }
+
+    protected void updateReferences(Node<T> node, Node<T> smallestNode, @NotNull Node<T> parent) {
+        if(parent.right == smallestNode){ parent.right = null; }
+        if(parent.left == smallestNode){ parent.left = null; }
+
+        if(smallestNode.right != null){
+            smallestNode.right.parent = node;
+            node.right = smallestNode.right;
+        }
     }
 
     /**Copies all the resource from one tree, to a new tree, and returns new tree.
@@ -450,5 +454,24 @@ public class Tree<T> implements ITree<T> {
     private void setupComparableMethod(@NotNull T thiz) {
         try { method = ((Comparable<T>) thiz).getClass().getMethod("compareTo", thiz.getClass());
         } catch (NoSuchMethodException e) { e.printStackTrace(); }
+    }
+
+    /**
+     * Method for updating the parent references and the grandparent
+     * @param root Node&lt;T&gt;
+     * @param pivot Node&lt;T&gt;
+     * @param pLeftChild Node&lt;T&gt;
+     * @param pGrandParent Node&lt;T&gt;
+     */
+    protected void updateParentalReferences(Node<T> root, @NotNull Node<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
+        pivot.parent = pGrandParent;
+        if(pLeftChild != null) pLeftChild.parent = root;
+
+        //Update grandparents references or set new root
+        if (pGrandParent != null) {
+            if (pGrandParent.left == root) { pGrandParent.left = pivot;
+            } else { pGrandParent.right = pivot; }
+
+        } else { setRootNode(pivot); }
     }
 }

@@ -132,23 +132,4 @@ public final class AVLTree<T> extends Tree<T> {
     private int getHeight(AVLNode<T> node) {
         return node == null ? -1 : node.height;
     }
-
-    /**
-     * Method for updating the parent references and the grandparent
-     * @param root AVLNode&lt;T&gt;
-     * @param pivot AVLNode&lt;T&gt;
-     * @param pLeftChild Node&lt;T&gt;
-     * @param pGrandParent Node&lt;T&gt;
-     */
-    private void updateParentalReferences(AVLNode<T> root, @NotNull AVLNode<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
-        pivot.parent = pGrandParent;
-        if(pLeftChild != null) pLeftChild.parent = root;
-
-        //Update grandparents references or set new root
-        if (pGrandParent != null) {
-            if (pGrandParent.left == root) { pGrandParent.left = pivot;
-            } else { pGrandParent.right = pivot; }
-
-        } else { setRootNode(pivot); }
-    }
 }

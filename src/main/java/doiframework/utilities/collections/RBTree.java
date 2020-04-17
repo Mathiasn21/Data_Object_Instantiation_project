@@ -173,13 +173,8 @@ public final class RBTree<T> extends Tree<T> {
             replace(node, replacement);
             node.color = replacement.color;
 
-            if(parent.right == replacement){ parent.right = null; }
-            if(parent.left == replacement){ parent.left = null; }
-
-            if(replacement.right != null){
-                replacement.right.parent = node;
-                node.right = replacement.right;
-            }
+            //Updates the references
+            updateReferences(node, replacement, parent);
             replacement = node;
             xParent = parent;
         }
@@ -309,27 +304,6 @@ public final class RBTree<T> extends Tree<T> {
         pivot.left = root;
         updateParentalReferences(root, pivot, pLeftChild, pGrandParent);
     }
-
-
-    /**
-     * Method for updating the parent and grandparent references
-     * @param root RBNode&lt;T&gt;
-     * @param pivot RBNode&lt;T&gt;
-     * @param pLeftChild Node&lt;T&gt;
-     * @param pGrandParent Node&lt;T&gt;
-     */
-    private void updateParentalReferences(RBNode<T> root, @NotNull RBNode<T> pivot, Node<T> pLeftChild, Node<T> pGrandParent) {
-        pivot.parent = pGrandParent;
-        if(pLeftChild != null) pLeftChild.parent = root;
-
-        //Update grandparents references or set new root
-        if (pGrandParent != null) {
-            if (pGrandParent.left == root) { pGrandParent.left = pivot;
-            } else { pGrandParent.right = pivot; }
-
-        } else { setRootNode(pivot); }
-    }
-
 
     /**Replaces vital resource from this node with that node...
      * @param thiz RBNode&lt;T&gt;
