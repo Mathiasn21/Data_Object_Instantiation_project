@@ -10,7 +10,7 @@ import java.util.List;
 /** A enum describing all possible Simple statistical implementations.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum SimpleStatisticalReport implements IReport{
+public enum SimpleStatisticalReport implements IReport {
     POPULATION_VARIANCE("Population Variance", SimpleStatistics::calcPopulationVariance),
 
     SAMPLE_VARIANCE("Sample Variance", SimpleStatistics::calcSampleVariance),

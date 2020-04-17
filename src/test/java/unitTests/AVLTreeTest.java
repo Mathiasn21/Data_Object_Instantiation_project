@@ -9,13 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class for testing AVLTree
- * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
+ * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */
 public class AVLTreeTest {
-    private final int[] fibonacci = {1, 1, 2, 3, 5, 8, 13, 21, 34}, scrambledFibonacci = {34, 1, 5, 1, 2, 13, 8, 3, 21}, fibonacciEightRemoved = {1, 1, 2, 3, 5, 13, 21, 34};
-
-    //TODO: IMPLEMENT TEST
+    private final int[] numbers = {20,4,3,2,9,7,11,26,21,30};// size = 10
     @Test
     void creation_of_tree(){
         assertDoesNotThrow(() -> {
@@ -23,133 +21,58 @@ public class AVLTreeTest {
         });
     }
 
-    //TODO: IMPLEMENT TEST
     @Test
-    void insertion(){
-        //insert a value
-        //insert a bigger value
-        //insert a smaller value
+    void insertion_with_comparator_set(){
+        int[] res = {2, 3, 4, 5, 6, 7, 13, 14, 15};
+        int[] arr = {13, 4, 5, 14, 3, 6, 2, 3, 15, 7};
+
+        ITree<Integer> tree = new Tree<>(Integer::compareTo, true);
+        for(int integer : arr) { tree.insert(integer); }
+
+        Iterator<Node<Integer>> iterator = tree.inorderTraversal();
+        assertDoesNotThrow(() -> {
+            for(int integer : res){ assertEquals(integer, (int) iterator.next().getT()); }
+            assertFalse(iterator.hasNext());
+        });
     }
 
-    //TODO: IMPLEMENT TEST
     @Test
-    void insertion_causes_LL_rotation(){
+    void insertion_without_comparator_set(){
+        int[] res = {2, 3, 3, 4, 5, 6, 7, 13, 14, 15};
+        int[] arr = {13, 4, 5, 14, 3, 6, 2, 3, 15, 7};
 
+        ITree<Integer> tree = new Tree<>();
+        for(int integer : arr) { tree.insert(integer); }
+        Iterator<Node<Integer>> iterator = tree.inorderTraversal();
+
+        assertDoesNotThrow(() -> {
+            for(int integer : res){ assertEquals(integer, (int) iterator.next().getT()); }
+            assertFalse(iterator.hasNext());
+        });
     }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void insertion_causes_LR_rotation(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void insertion_causes_RL_rotation(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void insertion_causes_RR_rotation(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void removal_causes_LL_rotation(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void removal_causes_LR_rotation(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void removal_causes_RL_rotation(){
-
-    }
-
-    //TODO: IMPLEMENT TEST
-    @Test
-    void removal_causes_RR_rotation(){
-
-    }
-
 
     @Test
     void insertion_of_node(){
         ITree<Integer> tree = genTree();
-        Iterator<Node<Integer>> iterator = tree.inorderTraversal();
-
-        for(int numbers : fibonacci){
-            assertEquals(numbers, iterator.next().getT());
-        }
-        assertEquals(tree.size(), fibonacci.length);
+        assertFalse(tree.isEmpty());
+        assertEquals(tree.size(), numbers.length);
     }
 
     @Test
     void removal_of_node(){
-        var tree = genTree();
-        for(int numbers : scrambledFibonacci){
-            tree.insert(numbers);
-        }
-        tree.remove(8);
-        assertFalse(tree.contains(8));
-    }
+        ITree<Integer> tree = genTree();
+        tree.remove(20);
+        tree.remove(11);
 
-    @Test
-    void levelorder_traversal(){
-        var tree = genTree();
-        int[] fibonacciLevelordered = {5, 1, 13, 1, 2, 8, 34, 3, 21};
-
-        for(int numbers : scrambledFibonacci) {
-            tree.insert(numbers);
-        }
-
-        Iterator<Node<Integer>> iterator = tree.levelorderTraversal();
-        for(int numbers : fibonacciLevelordered){
-            assertEquals(numbers, iterator.next().getT());
-        }
-    }
-
-    @Test
-    void postorder_traversal(){
-        var tree = genTree();
-        int[] fibonacciPostordered = {1, 3, 2, 1, 8, 21, 34, 13, 5};
-
-        for(int numbers : scrambledFibonacci) {
-            tree.insert(numbers);
-        }
-
-        Iterator<Node<Integer>> iterator = tree.postorderTraversal();
-        for(int numbers : fibonacciPostordered){
-            assertEquals(numbers, iterator.next().getT());
-        }
-    }
-
-    @Test
-    void preorder_traversal(){
-        var tree = genTree();
-        int[] fibonacciPreordered = {5, 1, 1, 2, 3, 13, 8, 34, 21};
-
-        for(int numbers : scrambledFibonacci) {
-            tree.insert(numbers);
-        }
-
-        Iterator<Node<Integer>> iterator = tree.preorderTraversal();
-        for(int numbers : fibonacciPreordered){
-            assertEquals(numbers, iterator.next().getT());
-        }
+        assertEquals(tree.size(), numbers.length - 2);
+        assertFalse(tree.contains(20));
+        assertFalse(tree.contains(11));
     }
 
     @NotNull
     private ITree<Integer> genTree(){
         ITree<Integer> tree = new AVLTree<>();
-        for(int numbers : scrambledFibonacci){ tree.insert(numbers); }
+        for(int numbers : numbers){ tree.insert(numbers); }
         return tree;
     }
 }

@@ -13,14 +13,14 @@ public class Parse {
     void from_string_to_primitive_value(){
         String[] values = {"22.34", "22.34", "2222", "String", "127", "255", "21334333332", "true"};
         for (int i = 0; i < wrappers.length; i++){
-            assertSame(Parser.toPrimitiveValueFromObject(wrappers[i], values[i]).getClass(), wrappers[i]);
+            assertSame(Parser.toPrimitiveValueGivenType(wrappers[i], values[i]).getClass(), wrappers[i]);
         }
     }
 
     @Test
     void from_primitive_object_to_primitive_class(){
         for(int i = 0; i < wrappers.length; i++){
-            assertEquals(Parser.wrapperToPrimitiveType(wrappers[i]), primitives[i]);
+            assertEquals(Parser.PrimitiveWrapperToPrimitiveType(wrappers[i]), primitives[i]);
         }
     }
 

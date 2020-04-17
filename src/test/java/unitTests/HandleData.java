@@ -44,6 +44,22 @@ public class HandleData {
     }
 
     @Test
+    void handle_json_with_primitive_arrays_n_dimensions() throws IOException {
+        Class<?>[] classes = {String.class, String.class, String.class, int[][][].class};
+        String path = System.getProperty("user.dir") + "/files/3Darrays.json" ;
+        Resource resource = Resource.newResource().fromFile(path).build();
+
+        JSONHandler jsonHandler = new JSONHandler();
+        List<Object[]> list = jsonHandler.handle(resource.getData());
+        assertFalse(list.isEmpty());
+
+        Object[] sample = list.get(0);
+        for(int i = 0; i < sample.length; i++){
+            assertSame(sample[i].getClass(), classes[i]);
+        }
+    }
+
+    @Test
     void handle_csv_with_only_primitives(){
         //TODO: implement test cases for this
         fail();

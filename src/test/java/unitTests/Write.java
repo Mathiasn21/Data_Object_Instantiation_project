@@ -2,7 +2,7 @@ package unitTests;
 
 import DOIFramework.core.resource.commands.write.IWriteCommand;
 import DOIFramework.core.resource.Resource;
-import DOIFramework.core.resource.commands.write.FileCommand;
+import DOIFramework.core.resource.commands.write.WriteFileCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class Write {
     void to_file_using_string(){
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            IWriteCommand writer = new FileCommand(path);
+            IWriteCommand writer = new WriteFileCommand(path);
             writer.execute( "StringPath;");
 
             Resource resource = Resource.newResource().fromFile(path).build();
@@ -35,7 +35,7 @@ public class Write {
     void to_file_using_path() {
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            FileCommand writer = new FileCommand(path);
+            WriteFileCommand writer = new WriteFileCommand(path);
             writer.execute( "StringPath;");
 
             Resource resource = Resource.newResource().fromFile(path).build();
@@ -51,11 +51,11 @@ public class Write {
     }
 
     @Test
-    void to_file_using_string_appending(){
+    void to_file_using_by_appending(){
         Assertions.assertDoesNotThrow(() -> {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            FileCommand write = new FileCommand(path);
+            WriteFileCommand write = new WriteFileCommand(path);
             write.execute("fappening");
 
             //Reads from resource
@@ -81,12 +81,6 @@ public class Write {
     @Test
     void to_URL_using_URL() {
         //TODO: Implement test and make sure you utilize mocks for this
-        fail();
-    }
-
-    @Test
-    void to_file_using_file_appending(){
-        //TODO: implement method
         fail();
     }
 }

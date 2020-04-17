@@ -62,15 +62,45 @@ public class JSONHandler implements IHandle{
     }
 
     private Object parseToPrimitiveArray(@NotNull JsonArray array){
-        int size = array.size();
-        Class<?> type = Parser.wrapperToPrimitiveType(findPrimitiveTypeFrom(array.get(0), array.get(size - 1)));
-        Object arr = Array.newInstance(type, size);
-
-        for (int i = 0; i < size; i++){
-            Array.set(arr, i, Parser.toPrimitiveValueFromObject(type, array.get(i).toString()));
+        Class<?> primitiveType;
+        JsonArray arr = array;
+        while(true){
+            JsonElement element = arr.get(0);
+            if(!element.isJsonArray()){
+                primitiveType = Parser.PrimitiveWrapperToPrimitiveType(findPrimitiveTypeFrom(arr.get(0), arr.get(arr.size() - 1)));
+                break;
+            }
+            arr = (JsonArray) element;
         }
-        return arr;
+        return buildArray(array, primitiveType);
     }
+
+    private Object buildArray(@NotNull JsonArray array, Class<?> primitiveType) {
+        Object res = null;
+
+        int outerSize = array.size();
+        for (int i = 0; i < outerSize; i++) {
+            JsonElement element = array.get(i);
+
+            if (!element.isJsonArray()) {
+                int size = array.size();
+                Object arr = Array.newInstance(primitiveType, size);
+
+                for (int j = 0; j < size; j++) {
+                    Array.set(arr, j, Parser.toPrimitiveValueGivenType(primitiveType, array.get(j).toString()));
+                }
+                return arr;
+            } else {
+                Object arr = buildArray(((JsonArray) array.get(i)), primitiveType);
+                if(res == null){
+                    res = Array.newInstance(arr.getClass(), outerSize);
+                }
+                Array.set(res, i, arr);
+            }
+        }
+        return res;
+    }
+
 
     private Class<?> findPrimitiveTypeFrom(@NotNull JsonElement firstElement, @NotNull JsonElement secondElement) {
         if(!(isCreatable(firstElement.toString()) && isCreatable(secondElement.toString()))){

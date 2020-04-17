@@ -387,4 +387,9 @@ public final class RBTree<T> extends Tree<T> {
         if(node == null){return;}
         node.color = color;
     }
+
+    @Override
+    public String toString() {
+        return inorderTraversal().toString();
+    }
 }

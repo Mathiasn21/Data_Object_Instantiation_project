@@ -1,7 +1,7 @@
 package DOIFramework.statistics;
 
-import DOIFramework.extractors.AverageReport;
-import DOIFramework.extractors.IReport;
+import DOIFramework.core.extractors.AverageReport;
+import DOIFramework.core.extractors.IReport;
 import org.jetbrains.annotations.NotNull;
 
 public enum ReportThings {

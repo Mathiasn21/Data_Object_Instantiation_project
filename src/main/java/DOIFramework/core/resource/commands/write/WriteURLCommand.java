@@ -14,12 +14,12 @@ import java.nio.charset.StandardCharsets;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
 **/
-public final class URLCommand implements IWriteURLCommand {
+public final class WriteURLCommand implements IWriteURLCommand {
     private final URL url;
 
-    public URLCommand(@NotNull URL url) { this.url = url; }
+    public WriteURLCommand(@NotNull URL url) { this.url = url; }
 
-    public URLCommand(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
+    public WriteURLCommand(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
 
     /**
      * Standard method for writing resource to a execute URL.

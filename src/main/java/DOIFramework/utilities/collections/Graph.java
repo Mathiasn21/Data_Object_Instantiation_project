@@ -1,49 +1,76 @@
 package DOIFramework.utilities.collections;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
 
 /** Class for handling of generic graph
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    GraphNode<T> node;
-    private Map<T, List<T>> toppointsMap;
+    public static List<GraphNode> nodes;
+    int nmbrOfNodes;
 
-    public void insert(int uid, T number, int... connections) {
-
+    public void insert(int uid, T number, ArrayList<GraphNode> connections) {
+        GraphNode node = new GraphNode(uid, connections);
+        nodes.add(node);
+        nmbrOfNodes++;
     }
 
     public boolean contains(T data) {
-        return false;
+        if(nodes.contains(data)){ //temporary pseudo code for checking of list contains the data
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public boolean contains(int uid) {
-        return false;
+        if(nodes.contains(uid)){ //temporary pseudo code for checking of list contains the uid
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public int size() {
-        return 0;
-    }
+        return nmbrOfNodes;
+    } //will return the number of nodes
 
     public void remove(T t) {
+        nodes.remove(t); //incorrect, but its pseudo code, so it will be implemented later
+        nmbrOfNodes--;
     }
 
     public int numConnections(int uid) {
-        return 0;
+        return nodes.get(uid).getConnections().size();
     }
 
     public int numConnections(T t) {
         return 0;
     }
 
-    public Iterator<GraphNode> DFS() {
-        return null;
+    public static void DFS(GraphNode startingNode) { //graph depth first search
+        ArrayList<GraphNode> visitedNodes = new ArrayList<GraphNode>();
+        Stack<GraphNode> stack= new Stack<GraphNode>();
+        stack.push(startingNode);
+
+        while (!stack.empty()){
+            GraphNode currentNode = stack.pop();
+            if(!visitedNodes.contains(currentNode)){
+                visitedNodes.add(currentNode);
+                ArrayList<GraphNode> connections = currentNode.getConnections();
+                for(int i = connections.size(); i >= 0; i--){
+                    stack.push(nodes.get(i));
+                }
+            }
+        }
     }
 
-    public int[] getConnections() {
-        return node.getConnections();
+    public ArrayList<GraphNode> getConnections(int i) {
+        return nodes.get(i).getConnections();
     }
 
     public T[] getConnections(T t) {
@@ -54,30 +81,8 @@ public class Graph<T> {
         return null;
     }
 
-
-//TODO: Implement generic graph and its functions
-}
-
-class GraphNode<T>{
-    int uid;
-    T number;
-    int[] connections; //array list that will contain this node's connections to other nodes
-
-    public GraphNode(int uid, T number, int ... connections){
-        this.uid = uid;
-        this.number = number;
-        this.connections = connections;
-    }
-
-    public int[] getConnections() {
-        return connections;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public T getNumber() {
-        return number;
+    @NotNull
+    public Iterator<GraphNode> DFS() {
+        return null;
     }
 }

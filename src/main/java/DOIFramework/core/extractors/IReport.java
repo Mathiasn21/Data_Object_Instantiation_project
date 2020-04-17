@@ -1,4 +1,4 @@
-package DOIFramework.extractors;
+package DOIFramework.core.extractors;
 
 import DOIFramework.statistics.IStatistics;
 

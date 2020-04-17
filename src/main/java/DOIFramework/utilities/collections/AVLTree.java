@@ -19,9 +19,12 @@ public final class AVLTree<T> extends Tree<T> {
         AVLNode<T> node = new AVLNode<>(data, null);
         insert(getRootNode(), node);//Calls super method
 
-        if(node.parent == null){return;}//No need to re balance
-        node = (AVLNode<T>)node.parent;
+        if(node.parent == null){
+            size++;
+            return;//No need to re balance
+        }
 
+        node = (AVLNode<T>)node.parent;
         while(node != null){
             reBalanceTree(node);
             node = (AVLNode<T>)node.parent;

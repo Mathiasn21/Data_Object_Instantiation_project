@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import static DOIFramework.utilities.collections.QuickTraversals.getBottomLeftChild;
@@ -86,7 +87,7 @@ public class Tree<T> implements ITree<T> {
      * @return int
      */
     @Override
-    public int size() { return size; }
+    public final int size() { return size; }
 
     /**
      * @return int
@@ -245,7 +246,10 @@ public class Tree<T> implements ITree<T> {
      * @return boolean
      */
     @Override
-    public final boolean contains(T t) { return search(t) == null; }
+    public final boolean contains(T t) { return search(t) != null; }
+
+    @Override
+    public boolean isEmpty() { return size == 0; }
 
     /**
      * Returns T or null if none was found

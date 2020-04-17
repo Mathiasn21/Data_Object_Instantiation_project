@@ -1,15 +1,17 @@
 package DOIFramework.statistics;
 
 
-import DOIFramework.exceptions.NotPrimitiveNumber;
-import DOIFramework.extractors.IReport;
 import DOIFramework.core.observer.EventObserver;
 import DOIFramework.core.observer.events.ExceptionEvent;
+import DOIFramework.exceptions.NotPrimitiveNumber;
+import DOIFramework.core.extractors.IReport;
 import DOIFramework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CentralCommand {
     private final List<ReportThings> commands;
@@ -34,7 +36,7 @@ public class CentralCommand {
             try {
                 IStatistics statistic = statFactory.create(command.getIReport().getMainClass(), data.get(0));
 
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            } catch (ReflectiveOperationException e) {
                 EventObserver.registerEventFrom(new ExceptionEvent(this, e));
             }
         });

@@ -64,11 +64,8 @@ public class AnnotationProcessingTest {
             ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "test");
             List<Object> complexDTO = objectInformation.data;
 
-            List<ComplexDTO> test = new ArrayList<>();
-
             for(Object o : complexDTO){
                 assertTrue(o instanceof ComplexDTO);
-                test.add((ComplexDTO) o);
             }
             assertEquals(complexDTO.size(), numObjects);
         } catch (ReflectiveOperationException e) {
