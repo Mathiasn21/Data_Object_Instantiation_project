@@ -50,4 +50,18 @@ public enum AverageReport implements IReport {
         return clazz;
     }
 
+    @Override
+    public String getOption() {
+        return this.option;
+    }
+
+    @Override
+    public double calculate(Statistics statistics) {
+        double d = -1;
+        if(statistics instanceof Average){
+            d = calculate.execute((Average) statistics);
+        }
+        return d;
+    }
+
 }

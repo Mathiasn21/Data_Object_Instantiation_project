@@ -1,5 +1,6 @@
 package doiframework.statistics.report;
 
+import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.Statistics;
 import doiframework.statistics.calculations.IStatisticsCalculate;
 import doiframework.statistics.calculations.SimpleStatistics;
@@ -49,5 +50,19 @@ public enum SimpleStatisticalReport implements IReport {
     @Override
     public Class<? extends Statistics> getMainClass() {
         return clazz;
+    }
+
+    @Override
+    public String getOption() {
+        return this.option;
+    }
+
+    @Override
+    public double calculate(Statistics statistics) {
+        double d = -1;
+        if(statistics instanceof SimpleStatistics){
+            d = calculate.execute((SimpleStatistics) statistics);
+        }
+        return d;
     }
 }

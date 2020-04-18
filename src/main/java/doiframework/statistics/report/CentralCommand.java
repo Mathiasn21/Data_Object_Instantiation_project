@@ -19,7 +19,7 @@ public class CentralCommand {
 
     public CentralCommand(@NotNull ReportThings[] commands, @NotNull Double[]... data) throws NotPrimitiveNumber {
         this.commands = Arrays.asList(commands);
-        for (Object o : data){
+        for (Double[] o : data){
             if(!Parser.isPrimitiveNumber(o.getClass().getComponentType())){
                 throw new NotPrimitiveNumber();
             }
@@ -37,14 +37,9 @@ public class CentralCommand {
                 var report = command.getIReport();
                 var statistic = statFactory.create(report.getMainClass(), data.get(0));
                 double d;
-                if(report.getClass() == AverageReport.class){
-                    d = ((AverageReport) report).calculate.execute((Average) statistic);
-                    res.put(((AverageReport) report).option, d);
 
-                } else if(report.getClass() == SimpleStatisticalReport.class){
-                    d = ((SimpleStatisticalReport) report).calculate.execute((SimpleStatistics) statistic);
-                    res.put(((SimpleStatisticalReport) report).option, d);
-                }
+                d = report.calculate(statistic);
+                res.put(report.getOption(), d);
 
             } catch (ReflectiveOperationException e) {
                 EventObserver.registerEventFrom(new ExceptionEvent(this, e));
