@@ -10,6 +10,8 @@ import java.util.List;
  * @version 1.0.0
  */
 public interface IAnnotationsProcessor {
+    void setPrefix(String prefix);
+
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param file {@link String}

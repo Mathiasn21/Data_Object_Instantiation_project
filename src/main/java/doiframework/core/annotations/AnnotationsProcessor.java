@@ -37,6 +37,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     private final static Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
     private final static List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
     private final static List<Class<?>> nameSpaceMappedToNameSpaces = new ArrayList<>();
+    private String prefix = "";
 
     public AnnotationsProcessor() {
         if(!objectMappedToConstructor.isEmpty()){return;}
@@ -113,7 +114,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
      * @return Set&lt;Class&lt;?&gt;&gt;
      */
     private Set<Class<?>> getAllDataObjectClasses(){
-        Reflections reflections = new Reflections("");
+        Reflections reflections = new Reflections(prefix);
         return reflections.getTypesAnnotatedWith(DataObject.class);
     }
 
@@ -131,6 +132,17 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     //                   4.Contract Methods              //
     // --------------------------------------------------//
+
+    /**
+     * Sets the prefix used for searching for annotated classes.
+     * Defaults to "".
+     * @param prefix String
+     */
+    @Override
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     /**
      * @param listWithInitArgs {@link List}&lt;{@link Object}[]&gt;
      * @param name String
