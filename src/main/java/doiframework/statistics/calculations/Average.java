@@ -10,9 +10,7 @@ import java.util.List;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public final class Average implements IStatistics{
-    private final double[] data;
-    private final int n;
+public final class Average extends Statistics {
     private double sum = 0;
 
     /**
@@ -20,8 +18,7 @@ public final class Average implements IStatistics{
      */
     @Contract(pure = true)
     public Average(@NotNull double[] data){
-        this.data = data;
-        this.n = data.length;
+        super(data);
     }
 
     /**
@@ -29,10 +26,7 @@ public final class Average implements IStatistics{
      */
     @Contract(pure = true)
     public Average(@NotNull Double[] data){
-        double[] doubles = new double[data.length];
-        for(int i = 0; i < data.length; i++){ doubles[i] = data[i]; }
-        this.data = doubles;
-        this.n = data.length;
+        super(data);
     }
 
     /**
@@ -40,10 +34,7 @@ public final class Average implements IStatistics{
      */
     @Contract(pure = true)
     public Average(@NotNull List<Number> data){
-        double[] doubles = new double[data.size()];
-        for(int i = 0; i < data.size(); i++){ doubles[i] = data.get(i).doubleValue(); }
-        this.data = doubles;
-        this.n = data.size();
+        super(data);
     }
 
     /**
@@ -111,8 +102,9 @@ public final class Average implements IStatistics{
         return n;
     }
 
+    @Contract(pure = true)
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "Average calculation";
     }
 }

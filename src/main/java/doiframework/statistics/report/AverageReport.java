@@ -5,7 +5,7 @@ import java.util.List;
 
 import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.IAverageCalculate;
-import doiframework.statistics.calculations.IStatistics;
+import doiframework.statistics.calculations.Statistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ public enum AverageReport implements IReport {
 
     public final String option;
     public final IAverageCalculate calculate;
-    private static final Class<? extends IStatistics> clazz = Average.class;
+    private static final Class<? extends Statistics> clazz = Average.class;
 
     @Contract(pure = true)
     AverageReport(String option, IAverageCalculate calculate) {
@@ -46,7 +46,7 @@ public enum AverageReport implements IReport {
     }
 
     @Override
-    public Class<? extends IStatistics> getMainClass() {
+    public Class<? extends Statistics> getMainClass() {
         return clazz;
     }
 

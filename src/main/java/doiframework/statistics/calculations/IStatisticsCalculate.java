@@ -2,7 +2,7 @@ package doiframework.statistics.calculations;
 
 /**
  * A interface for wrapping statistics calculation.
- * {@link IStatistics}
+ * {@link Statistics}
  */
 @FunctionalInterface
 public interface IStatisticsCalculate {

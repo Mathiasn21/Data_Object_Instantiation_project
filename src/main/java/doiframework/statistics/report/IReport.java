@@ -1,7 +1,7 @@
 package doiframework.statistics.report;
 
-import doiframework.statistics.calculations.IStatistics;
+import doiframework.statistics.calculations.Statistics;
 
 public interface IReport {
-    Class<? extends IStatistics> getMainClass();
+    Class<? extends Statistics> getMainClass();
 }

@@ -4,14 +4,11 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Class for calculating statistics execute the resource {@link IStatistics}
+ * Class for calculating statistics execute the resource {@link Statistics}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 1.0
  */
-public final class SimpleStatistics implements IStatistics {
-
-    private final double[] data;
-    private final int n;
+public final class SimpleStatistics extends Statistics {
     private final Average average;
 
     /**
@@ -19,8 +16,7 @@ public final class SimpleStatistics implements IStatistics {
      **/
     @Contract(pure = true)
     public SimpleStatistics(@NotNull double[] data){
-        this.data = data;
-        this.n = data.length;
+        super(data);
         this.average = new Average(data);
     }
 
@@ -29,10 +25,7 @@ public final class SimpleStatistics implements IStatistics {
      */
     @Contract(pure = true)
     public SimpleStatistics(@NotNull Double[] data){
-        double[] doubles = new double[data.length];
-        for(int i = 0; i < data.length; i++){ doubles[i] = data[i]; }
-        this.data = doubles;
-        this.n = data.length;
+        super(data);
         this.average = new Average(data);
     }
 

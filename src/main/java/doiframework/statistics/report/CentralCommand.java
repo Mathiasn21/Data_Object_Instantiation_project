@@ -4,7 +4,6 @@ import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
 import doiframework.exceptions.NotPrimitiveNumber;
 import doiframework.statistics.calculations.Average;
-import doiframework.statistics.calculations.IStatistics;
 import doiframework.statistics.calculations.SimpleStatistics;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;

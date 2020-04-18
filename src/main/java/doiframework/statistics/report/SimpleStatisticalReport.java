@@ -1,6 +1,6 @@
 package doiframework.statistics.report;
 
-import doiframework.statistics.calculations.IStatistics;
+import doiframework.statistics.calculations.Statistics;
 import doiframework.statistics.calculations.IStatisticsCalculate;
 import doiframework.statistics.calculations.SimpleStatistics;
 import org.jetbrains.annotations.Contract;
@@ -19,7 +19,7 @@ public enum SimpleStatisticalReport implements IReport {
     STANDARD_ERROR_SAMPLE("Standard Error - From sample", SimpleStatistics::calcStandardErrorFromSample),
     STANDARD_ERROR_POPULATION("Standard Error - From population", SimpleStatistics::calcStandardErrorFromPopulation);
 
-    private static final Class<? extends IStatistics> clazz = SimpleStatistics.class;
+    private static final Class<? extends Statistics> clazz = SimpleStatistics.class;
 
     public final String option;
     final IStatisticsCalculate calculate;
@@ -47,7 +47,7 @@ public enum SimpleStatisticalReport implements IReport {
     }
 
     @Override
-    public Class<? extends IStatistics> getMainClass() {
+    public Class<? extends Statistics> getMainClass() {
         return clazz;
     }
 }
