@@ -21,14 +21,15 @@ import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
  */
 public class CSVHandler implements IHandle{
     private String delimiter = ",";
-    private boolean isSingleColumn = false;
-
     private Class<?>[] primaryKeyTypes;
+
+    private boolean isSingleColumn = false;
     private boolean skipEmptyLines = false;
     private boolean removeDoubleQuotes = false;
     private boolean removeSingleQuotes = false;
     private boolean convertFloatToDouble = true;
     private boolean sampleEachLine;
+
     private int skipFirstXLines = 0;
     private int[] skipIndexes = new int[0];
 
