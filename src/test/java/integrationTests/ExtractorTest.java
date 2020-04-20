@@ -6,6 +6,7 @@ import doiframework.core.collectors.ICollector;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.extractors.Extractor;
 import doiframework.core.resource.Resource;
+import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.NotNull;
@@ -91,7 +92,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void multiple_columns_by_fields() throws IOException, NoSuchFieldException {
+    void multiple_columns_by_fields() throws IOException, NoSuchFieldException, NotPrimitiveNumberException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         var clazz = ComplexDTOCSV.class;
@@ -117,7 +118,7 @@ public class ExtractorTest {
     }
 
     @Test
-    void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException {
+    void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException, NotPrimitiveNumberException {
         var collector = genCollector();
         var extractor = new Extractor<>(collector);
         var clazz = ComplexDTOCSV.class;

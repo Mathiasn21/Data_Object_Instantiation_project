@@ -2,7 +2,10 @@ package doiframework.core.extractors;
 
 
 import doiframework.exceptions.NoSuchColumnException;
+import doiframework.exceptions.NotPrimitiveNumberException;
+import doiframework.exceptions.UnableToAccessDataException;
 import doiframework.statistics.report.AverageReport;
+import doiframework.statistics.report.ReportThings;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,10 +19,12 @@ import java.util.Map;
  * @version 1.0.0
  */
 public interface IExtractor{
-    void setReportOptions(@NotNull List<AverageReport> reportOptions);
+    void setReportOptions(@NotNull List<ReportThings> reportOptions);
+
+    void setReportOptions(@NotNull ReportThings[] reportOptions);
 
     @Contract(pure = true)
-    @NotNull List<AverageReport> getReportOptions();
+    @NotNull List<ReportThings> getReportOptions();
 
 
     @Contract(pure = true)
@@ -42,14 +47,11 @@ public interface IExtractor{
     @NotNull Map<String, List<Object>> extractColumnsUsingStrings(@NotNull List<String> columns) throws IllegalAccessException, NoSuchColumnException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException;
+    @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException;
+    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException, NotPrimitiveNumberException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException;
-
-    @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportFromStrings(@NotNull List<String> columns) throws IllegalAccessException;
+    @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, NotPrimitiveNumberException;
 }
