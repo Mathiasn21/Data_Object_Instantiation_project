@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 final class StatFactory {
     @Contract(pure = true)
     @SuppressWarnings("unchecked")//Safe due to being controlled by CentralCommand class
-    public <T extends Statistics> @NotNull T create(@NotNull Class<? extends Statistics> statClass, @NotNull Double[] column) throws ReflectiveOperationException {
-        return (T) statClass.getConstructor(Double[].class).newInstance((Object) column);
+    public <T extends Statistics> @NotNull T create(@NotNull Class<? extends Statistics> statClass, @NotNull Number[] column) throws ReflectiveOperationException {
+        return (T) statClass.getConstructor(Number[].class).newInstance((Object) column);
     }
 }

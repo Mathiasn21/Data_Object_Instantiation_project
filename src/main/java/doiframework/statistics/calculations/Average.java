@@ -30,6 +30,14 @@ public final class Average extends Statistics {
     }
 
     /**
+     * @param data double[]
+     */
+    @Contract(pure = true)
+    public Average(@NotNull Number[] data){
+        super(data);
+    }
+
+    /**
      * @param data {@link List}&lt;{@link Number}&gt;
      */
     @Contract(pure = true)

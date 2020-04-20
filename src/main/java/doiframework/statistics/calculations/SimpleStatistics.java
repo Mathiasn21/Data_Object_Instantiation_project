@@ -30,6 +30,15 @@ public final class SimpleStatistics extends Statistics {
     }
 
     /**
+     * @param data Number[]
+     */
+    @Contract(pure = true)
+    public SimpleStatistics(@NotNull Number[] data){
+        super(data);
+        this.average = new Average(data);
+    }
+
+    /**
      * @return double
      */
     public double calcSampleVariance() {

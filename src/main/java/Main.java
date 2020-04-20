@@ -1,9 +1,9 @@
-import doiframework.exceptions.NotPrimitiveNumber;
+import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.statistics.report.CentralCommand;
 import doiframework.statistics.report.ReportThings;
 
 public class Main {
-    public static void main(String[] args) throws NotPrimitiveNumber {
+    public static void main(String[] args) throws NotPrimitiveNumberException {
         Double[] data = new Double[]{1d,2d,3d,4d,5d,6d,6d,6d};
 
         CentralCommand c1 = new CentralCommand(ReportThings.getFullAverageReport(), data);

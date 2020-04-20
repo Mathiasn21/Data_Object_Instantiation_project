@@ -2,9 +2,7 @@ package doiframework.statistics.report;
 
 import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
-import doiframework.exceptions.NotPrimitiveNumber;
-import doiframework.statistics.calculations.Average;
-import doiframework.statistics.calculations.SimpleStatistics;
+import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,13 +13,13 @@ import java.util.Map;
 
 public class CentralCommand {
     private final List<ReportThings> commands;
-    private final List<Double[]> data;
+    private final List<Number[]> data;
 
-    public CentralCommand(@NotNull ReportThings[] commands, @NotNull Double[]... data) throws NotPrimitiveNumber {
+    public CentralCommand(@NotNull ReportThings[] commands, @NotNull Number[]... data) throws NotPrimitiveNumberException {
         this.commands = Arrays.asList(commands);
-        for (Double[] o : data){
+        for (Number[] o : data){
             if(!Parser.isPrimitiveNumber(o.getClass().getComponentType())){
-                throw new NotPrimitiveNumber();
+                throw new NotPrimitiveNumberException();
             }
         }
         this.data = Arrays.asList(data);
@@ -43,6 +41,7 @@ public class CentralCommand {
 
             } catch (ReflectiveOperationException e) {
                 EventObserver.registerEventFrom(new ExceptionEvent(this, e));
+                e.printStackTrace();
             }
         });
         return res;

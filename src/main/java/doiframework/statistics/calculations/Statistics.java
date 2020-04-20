@@ -10,19 +10,32 @@ public class Statistics {
     protected final int n;
 
     @Contract(pure = true)
-    public Statistics(double @NotNull [] data) {
+    public Statistics(@NotNull double[] data) {
         this.data = data;
         this.n = data.length;
     }
 
     /**
-     * @param data double[]
+     * @param data Double[]
      */
     @Contract(pure = true)
     public Statistics(@NotNull Double[] data){
         int length = data.length;
         double[] doubles = new double[length];
         for(int i = 0; i < length; i++){ doubles[i] = data[i]; }
+
+        this.data = doubles;
+        this.n = length;
+    }
+
+    /**
+     * @param data Number[]
+     */
+    @Contract(pure = true)
+    public Statistics(@NotNull Number[] data){
+        int length = data.length;
+        double[] doubles = new double[length];
+        for(int i = 0; i < length; i++){ doubles[i] = data[i].doubleValue(); }
 
         this.data = doubles;
         this.n = length;

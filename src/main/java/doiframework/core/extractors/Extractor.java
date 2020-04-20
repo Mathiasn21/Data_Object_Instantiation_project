@@ -8,6 +8,7 @@ import doiframework.core.observer.events.ExtractorFinishedEvent;
 import doiframework.core.observer.events.IEvent;
 import doiframework.statistics.calculations.Average;
 import doiframework.statistics.report.AverageReport;
+import doiframework.statistics.report.CentralCommand;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     public @NotNull List<AverageReport> getReportOptions() {
         return Collections.unmodifiableList(reportOptions);
     }
-
 
     @Contract(pure = true)
     @Override
@@ -114,7 +114,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return res;
     }
 
-
     @Contract(pure = true)
     @Override
     public @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException {
@@ -137,7 +136,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return res;
     }
 
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, List<Object>> extractColumnsUsingStrings(@NotNull List<String> columns) throws NoSuchColumnException {
@@ -153,6 +151,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     public @NotNull Map<String, Map<String, Double>> extractReport() {
+
         raise(new ExtractorFinishedEvent(this));
         return null;
     }
@@ -180,7 +179,6 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return res;
     }
 
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
