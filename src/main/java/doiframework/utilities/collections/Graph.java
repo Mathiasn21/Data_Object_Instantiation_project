@@ -18,21 +18,21 @@ public class Graph<T> {
     }
 
     public boolean contains(T data) {
-        if(nodes.contains(data)){ //temporary pseudo code for checking of list contains the data
-            return true;
+        for (GraphNode gn : nodes) {
+            if (gn.getData() == data) { // temporary code
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     public boolean contains(int uid) {
-        if(nodes.contains(uid)){ //temporary pseudo code for checking of list contains the uid
-            return true;
+        for (GraphNode gn : nodes) {
+            if (gn.getUid() == uid) {
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     public int size() {
@@ -56,7 +56,6 @@ public class Graph<T> {
         ArrayList<GraphNode> visitedNodes = new ArrayList<GraphNode>();
         Stack<GraphNode> stack= new Stack<GraphNode>();
         stack.push(startingNode);
-
         while (!stack.empty()){
             GraphNode currentNode = stack.pop();
             if(!visitedNodes.contains(currentNode)){
