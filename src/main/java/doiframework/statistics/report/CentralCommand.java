@@ -6,16 +6,13 @@ import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CentralCommand {
     private final List<ReportThings> commands;
     private final List<Number[]> data;
 
-    public CentralCommand(@NotNull ReportThings[] commands, @NotNull Number[]... data) throws NotPrimitiveNumberException {
+    public CentralCommand(@NotNull ReportThings[] commands, @NotNull Number[] ...data) throws NotPrimitiveNumberException {
         this.commands = Arrays.asList(commands);
         for (Number[] o : data){
             if(!Parser.isPrimitiveNumber(o.getClass().getComponentType())){
@@ -23,6 +20,16 @@ public class CentralCommand {
             }
         }
         this.data = Arrays.asList(data);
+    }
+    public CentralCommand(@NotNull ReportThings[] commands, @NotNull List<Number> data) throws NotPrimitiveNumberException {
+        this.commands = Arrays.asList(commands);
+
+        List<Number[]> listOfData = new ArrayList<>();
+        if(!Parser.isPrimitiveNumber(data.get(0).getClass())){
+            throw new NotPrimitiveNumberException();
+        }
+        listOfData.add(data.toArray(Number[]::new));
+        this.data = listOfData;
     }
 
     @NotNull

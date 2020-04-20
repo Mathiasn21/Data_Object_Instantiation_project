@@ -6,9 +6,10 @@ import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
 import doiframework.core.observer.events.ExtractorFinishedEvent;
 import doiframework.core.observer.events.IEvent;
-import doiframework.statistics.calculations.Average;
-import doiframework.statistics.report.AverageReport;
+import doiframework.exceptions.NotPrimitiveNumberException;
+import doiframework.exceptions.UnableToAccessDataException;
 import doiframework.statistics.report.CentralCommand;
+import doiframework.statistics.report.ReportThings;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +27,7 @@ import java.util.*;
 public final class Extractor<C extends ICollector> implements IExtractor {
     private final List<Object> columns;//List of resource objects
     private ICollector collector;
-    private List<AverageReport> reportOptions = Arrays.asList(AverageReport.values());
+    private ReportThings[] reportOptions = ReportThings.getFullAverageReport();
 
     public Extractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -38,14 +39,19 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     }
 
     @Override
-    public void setReportOptions(@NotNull List<AverageReport> reportOptions) {
+    public void setReportOptions(@NotNull List<ReportThings> reportOptions) {
+        this.reportOptions = reportOptions.toArray(new ReportThings[0]);
+    }
+
+    @Override
+    public void setReportOptions(@NotNull ReportThings[] reportOptions) {
         this.reportOptions = reportOptions;
     }
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<AverageReport> getReportOptions() {
-        return Collections.unmodifiableList(reportOptions);
+    public @NotNull List<ReportThings> getReportOptions() {
+        return Arrays.asList(reportOptions);
     }
 
     @Contract(pure = true)
@@ -66,7 +72,7 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     /**
      * @param method {@link Method}
      * @return {@link List}&lt;
-     * @throws NoSuchColumnException {@link NoSuchColumnException} NoSuchColumnException
+     * @throws NoSuchColumnException NoSuchColumnException
      */
     @Contract(pure = true)
     @Override
@@ -147,33 +153,40 @@ public final class Extractor<C extends ICollector> implements IExtractor {
         return res;
     }
 
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReport() {
+    public @NotNull Map<String, Map<String, Double>> extractReport() throws NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException {
+        Map<String, Map<String, Double>> res;
 
+        Object sample = columns.get(0);//Get a sample object
+        Class<?> clazz = sample.getClass();
+
+        Field[] fields = clazz.getFields();
+        Method[] methods = clazz.getMethods();
+
+        if(fields.length > 0){
+            res = extractReportUsingFields(Arrays.asList(fields));
+        }else if(methods.length > 0){
+            res = extractReportUsingMethods(Arrays.asList(methods));
+        }else{
+            throw new UnableToAccessDataException("Try making fields public or have getters.");
+        }
         raise(new ExtractorFinishedEvent(this));
-        return null;
+        return res;
     }
 
-    //TODO: implement this method
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException {
+    public @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException, NotPrimitiveNumberException {
         Map<String, Map<String, Double>> res = new HashMap<>();
         List<Field> filteredFields = filterFieldsForPrimitiveNumbers(fields);
         Map<Field, List<Object>> columns = extractColumnsUsingFields(filteredFields);
 
         for (Field field : filteredFields) {
-            Map<String, Double> report = new HashMap<>();
-            List<Number> column = (List<Number>)(Object)columns.get(field);//Safe as this is ensured beforehand
-
-            for (AverageReport option : reportOptions) {
-                Average average = new Average(column);
-                report.put(option.option, option.calculate.execute(average));
-            }
-            res.put(field.getName(), report);
+            List<Number> column = (List<Number>) (Object) columns.get(field);//Safe as this is ensured beforehand
+            CentralCommand centralCommand = new CentralCommand(reportOptions, column);
+            res.put(field.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));
         return res;
@@ -182,34 +195,18 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException {
+    public @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException, NotPrimitiveNumberException {
         Map<String, Map<String, Double>> res = new HashMap<>();
         List<Method> filteredMethods = filterMethodsForPrimitiveNumbers(methods);
         Map<Method, List<Object>> columns = extractColumnsUsingMethods(filteredMethods);
 
         for (Method method : filteredMethods) {
-            Map<String, Double> report = new HashMap<>();
-            List<Number> column = (List<Number>)(Object)columns.get(method);//Safe as this is ensured beforehand
-
-            for (AverageReport option : reportOptions) {
-                Average average = new Average(column);
-                report.put(option.option, option.calculate.execute(average));
-            }
-            res.put(method.getName(), report);
+            List<Number> column = (List<Number>) (Object) columns.get(method);//Safe as this is ensured beforehand
+            CentralCommand centralCommand = new CentralCommand(reportOptions, column);
+            res.put(method.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));
         return res;
-    }
-
-    //TODO: implement this method
-    @Contract(pure = true)
-    @Override
-    public @NotNull Map<String, Map<String, Double>> extractReportFromStrings(@NotNull List<String> columns) {
-        for (String string : columns) {
-
-        }
-        raise(new ExtractorFinishedEvent(this));
-        return null;
     }
 
     /**
