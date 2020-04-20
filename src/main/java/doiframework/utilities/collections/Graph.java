@@ -40,8 +40,7 @@ public class Graph<T> {
     } //will return the number of nodes
 
     public void remove(T t) {
-        nodes.remove(t); //incorrect, but its pseudo code, so it will be implemented later
-        nmbrOfNodes--;
+        nodes.removeIf(gn -> gn == t);
     }
 
     public int numConnections(int uid) {
@@ -82,6 +81,17 @@ public class Graph<T> {
 
     @NotNull
     public Iterator<GraphNode> DFS() {
-        return null;
+        Iterator<GraphNode> iterator = new Iterator<GraphNode>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public GraphNode next() {
+                return null;
+            }
+        };
+        return iterator;
     }
 }
