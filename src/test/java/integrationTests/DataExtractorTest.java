@@ -1,11 +1,11 @@
 package integrationTests;
 
 import DTOs.ComplexDTOCSV;
-import doiframework.core.collectors.Collector;
-import doiframework.core.collectors.ICollector;
+import doiframework.core.collectors.DataDataCollector;
+import doiframework.core.collectors.IDataCollector;
+import doiframework.core.extractors.DataDataExtractor;
 import doiframework.exceptions.NoSuchColumnException;
-import doiframework.core.extractors.Extractor;
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.IHandle;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public class ExtractorTest {
+public class DataExtractorTest {
     @Test
     void single_column_by_string() throws IOException, NoSuchColumnException {
         List<Object> list = new ArrayList<>();
@@ -34,7 +34,7 @@ public class ExtractorTest {
         }
 
         var collector = genCollector();
-        var extractor = new Extractor<>(collector);
+        var extractor = new DataDataExtractor<>(collector);
         var column = extractor.extractColumnFrom("string");
 
         assertFalse(column.isEmpty());
@@ -55,7 +55,7 @@ public class ExtractorTest {
         }
 
         var collector = genCollector();
-        var extractor = new Extractor<>(collector);
+        var extractor = new DataDataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var column = extractor.extractColumnFrom(clazz.getField("string"));
 
@@ -77,7 +77,7 @@ public class ExtractorTest {
         }
 
         var collector = genCollector();
-        var extractor = new Extractor<>(collector);
+        var extractor = new DataDataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var column = extractor.extractColumnFrom(clazz.getMethod("getString"));
 
@@ -94,7 +94,7 @@ public class ExtractorTest {
     @Test
     void multiple_columns_by_fields() throws IOException, NoSuchFieldException, NotPrimitiveNumberException {
         var collector = genCollector();
-        var extractor = new Extractor<>(collector);
+        var extractor = new DataDataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
         var columnMap = extractor.extractColumnsUsingFields(fields);
@@ -120,7 +120,7 @@ public class ExtractorTest {
     @Test
     void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException, NotPrimitiveNumberException {
         var collector = genCollector();
-        var extractor = new Extractor<>(collector);
+        var extractor = new DataDataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
         Map<String, Map<String, Double>> report = extractor.extractReportUsingMethods(methods);
@@ -146,7 +146,7 @@ public class ExtractorTest {
     @Test
     void multiple_columns_by_strings() throws IOException, NoSuchColumnException {
         var collector = genCollector();
-        var extractor = new Extractor<>(collector);
+        var extractor = new DataDataExtractor<>(collector);
         var strings = Arrays.asList("string", "Doubles", "integer");
         var columnMap = extractor.extractColumnsUsingStrings(strings);
         assertFalse(columnMap.isEmpty());
@@ -167,11 +167,11 @@ public class ExtractorTest {
     }
 
     @NotNull
-    private ICollector genCollector() throws IOException {
+    private IDataCollector genCollector() throws IOException {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
-        ICollector collector = Collector.newCollector(resource, handler).build();
+        IDataCollector collector = DataDataCollector.newCollector(dataSource, handler).build();
         collector.collectData();
         return collector;
     }

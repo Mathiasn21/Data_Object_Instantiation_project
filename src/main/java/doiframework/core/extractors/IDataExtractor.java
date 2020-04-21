@@ -18,7 +18,7 @@ import java.util.Map;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public interface IExtractor{
+public interface IDataExtractor {
     void setReportOptions(@NotNull List<ReportThings> reportOptions);
 
     void setReportOptions(@NotNull ReportThings[] reportOptions);

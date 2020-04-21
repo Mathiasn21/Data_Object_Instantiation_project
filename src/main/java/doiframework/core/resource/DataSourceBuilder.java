@@ -21,7 +21,7 @@ import java.util.List;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.6.0
  */
-public final class ResourceBuilder {
+public final class DataSourceBuilder {
     private final List<IReadCommand> readers = new ArrayList<>();
     private final List<IWriteCommand> writers = new ArrayList<>();
 
@@ -29,14 +29,14 @@ public final class ResourceBuilder {
      * Leave be, prevents unwanted instantiation.
      */
     @Contract(pure = true)
-    ResourceBuilder() {
+    DataSourceBuilder() {
     }
 
     /**
      * @param path String
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
-    public ResourceBuilder fromFile(@NotNull String path) {
+    public DataSourceBuilder fromFile(@NotNull String path) {
         ReadFileCommand readFileCommand = new ReadFileCommand(path);
         readers.add(readFileCommand);
         return this;
@@ -44,10 +44,10 @@ public final class ResourceBuilder {
 
     /**
      * @param file {@link File}
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromFile(@NotNull File file) {
+    public DataSourceBuilder fromFile(@NotNull File file) {
         ReadFileCommand readFileCommand = new ReadFileCommand(file);
         readers.add(readFileCommand);
         return this;
@@ -55,9 +55,9 @@ public final class ResourceBuilder {
 
     /**
      * @param paths String...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
-    public ResourceBuilder fromFile(@NotNull String... paths) {
+    public DataSourceBuilder fromFile(@NotNull String... paths) {
         for (String path : paths) {
             IReadCommand readFile = new ReadFileCommand(path);
             readers.add(readFile);
@@ -67,10 +67,10 @@ public final class ResourceBuilder {
 
     /**
      * @param files {@link File}...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromFile(@NotNull File... files) {
+    public DataSourceBuilder fromFile(@NotNull File... files) {
         for (File file : files) {
             IReadCommand readFile = new ReadFileCommand(file);
             readers.add(readFile);
@@ -81,10 +81,10 @@ public final class ResourceBuilder {
     /**
      * @throws IOException e
      * @param url String
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURL(@NotNull String url) throws IOException {
+    public DataSourceBuilder fromURL(@NotNull String url) throws IOException {
         IReadCommand readURL = new ReadURLCommand(url);
         readers.add(readURL);
         return this;
@@ -92,10 +92,10 @@ public final class ResourceBuilder {
 
     /**
      * @param url {@link URL}
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURL(@NotNull URL url) {
+    public DataSourceBuilder fromURL(@NotNull URL url) {
         IReadCommand readURL = new ReadURLCommand(url);
         readers.add(readURL);
         return this;
@@ -104,10 +104,10 @@ public final class ResourceBuilder {
     /**
      * @throws IOException e
      * @param urls String...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURLs(@NotNull String... urls) throws IOException {
+    public DataSourceBuilder fromURLs(@NotNull String... urls) throws IOException {
         for (String url : urls) {
             IReadCommand readURL = new ReadURLCommand(url);
             readers.add(readURL);
@@ -117,10 +117,10 @@ public final class ResourceBuilder {
 
     /**
      * @param urls {@link URL}...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder fromURLs(@NotNull URL... urls) {
+    public DataSourceBuilder fromURLs(@NotNull URL... urls) {
         for (URL url : urls) {
             IReadCommand readURL = new ReadURLCommand(url);
             readers.add(readURL);
@@ -131,9 +131,9 @@ public final class ResourceBuilder {
 
     /**
      * @param file {@link File}
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
-    public ResourceBuilder toFile(@NotNull File file) {
+    public DataSourceBuilder toFile(@NotNull File file) {
         IWriteCommand writeFile = new WriteFileCommand(file);
         writers.add(writeFile);
         return this;
@@ -141,9 +141,9 @@ public final class ResourceBuilder {
 
     /**
      * @param file {@link URL}
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
-    public ResourceBuilder toFile(@NotNull String file) {
+    public DataSourceBuilder toFile(@NotNull String file) {
         IWriteCommand writeFile = new WriteFileCommand(file);
         writers.add(writeFile);
         return this;
@@ -151,10 +151,10 @@ public final class ResourceBuilder {
 
     /**
      * @param files String...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder toFiles(@NotNull String ...files) {
+    public DataSourceBuilder toFiles(@NotNull String ...files) {
         for (String file : files) {
             IWriteCommand writeFile = new WriteFileCommand(file);
             writers.add(writeFile);
@@ -164,10 +164,10 @@ public final class ResourceBuilder {
 
     /**
      * @param files String...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder toFiles(@NotNull File ...files) {
+    public DataSourceBuilder toFiles(@NotNull File ...files) {
         for (File file : files) {
             IWriteCommand writeFile = new WriteFileCommand(file);
             writers.add(writeFile);
@@ -179,9 +179,9 @@ public final class ResourceBuilder {
 
     /**
      * @param url {@link URL}
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
-    public ResourceBuilder toURL(@NotNull URL url) {
+    public DataSourceBuilder toURL(@NotNull URL url) {
         IWriteCommand writeURL = new WriteURLCommand(url);
         writers.add(writeURL);
         return this;
@@ -190,9 +190,9 @@ public final class ResourceBuilder {
     /**
      * @param url {@link URL}
      * @throws MalformedURLException MalformedURLException
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
-    public ResourceBuilder toURL(@NotNull String url) throws MalformedURLException {
+    public DataSourceBuilder toURL(@NotNull String url) throws MalformedURLException {
         IWriteCommand writeURL = new WriteURLCommand(url);
         writers.add(writeURL);
         return this;
@@ -201,10 +201,10 @@ public final class ResourceBuilder {
     /**
      * @throws IOException e
      * @param urls String...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder toURLs(@NotNull String ...urls) throws IOException {
+    public DataSourceBuilder toURLs(@NotNull String ...urls) throws IOException {
         for (String url : urls) {
             IWriteCommand writeURL = new WriteURLCommand(url);
             writers.add(writeURL);
@@ -214,10 +214,10 @@ public final class ResourceBuilder {
 
     /**
      * @param urls String...
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public ResourceBuilder toURLs(@NotNull URL ...urls) {
+    public DataSourceBuilder toURLs(@NotNull URL ...urls) {
         for (URL url : urls) {
             IWriteCommand writeURL = new WriteURLCommand(url);
             writers.add(writeURL);
@@ -226,21 +226,21 @@ public final class ResourceBuilder {
     }
 
     /**
-     * @return {@link Resource}
+     * @return {@link DataSource}
      */
     @NotNull
     @Contract(value = " -> new", pure = true)
-    public Resource build() { return new Resource(readers.get(0)); }
+    public DataSource build() { return new DataSource(readers.get(0)); }
 
     /**
-     * @return {@link List}&lt;{@link Resource}&gt;
+     * @return {@link List}&lt;{@link DataSource}&gt;
      */
     @NotNull
-    public List<Resource> buildAll() {
-        List<Resource> resources = new ArrayList<>(readers.size());
+    public List<DataSource> buildAll() {
+        List<DataSource> dataSources = new ArrayList<>(readers.size());
         for (IReadCommand reader : readers) {
-            resources.add(new Resource(reader));
+            dataSources.add(new DataSource(reader));
         }
-        return resources;
+        return dataSources;
     }
 }

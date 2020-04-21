@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public final class ExtractorPool implements IExtractPool {
+public final class DataExtractorPoolData implements IDataExtractPool {
     private byte threads = 2;
     private ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(threads);
 
@@ -48,7 +48,7 @@ public final class ExtractorPool implements IExtractPool {
     }
 
     @Override
-    public @NotNull List<IExtractor> getAllExtractors() {
+    public @NotNull List<IDataExtractor> getAllExtractors() {
         return null;
     }
 

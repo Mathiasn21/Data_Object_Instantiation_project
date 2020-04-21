@@ -1,8 +1,8 @@
 package integrationTests;
 
-import doiframework.core.collectors.Collector;
-import doiframework.core.collectors.ICollector;
-import doiframework.core.resource.Resource;
+import doiframework.core.collectors.DataDataCollector;
+import doiframework.core.collectors.IDataCollector;
+import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
@@ -10,28 +10,28 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class CollectorTest {
+public class DataCollectorTest {
     @Test
     void json_simple_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
-        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
+        IDataCollector collector = DataDataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 
     @Test
     void json_array_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/testingJSONFile.json" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
-        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
+        IDataCollector collector = DataDataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 
     @Test
     void json_primitive_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/primitiveJSONtypes.json" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
-        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
+        IDataCollector collector = DataDataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 
@@ -39,13 +39,13 @@ public class CollectorTest {
     @Test
     void csv_data_from_single_column() throws IOException {
         String path = System.getProperty("user.dir") + "/files/trumpSpeeches.txt" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.setDelimiter("\\P{Alpha}+");
         csvHandler.isSingleColumn(true);
         csvHandler.skipEmptyLines(true);
 
-        ICollector collector = Collector.newCollector(resource, csvHandler).build();
+        IDataCollector collector = DataDataCollector.newCollector(dataSource, csvHandler).build();
         collector.setCompression(true);
         collector.collectData();
     }
@@ -58,8 +58,8 @@ public class CollectorTest {
         /*
         Assertions.assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
-            Resource resource = Resource.newResource().fromURL(url).build();
-            ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+            DataSource resource = DataSource.newResource().fromURL(url).build();
+            IDataCollector collector = DataDataCollector.newCollector(resource, new JSONHandler()).build();
             collector.collectData();
         });
         */

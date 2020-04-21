@@ -1,6 +1,6 @@
 package unitTests;
 
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 import doiframework.utilities.collections.GraphNode;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.collections.Graph;
@@ -207,7 +207,7 @@ public class GraphTest {
         csvHandler.setSampleEachLine(true);
         csvHandler.setDelimiter("\\s+");
 
-        var resource = Resource.newResource().fromFile(path).build();
+        var resource = DataSource.newResource().fromFile(path).build();
         return csvHandler.handle(resource.getData());
     }
 }

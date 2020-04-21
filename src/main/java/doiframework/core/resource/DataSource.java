@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.6.1
  */
-public final class Resource {
+public final class DataSource {
     private final IReadCommand readCommand;
     private final IWriteCommand writeCommand;
     private final String[] nameSpaces;
@@ -23,7 +23,7 @@ public final class Resource {
     /**
      * @param readCommand {@link IReadCommand}
      */
-    Resource(@NotNull IReadCommand readCommand) {
+    DataSource(@NotNull IReadCommand readCommand) {
         this(readCommand, "");
     }
 
@@ -31,7 +31,7 @@ public final class Resource {
      * @param writeCommand {@link IWriteCommand}
      * @param readCommand {@link IReadCommand}
      */
-    Resource(@NotNull IReadCommand readCommand, @Nullable IWriteCommand writeCommand) {
+    DataSource(@NotNull IReadCommand readCommand, @Nullable IWriteCommand writeCommand) {
         this(readCommand, writeCommand, "");
     }
 
@@ -39,7 +39,7 @@ public final class Resource {
      * @param readCommand {@link IReadCommand}
      * @param nameSpaces {@link String}
      */
-    Resource(IReadCommand readCommand, String ... nameSpaces) {
+    DataSource(IReadCommand readCommand, String ... nameSpaces) {
         this(readCommand, null, nameSpaces);
     }
 
@@ -48,7 +48,7 @@ public final class Resource {
      * @param readCommand {@link IReadCommand}
      * @param nameSpaces {@link String}
      */
-    Resource(IReadCommand readCommand, IWriteCommand writeCommand, String ... nameSpaces) {
+    DataSource(IReadCommand readCommand, IWriteCommand writeCommand, String ... nameSpaces) {
         this.readCommand = readCommand;
         this.nameSpaces = nameSpaces;
         this.writeCommand = writeCommand;
@@ -77,10 +77,10 @@ public final class Resource {
     }
 
     /**
-     * @return {@link ResourceBuilder}
+     * @return {@link DataSourceBuilder}
      */
     @Contract(value = " -> new", pure = true)
-    public static @NotNull ResourceBuilder newResource(){ return new ResourceBuilder(); }
+    public static @NotNull DataSourceBuilder newResource(){ return new DataSourceBuilder(); }
 
     /**
      * @return {@link String}

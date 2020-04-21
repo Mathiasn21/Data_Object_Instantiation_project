@@ -7,7 +7,7 @@ import java.util.List;
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */
-public interface ICollector {
+public interface IDataCollector {
     /**
      * @throws IOException IOException
      */

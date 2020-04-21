@@ -1,7 +1,7 @@
 package unitTests;
 
+import doiframework.core.resource.DataSource;
 import doiframework.core.resource.commands.write.IWriteCommand;
-import doiframework.core.resource.Resource;
 import doiframework.core.resource.commands.write.WriteFileCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ public class Write {
             IWriteCommand writer = new WriteFileCommand(path);
             writer.execute( "StringPath;");
 
-            Resource resource = Resource.newResource().fromFile(path).build();
+            DataSource dataSource = DataSource.newResource().fromFile(path).build();
             StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = resource.getData();
+            BufferedReader bufferedReader = dataSource.getData();
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -38,9 +38,9 @@ public class Write {
             WriteFileCommand writer = new WriteFileCommand(path);
             writer.execute( "StringPath;");
 
-            Resource resource = Resource.newResource().fromFile(path).build();
+            DataSource dataSource = DataSource.newResource().fromFile(path).build();
             StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = resource.getData();
+            BufferedReader bufferedReader = dataSource.getData();
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -58,10 +58,10 @@ public class Write {
             WriteFileCommand write = new WriteFileCommand(path);
             write.execute("fappening");
 
-            //Reads from resource
-            Resource resource = Resource.newResource().fromFile(path).build();
+            //Reads from dataSource
+            DataSource dataSource = DataSource.newResource().fromFile(path).build();
             StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = resource.getData();
+            BufferedReader bufferedReader = dataSource.getData();
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {

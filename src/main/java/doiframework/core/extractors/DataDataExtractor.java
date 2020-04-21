@@ -1,6 +1,6 @@
 package doiframework.core.extractors;
 
-import doiframework.core.collectors.ICollector;
+import doiframework.core.collectors.IDataCollector;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
@@ -24,17 +24,17 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture and most of the technical implementation
  * @version 2.2.0
  */
-public final class Extractor<C extends ICollector> implements IExtractor {
+public final class DataDataExtractor<C extends IDataCollector> implements IDataExtractor {
     private final List<Object> columns;//List of resource objects
-    private ICollector collector;
+    private IDataCollector collector;
     private ReportThings[] reportOptions = ReportThings.getFullAverageReport();
 
-    public Extractor(@NotNull C collector) {
+    public DataDataExtractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
         this.collector = collector;
     }
 
-    public Extractor(@NotNull List<Object> rows) {
+    public DataDataExtractor(@NotNull List<Object> rows) {
         this.columns = rows;
     }
 
@@ -210,9 +210,9 @@ public final class Extractor<C extends ICollector> implements IExtractor {
     }
 
     /**
-     * @return ICollector
+     * @return IDataCollector
      */
-    public ICollector getCollector() {
+    public IDataCollector getCollector() {
         return collector;
     }
 

@@ -2,7 +2,7 @@ package doiframework.core.collectors;
 
 import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.IHandle;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -17,15 +17,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public final class CollectorPool implements ICollectorPool{
+public final class DataDataCollectorPool implements IDataCollectorPool {
     private byte numberOfThreads = 2;
-    private final List<ICollector> collectors;
+    private final List<IDataCollector> collectors;
 
-    CollectorPool(List<ICollector> collectors) { this.collectors = collectors; }
+    DataDataCollectorPool(List<IDataCollector> collectors) { this.collectors = collectors; }
 
     @Override
     public void collectAllData() throws IOException {
-        for (ICollector collector : collectors) { collector.collectData(); }
+        for (IDataCollector collector : collectors) { collector.collectData(); }
     }
 
     /**
@@ -43,7 +43,7 @@ public final class CollectorPool implements ICollectorPool{
      */
     @Override
     public void collectAllDataAsync(ThreadPoolExecutor pool){
-        for (ICollector collector : collectors) {
+        for (IDataCollector collector : collectors) {
             pool.submit(() -> {
                 try { collector.collectData(); }
                 catch (IOException e) {
@@ -56,24 +56,24 @@ public final class CollectorPool implements ICollectorPool{
 
     @NotNull
     @Override
-    public Iterator<ICollector> iterator() { return collectors.iterator(); }
+    public Iterator<IDataCollector> iterator() { return collectors.iterator(); }
 
     @NotNull
     @Contract(pure = true)
     @Override
-    public List<ICollector> getAllCollectors() { return Collections.unmodifiableList(collectors); }
+    public List<IDataCollector> getAllCollectors() { return Collections.unmodifiableList(collectors); }
 
     @Override
     public void setNumberOfThreads(byte number) { numberOfThreads = number; }
 
     /**
-     * @param resources {@link List}&lt;{@link Resource}&gt;
+     * @param dataSources {@link List}&lt;{@link DataSource}&gt;
      * @param dataHandler {@link IHandle}
      * @return {@link CollectorBuilder}
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static CollectorPoolBuilder newCollectors(List<Resource> resources, IHandle dataHandler) {
-        return new CollectorPoolBuilder(resources, dataHandler);
+    public static CollectorPoolBuilder newCollectors(List<DataSource> dataSources, IHandle dataHandler) {
+        return new CollectorPoolBuilder(dataSources, dataHandler);
     }
 }

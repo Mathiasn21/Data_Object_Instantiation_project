@@ -19,9 +19,9 @@ public class Graph<T> {
 
     public boolean contains(T data) {
         for (GraphNode gn : nodes) {
-            if (gn.getData() == data) { // temporary code
+            /*if (gn.getData() == data) { // temporary code
                 return true;
-            }
+            }*/
         }
         return false;
     }

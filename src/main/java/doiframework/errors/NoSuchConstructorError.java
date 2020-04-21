@@ -1,10 +1,10 @@
 package doiframework.errors;
 
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 
 /**
  * Thrown whenever the framework can't find a appropriate constructor
- * from {@link Resource} resource.
+ * from {@link DataSource} resource.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */

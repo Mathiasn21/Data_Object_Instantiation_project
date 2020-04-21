@@ -1,6 +1,6 @@
 package unitTests;
 
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +14,10 @@ public class HandleData {
     void handle_json_with_only_primitives() throws IOException {
         Class<?>[] classes = {String.class, String.class, String.class, Integer.class};
         String path = System.getProperty("user.dir") + "/files/jsonNoArrays.json" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
 
         JSONHandler jsonHandler = new JSONHandler();
-        List<Object[]> list = jsonHandler.handle(resource.getData());
+        List<Object[]> list = jsonHandler.handle(dataSource.getData());
         assertFalse(list.isEmpty());
 
         Object[] sample = list.get(0);
@@ -31,10 +31,10 @@ public class HandleData {
     void handle_json_with_primitive_arrays() throws IOException {
         Class<?>[] classes = {String.class, String.class, String.class, int[].class};
         String path = System.getProperty("user.dir") + "/files/testingJSONFile.json" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
 
         JSONHandler jsonHandler = new JSONHandler();
-        List<Object[]> list = jsonHandler.handle(resource.getData());
+        List<Object[]> list = jsonHandler.handle(dataSource.getData());
         assertFalse(list.isEmpty());
 
         Object[] sample = list.get(0);
@@ -47,10 +47,10 @@ public class HandleData {
     void handle_json_with_primitive_arrays_n_dimensions() throws IOException {
         Class<?>[] classes = {String.class, String.class, String.class, int[][][].class};
         String path = System.getProperty("user.dir") + "/files/3Darrays.json" ;
-        Resource resource = Resource.newResource().fromFile(path).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
 
         JSONHandler jsonHandler = new JSONHandler();
-        List<Object[]> list = jsonHandler.handle(resource.getData());
+        List<Object[]> list = jsonHandler.handle(dataSource.getData());
         assertFalse(list.isEmpty());
 
         Object[] sample = list.get(0);

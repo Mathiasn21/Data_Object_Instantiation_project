@@ -1,6 +1,6 @@
 package doiframework.core.observer;
 
-import doiframework.core.observer.events.CollectorFinishedEvent;
+import doiframework.core.observer.events.DataCollectorFinishedEvent;
 import doiframework.core.observer.events.ExceptionEvent;
 import doiframework.core.observer.events.IEvent;
 import doiframework.core.observer.events.EventCommand;
@@ -21,7 +21,7 @@ public final class EventObserver {
     static{
         registeredEvents.put(IEvent.class, new ArrayList<>());
         registeredEvents.put(ExceptionEvent.class, new ArrayList<>());
-        registeredEvents.put(CollectorFinishedEvent.class, new ArrayList<>());
+        registeredEvents.put(DataCollectorFinishedEvent.class, new ArrayList<>());
     }
 
     public static void subscribeToEvents(@NotNull Subject subject, @NotNull List<Class<? extends IEvent>> events){

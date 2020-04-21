@@ -1,6 +1,6 @@
 package unitTests;
 
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -14,9 +14,9 @@ public class Read {
     void from_file_using_file() {
         assertDoesNotThrow(() -> {
             File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
-            Resource resource = Resource.newResource().fromFile(path).build();
+            DataSource dataSource = DataSource.newResource().fromFile(path).build();
 
-            BufferedReader bufferedReader = resource.getData();
+            BufferedReader bufferedReader = dataSource.getData();
             StringBuilder builder = new StringBuilder();
 
             String line;
@@ -32,10 +32,10 @@ public class Read {
     void from_URL_using_URL() {
         assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
-            Resource resource = Resource.newResource().fromURL(url).build();
+            DataSource dataSource = DataSource.newResource().fromURL(url).build();
 
             StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = resource.getData();
+            BufferedReader bufferedReader = dataSource.getData();
 
             String line;
             while((line = bufferedReader.readLine()) != null){
@@ -50,10 +50,10 @@ public class Read {
     void from_URL_using_string() {
         assertDoesNotThrow(() -> {
             String URL = "http://example.com";
-            Resource resource = Resource.newResource().fromURL(URL).build();
+            DataSource dataSource = DataSource.newResource().fromURL(URL).build();
 
             StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = resource.getData();
+            BufferedReader bufferedReader = dataSource.getData();
 
             String line;
             while((line = bufferedReader.readLine()) != null){

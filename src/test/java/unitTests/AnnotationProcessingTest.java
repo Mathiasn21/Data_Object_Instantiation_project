@@ -5,7 +5,7 @@ import DTOs.DTO;
 import DTOs.DTONoFile;
 import doiframework.core.annotations.AnnotationsProcessor;
 import doiframework.core.annotations.ObjectInformation;
-import doiframework.core.resource.Resource;
+import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
 
@@ -102,9 +102,9 @@ public class AnnotationProcessingTest {
     @Test
     void dataObject_instantiation_no_specified_test() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";
-        Resource resource = Resource.newResource().fromFile(path).build();
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
         JSONHandler jsonHandler = new JSONHandler();
-        List<Object[]> list = jsonHandler.handle(resource.getData());
+        List<Object[]> list = jsonHandler.handle(dataSource.getData());
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
         assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "DTOJson.json"));
