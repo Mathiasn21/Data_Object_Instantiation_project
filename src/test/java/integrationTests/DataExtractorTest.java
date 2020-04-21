@@ -3,7 +3,7 @@ package integrationTests;
 import DTOs.ComplexDTOCSV;
 import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
-import doiframework.core.extractors.DataDataExtractor;
+import doiframework.core.extractors.DataExtractor;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.resource.DataSource;
 import doiframework.exceptions.NotPrimitiveNumberException;
@@ -34,7 +34,7 @@ public class DataExtractorTest {
         }
 
         var collector = genCollector();
-        var extractor = new DataDataExtractor<>(collector);
+        var extractor = new DataExtractor<>(collector);
         var column = extractor.extractColumnFrom("string");
 
         assertFalse(column.isEmpty());
@@ -55,7 +55,7 @@ public class DataExtractorTest {
         }
 
         var collector = genCollector();
-        var extractor = new DataDataExtractor<>(collector);
+        var extractor = new DataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var column = extractor.extractColumnFrom(clazz.getField("string"));
 
@@ -77,7 +77,7 @@ public class DataExtractorTest {
         }
 
         var collector = genCollector();
-        var extractor = new DataDataExtractor<>(collector);
+        var extractor = new DataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var column = extractor.extractColumnFrom(clazz.getMethod("getString"));
 
@@ -94,7 +94,7 @@ public class DataExtractorTest {
     @Test
     void multiple_columns_by_fields() throws IOException, NoSuchFieldException, NotPrimitiveNumberException {
         var collector = genCollector();
-        var extractor = new DataDataExtractor<>(collector);
+        var extractor = new DataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
         var columnMap = extractor.extractColumnsUsingFields(fields);
@@ -120,7 +120,7 @@ public class DataExtractorTest {
     @Test
     void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException, NotPrimitiveNumberException {
         var collector = genCollector();
-        var extractor = new DataDataExtractor<>(collector);
+        var extractor = new DataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
         Map<String, Map<String, Double>> report = extractor.extractReportUsingMethods(methods);
@@ -146,7 +146,7 @@ public class DataExtractorTest {
     @Test
     void multiple_columns_by_strings() throws IOException, NoSuchColumnException {
         var collector = genCollector();
-        var extractor = new DataDataExtractor<>(collector);
+        var extractor = new DataExtractor<>(collector);
         var strings = Arrays.asList("string", "Doubles", "integer");
         var columnMap = extractor.extractColumnsUsingStrings(strings);
         assertFalse(columnMap.isEmpty());

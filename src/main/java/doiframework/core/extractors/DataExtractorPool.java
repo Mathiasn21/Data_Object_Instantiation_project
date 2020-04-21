@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public final class DataExtractorPoolData implements IDataExtractPool {
+public final class DataExtractorPool implements IDataExtractorPool {
     private byte threads = 2;
     private ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(threads);
 

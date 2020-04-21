@@ -24,17 +24,17 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21 - Architecture and most of the technical implementation
  * @version 2.2.0
  */
-public final class DataDataExtractor<C extends IDataCollector> implements IDataExtractor {
+public final class DataExtractor<C extends IDataCollector> implements IDataExtractor {
     private final List<Object> columns;//List of resource objects
     private IDataCollector collector;
     private ReportThings[] reportOptions = ReportThings.getFullAverageReport();
 
-    public DataDataExtractor(@NotNull C collector) {
+    public DataExtractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
         this.collector = collector;
     }
 
-    public DataDataExtractor(@NotNull List<Object> rows) {
+    public DataExtractor(@NotNull List<Object> rows) {
         this.columns = rows;
     }
 
