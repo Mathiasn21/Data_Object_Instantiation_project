@@ -29,7 +29,7 @@ public final class Covariance {
 
         this.data1 = doubles;
         this.data2 = doubles2;
-        this.n = data1.length;
+        this.n = data2.length;
     }
 
     private double covariance() throws DatasetNotMatchingException {
@@ -43,7 +43,7 @@ public final class Covariance {
             throw new DatasetNotMatchingException();
         }
         for (int i = 0; i < n; i++) {
-            sum += (data1[i] - avgMean) * (data2[i] - avg2Mean);
+            sum += ((data1[i] - avgMean) * (data2[i] - avg2Mean));
         }
         return sum;
     }
@@ -52,7 +52,7 @@ public final class Covariance {
         return covariance() / n;
     }
     public double calcCovarianceFromSample() throws Exception {
-        return covariance() / n-1;
+        return covariance() / (n-1);
     }
 
 }

@@ -15,7 +15,7 @@ public class CovarianceTest {
     public void covarianceFromSampleTest(){
         assertDoesNotThrow(() -> {
             double covFromSample = cov.calcCovarianceFromSample();
-            assertEquals(3.5357142857143, covFromSample);
+            assertEquals(3.09375, covFromSample);
         });
     }
 
@@ -23,7 +23,7 @@ public class CovarianceTest {
     public void covarianceFromPopulationTest(){
         assertDoesNotThrow(() -> {
             double covFromPopulation = cov.calcCovarianceFromPopulation();
-            assertEquals(3.09375, covFromPopulation);
+            assertEquals(3.5357142857143, covFromPopulation);
         });
     }
 
