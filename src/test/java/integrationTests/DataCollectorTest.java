@@ -1,6 +1,6 @@
 package integrationTests;
 
-import doiframework.core.collectors.DataDataCollector;
+import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.CSVHandler;
@@ -15,7 +15,7 @@ public class DataCollectorTest {
     void json_simple_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        IDataCollector collector = DataDataCollector.newCollector(dataSource, new JSONHandler()).build();
+        IDataCollector collector = DataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 
@@ -23,7 +23,7 @@ public class DataCollectorTest {
     void json_array_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/testingJSONFile.json" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        IDataCollector collector = DataDataCollector.newCollector(dataSource, new JSONHandler()).build();
+        IDataCollector collector = DataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 
@@ -31,7 +31,7 @@ public class DataCollectorTest {
     void json_primitive_data_from_file() throws IOException {
         String path = System.getProperty("user.dir") + "/files/primitiveJSONtypes.json" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        IDataCollector collector = DataDataCollector.newCollector(dataSource, new JSONHandler()).build();
+        IDataCollector collector = DataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 
@@ -45,7 +45,7 @@ public class DataCollectorTest {
         csvHandler.isSingleColumn(true);
         csvHandler.skipEmptyLines(true);
 
-        IDataCollector collector = DataDataCollector.newCollector(dataSource, csvHandler).build();
+        IDataCollector collector = DataCollector.newCollector(dataSource, csvHandler).build();
         collector.setCompression(true);
         collector.collectData();
     }
@@ -59,7 +59,7 @@ public class DataCollectorTest {
         Assertions.assertDoesNotThrow(() -> {
             URL url = new URL("http://example.com");
             DataSource resource = DataSource.newResource().fromURL(url).build();
-            IDataCollector collector = DataDataCollector.newCollector(resource, new JSONHandler()).build();
+            IDataCollector collector = DataCollector.newCollector(resource, new JSONHandler()).build();
             collector.collectData();
         });
         */

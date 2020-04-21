@@ -1,7 +1,7 @@
 package integrationTests;
 
 import DTOs.ComplexDTOCSV;
-import doiframework.core.collectors.DataDataCollector;
+import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.extractors.DataDataExtractor;
 import doiframework.exceptions.NoSuchColumnException;
@@ -171,7 +171,7 @@ public class DataExtractorTest {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
         IHandle handler = new CSVHandler();
-        IDataCollector collector = DataDataCollector.newCollector(dataSource, handler).build();
+        IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
         collector.collectData();
         return collector;
     }

@@ -21,7 +21,7 @@ import java.util.*;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.9.4
  */
-public final class DataDataCollector implements IDataCollector {
+public final class DataCollector implements IDataCollector {
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
     private final IHandle dataHandler;
@@ -35,7 +35,7 @@ public final class DataDataCollector implements IDataCollector {
      * @param dataSource {@link DataSource}
      * @param dataHandler {@link IHandle}
      */
-    DataDataCollector(DataSource dataSource, IHandle dataHandler) {
+    DataCollector(DataSource dataSource, IHandle dataHandler) {
         this.dataSource = dataSource;
         this.dataHandler = dataHandler;
     }
@@ -94,12 +94,12 @@ public final class DataDataCollector implements IDataCollector {
     /**
      * @param dataSource {@link DataSource}
      * @param dataHandler {@link IHandle}
-     * @return {@link CollectorBuilder}
+     * @return {@link DataCollectorBuilder}
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static CollectorBuilder newCollector(DataSource dataSource, IHandle dataHandler) {
-        return new CollectorBuilder(dataSource, dataHandler);
+    public static DataCollectorBuilder newCollector(DataSource dataSource, IHandle dataHandler) {
+        return new DataCollectorBuilder(dataSource, dataHandler);
     }
 
     @NotNull

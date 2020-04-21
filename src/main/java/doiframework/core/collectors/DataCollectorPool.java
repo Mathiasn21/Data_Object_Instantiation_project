@@ -17,11 +17,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public final class DataDataCollectorPool implements IDataCollectorPool {
+public final class DataCollectorPool implements IDataCollectorPool {
     private byte numberOfThreads = 2;
     private final List<IDataCollector> collectors;
 
-    DataDataCollectorPool(List<IDataCollector> collectors) { this.collectors = collectors; }
+    DataCollectorPool(List<IDataCollector> collectors) { this.collectors = collectors; }
 
     @Override
     public void collectAllData() throws IOException {
@@ -69,11 +69,11 @@ public final class DataDataCollectorPool implements IDataCollectorPool {
     /**
      * @param dataSources {@link List}&lt;{@link DataSource}&gt;
      * @param dataHandler {@link IHandle}
-     * @return {@link CollectorBuilder}
+     * @return {@link DataCollectorBuilder}
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static CollectorPoolBuilder newCollectors(List<DataSource> dataSources, IHandle dataHandler) {
-        return new CollectorPoolBuilder(dataSources, dataHandler);
+    public static DataCollectorPoolBuilder newCollectors(List<DataSource> dataSources, IHandle dataHandler) {
+        return new DataCollectorPoolBuilder(dataSources, dataHandler);
     }
 }
