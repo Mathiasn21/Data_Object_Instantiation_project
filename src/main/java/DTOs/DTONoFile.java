@@ -1,7 +1,7 @@
 package DTOs;
 
-import DOIFramework.core.annotations.DataObject;
-import DOIFramework.core.annotations.DataField;
+import doiframework.core.annotations.DataObject;
+import doiframework.core.annotations.DataField;
 
 @DataObject
 public class DTONoFile{

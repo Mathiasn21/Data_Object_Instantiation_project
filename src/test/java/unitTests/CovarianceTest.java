@@ -1,6 +1,6 @@
 package unitTests;
 
-import DOIFramework.statistics.calculations.Covariance;
+import doiframework.statistics.calculations.Covariance;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;

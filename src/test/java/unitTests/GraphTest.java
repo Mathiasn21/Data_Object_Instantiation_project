@@ -1,9 +1,9 @@
 package unitTests;
 
-import DOIFramework.core.resource.Resource;
-import DOIFramework.utilities.collections.GraphNode;
-import DOIFramework.utilities.handlers.CSVHandler;
-import DOIFramework.utilities.collections.Graph;
+import doiframework.core.resource.DataSource;
+import doiframework.utilities.collections.GraphNode;
+import doiframework.utilities.handlers.CSVHandler;
+import doiframework.utilities.collections.Graph;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
@@ -207,7 +207,7 @@ public class GraphTest {
         csvHandler.setSampleEachLine(true);
         csvHandler.setDelimiter("\\s+");
 
-        var resource = Resource.newResource().fromFile(path).build();
+        var resource = DataSource.newResource().fromFile(path).build();
         return csvHandler.handle(resource.getData());
     }
 }

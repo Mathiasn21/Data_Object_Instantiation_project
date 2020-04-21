@@ -1,4 +1,4 @@
-## Collecting from multiple resources:
+## Collecting from multiple dataSources:
 
 ### Data used:
 Data used for this page.
@@ -14,45 +14,45 @@ JSON:
 
 ### Collecting from file:
 
-#### Define resources multiple times:
+#### Define dataSources multiple times:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
-        List<Resource> resources = Resource.newResource().fromFile(path).fromFile(path).buildAll();
-        ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
+        List<Resource> dataSources = Resource.newResource().fromFile(path).fromFile(path).buildAll();
+        ICollectorPool collectorPool = CollectorPool.newCollectors(dataSources, new JSONHandler()).buildAll();
         collectorPool.collectAllDataAsync();
     }
 }
 ```
 Note the chained invocations of fromFile().
  
-#### Define multiple resources once
+#### Define multiple dataSources once
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
 public class Main {
     public static void main(String[] args) { 
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         String[] paths = {path, path, path}; //Multiple paths
-        List<Resource> resources = Resource.newResource().fromFile(paths).buildAll();
-        ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
+        List<Resource> dataSources = Resource.newResource().fromFile(paths).buildAll();
+        ICollectorPool collectorPool = CollectorPool.newCollectors(dataSources, new JSONHandler()).buildAll();
         collectorPool.collectAllDataAsync();
     }
 }
 ```
-It is both possible to do the same whenever defining URL resources. In accordance with the single resource scenario,
+It is both possible to do the same whenever defining URL dataSources. In accordance with the single dataSource scenario,
 one is allowed to utilize the respective classes: File and URL, instead of strings for defining paths/urls.
 
-**Note** the invocation of **buildAll()** for building a list of resources.
+**Note** the invocation of **buildAll()** for building a list of dataSources.
 
 
-With many resource one must utilize a pool of collectors. these are instantiated by 
+With many dataSource one must utilize a pool of collectors. these are instantiated by 
 using the corresponding builder like this: 
 
-    ICollectorPool collectorPool = CollectorPool.newCollectors(resources, new JSONHandler()).buildAll();
+    ICollectorPool collectorPool = CollectorPool.newCollectors(dataSources, new JSONHandler()).buildAll();
     
 A collector pool collects data either async or sync by invoking respective methods.
 Further said pool allows one to define their own executor service if needed. Like this:
