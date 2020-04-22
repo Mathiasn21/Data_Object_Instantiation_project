@@ -8,8 +8,8 @@ import doiframework.core.observer.events.ExtractorFinishedEvent;
 import doiframework.core.observer.events.IEvent;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
-import doiframework.statistics.report.CentralCommand;
-import doiframework.statistics.report.ReportThings;
+import doiframework.statistics.report.ReportCommand;
+import doiframework.statistics.report.Report;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ import java.util.*;
 public final class DataExtractor<C extends IDataCollector> implements IDataExtractor {
     private final List<Object> columns;//List of resource objects
     private IDataCollector collector;
-    private ReportThings[] reportOptions = ReportThings.getFullAverageReport();
+    private Report[] reportOptions = Report.getFullAverageReport();
 
     public DataExtractor(@NotNull C collector) {
         this.columns = collector.getAllColumns();
@@ -39,18 +39,18 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     }
 
     @Override
-    public void setReportOptions(@NotNull List<ReportThings> reportOptions) {
-        this.reportOptions = reportOptions.toArray(new ReportThings[0]);
+    public void setReportOptions(@NotNull List<Report> reportOptions) {
+        this.reportOptions = reportOptions.toArray(new Report[0]);
     }
 
     @Override
-    public void setReportOptions(@NotNull ReportThings[] reportOptions) {
+    public void setReportOptions(@NotNull Report[] reportOptions) {
         this.reportOptions = reportOptions;
     }
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<ReportThings> getReportOptions() {
+    public @NotNull List<Report> getReportOptions() {
         return Arrays.asList(reportOptions);
     }
 
@@ -185,7 +185,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
         for (Field field : filteredFields) {
             List<Number> column = (List<Number>) (Object) columns.get(field);//Safe as this is ensured beforehand
-            CentralCommand centralCommand = new CentralCommand(reportOptions, column);
+            ReportCommand centralCommand = new ReportCommand(reportOptions, column);
             res.put(field.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));
@@ -202,7 +202,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
         for (Method method : filteredMethods) {
             List<Number> column = (List<Number>) (Object) columns.get(method);//Safe as this is ensured beforehand
-            CentralCommand centralCommand = new CentralCommand(reportOptions, column);
+            ReportCommand centralCommand = new ReportCommand(reportOptions, column);
             res.put(method.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));

@@ -8,11 +8,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class CentralCommand {
-    private final List<ReportThings> commands;
+/**
+ * Class with the central command that excecutes the report
+ */
+public class ReportCommand {
+    private final List<Report> commands;
     private final List<Number[]> data;
 
-    public CentralCommand(@NotNull ReportThings[] commands, @NotNull Number[] ...data) throws NotPrimitiveNumberException {
+    public ReportCommand(@NotNull Report[] commands, @NotNull Number[] ...data) throws NotPrimitiveNumberException {
         this.commands = Arrays.asList(commands);
         for (Number[] o : data){
             if(!Parser.isPrimitiveNumber(o.getClass().getComponentType())){
@@ -21,7 +24,7 @@ public class CentralCommand {
         }
         this.data = Arrays.asList(data);
     }
-    public CentralCommand(@NotNull ReportThings[] commands, @NotNull List<Number> data) throws NotPrimitiveNumberException {
+    public ReportCommand(@NotNull Report[] commands, @NotNull List<Number> data) throws NotPrimitiveNumberException {
         this.commands = Arrays.asList(commands);
 
         List<Number[]> listOfData = new ArrayList<>();
@@ -48,6 +51,8 @@ public class CentralCommand {
 
             } catch (ReflectiveOperationException e) {
                 EventObserver.registerEventFrom(new ExceptionEvent(this, e));
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });

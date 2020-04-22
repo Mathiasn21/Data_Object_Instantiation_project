@@ -9,6 +9,7 @@ public class Statistics {
     protected final double[] data;
     protected final int n;
 
+
     @Contract(pure = true)
     public Statistics(@NotNull double[] data) {
         this.data = data;
@@ -53,4 +54,5 @@ public class Statistics {
         this.data = doubles;
         this.n = size;
     }
+
 }

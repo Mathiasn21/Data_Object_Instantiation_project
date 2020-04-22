@@ -13,6 +13,7 @@ import java.util.List;
 public final class Average extends Statistics {
     private double sum = 0;
 
+
     /**
      * @param data double[]
      */
