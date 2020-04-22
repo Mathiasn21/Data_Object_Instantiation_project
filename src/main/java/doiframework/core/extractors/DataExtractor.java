@@ -152,7 +152,16 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
     @Override
     public @NotNull Map<Method, List<Object>> extractColumnsUsingMethods() throws NoSuchColumnException {
-        return extractColumnsUsingMethods(Arrays.asList(clazz.getMethods()));
+        Method[] methods = clazz.getMethods();
+        List<Method> filteredMethods = new ArrayList<>();
+
+        for (Method method : methods) {
+            if(method.getParameterCount() > 0 || !method.getName().toLowerCase().contains("get")){
+                continue;
+            }
+            filteredMethods.add(method);
+        }
+        return extractColumnsUsingMethods(filteredMethods);
     }
 
     @Contract(pure = true)
