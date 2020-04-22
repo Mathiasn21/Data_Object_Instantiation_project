@@ -8,7 +8,7 @@ import java.util.List;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.0.0
  */
-public interface IHandle {
+public interface IHandleData {
     /**
      * @param bufferedReader {@link BufferedReader}
      * @return {@link List}&lt;{@link List}&lt;{@link Object}&gt;&gt;

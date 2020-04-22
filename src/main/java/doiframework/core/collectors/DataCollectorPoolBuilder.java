@@ -1,7 +1,7 @@
 package doiframework.core.collectors;
 
 import doiframework.core.resource.DataSource;
-import doiframework.utilities.handlers.IHandle;
+import doiframework.utilities.handlers.IHandleData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public final class DataCollectorPoolBuilder {
     private final List<DataCollectorBuilder> dataCollectorBuilders;
-    DataCollectorPoolBuilder(@NotNull List<DataSource> dataSources, @NotNull IHandle handler) {
+    DataCollectorPoolBuilder(@NotNull List<DataSource> dataSources, @NotNull IHandleData handler) {
         List<DataCollectorBuilder> dataCollectorBuilders = new ArrayList<>(dataSources.size());
         for (DataSource dataSource : dataSources) {
             dataCollectorBuilders.add(DataCollector.newCollector(dataSource, handler));

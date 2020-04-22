@@ -8,7 +8,7 @@ import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.resource.DataSource;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.utilities.handlers.CSVHandler;
-import doiframework.utilities.handlers.IHandle;
+import doiframework.utilities.handlers.IHandleData;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
@@ -170,7 +170,7 @@ public class DataExtractorTest {
     private IDataCollector genCollector() throws IOException {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        IHandle handler = new CSVHandler();
+        IHandleData handler = new CSVHandler();
         IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
         collector.collectData();
         return collector;
