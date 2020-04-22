@@ -42,7 +42,7 @@ public class Node<T> implements Cloneable{
     public final int getTCounter(){ return tCounter; }
 
     @Override
-    public String toString() { return t.toString(); }
+    public final String toString() { return t.toString(); }
 
     @Override
     public boolean equals(Object o) {

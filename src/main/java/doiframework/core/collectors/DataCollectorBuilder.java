@@ -1,7 +1,7 @@
 package doiframework.core.collectors;
 
 import doiframework.core.resource.DataSource;
-import doiframework.utilities.handlers.IHandle;
+import doiframework.utilities.handlers.IDataHandler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public final class DataCollectorBuilder {
     private final IDataCollector collector;
 
-    DataCollectorBuilder(DataSource dataSource, IHandle dataHandler){ this.collector = new DataCollector(dataSource, dataHandler); }
+    DataCollectorBuilder(DataSource dataSource, IDataHandler dataHandler){ this.collector = new DataCollector(dataSource, dataHandler); }
 
     @Contract(pure = true)
     @NotNull

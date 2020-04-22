@@ -8,7 +8,7 @@ import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.resource.DataSource;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.utilities.handlers.CSVHandler;
-import doiframework.utilities.handlers.IHandle;
+import doiframework.utilities.handlers.IDataHandler;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
@@ -166,11 +166,59 @@ public class DataExtractorTest {
         }
     }
 
+    @Test
+    void all_columns_using_fields() throws IOException, ReflectiveOperationException {
+        var collector = genCollector();
+        var clazz = ComplexDTOCSV.class;
+        var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
+        var extractor = new DataExtractor<>(collector);
+        var columnMap = extractor.extractColumnsUsingFields();
+        assertFalse(columnMap.isEmpty());
+
+        Class<?>[] instance = {String.class, Double.class, Integer.class};
+        for (int i = 0; i < fields.size(); i++) {
+            Field field = fields.get(i);
+
+            var objectList = columnMap.get(field);
+            assertFalse(objectList.isEmpty());
+
+            int j = 0;
+            while (j < objectList.size()) {
+                assertSame(objectList.get(j).getClass(), instance[i]);
+                j++;
+            }
+        }
+    }
+
+    @Test
+    void all_columns_using_methods() throws IOException, NoSuchMethodException, NoSuchColumnException {
+        var collector = genCollector();
+        var clazz = ComplexDTOCSV.class;
+        var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
+        var extractor = new DataExtractor<>(collector);
+        var columnMap = extractor.extractColumnsUsingMethods();
+        assertFalse(columnMap.isEmpty());
+
+        Class<?>[] instance = {String.class, Double.class, Integer.class};
+        for (int i = 0; i < methods.size(); i++) {
+            Method method = methods.get(i);
+
+            var objectList = columnMap.get(method);
+            assertFalse(objectList.isEmpty());
+
+            int j = 0;
+            while (j < objectList.size()) {
+                assertSame(objectList.get(j).getClass(), instance[i]);
+                j++;
+            }
+        }
+    }
+
     @NotNull
     private IDataCollector genCollector() throws IOException {
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        IHandle handler = new CSVHandler();
+        IDataHandler handler = new CSVHandler();
         IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
         collector.collectData();
         return collector;

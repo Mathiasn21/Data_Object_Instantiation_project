@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import static doiframework.utilities.collections.QuickTraversals.getBottomLeftChild;

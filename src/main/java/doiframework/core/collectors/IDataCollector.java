@@ -23,10 +23,10 @@ public interface IDataCollector {
     /**
      * @return {@link Class}&lt;?&gt;
      */
-    Class<?> getClazz();
+    Class<?> getDataClazz();
 
     /**
      * @return {@link List}&lt;{@link Object}&gt;
      */
-    List<Object> getAllColumns();
+    List<Object> getAllObjects();
 }

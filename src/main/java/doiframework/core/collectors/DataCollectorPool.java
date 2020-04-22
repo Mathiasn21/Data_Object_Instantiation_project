@@ -3,7 +3,7 @@ package doiframework.core.collectors;
 import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
 import doiframework.core.resource.DataSource;
-import doiframework.utilities.handlers.IHandle;
+import doiframework.utilities.handlers.IDataHandler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -68,12 +68,12 @@ public final class DataCollectorPool implements IDataCollectorPool {
 
     /**
      * @param dataSources {@link List}&lt;{@link DataSource}&gt;
-     * @param dataHandler {@link IHandle}
+     * @param dataHandler {@link IDataHandler}
      * @return {@link DataCollectorBuilder}
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static DataCollectorPoolBuilder newCollectors(List<DataSource> dataSources, IHandle dataHandler) {
+    public static DataCollectorPoolBuilder newCollectors(List<DataSource> dataSources, IDataHandler dataHandler) {
         return new DataCollectorPoolBuilder(dataSources, dataHandler);
     }
 }

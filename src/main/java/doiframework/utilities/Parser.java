@@ -76,7 +76,6 @@ public final class Parser {
                 (clazz == Byte.class    || clazz == byte.class   );
     }
 
-
     /**
      * Gets corresponding comparator for given primitive type,
      * throws error if none is found. It is an error as this is

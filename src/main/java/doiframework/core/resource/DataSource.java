@@ -10,15 +10,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/** Class representing a resource source. Aka a place to fetch resource from.
+/** Class representing a source for data. Aka a place to fetch data from.
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.6.1
  */
+
 public final class DataSource {
     private final IReadCommand readCommand;
     private final IWriteCommand writeCommand;
     private final String[] nameSpaces;
-    private String data = null;
 
     /**
      * @param readCommand {@link IReadCommand}
@@ -39,7 +39,7 @@ public final class DataSource {
      * @param readCommand {@link IReadCommand}
      * @param nameSpaces {@link String}
      */
-    DataSource(IReadCommand readCommand, String ... nameSpaces) {
+    DataSource(@NotNull IReadCommand readCommand, @NotNull String ... nameSpaces) {
         this(readCommand, null, nameSpaces);
     }
 
@@ -48,12 +48,11 @@ public final class DataSource {
      * @param readCommand {@link IReadCommand}
      * @param nameSpaces {@link String}
      */
-    DataSource(IReadCommand readCommand, IWriteCommand writeCommand, String ... nameSpaces) {
+    DataSource(@NotNull IReadCommand readCommand, IWriteCommand writeCommand, @NotNull String ...nameSpaces) {
         this.readCommand = readCommand;
         this.nameSpaces = nameSpaces;
         this.writeCommand = writeCommand;
     }
-
 
     /**
      * @return {@link BufferedReader}
@@ -86,10 +85,4 @@ public final class DataSource {
      * @return {@link String}
      */
     public final String[] getNameSpaces() { return nameSpaces; }
-
-
-    /**
-     * @throws IOException IOException {@link IOException}
-     */
-    public final void writeData() throws IOException { writeCommand.execute(data); }
 }

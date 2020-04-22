@@ -1,6 +1,6 @@
 package doiframework.exceptions;
 
-public class UnableToAccessDataException extends Exception {
+public final class UnableToAccessDataException extends Exception {
     public UnableToAccessDataException() {
         super();
     }
