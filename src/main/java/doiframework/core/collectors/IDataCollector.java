@@ -28,5 +28,5 @@ public interface IDataCollector {
     /**
      * @return {@link List}&lt;{@link Object}&gt;
      */
-    List<Object> getAllColumns();
+    List<Object> getAllObjects();
 }

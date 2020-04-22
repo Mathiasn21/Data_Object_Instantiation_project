@@ -30,7 +30,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     private ReportThings[] reportOptions = ReportThings.getFullAverageReport();
 
     public DataExtractor(@NotNull C collector) {
-        this.columns = collector.getAllColumns();
+        this.columns = collector.getAllObjects();
         this.collector = collector;
     }
 

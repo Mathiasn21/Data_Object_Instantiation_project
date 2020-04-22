@@ -81,7 +81,7 @@ public final class DataCollector implements IDataCollector {
      */
     @NotNull
     @Override
-    public List<Object> getAllColumns() {
+    public List<Object> getAllObjects() {
         Iterator<Node<Object>> iterator = rbTree.inorderTraversal();
         List<Object> res = new ArrayList<>();
         while(iterator.hasNext()){ res.add(iterator.next().getT()); }
