@@ -15,8 +15,11 @@ public class Main {
         var res2 = c2.executeReport();
         System.out.println(res2);
 
+
+        //HVORFOR FUNKER IKKE DETTE
         ReportCommand c3 = new ReportCommand(Report.getFullCovarianceCorrelationReport(), data, data2);
         var res3 = c3.executeReport();
         System.out.println(res3);
+
     }
 }
