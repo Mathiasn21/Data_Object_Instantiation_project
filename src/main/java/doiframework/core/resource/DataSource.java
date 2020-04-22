@@ -18,7 +18,6 @@ public final class DataSource {
     private final IReadCommand readCommand;
     private final IWriteCommand writeCommand;
     private final String[] nameSpaces;
-    private String data = null;
 
     /**
      * @param readCommand {@link IReadCommand}
@@ -86,10 +85,4 @@ public final class DataSource {
      * @return {@link String}
      */
     public final String[] getNameSpaces() { return nameSpaces; }
-
-
-    /**
-     * @throws IOException IOException {@link IOException}
-     */
-    public final void writeData() throws IOException { writeCommand.execute(data); }
 }
