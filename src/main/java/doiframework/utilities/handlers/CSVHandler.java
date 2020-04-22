@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.5.0
  */
-public class CSVHandler implements IHandleData {
+public class CSVHandler implements IDataHandler {
     private String delimiter = ",";
     private Class<?>[] primaryKeyTypes;
 

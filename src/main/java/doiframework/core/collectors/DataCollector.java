@@ -7,7 +7,7 @@ import doiframework.core.observer.events.DataCollectorFinishedEvent;
 import doiframework.core.observer.events.ExceptionEvent;
 import doiframework.core.observer.events.IEvent;
 import doiframework.core.resource.DataSource;
-import doiframework.utilities.handlers.IHandleData;
+import doiframework.utilities.handlers.IDataHandler;
 import doiframework.utilities.collections.ITree;
 import doiframework.utilities.collections.Node;
 import doiframework.utilities.collections.RBTree;
@@ -17,14 +17,14 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.*;
 
-/** Class responsible for collecting dataSource from a dataSource {@link DataSource} using a handler {@link IHandleData}
+/** Class responsible for collecting dataSource from a dataSource {@link DataSource} using a handler {@link IDataHandler}
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.9.4
  */
 public final class DataCollector implements IDataCollector {
     private static final AnnotationsProcessor annotationProcessor = new AnnotationsProcessor();
 
-    private final IHandleData dataHandler;
+    private final IDataHandler dataHandler;
     private final DataSource dataSource;
     private Class<?> clazz;
     private ITree<Object> rbTree;
@@ -33,9 +33,9 @@ public final class DataCollector implements IDataCollector {
 
     /**
      * @param dataSource {@link DataSource}
-     * @param dataHandler {@link IHandleData}
+     * @param dataHandler {@link IDataHandler}
      */
-    DataCollector(DataSource dataSource, IHandleData dataHandler) {
+    DataCollector(DataSource dataSource, IDataHandler dataHandler) {
         this.dataSource = dataSource;
         this.dataHandler = dataHandler;
     }
@@ -93,12 +93,12 @@ public final class DataCollector implements IDataCollector {
 
     /**
      * @param dataSource {@link DataSource}
-     * @param dataHandler {@link IHandleData}
+     * @param dataHandler {@link IDataHandler}
      * @return {@link DataCollectorBuilder}
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static DataCollectorBuilder newCollector(DataSource dataSource, IHandleData dataHandler) {
+    public static DataCollectorBuilder newCollector(DataSource dataSource, IDataHandler dataHandler) {
         return new DataCollectorBuilder(dataSource, dataHandler);
     }
 
