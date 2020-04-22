@@ -73,7 +73,7 @@ public final class DataCollector implements IDataCollector {
     @NotNull
     @Contract(pure = true)
     @Override
-    public Class<?> getClazz() { return clazz; }
+    public Class<?> getDataClazz() { return clazz; }
 
     /**
      * Returns all collected dataSource traversed in order
