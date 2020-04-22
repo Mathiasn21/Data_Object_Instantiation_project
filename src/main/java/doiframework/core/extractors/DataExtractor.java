@@ -26,16 +26,19 @@ import java.util.*;
  */
 public final class DataExtractor<C extends IDataCollector> implements IDataExtractor {
     private final List<Object> columns;//List of resource objects
+    private final Class<?> clazz;
     private IDataCollector collector;
     private ReportThings[] reportOptions = ReportThings.getFullAverageReport();
 
     public DataExtractor(@NotNull C collector) {
         this.columns = collector.getAllObjects();
         this.collector = collector;
+        clazz = columns.get(0).getClass();
     }
 
     public DataExtractor(@NotNull List<Object> rows) {
         this.columns = rows;
+        clazz = columns.get(0).getClass();
     }
 
     @Override
@@ -131,6 +134,11 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
         return res;
     }
 
+    @Override
+    public @NotNull Map<Field, List<Object>> extractColumnsUsingFields() throws ReflectiveOperationException {
+        return extractColumnsUsingFields(Arrays.asList(clazz.getFields()));
+    }
+
     @Contract(pure = true)
     @Override
     public @NotNull Map<Method, List<Object>> extractColumnsUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException {
@@ -140,6 +148,11 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
         }
         raise(new ExtractorFinishedEvent(this));
         return res;
+    }
+
+    @Override
+    public @NotNull Map<Method, List<Object>> extractColumnsUsingMethods() throws NoSuchColumnException {
+        return extractColumnsUsingMethods(Arrays.asList(clazz.getMethods()));
     }
 
     @Contract(pure = true)

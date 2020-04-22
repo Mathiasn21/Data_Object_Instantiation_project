@@ -26,7 +26,6 @@ public interface IDataExtractor {
     @Contract(pure = true)
     @NotNull List<ReportThings> getReportOptions();
 
-
     @Contract(pure = true)
     @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws ReflectiveOperationException;
 
@@ -41,10 +40,17 @@ public interface IDataExtractor {
     @NotNull Map<Field, List<Object>> extractColumnsUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException;
 
     @Contract(pure = true)
+    @NotNull Map<Field, List<Object>> extractColumnsUsingFields() throws ReflectiveOperationException;
+
+    @Contract(pure = true)
     @NotNull Map<Method, List<Object>> extractColumnsUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchColumnException;
 
     @Contract(pure = true)
+    @NotNull Map<Method, List<Object>> extractColumnsUsingMethods() throws IllegalAccessException, NoSuchColumnException;
+
+    @Contract(pure = true)
     @NotNull Map<String, List<Object>> extractColumnsUsingStrings(@NotNull List<String> columns) throws IllegalAccessException, NoSuchColumnException;
+
 
     @Contract(pure = true)
     @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException;
