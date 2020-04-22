@@ -53,7 +53,6 @@ public final class DataSource {
         this.writeCommand = writeCommand;
     }
 
-
     /**
      * @return {@link BufferedReader}
      * @throws FileNotFoundException FileNotFoundException
