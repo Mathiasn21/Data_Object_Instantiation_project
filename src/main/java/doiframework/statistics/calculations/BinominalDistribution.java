@@ -20,11 +20,17 @@ public class BinominalDistribution {
         if(probability < 0 || probability > 1){
             throw new IllegalArgumentException("The probability has to be between 0 and 1");
         }
-        numberOfAttempts = this.numberOfAttempts;
-        probability = this.probability;
+        this.numberOfAttempts = numberOfAttempts;
+        this.probability = probability;
     }
 
-    public double calcBinominalDistributionOfVariable(int variable, int numberOfAttempts, double probability){
+    public double calcBinominalProbability(int variable){
+        if(numberOfAttempts <=0){
+            throw new IllegalArgumentException("n has to be greater than 0");
+        }
+        if(probability < 0 || probability > 1){
+            throw new IllegalArgumentException("The probability has to be between 0 and 1");
+        }
         Combinations comb = new Combinations(numberOfAttempts, variable);
         int binonminalCoeff = comb.withoutReputition();
 
@@ -32,7 +38,7 @@ public class BinominalDistribution {
                 (Math.pow(1 - probability, numberOfAttempts - variable));
     }
 
-    public double calcBinominalExcpectedValue(int numberOfAttempts, double probability){
+    public double calcBinominalExcpectedValue(){
         if(numberOfAttempts <=0){
             throw new IllegalArgumentException("n has to be greater than 0");
         }
@@ -41,7 +47,8 @@ public class BinominalDistribution {
         }
         return numberOfAttempts * probability;
     }
-    public double calcBinominalVariance(int numberOfAttempts, double probability){
+
+    public double calcBinominalVariance(){
         if(numberOfAttempts <=0){
             throw new IllegalArgumentException("n has to be greater than 0");
         }
@@ -49,5 +56,10 @@ public class BinominalDistribution {
             throw new IllegalArgumentException("The probability has to be between 0 and 1");
         }
         return numberOfAttempts * probability*(1-probability);
+    }
+
+    public double calcBinominalCumulativeProbability(int variable){
+        //TODO: implement method
+        return 0;
     }
 }
