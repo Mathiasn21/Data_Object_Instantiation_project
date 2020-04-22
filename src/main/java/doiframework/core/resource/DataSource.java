@@ -14,6 +14,7 @@ import java.io.IOException;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 1.6.1
  */
+
 public final class DataSource {
     private final IReadCommand readCommand;
     private final IWriteCommand writeCommand;
