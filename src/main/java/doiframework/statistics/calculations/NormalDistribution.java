@@ -1,4 +1,4 @@
 package doiframework.statistics.calculations;
 
-public class NormalDistribution {
+public final class NormalDistribution {
 }

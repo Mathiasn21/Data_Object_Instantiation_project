@@ -2,7 +2,6 @@ package doiframework.statistics.calculations;
 
 public final class Combinations {
 
-
     public Combinations(){}
 
     private int factorial(int n) {
@@ -23,6 +22,4 @@ public final class Combinations {
             return binominalCoefficient(n - 1, elementsChosen) +
                     binominalCoefficient(n - 1, elementsChosen - 1);
     }
-
-
 }

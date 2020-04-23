@@ -4,7 +4,7 @@ public final class Permutations {
 
     public Permutations() {}
 
-    private int factorial(int n){
+    public int factorial(int n){
         if (n <= 1)
             return 1;
         return n * factorial(n - 1);

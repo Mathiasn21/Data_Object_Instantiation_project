@@ -22,13 +22,13 @@ public class BinominalDistributionTest {
 
     @Test
     public void binominalExcpectedValueTest(){
-        p = b.calcBinominalExcpectedValue();
+        p = b.calcExcpectedValue();
         assertEquals(1.2000000000000002, p);
     }
 
     @Test
     public void binominalVarianceTest(){
-        p = b.calcBinominalVariance();
+        p = b.calcVariance();
         assertEquals(0.9600000000000002, p);
     }
 

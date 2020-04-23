@@ -1,6 +1,6 @@
 package doiframework.statistics.calculations;
 
-public class BinominalDistribution {
+public final class BinominalDistribution {
     private int numberOfAttempts;
     private double probability;
 
@@ -35,11 +35,11 @@ public class BinominalDistribution {
                 Math.pow((1 - probability), (numberOfAttempts - variableX));
     }
 
-    public double calcBinominalExcpectedValue(){
+    public double calcExcpectedValue(){
         return numberOfAttempts * probability;
     }
 
-    public double calcBinominalVariance(){
+    public double calcVariance(){
         return numberOfAttempts * probability*(1-probability);
     }
 
@@ -82,5 +82,5 @@ public class BinominalDistribution {
         double cdf = calCumulativeProbabilityLessThanEqual(variableX - 1);
         return 1 - cdf;
     }
-    
+
 }
