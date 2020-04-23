@@ -123,8 +123,8 @@ public class DataExtractorTest {
         var extractor = new DataExtractor<>(collector);
         var clazz = ComplexDTOCSV.class;
         var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
-        Map<String, Map<String, Double>> report = extractor.extractReportUsingMethods(methods);
         var columnMap = extractor.extractColumnsUsingMethods(methods);
+        Map<String, Map<String, Double>> report = extractor.extractReportUsingMethods(methods);
         assertFalse(columnMap.isEmpty());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
