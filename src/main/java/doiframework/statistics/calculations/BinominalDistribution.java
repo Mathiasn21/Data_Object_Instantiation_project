@@ -4,14 +4,6 @@ public final class BinominalDistribution {
     private int numberOfAttempts;
     private double probability;
 
-    public int getNumberOfAttempts() {
-        return numberOfAttempts;
-    }
-
-    public double getProbability() {
-        return probability;
-    }
-
     public BinominalDistribution(int numberOfAttempts, double probability) {
 
         if(numberOfAttempts <=0){
@@ -83,4 +75,16 @@ public final class BinominalDistribution {
         return 1 - cdf;
     }
 
+    public int getNumberOfAttempts() {
+        return numberOfAttempts;
+    }
+
+    public double getProbability() {
+        return probability;
+    }
+
+    @Override
+    public String toString() {
+        return "Binominal Distribution";
+    }
 }
