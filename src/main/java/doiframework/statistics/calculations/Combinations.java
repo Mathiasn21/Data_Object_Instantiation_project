@@ -1,13 +1,9 @@
 package doiframework.statistics.calculations;
 
 public final class Combinations {
-    int n;
-    int elementsChosen;
 
-    public Combinations(int n, int elementsChosen){
-        this.n = n;
-        this.elementsChosen = elementsChosen;
-    }
+
+    public Combinations(){}
 
     private int factorial(int n) {
         if (n <= 1)
@@ -15,13 +11,18 @@ public final class Combinations {
         return n * factorial(n - 1);
     }
 
-    public int withReputition() {
+    public int withRepetition(int n, int elementsChosen) {
         return factorial(elementsChosen + n - 1) / (factorial(elementsChosen) *
                 factorial(n - 1));
     }
 
-    //binominal coefficient
-    public int withoutReputition() {
-        return factorial(n) / (factorial(elementsChosen) * factorial(n - elementsChosen));
+    public int binominalCoefficient(int n, int elementsChosen) {
+        if ((n == elementsChosen) || (elementsChosen == 0))
+            return 1;
+        else
+            return binominalCoefficient(n - 1, elementsChosen) +
+                    binominalCoefficient(n - 1, elementsChosen - 1);
     }
+
+
 }

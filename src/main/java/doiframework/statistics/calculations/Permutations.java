@@ -2,13 +2,7 @@ package doiframework.statistics.calculations;
 
 public final class Permutations {
 
-    int n;
-    int reputitions;
-
-    public Permutations(int n, int reputitions) {
-        this.n = n;
-        this.reputitions = reputitions;
-    }
+    public Permutations() {}
 
     private int factorial(int n){
         if (n <= 1)
@@ -16,12 +10,11 @@ public final class Permutations {
         return n * factorial(n - 1);
     }
 
-    public double withRepition(){
-        return Math.pow(n, reputitions);
+    public double withRepetition(int n, int repetitions){
+        return Math.pow(n, repetitions);
     }
 
-    public int withoutRepition(){
-        return factorial(n) / factorial(n - reputitions);
+    public int withoutRepetition(int n, int repetitions){
+        return factorial(n) / factorial(n - repetitions);
     }
-
 }

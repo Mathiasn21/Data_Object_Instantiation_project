@@ -24,42 +24,63 @@ public class BinominalDistribution {
         this.probability = probability;
     }
 
-    public double calcBinominalProbability(int variable){
-        if(numberOfAttempts <=0){
-            throw new IllegalArgumentException("n has to be greater than 0");
+    public double calcBinominalProbability(int variableX){
+        if (variableX > numberOfAttempts){
+            throw new IllegalArgumentException("X has to be less than number of attempts");
         }
-        if(probability < 0 || probability > 1){
-            throw new IllegalArgumentException("The probability has to be between 0 and 1");
-        }
-        Combinations comb = new Combinations(numberOfAttempts, variable);
-        int binonminalCoeff = comb.withoutReputition();
+        Combinations comb = new Combinations();
+        int binonminalCoeff = comb.binominalCoefficient(numberOfAttempts, variableX);
 
-        return binonminalCoeff * Math.pow(probability, variable)*
-                (Math.pow(1 - probability, numberOfAttempts - variable));
+        return binonminalCoeff * Math.pow(probability, variableX)*
+                Math.pow((1 - probability), (numberOfAttempts - variableX));
     }
 
     public double calcBinominalExcpectedValue(){
-        if(numberOfAttempts <=0){
-            throw new IllegalArgumentException("n has to be greater than 0");
-        }
-        if(probability < 0 || probability > 1){
-            throw new IllegalArgumentException("The probability has to be between 0 and 1");
-        }
         return numberOfAttempts * probability;
     }
 
     public double calcBinominalVariance(){
-        if(numberOfAttempts <=0){
-            throw new IllegalArgumentException("n has to be greater than 0");
-        }
-        if(probability < 0 || probability > 1){
-            throw new IllegalArgumentException("The probability has to be between 0 and 1");
-        }
         return numberOfAttempts * probability*(1-probability);
     }
 
-    public double calcBinominalCumulativeProbability(int variable){
-        //TODO: implement method
-        return 0;
+    public double calCumulativeProbabilityLessThanEqual(int variableX){
+        if (variableX > numberOfAttempts){
+            throw new IllegalArgumentException("X has to be less than number of attempts");
+        }
+        double binominalPorbability = 0;
+        for(int i = 0; i <= numberOfAttempts; i++){
+            if(variableX < 0){
+                break;
+            }else {
+                binominalPorbability += calcBinominalProbability(variableX);
+                variableX--;
+            }
+        }
+        return binominalPorbability;
     }
+
+    public double calCumulativeProbabilityMoreThan(int variableX){
+        if (variableX > numberOfAttempts){
+            throw new IllegalArgumentException("X has to be less than number of attempts");
+        }
+        double binominalPorbability = 0;
+        for(int i = 0; i <= numberOfAttempts; i++){
+            if(variableX < 0){
+                break;
+            }else {
+                binominalPorbability += calcBinominalProbability(variableX);
+                variableX--;
+            }
+        }
+        return 1 - binominalPorbability;
+    }
+
+    public double calCumulativeProbabilityMoreThanEqual(int variableX){
+        if (variableX > numberOfAttempts){
+            throw new IllegalArgumentException("X has to be less than number of attempts");
+        }
+        double cdf = calCumulativeProbabilityLessThanEqual(variableX - 1);
+        return 1 - cdf;
+    }
+    
 }
