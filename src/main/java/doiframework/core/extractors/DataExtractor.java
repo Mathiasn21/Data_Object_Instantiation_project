@@ -9,7 +9,7 @@ import doiframework.core.observer.events.ExtractorFinishedEvent;
 import doiframework.core.observer.events.IEvent;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
-import doiframework.statistics.report.ReportCommand;
+import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.Report;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
@@ -214,7 +214,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
         for (Field field : filteredFields) {
             List<Number> column = (List<Number>) (Object) columns.get(field);//Safe as this is ensured beforehand
-            ReportCommand centralCommand = new ReportCommand(reportOptions, column);
+            DataReport centralCommand = new DataReport(reportOptions, column);
             res.put(field.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));
@@ -231,7 +231,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
         for (Method method : filteredMethods) {
             List<Number> column = (List<Number>) (Object) columns.get(method);//Safe as this is ensured beforehand
-            ReportCommand centralCommand = new ReportCommand(reportOptions, column);
+            DataReport centralCommand = new DataReport(reportOptions, column);
             res.put(method.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));

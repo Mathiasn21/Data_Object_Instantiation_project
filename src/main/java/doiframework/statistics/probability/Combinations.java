@@ -1,4 +1,4 @@
-package doiframework.statistics.calculations;
+package doiframework.statistics.probability;
 
 public final class Combinations {
 
@@ -13,11 +13,11 @@ public final class Combinations {
                 factorial(n - 1));
     }
 
-    public int binominalCoefficient(int n, int elementsChosen) {
+    public int withoutRepetition(int n, int elementsChosen) {
         if ((n == elementsChosen) || (elementsChosen == 0))
             return 1;
         else
-            return binominalCoefficient(n - 1, elementsChosen) +
-                    binominalCoefficient(n - 1, elementsChosen - 1);
+            return withoutRepetition(n - 1, elementsChosen) +
+                    withoutRepetition(n - 1, elementsChosen - 1);
     }
 }

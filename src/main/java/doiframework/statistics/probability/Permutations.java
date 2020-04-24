@@ -1,4 +1,4 @@
-package doiframework.statistics.calculations;
+package doiframework.statistics.probability;
 
 public final class Permutations {
 

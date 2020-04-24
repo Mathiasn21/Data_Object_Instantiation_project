@@ -1,7 +1,7 @@
 package unitTests;
 
-import doiframework.statistics.calculations.Combinations;
-import doiframework.statistics.calculations.Permutations;
+import doiframework.statistics.probability.Combinations;
+import doiframework.statistics.probability.Permutations;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -35,8 +35,8 @@ public class PermutationAndCombinationTest {
 
     @Test
     public void combinationsWithoutRepitionTest(){
-        p = comb.binominalCoefficient(5,3);
-        p2 = comb2.binominalCoefficient(25,14);
+        p = comb.withoutRepetition(5,3);
+        p2 = comb2.withoutRepetition(25,14);
         assertEquals(10, p);
         assertNotEquals(11, p);
         assertEquals(4457400, p2);

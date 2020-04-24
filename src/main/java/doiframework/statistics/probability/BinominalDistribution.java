@@ -1,4 +1,4 @@
-package doiframework.statistics.calculations;
+package doiframework.statistics.probability;
 
 public final class BinominalDistribution {
     private int numberOfAttempts;
@@ -21,7 +21,7 @@ public final class BinominalDistribution {
             throw new IllegalArgumentException("X has to be less than number of attempts");
         }
         Combinations comb = new Combinations();
-        int binonminalCoeff = comb.binominalCoefficient(numberOfAttempts, variableX);
+        int binonminalCoeff = comb.withoutRepetition(numberOfAttempts, variableX);
 
         return binonminalCoeff * Math.pow(probability, variableX)*
                 Math.pow((1 - probability), (numberOfAttempts - variableX));
@@ -81,6 +81,11 @@ public final class BinominalDistribution {
 
     public double getProbability() {
         return probability;
+    }
+
+    public int getBinominalCoefficient(int variableX){
+        Combinations c = new Combinations();
+        return c.withoutRepetition(numberOfAttempts, variableX);
     }
 
     @Override

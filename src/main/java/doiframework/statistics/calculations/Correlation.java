@@ -2,12 +2,15 @@ package doiframework.statistics.calculations;
 
 
 import doiframework.exceptions.DatasetNotMatchingException;
+import doiframework.statistics.calculations.AdvancedStatistics;
+import doiframework.statistics.calculations.Covariance;
+import doiframework.statistics.calculations.SimpleStatistics;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public final class Correlation extends AdvancedStatistics{
+public final class Correlation extends AdvancedStatistics {
 
     /**
      * @param data1 double[]
@@ -30,7 +33,7 @@ public final class Correlation extends AdvancedStatistics{
         super(data1, data2);
     }
 
-    public double calcCorrelationCoefficientFromSample() throws Exception {
+    public double calcCorrelationCoefficientFromSample() throws DatasetNotMatchingException {
         Covariance cov = new Covariance(data, data2);
         SimpleStatistics s1 = new SimpleStatistics(data);
         SimpleStatistics s2 = new SimpleStatistics(data2);
@@ -42,7 +45,7 @@ public final class Correlation extends AdvancedStatistics{
                 (s1.calcStandardDeviationFromSample() * s2.calcStandardDeviationFromSample());
     }
 
-    public double calcCorrelationCoefficientFromPopulation() throws Exception {
+    public double calcCorrelationCoefficientFromPopulation() throws DatasetNotMatchingException {
         Covariance cov = new Covariance(data, data2);
         SimpleStatistics s1 = new SimpleStatistics(data);
         SimpleStatistics s2 = new SimpleStatistics(data2);
