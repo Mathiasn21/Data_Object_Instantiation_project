@@ -56,7 +56,7 @@ public class DataReport {
     private Map<String, Double> executeReportOnSimpleStatistics(){
         StatFactory statFactory = new StatFactory();
         Map<String, Double> res = new HashMap<>();
-        String msg = ",Dataset:";
+        String msg = ", Dataset: ";
 
         commands.forEach((command) -> {
             try {
@@ -124,11 +124,10 @@ public class DataReport {
             s = mapping.getKey();
             d = mapping.getValue();
 
-            String a = String.format("%-50s", s);
+            String a = String.format("%-52s", s);
             System.out.println(a + d);
         }
-
         System.out.println("------------------------------------------------------------------------");
-
     }
+    
 }
