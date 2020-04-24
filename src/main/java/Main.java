@@ -1,12 +1,8 @@
 import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NotPrimitiveNumberException;
-import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.Correlation;
-import doiframework.statistics.calculations.Statistics;
 import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.Report;
-
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException {
