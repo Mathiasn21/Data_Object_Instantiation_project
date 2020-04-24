@@ -4,24 +4,23 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public enum Report {
-    //TODO: add all calculations here
     AVERAGE_MEAN(AverageReport.AVERAGE_MEAN),
     AVERAGE_MID_RANGE(AverageReport.AVERAGE_MID_RANGE),
     AVERAGE_MEDIAN(AverageReport.AVERAGE_MEDIAN),
     AVERAGE_MODE(AverageReport.AVERAGE_MODE),
-    AVERAGE_SUM(AverageReport.AVERAGE_SUM),
+    TOTAL_SUM(AverageReport.AVERAGE_SUM),
 
-    POPULATION_VARIANCE(SimpleStatisticalReport.SAMPLE_VARIANCE),
+    POPULATION_VARIANCE(SimpleStatisticalReport.POPULATION_VARIANCE),
     SAMPLE_VARIANCE(SimpleStatisticalReport.SAMPLE_VARIANCE),
     STANDARD_DEVIATION_POPULATION(SimpleStatisticalReport.STANDARD_DEVIATION_POPULATION),
     STANDARD_DEVIATION_SAMPLE(SimpleStatisticalReport.STANDARD_DEVIATION_SAMPLE),
     STANDARD_ERROR_SAMPLE(SimpleStatisticalReport.STANDARD_ERROR_SAMPLE),
     STANDARD_ERROR_POPULATION(SimpleStatisticalReport.STANDARD_ERROR_POPULATION),
 
-    COVARIANCE_FROM_SAMPLE(CovarianceReport.COVARIANCE_SAMPLE),
-    COVARIANCE_FROM_POPULATION(CovarianceReport.COVARIANCE_POPULATION),
-    CORRELATION_FROM_SAMPLE(CorrelationReport.CORRELATION_SAMPLE),
-    CORRELATION_FROM_POPULATION(CorrelationReport.CORRELATION_POPULATION);
+    COVARIANCE_SAMPLE(CovarianceReport.COVARIANCE_SAMPLE),
+    COVARIANCE_POPULATION(CovarianceReport.COVARIANCE_POPULATION),
+    CORRELATION_SAMPLE(CorrelationReport.CORRELATION_SAMPLE),
+    CORRELATION_POPULATION(CorrelationReport.CORRELATION_POPULATION);
 
     private final IReport report;
 
@@ -32,7 +31,7 @@ public enum Report {
     @Override
     @NotNull
     public String toString() {
-        return "ReportThings{}";
+        return this.report.getOption();
     }
 
     public IReport getIReport(){
@@ -45,7 +44,7 @@ public enum Report {
                 Report.AVERAGE_MEAN,
                 Report.AVERAGE_MID_RANGE,
                 Report.AVERAGE_MEDIAN,
-                Report.AVERAGE_SUM,
+                Report.TOTAL_SUM,
                 Report.AVERAGE_MODE
         };
     }
@@ -65,11 +64,15 @@ public enum Report {
     @Contract(value = " -> new", pure = true)
     public static Report @NotNull [] getFullCovarianceCorrelationReport(){
         return new Report[]{
-                Report.COVARIANCE_FROM_SAMPLE,
-                Report.COVARIANCE_FROM_POPULATION,
-                Report.CORRELATION_FROM_SAMPLE,
-                Report.CORRELATION_FROM_POPULATION
+                Report.COVARIANCE_SAMPLE,
+                Report.COVARIANCE_POPULATION,
+                Report.CORRELATION_SAMPLE,
+                Report.CORRELATION_POPULATION
         };
+    }
+
+    public static ReportBuilder getBuilder(){
+        return new ReportBuilder();
     }
 
 }

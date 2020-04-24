@@ -1,6 +1,6 @@
 package unitTests;
 
-import doiframework.statistics.calculations.PoissonDistribution;
+import doiframework.statistics.probability.PoissonDistribution;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

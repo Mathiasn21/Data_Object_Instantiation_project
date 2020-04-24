@@ -1,4 +1,4 @@
-package doiframework.statistics.calculations;
+package doiframework.statistics.probability;
 
 public final class PoissonDistribution {
 
@@ -25,7 +25,6 @@ public final class PoissonDistribution {
     }
 
     public double calcCumulativeProbabilityLessThanEqual(int variableX){
-        double expectedValue = calcExcpectedValue();
         double poissonValue = 0;
         for(int i = variableX; i >= 0; i--){
                 poissonValue += calcPoissonDistribution(variableX);
@@ -34,7 +33,6 @@ public final class PoissonDistribution {
         return poissonValue;
     }
     public double calcCumulativeProbabilityMoreThan(int variableX){
-        double expectedValue = calcExcpectedValue();
         double poissonValue = 0;
         for(int i = variableX; i >= 0; i--){
             poissonValue += calcPoissonDistribution(variableX);
@@ -42,8 +40,8 @@ public final class PoissonDistribution {
         }
         return 1 - poissonValue;
     }
+
     public double calcCumulativeProbabilityMoreThanEqual(int variableX){
-        double expectedValue = calcExcpectedValue();
         double cdf = calcCumulativeProbabilityLessThanEqual(variableX - 1);
         return 1 - cdf;
     }

@@ -1,19 +1,20 @@
 package doiframework.statistics.report;
 
 import doiframework.statistics.calculations.*;
+import doiframework.statistics.calculations.Correlation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
-public enum CorrelationReport implements IReport {
+public enum CorrelationReport implements IAdvancedReport {
     CORRELATION_SAMPLE("Correlation Coefficient - From sample", Correlation::calcCorrelationCoefficientFromSample),
     CORRELATION_POPULATION("Correlation Coefficient - From population", Correlation::calcCorrelationCoefficientFromPopulation);
 
     public final String option;
     public final ICorrelationCalculate calculate;
-    private static final Class<? extends Statistics> clazz = Covariance.class;
+    private static final Class<? extends AdvancedStatistics> clazz = Correlation.class;
 
     @Contract(pure = true)
     CorrelationReport(String option, ICorrelationCalculate calculate) {
@@ -56,6 +57,10 @@ public enum CorrelationReport implements IReport {
     @Override
     public String toString() { return option; }
 
+    @Override
+    public int getNumbSupportedDataSets() {
+        return 2;
+    }
 }
 
 

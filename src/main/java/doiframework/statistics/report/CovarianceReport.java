@@ -7,13 +7,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public enum CovarianceReport implements IReport {
+public enum CovarianceReport implements IAdvancedReport {
     COVARIANCE_SAMPLE("Covariance - From sample", Covariance::calcCovarianceFromSample),
     COVARIANCE_POPULATION("Covariance - From population", Covariance::calcCovarianceFromPopulation);
 
     public final String option;
     public final ICovarianceCalculate calculate;
-    private static final Class<? extends Statistics> clazz = Covariance.class;
+    private static final Class<? extends AdvancedStatistics> clazz = Covariance.class;
 
     @Contract(pure = true)
     CovarianceReport(String option, ICovarianceCalculate calculate) {
@@ -57,4 +57,8 @@ public enum CovarianceReport implements IReport {
     @Override
     public String toString() { return option; }
 
+    @Override
+    public int getNumbSupportedDataSets() {
+        return 2;
+    }
 }

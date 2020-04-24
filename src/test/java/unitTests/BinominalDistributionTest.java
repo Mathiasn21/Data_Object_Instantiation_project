@@ -1,6 +1,6 @@
 package unitTests;
 
-import doiframework.statistics.calculations.BinominalDistribution;
+import doiframework.statistics.probability.BinominalDistribution;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,5 +52,11 @@ public class BinominalDistributionTest {
     public void binominalCumulativeMoreThanEqualTest(){
         p2 = b2.calCumulativeProbabilityMoreThanEqual(14);
         assertEquals(0.07780106386707308, p2);
+    }
+
+    @Test
+    public void getBinominalCoefficientTest(){
+        p2 = b2.getBinominalCoefficient(14);
+        assertEquals(4457400, p2);
     }
 }
