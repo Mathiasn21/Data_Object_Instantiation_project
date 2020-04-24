@@ -2,8 +2,6 @@ package doiframework.statistics.probability;
 
 public final class Combinations {
 
-    public Combinations(){}
-
     private int factorial(int n) {
         if (n <= 1)
             return 1;
