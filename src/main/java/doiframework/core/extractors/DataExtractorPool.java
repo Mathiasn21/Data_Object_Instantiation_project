@@ -34,41 +34,44 @@ public final class DataExtractorPool implements IDataExtractorPool {
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromFields(@NotNull Map<Class<? extends DataObject>, List<Field>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException {
         Map<Class<? extends DataObject>, List<Object[]>> res = new HashMap<>();
-        System.out.println(classListMap.keySet());
+        classListMap.keySet().forEach((o) -> {
+            Class<?> d = o;
+            System.out.println(d);
+        });
 
         return null;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromNames(@NotNull Map<Class<? extends DataObject>, List<String>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromNames(@NotNull Map<Class<?>, List<String>> classListMap) throws IllegalAccessException {
         return null;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromMethods(@NotNull Map<Class<? extends DataObject>, List<Method>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) throws IllegalAccessException {
         return null;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromFields(@NotNull Map<Class<? extends DataObject>, List<Field>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException {
         return null;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromStrings(@NotNull Map<Class<? extends DataObject>, List<String>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromStrings(@NotNull Map<Class<?>, List<String>> classListMap) throws IllegalAccessException {
         return null;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<? extends DataObject>, List<Method>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) throws IllegalAccessException {
         return null;
     }
 
     @Contract(pure = true)
     @Override
-    public @NotNull Map<Class<? extends DataObject>, IDataExtractor> getAllExtractors() {
+    public @NotNull Map<Class<?>, IDataExtractor> getAllExtractors() {
         return Collections.unmodifiableMap(dataExtractors);
     }
 
