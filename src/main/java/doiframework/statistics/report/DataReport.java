@@ -56,7 +56,7 @@ public class DataReport {
     private Map<String, Double> executeReportOnSimpleStatistics(){
         StatFactory statFactory = new StatFactory();
         Map<String, Double> res = new HashMap<>();
-        String msg = ",Dataset:";
+        String msg = ", Dataset: ";
 
         commands.forEach((command) -> {
             try {
@@ -111,20 +111,23 @@ public class DataReport {
         return res;
     }
 
-
     public void prettyPrintReport() {
         var report = executeReport();
+        String s= "";
+        Double d;
 
-        Set<Map.Entry<String, Double>> entries = report.entrySet();
         TreeMap<String, Double> sorted = new TreeMap<>(report);
         Set<Map.Entry<String, Double>> mappings = sorted.entrySet();
 
+        System.out.println("---------------------------------Report---------------------------------\n");
         for(Map.Entry<String, Double> mapping : mappings){
-            System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
-        }
+            s = mapping.getKey();
+            d = mapping.getValue();
 
-        /*report.forEach((key,value)->{
-            System.out.println(key + ":\n" + value);
-        });*/
+            String a = String.format("%-52s", s);
+            System.out.println(a + d);
+        }
+        System.out.println("------------------------------------------------------------------------");
     }
+    
 }
