@@ -143,7 +143,9 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
     @Override
     public @NotNull Map<Field, List<Object>> extractColumnsUsingFields() throws ReflectiveOperationException {
-        return extractColumnsUsingFields(Arrays.asList(clazz.getFields()));
+        var res = extractColumnsUsingFields(Arrays.asList(clazz.getFields()));
+        raise(new ExtractorFinishedEvent(this));
+        return res;
     }
 
     @Contract(pure = true)
