@@ -3,6 +3,8 @@ package doiframework.core.extractors;
 import doiframework.core.annotations.DataObject;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.collectors.IDataCollectorPool;
+import doiframework.exceptions.NoSuchColumnException;
+import doiframework.exceptions.NotPrimitiveNumberException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +36,7 @@ public final class DataExtractorPool implements IDataExtractorPool {
     }
 
     @Override
-    public @NotNull Map<Class<?>, Map<Field, List<Object>>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException {
+    public @NotNull Map<Class<?>, Map<Field, List<Object>>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) {
         Map<Class<?>, Map<Field, List<Object>>> res = new HashMap<>();
         classListMap.keySet().forEach((o) -> {
             var extractor = dataExtractors.get(o);
@@ -44,33 +46,64 @@ public final class DataExtractorPool implements IDataExtractorPool {
                 e.printStackTrace();
             }
         });
-
         return res;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromNames(@NotNull Map<Class<?>, List<String>> classListMap) throws IllegalAccessException {
-        return null;
+    public @NotNull Map<Class<?>, Map<String, List<Object>>> extractAllColumnsFromNames(@NotNull Map<Class<?>, List<String>> classListMap) {
+        Map<Class<?>, Map<String, List<Object>>> res = new HashMap<>();
+        classListMap.keySet().forEach((o) -> {
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractColumnsUsingStrings(classListMap.get(o)));
+            } catch (ReflectiveOperationException | NoSuchColumnException e) {
+                e.printStackTrace();
+            }
+        });
+        return res;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) throws IllegalAccessException {
-        return null;
+    public @NotNull Map<Class<?>, Map<Method, List<Object>>> extractAllColumnsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) {
+        Map<Class<?>, Map<Method, List<Object>>> res = new HashMap<>();
+        classListMap.keySet().forEach((o) -> {
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractColumnsUsingMethods(classListMap.get(o)));
+            } catch (ReflectiveOperationException | NoSuchColumnException e) {
+                e.printStackTrace();
+            }
+        });
+        return res;
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException {
-        return null;
+    public @NotNull Map<Class<?>, Map<String, Map<String, Double>>> extractDataReportsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) {
+        Map<Class<?>, Map<String, Map<String, Double>>> res = new HashMap<>();
+        classListMap.keySet().forEach((o) -> {
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractReportUsingFields(classListMap.get(o)));
+            } catch (ReflectiveOperationException | NotPrimitiveNumberException e) {
+                e.printStackTrace();
+            }
+        });
+        return res;
     }
 
-    @Override
-    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromStrings(@NotNull Map<Class<?>, List<String>> classListMap) throws IllegalAccessException {
-        return null;
-    }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) throws IllegalAccessException {
-        return null;
+    public @NotNull Map<Class<?>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) {
+        Map<Class<?>, Map<String, Map<String, Double>>> res = new HashMap<>();
+        classListMap.keySet().forEach((o) -> {
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractReportUsingMethods(classListMap.get(o)));
+            } catch (ReflectiveOperationException | NoSuchColumnException | NotPrimitiveNumberException e) {
+                e.printStackTrace();
+            }
+        });
+        return res;
     }
 
     @Contract(pure = true)
