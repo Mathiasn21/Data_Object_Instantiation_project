@@ -21,7 +21,7 @@ interface IDataExtractorPool {
     @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromStrings(@NotNull Map<Class<? extends DataObject>, List<String>> classListMap) throws IllegalAccessException;
     @NotNull Map<Class<? extends DataObject>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<? extends DataObject>, List<Method>> classListMap) throws IllegalAccessException;
 
-    @NotNull List<IDataExtractor> getAllExtractors();
+    Map<Class<? extends DataObject>, IDataExtractor> getAllExtractors();
 
     void setNumberOfThreads(byte number);
     void setThreadPoolExecutor(@NotNull ThreadPoolExecutor pool);

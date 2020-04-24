@@ -1,6 +1,7 @@
 package doiframework.core.extractors;
 
 
+import doiframework.core.annotations.DataObject;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
@@ -25,6 +26,9 @@ public interface IDataExtractor {
 
     @Contract(pure = true)
     @NotNull List<Report> getReportOptions();
+
+    @Contract(pure = true)
+    @NotNull Class<? extends DataObject> getDataObjectClass();
 
     @Contract(pure = true)
     @NotNull List<Object> extractColumnFrom (@NotNull Field field) throws ReflectiveOperationException;
