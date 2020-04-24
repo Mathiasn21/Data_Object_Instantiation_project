@@ -111,20 +111,24 @@ public class DataReport {
         return res;
     }
 
-
     public void prettyPrintReport() {
         var report = executeReport();
+        String s= "";
+        Double d;
 
-        Set<Map.Entry<String, Double>> entries = report.entrySet();
         TreeMap<String, Double> sorted = new TreeMap<>(report);
         Set<Map.Entry<String, Double>> mappings = sorted.entrySet();
 
+        System.out.println("---------------------------------Report---------------------------------\n");
         for(Map.Entry<String, Double> mapping : mappings){
-            System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
+            s = mapping.getKey();
+            d = mapping.getValue();
+
+            String a = String.format("%-50s", s);
+            System.out.println(a + d);
         }
 
-        /*report.forEach((key,value)->{
-            System.out.println(key + ":\n" + value);
-        });*/
+        System.out.println("------------------------------------------------------------------------");
+
     }
 }
