@@ -34,14 +34,18 @@ public final class DataExtractorPool implements IDataExtractorPool {
     }
 
     @Override
-    public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException {
-        Map<Class<? extends DataObject>, List<Object[]>> res = new HashMap<>();
+    public @NotNull Map<Class<?>, Map<Field, List<Object>>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException {
+        Map<Class<?>, Map<Field, List<Object>>> res = new HashMap<>();
         classListMap.keySet().forEach((o) -> {
-            Class<?> d = o;
-            System.out.println(d);
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractColumnsUsingFields(classListMap.get(o)));
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+            }
         });
 
-        return null;
+        return res;
     }
 
     @Override

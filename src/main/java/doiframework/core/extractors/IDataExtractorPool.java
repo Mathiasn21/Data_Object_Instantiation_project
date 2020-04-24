@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
 interface IDataExtractorPool {
-    @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException;
+    Map<? extends Class<?>, Map<Field, List<Object>>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap) throws IllegalAccessException;
     @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromNames(@NotNull Map<Class<?>, List<String>> classListMap) throws IllegalAccessException;
     @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap) throws IllegalAccessException;
 

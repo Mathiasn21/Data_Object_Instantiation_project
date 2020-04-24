@@ -75,6 +75,7 @@ public class Main {
         Map<Class<?>, List<Field>> map = new HashMap<>();
         List<Field> ll = Arrays.asList(ComplexDTOCSV.class.getFields());
         map.put(ComplexDTOCSV.class, ll);
-        extractorPool.extractAllColumnsFromFields(map);
+        var res = extractorPool.extractAllColumnsFromFields(map);
+        System.out.println(res);
     }
 }
