@@ -1,5 +1,6 @@
 package doiframework.core.extractors;
 
+import doiframework.core.annotations.DataObject;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.observer.EventObserver;
@@ -55,6 +56,12 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     @Override
     public @NotNull List<Report> getReportOptions() {
         return Arrays.asList(reportOptions);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")//As only DataObjects are instantiated in this framework.
+    public @NotNull Class<? extends DataObject> getDataObjectClass() {
+        return (Class<? extends DataObject>) clazz;
     }
 
     @Contract(pure = true)

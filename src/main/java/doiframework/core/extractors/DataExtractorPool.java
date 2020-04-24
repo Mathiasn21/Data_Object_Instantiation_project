@@ -1,12 +1,14 @@
 package doiframework.core.extractors;
 
 import doiframework.core.annotations.DataObject;
+import doiframework.core.collectors.IDataCollector;
+import doiframework.core.collectors.IDataCollectorPool;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -16,9 +18,26 @@ import java.util.concurrent.ThreadPoolExecutor;
 public final class DataExtractorPool implements IDataExtractorPool {
     private byte threads = 2;
     private ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(threads);
+    private final Map<Class<? extends DataObject>, IDataExtractor> dataExtractors = new HashMap<>();
+
+    public DataExtractorPool(@NotNull List<IDataExtractor> dataExtractors) {
+        for (IDataExtractor dataExtractor : dataExtractors) {
+            this.dataExtractors.put(dataExtractor.getDataObjectClass(), dataExtractor);
+        }
+    }
+
+    public DataExtractorPool(@NotNull IDataCollectorPool dataCollectorPool) {
+        for (IDataCollector dataCollector : dataCollectorPool.getAllCollectors()) {
+            var dataExtractor = new DataExtractor<>(dataCollector);
+            dataExtractors.put(dataExtractor.getDataObjectClass(), dataExtractor);
+        }
+    }
 
     @Override
     public @NotNull Map<Class<? extends DataObject>, List<Object[]>> extractAllColumnsFromFields(@NotNull Map<Class<? extends DataObject>, List<Field>> classListMap) throws IllegalAccessException {
+        Map<Class<? extends DataObject>, List<Object[]>> res = new HashMap<>();
+        System.out.println(classListMap.keySet());
+
         return null;
     }
 
@@ -47,9 +66,10 @@ public final class DataExtractorPool implements IDataExtractorPool {
         return null;
     }
 
+    @Contract(pure = true)
     @Override
-    public @NotNull List<IDataExtractor> getAllExtractors() {
-        return null;
+    public @NotNull Map<Class<? extends DataObject>, IDataExtractor> getAllExtractors() {
+        return Collections.unmodifiableMap(dataExtractors);
     }
 
     @Override
