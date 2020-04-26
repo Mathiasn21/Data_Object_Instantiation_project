@@ -30,6 +30,7 @@ public final class DataCollector implements IDataCollector {
     private ITree<Object> rbTree;
     private Comparator<Object> comparator = null;
     private boolean compression = false;
+    private ObjectInformation dataObjectInformation;
 
     /**
      * @param dataSource {@link DataSource}
@@ -49,10 +50,10 @@ public final class DataCollector implements IDataCollector {
         List<Object[]> initArgs = dataHandler.handle(dataSource.getData());
         rbTree = new RBTree<>(comparator, compression);
         try {
-            ObjectInformation objectObjectInformation = annotationProcessor.initializeDataObjects(initArgs, dataSource.getNameSpaces()[0]);
-            for (Object o : objectObjectInformation.data) { rbTree.insert(o); }
+            dataObjectInformation = annotationProcessor.initializeDataObjects(initArgs, dataSource.getNameSpaces()[0]);
+            for (Object o : dataObjectInformation.data) { rbTree.insert(o); }
 
-            clazz = objectObjectInformation.clazz;
+            clazz = dataObjectInformation.clazz;
             raise(new DataCollectorFinishedEvent(this));
         } catch (ReflectiveOperationException e) { raise(new ExceptionEvent(this, e)); }
     }
@@ -86,6 +87,12 @@ public final class DataCollector implements IDataCollector {
         List<Object> res = new ArrayList<>();
         while(iterator.hasNext()){ res.add(iterator.next().getT()); }
         return res;
+    }
+
+    @Contract(pure = true)
+    @Override
+    public @NotNull ObjectInformation getDataObjectInformation() {
+        return dataObjectInformation;
     }
 
     private void raise(@NotNull IEvent event) { EventObserver.registerEventFrom(event); }
