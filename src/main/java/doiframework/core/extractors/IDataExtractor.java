@@ -5,8 +5,7 @@ import doiframework.core.annotations.DataObject;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
-import doiframework.statistics.report.AverageReport;
-import doiframework.statistics.report.Report;
+import doiframework.statistics.report.ReportCollection;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,12 +19,12 @@ import java.util.Map;
  * @version 1.0.0
  */
 public interface IDataExtractor {
-    void setReportOptions(@NotNull List<Report> reportOptions);
+    void setReportCollectionOptions(@NotNull List<ReportCollection> reportCollectionOptions);
 
-    void setReportOptions(@NotNull Report[] reportOptions);
+    void setReportOptions(@NotNull ReportCollection[] reportCollectionOptions);
 
     @Contract(pure = true)
-    @NotNull List<Report> getReportOptions();
+    @NotNull List<ReportCollection> getReportCollectionOptions();
 
     @Contract(pure = true)
     @NotNull Class<? extends DataObject> getDataObjectClass();

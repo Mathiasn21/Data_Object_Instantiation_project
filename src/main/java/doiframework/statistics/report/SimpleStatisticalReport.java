@@ -1,6 +1,5 @@
 package doiframework.statistics.report;
 
-import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.Statistics;
 import doiframework.statistics.calculations.IStatisticsCalculate;
 import doiframework.statistics.calculations.SimpleStatistics;
@@ -12,7 +11,7 @@ import java.util.List;
 /** A enum describing all possible Simple statistical implementations.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum SimpleStatisticalReport implements IReport {
+public enum SimpleStatisticalReport implements IReportContext {
     SAMPLE_VARIANCE("Sample Variance", SimpleStatistics::calcSampleVariance),
     POPULATION_VARIANCE("Population Variance", SimpleStatistics::calcPopulationVariance),
     STANDARD_DEVIATION_POPULATION("Standard Deviation - From population", SimpleStatistics::calcStandardDeviationFromPopulation),

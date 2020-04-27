@@ -1,34 +1,33 @@
 package doiframework.statistics.report;
 
 import doiframework.statistics.calculations.*;
-import doiframework.statistics.calculations.Correlation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
-public enum CorrelationReport implements IAdvancedReport {
-    CORRELATION_SAMPLE("Correlation Coefficient - From sample", Correlation::calcCorrelationCoefficientFromSample),
-    CORRELATION_POPULATION("Correlation Coefficient - From population", Correlation::calcCorrelationCoefficientFromPopulation);
+public enum CovarianceReportStrategy implements IAdvancedReportContext {
+    COVARIANCE_SAMPLE("Covariance - From sample", Covariance::calcCovarianceFromSample),
+    COVARIANCE_POPULATION("Covariance - From population", Covariance::calcCovarianceFromPopulation);
 
     public final String option;
-    public final ICorrelationCalculate calculate;
-    private static final Class<? extends AdvancedStatistics> clazz = Correlation.class;
+    public final ICovarianceCalculate calculate;
+    private static final Class<? extends AdvancedStatistics> clazz = Covariance.class;
 
     @Contract(pure = true)
-    CorrelationReport(String option, ICorrelationCalculate calculate) {
+    CovarianceReportStrategy(String option, ICovarianceCalculate calculate) {
         this.option = option;
         this.calculate = calculate;
     }
 
     /**
-     * @return {@link List}&lt;{@link CorrelationReport}&gt;
+     * @return {@link List}&lt;{@link CovarianceReportStrategy}&gt;
      */
     @Contract(pure = true)
     @NotNull
-    public static List<CorrelationReport> getStandardConfiguration(){
-        return Arrays.asList(CorrelationReport.values());
+    public static List<CovarianceReportStrategy> getStandardConfiguration(){
+        return Arrays.asList(CovarianceReportStrategy.values());
     }
 
     @Override
@@ -41,11 +40,12 @@ public enum CorrelationReport implements IAdvancedReport {
         return this.option;
     }
 
+    //TODO: ask what this is lol
     @Override
     public double calculate(Statistics advancedStatistics) throws Exception {
         double d = -1;
-        if(advancedStatistics instanceof Correlation){
-            d = calculate.execute((Correlation) advancedStatistics);
+        if(advancedStatistics instanceof Covariance){
+            d = calculate.execute((Covariance) advancedStatistics);
         }
         return d;
     }
@@ -62,5 +62,3 @@ public enum CorrelationReport implements IAdvancedReport {
         return 2;
     }
 }
-
-

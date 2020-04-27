@@ -2,7 +2,7 @@ package doiframework.statistics.report;
 
 import doiframework.statistics.calculations.Statistics;
 
-public interface IReport {
+public interface IReportContext {
     Class<? extends Statistics> getMainClass();
     String getOption();
     double calculate(Statistics statistics) throws Exception;

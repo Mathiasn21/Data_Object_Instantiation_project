@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum AverageReport implements IReport {
+public enum AverageReportStrategy implements IReportContext {
     AVERAGE_SUM("Total sum", Average::calcSum),
     AVERAGE_MEAN("Average", Average::calcMean),
     AVERAGE_MEDIAN("Median", Average::calcMedian),
@@ -24,7 +24,7 @@ public enum AverageReport implements IReport {
     private static final Class<? extends Statistics> clazz = Average.class;
 
     @Contract(pure = true)
-    AverageReport(String option, IAverageCalculate calculate) {
+    AverageReportStrategy(String option, IAverageCalculate calculate) {
         this.option = option;
         this.calculate = calculate;
     }
@@ -37,12 +37,12 @@ public enum AverageReport implements IReport {
     public String toString() { return option; }
 
     /**
-     * @return {@link List}&lt;{@link AverageReport}&gt;
+     * @return {@link List}&lt;{@link AverageReportStrategy}&gt;
      */
     @Contract(pure = true)
     @NotNull
-    public static List<AverageReport> getStandardConfiguration(){
-        return Arrays.asList(AverageReport.values());
+    public static List<AverageReportStrategy> getStandardConfiguration(){
+        return Arrays.asList(AverageReportStrategy.values());
     }
 
     @Override
