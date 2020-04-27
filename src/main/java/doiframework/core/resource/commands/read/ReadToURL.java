@@ -12,14 +12,14 @@ import java.nio.charset.StandardCharsets;
  * @author Maria Elinor Pedersen Github: https://github.com/marped
  * @version 2.0.0
  */
-public final class ReadURLCommand implements IReadURLCommand {
+public final class ReadToURL implements IReadURLCommand {
     private final String name;
     private final URL url;
 
-    public ReadURLCommand(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
+    public ReadToURL(@NotNull String url) throws MalformedURLException { this(new URL(url)); }
 
     @Contract(pure = true)
-    public ReadURLCommand(@NotNull URL url) {
+    public ReadToURL(@NotNull URL url) {
         this.url = url;
         this.name = url.getPath();
     }

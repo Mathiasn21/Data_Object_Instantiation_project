@@ -10,11 +10,11 @@ import java.nio.charset.StandardCharsets;
  * @author Mathias Walter Nilsen Github: Mathiasn21 @ https://github.com/Mathiasn21
  * @version 2.0.0
  */
-public final class ReadFileCommand implements IReadFileCommand {
+public final class ReadToFile implements IReadFileCommand {
     private final String path;
 
-    public ReadFileCommand(@NotNull String path) { this.path = path; }
-    public ReadFileCommand(@NotNull File path) { this.path = path.getPath(); }
+    public ReadToFile(@NotNull String path) { this.path = path; }
+    public ReadToFile(@NotNull File path) { this.path = path.getPath(); }
 
     /**
      * @return {@link BufferedReader}
