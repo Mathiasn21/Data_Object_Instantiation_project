@@ -62,7 +62,7 @@ public class Main {
                 data, data2);
 
         c5.prettyPrintReport();
-
+        
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         DataSource source = DataSource.newResource().fromFile(path).build();
         List<DataSource> list = new ArrayList<>();
