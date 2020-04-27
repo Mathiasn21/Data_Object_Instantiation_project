@@ -70,18 +70,5 @@ public class Write {
             assertTrue(builder.toString().contains("fappening"));
         });
     }
-
-    //TODO: Implement these methods @Maria
-    @Test
-    void to_URL_using_string()  {
-        //TODO: make sure this is the right way to test - eg: execute POST request
-        fail();
-    }
-
-    @Test
-    void to_URL_using_URL() {
-        //TODO: Implement test and make sure you utilize mocks for this
-        fail();
-    }
 }
 

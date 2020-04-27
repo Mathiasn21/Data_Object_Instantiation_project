@@ -1,6 +1,7 @@
 package doiframework.core.extractors;
 
 import doiframework.core.annotations.DataObject;
+import doiframework.core.annotations.ObjectInformation;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.core.observer.EventObserver;
@@ -28,18 +29,21 @@ import java.util.*;
 public final class DataExtractor<C extends IDataCollector> implements IDataExtractor {
     private final List<Object> columns;//List of resource objects
     private final Class<?> clazz;
+    private final ObjectInformation objectInformation;
     private IDataCollector collector;
     private Report[] reportOptions = Report.getFullAverageReport();
 
     public DataExtractor(@NotNull C collector) {
         this.columns = collector.getAllObjects();
         this.collector = collector;
-        clazz = columns.get(0).getClass();
+        objectInformation = collector.getDataObjectInformation();
+        clazz = objectInformation.clazz;
     }
 
     public DataExtractor(@NotNull List<Object> rows) {
         this.columns = rows;
         clazz = columns.get(0).getClass();
+        objectInformation = null;
     }
 
     @Override
@@ -143,7 +147,9 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
     @Override
     public @NotNull Map<Field, List<Object>> extractColumnsUsingFields() throws ReflectiveOperationException {
-        return extractColumnsUsingFields(Arrays.asList(clazz.getFields()));
+        var res = extractColumnsUsingFields(Arrays.asList(clazz.getFields()));
+        raise(new ExtractorFinishedEvent(this));
+        return res;
     }
 
     @Contract(pure = true)

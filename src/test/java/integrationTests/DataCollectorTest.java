@@ -50,19 +50,4 @@ public class DataCollectorTest {
         collector.setCompression(true);
         collector.collectData();
     }
-
-    @Test
-    void data_from_URL() {
-        //TODO: implement correct url for an json api
-
-        fail();
-        /*
-        Assertions.assertDoesNotThrow(() -> {
-            URL url = new URL("http://example.com");
-            DataSource resource = DataSource.newResource().fromURL(url).build();
-            IDataCollector collector = DataCollector.newCollector(resource, new JSONHandler()).build();
-            collector.collectData();
-        });
-        */
-    }
 }

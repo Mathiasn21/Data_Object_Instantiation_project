@@ -1,11 +1,26 @@
+import DTOs.ComplexDTOCSV;
+import doiframework.core.annotations.DataObject;
+import doiframework.core.collectors.DataCollector;
+import doiframework.core.collectors.DataCollectorPool;
+import doiframework.core.collectors.IDataCollector;
+import doiframework.core.collectors.IDataCollectorPool;
+import doiframework.core.extractors.DataExtractorPool;
+import doiframework.core.resource.DataSource;
 import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.statistics.calculations.Correlation;
 import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.Report;
+import doiframework.utilities.handlers.CSVHandler;
+import doiframework.utilities.handlers.IDataHandler;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException {
+    public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException, IOException, IllegalAccessException {
         Double[] data = new Double[]{1d,2d,3d,4d,5d,6d,6d,6d};
         Double [] data2 = new Double[]{2d,5d,6d,7d,7d,8d,9d,6d};
 
@@ -47,5 +62,20 @@ public class Main {
                 data, data2);
 
         c5.prettyPrintReport();
+        
+        String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
+        DataSource source = DataSource.newResource().fromFile(path).build();
+        List<DataSource> list = new ArrayList<>();
+        list.add(source);
+        IDataCollectorPool collectorPool = DataCollectorPool.newCollectors(list, new CSVHandler()).buildAll();
+
+        collectorPool.collectAllData();
+
+        DataExtractorPool extractorPool = new DataExtractorPool(collectorPool);
+        Map<Class<?>, List<Field>> map = new HashMap<>();
+        List<Field> ll = Arrays.asList(ComplexDTOCSV.class.getFields());
+        map.put(ComplexDTOCSV.class, ll);
+        var res = extractorPool.extractAllColumnsFromFields(map);
+        System.out.println(res);
     }
 }
