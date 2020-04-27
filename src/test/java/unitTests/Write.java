@@ -2,7 +2,7 @@ package unitTests;
 
 import doiframework.core.resource.DataSource;
 import doiframework.core.resource.commands.write.IWriteCommand;
-import doiframework.core.resource.commands.write.WriteFileCommand;
+import doiframework.core.resource.commands.write.WriteToFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class Write {
     void to_file_using_string(){
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            IWriteCommand writer = new WriteFileCommand(path);
+            IWriteCommand writer = new WriteToFile(path);
             writer.execute( "StringPath;");
 
             DataSource dataSource = DataSource.newResource().fromFile(path).build();
@@ -35,7 +35,7 @@ public class Write {
     void to_file_using_path() {
         Assertions.assertDoesNotThrow(() -> {
             String path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            WriteFileCommand writer = new WriteFileCommand(path);
+            WriteToFile writer = new WriteToFile(path);
             writer.execute( "StringPath;");
 
             DataSource dataSource = DataSource.newResource().fromFile(path).build();
@@ -55,7 +55,7 @@ public class Write {
         Assertions.assertDoesNotThrow(() -> {
             String path;
             path = System.getProperty("user.dir") + "/files/writeToTest.txt";
-            WriteFileCommand write = new WriteFileCommand(path);
+            WriteToFile write = new WriteToFile(path);
             write.execute("fappening");
 
             //Reads from dataSource

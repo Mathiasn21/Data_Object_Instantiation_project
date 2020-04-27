@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import java.util.Comparator;
 
-/** Class for parsing string values to primitive types execute a clazz
+/** Class for parsing string values to primitive types 
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  * @version 1.0.0
  */

@@ -107,7 +107,6 @@ public class DataReport {
                 e.printStackTrace();
             }
         });
-
         return res;
     }
 
@@ -129,5 +128,4 @@ public class DataReport {
         }
         System.out.println("------------------------------------------------------------------------");
     }
-    
 }
