@@ -1,17 +1,12 @@
-import DTOs.ComplexDTOCSV;
-import DTOs.FinalCountdownDTO;
-import doiframework.core.annotations.DataObject;
 import doiframework.core.collectors.DataCollector;
-import doiframework.core.collectors.DataCollectorPool;
 import doiframework.core.collectors.IDataCollector;
-import doiframework.core.collectors.IDataCollectorPool;
 import doiframework.core.extractors.DataExtractor;
-import doiframework.core.extractors.DataExtractorPool;
 import doiframework.core.resource.DataSource;
 import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
+import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.Correlation;
 import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.ReportCollection;
@@ -79,16 +74,19 @@ public class Main {
 
         var extractor = new DataExtractor<>(collector);
         var columnsUsingFieldsMap = extractor.extractColumnsUsingFields();
-        List<Object> dataset1 = new ArrayList<>(columnsUsingFieldsMap.values());
+        List<Object> dataset = new ArrayList<>(columnsUsingFieldsMap.values());
+        double[] data1 = (double[]) dataset.get(1);
+
+        Average avg = new Average(data1);
+
         var thing = new ArrayList<>(columnsUsingFieldsMap.keySet());
         System.out.println(thing.get(1));
 
-        System.out.println(dataset1.get(1));
         System.out.println("\n\n\n\n\n");
-        extractor.extractReport().values().forEach(System.out::println);
+        extractor.createReport().values().forEach(System.out::println);
 
         List<Field> l = Collections.singletonList(thing.get(1));
-        System.out.println(extractor.extractReportUsingFields(l));
+        System.out.println(extractor.createReportUsingFields(l));
     }
 
     private static void showcaseAPIDataExtractorFields() throws IOException, ReflectiveOperationException {

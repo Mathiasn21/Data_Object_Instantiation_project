@@ -100,7 +100,7 @@ public class DataExtractorTest {
         var columnMap = extractor.extractColumnsUsingFields(fields);
         assertFalse(columnMap.isEmpty());
 
-        System.out.println(extractor.extractReportUsingFields(fields).values());
+        System.out.println(extractor.createReportUsingFields(fields).values());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
         for (int i = 0; i < fields.size(); i++) {
@@ -124,7 +124,7 @@ public class DataExtractorTest {
         var clazz = ComplexDTOCSV.class;
         var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
         var columnMap = extractor.extractColumnsUsingMethods(methods);
-        Map<String, Map<String, Double>> report = extractor.extractReportUsingMethods(methods);
+        Map<String, Map<String, Double>> report = extractor.createReportUsingMethods(methods);
         assertFalse(columnMap.isEmpty());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};
