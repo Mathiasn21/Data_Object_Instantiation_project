@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class AdvancedStatistics extends Statistics {
+class AdvancedStatistics extends Statistics {
     protected final double[] data2;
     protected final double n;
 
