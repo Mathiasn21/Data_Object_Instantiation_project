@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public enum CorrelationReportStrategy implements IAdvancedReport {
+enum CorrelationReportStrategy implements IAdvancedReport {
     CORRELATION_SAMPLE("Correlation Coefficient - From sample", Correlation::calcCorrelationCoefficientFromSample),
     CORRELATION_POPULATION("Correlation Coefficient - From population", Correlation::calcCorrelationCoefficientFromPopulation);
 

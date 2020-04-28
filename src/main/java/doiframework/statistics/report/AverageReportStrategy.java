@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-public enum AverageReportStrategy implements IReport {
+enum AverageReportStrategy implements IReport {
     AVERAGE_SUM("Total sum", Average::calcSum),
     AVERAGE_MEAN("Average", Average::calcMean),
     AVERAGE_MEDIAN("Median", Average::calcMedian),

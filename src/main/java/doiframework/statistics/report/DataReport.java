@@ -108,7 +108,7 @@ public class DataReport {
 
     public void prettyPrintReport() {
         var report = executeReport();
-        String s= "";
+        String s;
         Double d;
 
         TreeMap<String, Double> sorted = new TreeMap<>(report);

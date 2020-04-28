@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public enum CovarianceReportStrategy implements IAdvancedReport {
+enum CovarianceReportStrategy implements IAdvancedReport {
     COVARIANCE_SAMPLE("Covariance - From sample", Covariance::calcCovarianceFromSample),
     COVARIANCE_POPULATION("Covariance - From population", Covariance::calcCovarianceFromPopulation);
 

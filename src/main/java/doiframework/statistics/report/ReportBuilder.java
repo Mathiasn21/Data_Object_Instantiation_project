@@ -3,7 +3,7 @@ package doiframework.statistics.report;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportBuilder {
+public final class ReportBuilder {
 
     private final List<ReportCollection> list = new ArrayList<>();
 
