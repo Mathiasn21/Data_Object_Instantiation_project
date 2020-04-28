@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class DataExtractorPoolMain {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         var dataCollectorPool = genCollectorPool();
 
         IDataExtractorPool dataExtractorPool = new DataExtractorPool(dataCollectorPool);
@@ -19,7 +19,7 @@ public class DataExtractorPoolMain {
     }
 
     @NotNull
-    private static IDataCollectorPool genCollectorPool() throws IOException {
+    private static IDataCollectorPool genCollectorPool() {
         String path = System.getProperty("user.dir") + "/files/showcaseAPI.csv" ;
         List<DataSource> sourceList = DataSource.newResource().fromFile(path).fromFile(path).buildAll();
 
