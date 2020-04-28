@@ -216,7 +216,7 @@ public class DataExtractorTest {
 
     @NotNull
     private IDataCollector genCollector() throws IOException {
-        String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
+        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
         IDataHandler handler = new CSVHandler();
         IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
