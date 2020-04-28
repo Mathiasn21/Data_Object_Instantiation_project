@@ -75,7 +75,7 @@ public class Main {
         var extractor = new DataExtractor<>(collector);
         var columnsUsingFieldsMap = extractor.extractColumnsUsingFields();
         List<Object> dataset = new ArrayList<>(columnsUsingFieldsMap.values());
-        double[] data1 = (double[]) dataset.get(1);
+        double[] data1 = new double[10];
 
         Average avg = new Average(data1);
 
@@ -87,6 +87,10 @@ public class Main {
 
         List<Field> l = Collections.singletonList(thing.get(1));
         System.out.println(extractor.createReportUsingFields(l));
+
+
+        System.out.println();
+        var collector2 = genCollector();
     }
 
     private static void showcaseAPIDataExtractorFields() throws IOException, ReflectiveOperationException {
@@ -112,6 +116,10 @@ public class Main {
         IDataHandler handler = new CSVHandler();
         IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
         collector.collectData();
+
+        List<Object> collectedObjects = collector.getAllObjects();
+        collectedObjects.forEach(System.out::println);
+
         return collector;
     }
 }
