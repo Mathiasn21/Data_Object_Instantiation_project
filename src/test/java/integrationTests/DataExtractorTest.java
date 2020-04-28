@@ -173,6 +173,9 @@ public class DataExtractorTest {
         var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
         var extractor = new DataExtractor<>(collector);
         var columnMap = extractor.extractColumnsUsingFields();
+
+        columnMap.values().forEach(System.out::println);
+
         assertFalse(columnMap.isEmpty());
 
         Class<?>[] instance = {String.class, Double.class, Integer.class};

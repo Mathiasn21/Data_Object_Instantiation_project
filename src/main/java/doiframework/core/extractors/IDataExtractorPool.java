@@ -11,8 +11,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author Mathias - Mathiasn21 - https://github.com/Mathiasn21/
  */
-interface IDataExtractorPool {
-    Map<? extends Class<?>, Map<Field, List<Object>>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap);
+public interface IDataExtractorPool {
+    Map<Class<?>, Map<Field,  List<Object>>> extractAllColumnsFromFields();
+    Map<Class<?>, Map<Method, List<Object>>> extractAllColumnsFromMethods();
+
+    Map<Class<?>, Map<Field,  List<Object>>> extractAllColumnsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap);
     Map<Class<?>, Map<String, List<Object>>> extractAllColumnsFromNames(@NotNull Map<Class<?>, List<String>> classListMap);
     Map<Class<?>, Map<Method, List<Object>>> extractAllColumnsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap);
 

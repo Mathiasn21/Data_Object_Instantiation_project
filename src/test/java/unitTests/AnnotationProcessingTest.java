@@ -1,6 +1,5 @@
 package unitTests;
 
-import DTOs.ComplexDTO;
 import DTOs.DTO;
 import DTOs.DTONoFile;
 import doiframework.core.annotations.AnnotationsProcessor;
@@ -8,6 +7,7 @@ import doiframework.core.annotations.ObjectInformation;
 import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
+import showcaseAPI.ShowAPIDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class AnnotationProcessingTest {
             List<Object> complexDTO = objectInformation.data;
 
             for(Object o : complexDTO){
-                assertTrue(o instanceof ComplexDTO);
+                assertTrue(o instanceof ShowAPIDTO);
             }
             assertEquals(complexDTO.size(), numObjects);
         } catch (ReflectiveOperationException e) {
