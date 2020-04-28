@@ -5,10 +5,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class Statistics {
+class Statistics {
     protected final double[] data;
     protected final int n;
-
 
     @Contract(pure = true)
     public Statistics(@NotNull double[] data) {

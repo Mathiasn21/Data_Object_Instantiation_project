@@ -49,7 +49,7 @@ public final class Average extends Statistics {
     /**
      * @return double
      */
-    public double calcSum() {
+    public double calcTotalSum() {
         if(sum <= 0){
             for(double i : data){
                 sum += i;
@@ -62,7 +62,7 @@ public final class Average extends Statistics {
      * @return double
      */
     public double calcMean() {
-        return (sum == 0 ? calcSum() : sum) / n;
+        return (sum == 0 ? calcTotalSum() : sum) / n;
     }
 
     /**

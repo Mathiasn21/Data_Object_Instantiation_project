@@ -19,7 +19,7 @@ public class AverageTest {
 
     @Test
     public void calcSum(){
-        double sum = average.calcSum();
+        double sum = average.calcTotalSum();
         assertEquals(33.0, sum);
     }
     @Test

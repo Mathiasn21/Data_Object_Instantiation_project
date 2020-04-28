@@ -34,23 +34,23 @@ public class BinominalDistributionTest {
 
     @Test
     public void binominalCumulativeLessThanEqualTest(){
-        p = b.calCumulativeProbabilityLessThanEqual(2);
-        p2 = b2.calCumulativeProbabilityLessThanEqual(14);
+        p = b.calcCumulativeProbabilityLessThanEqual(2);
+        p2 = b2.calcCumulativeProbabilityLessThanEqual(14);
         assertEquals(0.9656084819093212, p2);
         assertEquals(0.9011200000000004, p);
     }
 
     @Test
     public void binominalCumulativeMoreThanTest(){
-        p = b.calCumulativeProbabilityMoreThan(2);
-        p2 = b2.calCumulativeProbabilityMoreThan(14);
+        p = b.calcCumulativeProbabilityMoreThan(2);
+        p2 = b2.calcCumulativeProbabilityMoreThan(14);
         assertEquals(0.09887999999999963, p);
         assertEquals(0.03439151809067875, p2);
     }
 
     @Test
     public void binominalCumulativeMoreThanEqualTest(){
-        p2 = b2.calCumulativeProbabilityMoreThanEqual(14);
+        p2 = b2.calccCumulativeProbabilityMoreThanEqual(14);
         assertEquals(0.07780106386707308, p2);
     }
 

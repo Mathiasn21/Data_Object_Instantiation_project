@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public enum CorrelationReport implements IAdvancedReport {
+enum CorrelationStrategy implements IAdvancedReport {
     CORRELATION_SAMPLE("Correlation Coefficient - From sample", Correlation::calcCorrelationCoefficientFromSample),
     CORRELATION_POPULATION("Correlation Coefficient - From population", Correlation::calcCorrelationCoefficientFromPopulation);
 
@@ -17,18 +17,18 @@ public enum CorrelationReport implements IAdvancedReport {
     private static final Class<? extends AdvancedStatistics> clazz = Correlation.class;
 
     @Contract(pure = true)
-    CorrelationReport(String option, ICorrelationCalculate calculate) {
+    CorrelationStrategy(String option, ICorrelationCalculate calculate) {
         this.option = option;
         this.calculate = calculate;
     }
 
     /**
-     * @return {@link List}&lt;{@link CorrelationReport}&gt;
+     * @return {@link List}&lt;{@link CorrelationStrategy}&gt;
      */
     @Contract(pure = true)
     @NotNull
-    public static List<CorrelationReport> getStandardConfiguration(){
-        return Arrays.asList(CorrelationReport.values());
+    public static List<CorrelationStrategy> getStandardConfiguration(){
+        return Arrays.asList(CorrelationStrategy.values());
     }
 
     @Override
