@@ -2,27 +2,31 @@ package doiframework.statistics.report;
 
 import doiframework.core.observer.EventObserver;
 import doiframework.core.observer.events.ExceptionEvent;
+import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NotPrimitiveNumberException;
+import doiframework.statistics.calculations.AdvancedStatistics;
+import doiframework.statistics.calculations.Statistics;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * Class with the central command that excecutes the report
  */
 public class DataReport {
-    private final List<ReportCollection> commands = new ArrayList<>();
-    private final List<ReportCollection> advancedCommands = new ArrayList<>();
+    private final List<Report> commands = new ArrayList<>();
+    private final List<Report> advancedCommands = new ArrayList<>();
     private final List<Number[]> data;
 
-    public DataReport(@NotNull ReportCollection[] commands, @NotNull Number[] ...data) throws NotPrimitiveNumberException {
-        for (ReportCollection reportCollection : commands) {
-            if(reportCollection.getIReport() instanceof IAdvancedReport){
-                advancedCommands.add(reportCollection);
+    public DataReport(@NotNull Report[] commands, @NotNull Number[] ...data) throws NotPrimitiveNumberException {
+        for (Report report : commands) {
+            if(report.getIReport() instanceof IAdvancedReport){
+                advancedCommands.add(report);
                 continue;
             }
-            this.commands.add(reportCollection);
+            this.commands.add(report);
         }
         for (Number[] o : data){
             if(!Parser.isPrimitiveNumber(o.getClass().getComponentType())){
@@ -32,7 +36,7 @@ public class DataReport {
         this.data = Arrays.asList(data);
     }
 
-    public DataReport(@NotNull ReportCollection[] commands, @NotNull List<Number> data) throws NotPrimitiveNumberException {
+    public DataReport(@NotNull Report[] commands, @NotNull List<Number> data) throws NotPrimitiveNumberException {
         this.commands.addAll(Arrays.asList(commands));
         List<Number[]> listOfData = new ArrayList<>();
         if(!Parser.isPrimitiveNumber(data.get(0).getClass())){
@@ -114,7 +118,7 @@ public class DataReport {
         TreeMap<String, Double> sorted = new TreeMap<>(report);
         Set<Map.Entry<String, Double>> mappings = sorted.entrySet();
 
-        System.out.println("---------------------------------ReportCollection---------------------------------\n");
+        System.out.println("---------------------------------Report---------------------------------\n");
         for(Map.Entry<String, Double> mapping : mappings){
             s = mapping.getKey();
             d = mapping.getValue();

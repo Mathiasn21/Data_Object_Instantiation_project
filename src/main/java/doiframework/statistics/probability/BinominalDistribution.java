@@ -35,7 +35,7 @@ public final class BinominalDistribution {
         return numberOfAttempts * probability*(1-probability);
     }
 
-    public double calcCumulativeProbabilityLessThanEqual(int variableX){
+    public double calCumulativeProbabilityLessThanEqual(int variableX){
         if (variableX > numberOfAttempts){
             throw new IllegalArgumentException("X has to be less than number of attempts");
         }
@@ -51,7 +51,7 @@ public final class BinominalDistribution {
         return binominalPorbability;
     }
 
-    public double calcCumulativeProbabilityMoreThan(int variableX){
+    public double calCumulativeProbabilityMoreThan(int variableX){
         if (variableX > numberOfAttempts){
             throw new IllegalArgumentException("X has to be less than number of attempts");
         }
@@ -67,11 +67,11 @@ public final class BinominalDistribution {
         return 1 - binominalPorbability;
     }
 
-    public double calccCumulativeProbabilityMoreThanEqual(int variableX){
+    public double calCumulativeProbabilityMoreThanEqual(int variableX){
         if (variableX > numberOfAttempts){
             throw new IllegalArgumentException("X has to be less than number of attempts");
         }
-        double cdf = calcCumulativeProbabilityLessThanEqual(variableX - 1);
+        double cdf = calCumulativeProbabilityLessThanEqual(variableX - 1);
         return 1 - cdf;
     }
 
