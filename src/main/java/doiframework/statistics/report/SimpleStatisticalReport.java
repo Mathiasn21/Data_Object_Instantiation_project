@@ -37,15 +37,6 @@ public enum SimpleStatisticalReport implements IReportContext {
     @Override
     public String toString() { return option; }
 
-    /**
-     * @return {@link List}&lt;{@link SimpleStatisticalReport}&gt;
-     */
-    @Contract(pure = true)
-    @NotNull
-    public static List<SimpleStatisticalReport> getStandardConfiguration() {
-        return Arrays.asList(STANDARD_DEVIATION_SAMPLE, SAMPLE_VARIANCE);
-    }
-
     @Override
     public Class<? extends Statistics> getMainClass() {
         return clazz;

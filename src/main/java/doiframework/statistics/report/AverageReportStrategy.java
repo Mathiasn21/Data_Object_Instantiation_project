@@ -36,15 +36,6 @@ public enum AverageReportStrategy implements IReportContext {
     @Override
     public String toString() { return option; }
 
-    /**
-     * @return {@link List}&lt;{@link AverageReportStrategy}&gt;
-     */
-    @Contract(pure = true)
-    @NotNull
-    public static List<AverageReportStrategy> getStandardConfiguration(){
-        return Arrays.asList(AverageReportStrategy.values());
-    }
-
     @Override
     public Class<? extends Statistics> getMainClass() {
         return clazz;

@@ -22,15 +22,6 @@ public enum CorrelationReportStrategy implements IAdvancedReportContext {
         this.calculate = calculate;
     }
 
-    /**
-     * @return {@link List}&lt;{@link CorrelationReportStrategy}&gt;
-     */
-    @Contract(pure = true)
-    @NotNull
-    public static List<CorrelationReportStrategy> getStandardConfiguration(){
-        return Arrays.asList(CorrelationReportStrategy.values());
-    }
-
     @Override
     public Class<? extends Statistics> getMainClass() {
         return clazz;

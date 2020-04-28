@@ -21,15 +21,6 @@ public enum CovarianceReportStrategy implements IAdvancedReportContext {
         this.calculate = calculate;
     }
 
-    /**
-     * @return {@link List}&lt;{@link CovarianceReportStrategy}&gt;
-     */
-    @Contract(pure = true)
-    @NotNull
-    public static List<CovarianceReportStrategy> getStandardConfiguration(){
-        return Arrays.asList(CovarianceReportStrategy.values());
-    }
-
     @Override
     public Class<? extends Statistics> getMainClass() {
         return clazz;
