@@ -57,7 +57,7 @@ public final class DataSourceBuilder {
      * @param paths String...
      * @return {@link DataSourceBuilder}
      */
-    public DataSourceBuilder fromFile(@NotNull String... paths) {
+    public DataSourceBuilder fromFiles(@NotNull String... paths) {
         for (String path : paths) {
             IReadCommand readFile = new ReadToFile(path);
             readers.add(readFile);
@@ -70,7 +70,7 @@ public final class DataSourceBuilder {
      * @return {@link DataSourceBuilder}
      */
     @Contract(value = "_ -> this", pure = true)
-    public DataSourceBuilder fromFile(@NotNull File... files) {
+    public DataSourceBuilder fromFiles(@NotNull File... files) {
         for (File file : files) {
             IReadCommand readFile = new ReadToFile(file);
             readers.add(readFile);

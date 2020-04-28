@@ -82,7 +82,7 @@ public class Main {
         showcaseAPIDataExtractorFields();
         showcaseAPIDataExtractorMethods();
 
-        
+
     }
 
     private static void showcaseAPIDataExtractorFields() throws IOException, ReflectiveOperationException {

@@ -7,6 +7,7 @@ import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -33,6 +34,36 @@ public final class DataExtractorPool implements IDataExtractorPool {
             var dataExtractor = new DataExtractor<>(dataCollector);
             dataExtractors.put(dataExtractor.getDataObjectClass(), dataExtractor);
         }
+    }
+
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<Class<?>, Map<Field, List<Object>>> extractAllColumnsFromFields() {
+        Map<Class<?>, Map<Field, List<Object>>> res = new HashMap<>();
+        dataExtractors.keySet().forEach((o) -> {
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractColumnsUsingFields());
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+            }
+        });
+        return res;
+    }
+
+    @Contract(pure = true)
+    @Override
+    public @NotNull Map<Class<?>, Map<Method, List<Object>>> extractAllColumnsFromMethods() {
+        Map<Class<?>, Map<Method, List<Object>>> res = new HashMap<>();
+        dataExtractors.keySet().forEach((o) -> {
+            var extractor = dataExtractors.get(o);
+            try {
+                res.put(o, extractor.extractColumnsUsingMethods());
+            } catch (ReflectiveOperationException | NoSuchColumnException e) {
+                e.printStackTrace();
+            }
+        });
+        return res;
     }
 
     @Override
