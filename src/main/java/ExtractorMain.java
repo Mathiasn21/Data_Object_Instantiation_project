@@ -36,7 +36,6 @@ public class ExtractorMain {
         System.out.println("\n");
     }
 
-
     @NotNull
     private static IDataCollector genCollector() throws IOException {
         String path = System.getProperty("user.dir") + "/files/showcaseAPI.csv" ;
