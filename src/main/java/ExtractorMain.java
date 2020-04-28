@@ -1,3 +1,4 @@
+import DTOs.FinalCountdownDTO;
 import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.extractors.DataExtractor;
@@ -26,11 +27,12 @@ public class ExtractorMain {
         columnsUsingMethodsMap.values().forEach(System.out::println);
         System.out.println("\n");
 
-
         var fields = Arrays.asList(clazz.getField("string"), clazz.getField("anInt"), clazz.getField("aDouble"));
         var columnsUsingFieldsMap = extractor.extractColumnsUsingFields(fields);
         //Alternative by only utilizing a single field
-        var columnUsingField = extractor.extractColumnFrom(fields.get(1));
+        // Class<FinalCountdownDTO> clazz = FinalCountdownDTO.class;
+
+        var columnUsingField = extractor.extractColumnFrom(clazz.getField("lyrics"));
         columnsUsingFieldsMap.values().forEach(System.out::println);
         System.out.println("\n");
     }
