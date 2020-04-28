@@ -6,11 +6,13 @@ import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.CSVHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.List;
 
 public class DataExtractorPoolMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         var dataCollectorPool = genCollectorPool();
+        dataCollectorPool.collectAllData();
 
         IDataExtractorPool dataExtractorPool = new DataExtractorPool(dataCollectorPool);
         dataExtractorPool.extractAllColumnsFromFields();

@@ -29,6 +29,8 @@ public class ExtractorMain {
 
         var fields = Arrays.asList(clazz.getField("string"), clazz.getField("anInt"), clazz.getField("aDouble"));
         var columnsUsingFieldsMap = extractor.extractColumnsUsingFields(fields);
+        //Alternative by only utilizing a single field
+        var columnUsingField = extractor.extractColumnFrom(fields.get(1));
         columnsUsingFieldsMap.values().forEach(System.out::println);
         System.out.println("\n");
     }
