@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
- * Class with the central command that excecutes the report
+ * Class that excecutes the report
  */
 public class DataReport {
     private final List<ReportCollection> commands = new ArrayList<>();
@@ -42,14 +42,14 @@ public class DataReport {
         this.data = listOfData;
     }
 
-    @NotNull
-    public Map<String, Double> executeReport()  {
+
+    public @NotNull Map<String, Double> executeReport()  {
         Map<String, Double> res = new HashMap<>(executeReportOnSimpleStatistics());
         res.putAll(executeReportOnAdvancedStatistics());
         return res;
     }
 
-    private Map<String, Double> executeReportOnSimpleStatistics(){
+    private @NotNull Map<String, Double> executeReportOnSimpleStatistics(){
         StatFactory statFactory = new StatFactory();
         Map<String, Double> res = new HashMap<>();
         String msg = ", Dataset: ";
@@ -77,8 +77,8 @@ public class DataReport {
         return res;
     }
 
-    @NotNull
-    private Map<String, Double> executeReportOnAdvancedStatistics()  {
+
+    private @NotNull Map<String, Double> executeReportOnAdvancedStatistics()  {
         StatFactory statFactory = new StatFactory();
         Map<String, Double> res = new HashMap<>();
 
@@ -108,7 +108,7 @@ public class DataReport {
 
     public void prettyPrintReport() {
         var report = executeReport();
-        String s= "";
+        String s;
         Double d;
 
         TreeMap<String, Double> sorted = new TreeMap<>(report);
