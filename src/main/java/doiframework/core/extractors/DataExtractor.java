@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -157,7 +158,9 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     public @NotNull Map<Method, List<Object>> extractColumnsUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException {
         Map<Method, List<Object>> res = new HashMap<>();
         for (Method method : methods) {
-            res.put(method, this.extractColumnFrom(method));
+            if(Parser.isPrimitiveType(method.getReturnType())){
+                res.put(method, this.extractColumnFrom(method));
+            }
         }
         raise(new ExtractorFinishedEvent(this));
         return res;
