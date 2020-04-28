@@ -11,6 +11,7 @@ import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.IDataHandler;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import showcaseAPI.ShowAPIDTO;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -28,17 +29,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DataExtractorTest {
     @Test
     void single_column_by_string() throws IOException, NoSuchColumnException {
-        List<Object> list = new ArrayList<>();
-        for(int i = 0; i < 24; i++){
-            list.add("\"dwada\"");
-        }
-
         var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
         var column = extractor.extractColumnFrom("string");
 
         assertFalse(column.isEmpty());
-        assertEquals(list, column);
 
         int i = 0;
         while (i < column.size()) {
@@ -49,18 +44,12 @@ public class DataExtractorTest {
 
     @Test
     void single_column_by_field() throws IOException, NoSuchFieldException {
-        List<Object> list = new ArrayList<>();
-        for(int i = 0; i < 24; i++){
-            list.add("\"dwada\"");
-        }
-
         var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
-        var clazz = ComplexDTOCSV.class;
+        var clazz = ShowAPIDTO.class;
         var column = extractor.extractColumnFrom(clazz.getField("string"));
 
         assertFalse(column.isEmpty());
-        assertEquals(list, column);
 
         int i = 0;
         while (i < column.size()) {
@@ -71,18 +60,12 @@ public class DataExtractorTest {
 
     @Test
     void single_column_by_method() throws IOException, NoSuchMethodException, NoSuchColumnException {
-        List<Object> list = new ArrayList<>();
-        for(int i = 0; i < 24; i++){
-            list.add("\"dwada\"");
-        }
-
         var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
-        var clazz = ComplexDTOCSV.class;
+        var clazz = ShowAPIDTO.class;
         var column = extractor.extractColumnFrom(clazz.getMethod("getString"));
 
         assertFalse(column.isEmpty());
-        assertEquals(list, column);
 
         int i = 0;
         while (i < column.size()) {
@@ -95,8 +78,8 @@ public class DataExtractorTest {
     void multiple_columns_by_fields() throws IOException, NoSuchFieldException, NotPrimitiveNumberException {
         var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
-        var clazz = ComplexDTOCSV.class;
-        var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
+        var clazz = ShowAPIDTO.class;
+        var fields = Arrays.asList(clazz.getField("string"), clazz.getField("aDouble"), clazz.getField("anInt"));
         var columnMap = extractor.extractColumnsUsingFields(fields);
         assertFalse(columnMap.isEmpty());
 
@@ -121,8 +104,8 @@ public class DataExtractorTest {
     void multiple_columns_by_methods() throws IOException, NoSuchMethodException, NoSuchColumnException, NotPrimitiveNumberException {
         var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
-        var clazz = ComplexDTOCSV.class;
-        var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
+        var clazz = ShowAPIDTO.class;
+        var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getaDouble"), clazz.getMethod("getAnInt"));
         var columnMap = extractor.extractColumnsUsingMethods(methods);
         Map<String, Map<String, Double>> report = extractor.createReportUsingMethods(methods);
         assertFalse(columnMap.isEmpty());
@@ -147,7 +130,7 @@ public class DataExtractorTest {
     void multiple_columns_by_strings() throws IOException, NoSuchColumnException {
         var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
-        var strings = Arrays.asList("string", "Doubles", "integer");
+        var strings = Arrays.asList("string", "aDouble", "anInt");
         var columnMap = extractor.extractColumnsUsingStrings(strings);
         assertFalse(columnMap.isEmpty());
 
@@ -169,8 +152,8 @@ public class DataExtractorTest {
     @Test
     void all_columns_using_fields() throws IOException, ReflectiveOperationException {
         var collector = genCollector();
-        var clazz = ComplexDTOCSV.class;
-        var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
+        var clazz = ShowAPIDTO.class;
+        var fields = Arrays.asList(clazz.getField("string"), clazz.getField("aDouble"), clazz.getField("anInt"));
         var extractor = new DataExtractor<>(collector);
         var columnMap = extractor.extractColumnsUsingFields();
 
@@ -196,8 +179,8 @@ public class DataExtractorTest {
     @Test
     void all_columns_using_methods() throws IOException, NoSuchMethodException, NoSuchColumnException {
         var collector = genCollector();
-        var clazz = ComplexDTOCSV.class;
-        var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getDoubles"), clazz.getMethod("getInteger"));
+        var clazz = ShowAPIDTO.class;
+        var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getaDouble"), clazz.getMethod("getAnInt"));
         var extractor = new DataExtractor<>(collector);
         var columnMap = extractor.extractColumnsUsingMethods();
         assertFalse(columnMap.isEmpty());
@@ -219,7 +202,7 @@ public class DataExtractorTest {
 
     @NotNull
     private IDataCollector genCollector() throws IOException {
-        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv" ;
+        String path = System.getProperty("user.dir") + "/files/showcaseAPI.csv" ;
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
         IDataHandler handler = new CSVHandler();
         IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
