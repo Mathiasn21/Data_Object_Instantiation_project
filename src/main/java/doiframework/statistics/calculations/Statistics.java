@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-class Statistics {
+public class Statistics {
     protected final double[] data;
     protected final int n;
 
