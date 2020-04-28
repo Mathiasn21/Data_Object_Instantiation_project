@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class DataCollectorTest {
     @Test
     void json_simple_data_from_file() throws IOException {

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
- * Class with the central command that excecutes the report
+ * Class that excecutes the report
  */
 public class DataReport {
     private final List<ReportCollection> commands = new ArrayList<>();
@@ -18,7 +18,7 @@ public class DataReport {
 
     public DataReport(@NotNull ReportCollection[] commands, @NotNull Number[] ...data) throws NotPrimitiveNumberException {
         for (ReportCollection reportCollection : commands) {
-            if(reportCollection.getIReport() instanceof IAdvancedReport){
+            if(reportCollection.getIReport() instanceof IAdvancedReportContext){
                 advancedCommands.add(reportCollection);
                 continue;
             }
@@ -42,14 +42,14 @@ public class DataReport {
         this.data = listOfData;
     }
 
-    @NotNull
-    public Map<String, Double> executeReport()  {
+
+    public @NotNull Map<String, Double> executeReport()  {
         Map<String, Double> res = new HashMap<>(executeReportOnSimpleStatistics());
         res.putAll(executeReportOnAdvancedStatistics());
         return res;
     }
 
-    private Map<String, Double> executeReportOnSimpleStatistics(){
+    private @NotNull Map<String, Double> executeReportOnSimpleStatistics(){
         StatFactory statFactory = new StatFactory();
         Map<String, Double> res = new HashMap<>();
         String msg = ", Dataset: ";
@@ -57,7 +57,7 @@ public class DataReport {
         commands.forEach((command) -> {
             try {
                 var report = command.getIReport();
-                var mainClazz = report.getMainClass();
+                var mainClazz = report.getStatisticalClass();
 
                 for (int i = 0; i < data.size(); i++) {
                     Number[] number = data.get(i);
@@ -77,17 +77,17 @@ public class DataReport {
         return res;
     }
 
-    @NotNull
-    private Map<String, Double> executeReportOnAdvancedStatistics()  {
+
+    private @NotNull Map<String, Double> executeReportOnAdvancedStatistics()  {
         StatFactory statFactory = new StatFactory();
         Map<String, Double> res = new HashMap<>();
 
         advancedCommands.forEach((command) -> {
             try {
                 var report = command.getIReport();
-                var mainClazz = report.getMainClass();
+                var mainClazz = report.getStatisticalClass();
 
-                if(((IAdvancedReport) report).getNumbSupportedDataSets() != data.size()){
+                if(((IAdvancedReportContext) report).getNumbSupportedDataSets() != data.size()){
                     return;
                 }
                 var statistic = statFactory.create(mainClazz, data.toArray(new Number[0][0]));
@@ -108,7 +108,7 @@ public class DataReport {
 
     public void prettyPrintReport() {
         var report = executeReport();
-        String s= "";
+        String s;
         Double d;
 
         TreeMap<String, Double> sorted = new TreeMap<>(report);

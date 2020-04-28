@@ -1,17 +1,14 @@
 package doiframework.statistics.report;
 
-import doiframework.statistics.calculations.Statistics;
 import doiframework.statistics.calculations.IStatisticsCalculate;
 import doiframework.statistics.calculations.SimpleStatistics;
+import doiframework.statistics.calculations.Statistics;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import java.util.Arrays;
-import java.util.List;
 
 /** A enum describing all possible Simple statistical implementations.
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-enum SimpleStatisticalStrategy implements IReport {
+public enum SimpleStatisticalReport implements IReportContext {
     SAMPLE_VARIANCE("Sample Variance", SimpleStatistics::calcSampleVariance),
     POPULATION_VARIANCE("Population Variance", SimpleStatistics::calcPopulationVariance),
     STANDARD_DEVIATION_POPULATION("Standard Deviation - From population", SimpleStatistics::calcStandardDeviationFromPopulation),
@@ -19,7 +16,7 @@ enum SimpleStatisticalStrategy implements IReport {
     STANDARD_ERROR_SAMPLE("Standard Error - From sample", SimpleStatistics::calcStandardErrorFromSample),
     STANDARD_ERROR_POPULATION("Standard Error - From population", SimpleStatistics::calcStandardErrorFromPopulation);
 
-    private static final Class<? extends Statistics> clazz = SimpleStatistics.class;
+    private static final Class<? extends Statistics> STATISTICS_CLASS = SimpleStatistics.class;
 
     public final String option;
     final IStatisticsCalculate calculate;
@@ -37,18 +34,9 @@ enum SimpleStatisticalStrategy implements IReport {
     @Override
     public String toString() { return option; }
 
-    /**
-     * @return {@link List}&lt;{@link SimpleStatisticalStrategy}&gt;
-     */
-    @Contract(pure = true)
-    @NotNull
-    public static List<SimpleStatisticalStrategy> getStandardConfiguration() {
-        return Arrays.asList(STANDARD_DEVIATION_SAMPLE, SAMPLE_VARIANCE);
-    }
-
     @Override
-    public Class<? extends Statistics> getMainClass() {
-        return clazz;
+    public Class<? extends Statistics> getStatisticalClass() {
+        return STATISTICS_CLASS;
     }
 
     @Override
