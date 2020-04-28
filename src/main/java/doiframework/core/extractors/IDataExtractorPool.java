@@ -22,7 +22,7 @@ public interface IDataExtractorPool {
     Map<? extends Class<?>, Map<String, Map<String, Double>>> extractDataReportsFromFields(@NotNull Map<Class<?>, List<Field>> classListMap);
     Map<? extends Class<?>, Map<String, Map<String, Double>>> extractAllReportsFromMethods(@NotNull Map<Class<?>, List<Method>> classListMap);
 
-    @NotNull Map<Class<?>, IDataExtractor> getAllExtractors();
+    @NotNull Map<Class<?>, List<IDataExtractor>> getAllExtractors();
 
     void setNumberOfThreads(byte number);
     void setThreadPoolExecutor(@NotNull ThreadPoolExecutor pool);

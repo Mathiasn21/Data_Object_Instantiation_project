@@ -15,13 +15,14 @@ public class DataExtractorPoolMain {
         dataCollectorPool.collectAllData();
 
         IDataExtractorPool dataExtractorPool = new DataExtractorPool(dataCollectorPool);
-        dataExtractorPool.extractAllColumnsFromFields();
+        var res = dataExtractorPool.extractAllColumnsFromFields();
+        System.out.println(res);
     }
 
     @NotNull
     private static IDataCollectorPool genCollectorPool() {
         String path = System.getProperty("user.dir") + "/files/showcaseAPI.csv";
-        String path = System.getProperty("user.dir") + "/files/showcaseAPI.csv";
+        String path2 = System.getProperty("user.dir") + "/files/showcaseAPI2.csv";
         List<DataSource> sourceList = DataSource.newResource().fromFile(path).fromFile(path2).buildAll();
 
         //Alternative way of declaring multiple DataSources
