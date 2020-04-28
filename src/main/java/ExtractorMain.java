@@ -1,4 +1,3 @@
-import DTOs.FinalCountdownDTO;
 import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.extractors.DataExtractor;
