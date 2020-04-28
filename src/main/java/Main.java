@@ -1,14 +1,12 @@
-import DTOs.ComplexDTOCSV;
 import doiframework.core.collectors.DataCollector;
-import doiframework.core.collectors.DataCollectorPool;
 import doiframework.core.collectors.IDataCollector;
-import doiframework.core.collectors.IDataCollectorPool;
 import doiframework.core.extractors.DataExtractor;
-import doiframework.core.extractors.DataExtractorPool;
 import doiframework.core.resource.DataSource;
 import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
+import doiframework.exceptions.UnableToAccessDataException;
+import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.Correlation;
 import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.ReportCollection;
@@ -21,7 +19,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException, IOException, ReflectiveOperationException, NoSuchColumnException {
+    public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException, IOException, ReflectiveOperationException, NoSuchColumnException, UnableToAccessDataException {
         Double[] data = new Double[]{1d,2d,3d,4d,5d,6d,6d,6d};
         Double [] data2 = new Double[]{2d,5d,6d,7d,7d,8d,9d,6d};
 
@@ -63,26 +61,32 @@ public class Main {
                 data, data2);
 
         c5.prettyPrintReport();
-        
-        String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
+
+        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv" ;
         DataSource source = DataSource.newResource().fromFile(path).build();
         List<DataSource> list = new ArrayList<>();
         list.add(source);
-        IDataCollectorPool collectorPool = DataCollectorPool.newCollectors(list, new CSVHandler()).buildAll();
+        CSVHandler csvHandler = new CSVHandler();
+        csvHandler.setDelimiter(";");
+        IDataCollector collector = DataCollector.newCollector(source, csvHandler).build();
 
-        collectorPool.collectAllData();
+        collector.collectData();
 
-        DataExtractorPool extractorPool = new DataExtractorPool(collectorPool);
-        Map<Class<?>, List<Field>> map = new HashMap<>();
-        List<Field> ll = Arrays.asList(ComplexDTOCSV.class.getFields());
-        map.put(ComplexDTOCSV.class, ll);
-        var res = extractorPool.extractAllColumnsFromFields(map);
-        System.out.println(res);
+        var extractor = new DataExtractor<>(collector);
+        var columnsUsingFieldsMap = extractor.extractColumnsUsingFields();
+        List<Object> dataset = new ArrayList<>(columnsUsingFieldsMap.values());
+        double[] data1 = (double[]) dataset.get(1);
 
-        showcaseAPIDataExtractorFields();
-        showcaseAPIDataExtractorMethods();
+        Average avg = new Average(data1);
 
+        var thing = new ArrayList<>(columnsUsingFieldsMap.keySet());
+        System.out.println(thing.get(1));
 
+        System.out.println("\n\n\n\n\n");
+        extractor.createReport().values().forEach(System.out::println);
+
+        List<Field> l = Collections.singletonList(thing.get(1));
+        System.out.println(extractor.createReportUsingFields(l));
     }
 
     private static void showcaseAPIDataExtractorFields() throws IOException, ReflectiveOperationException {

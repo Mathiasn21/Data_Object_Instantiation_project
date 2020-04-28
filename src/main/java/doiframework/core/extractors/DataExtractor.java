@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -193,7 +192,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
     @Contract(pure = true)
     @Override
-    public @NotNull Map<String, Map<String, Double>> extractReport() throws NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException {
+    public @NotNull Map<String, Map<String, Double>> createReport() throws NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException {
         Map<String, Map<String, Double>> res;
 
         Object sample = columns.get(0);//Get a sample object
@@ -203,9 +202,9 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
         Method[] methods = clazz.getMethods();
 
         if(fields.length > 0){
-            res = extractReportUsingFields(Arrays.asList(fields));
+            res = createReportUsingFields(Arrays.asList(fields));
         }else if(methods.length > 0){
-            res = extractReportUsingMethods(Arrays.asList(methods));
+            res = createReportUsingMethods(Arrays.asList(methods));
         }else{
             throw new UnableToAccessDataException("Try making fields public or have getters.");
         }
@@ -216,7 +215,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException, NotPrimitiveNumberException {
+    public @NotNull Map<String, Map<String, Double>> createReportUsingFields(@NotNull List<Field> fields) throws NoSuchFieldException, NotPrimitiveNumberException {
         Map<String, Map<String, Double>> res = new HashMap<>();
         List<Field> filteredFields = filterFieldsForPrimitiveNumbers(fields);
         Map<Field, List<Object>> columns = extractColumnsUsingFields(filteredFields);
@@ -233,7 +232,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     @Contract(pure = true)
     @Override
     @SuppressWarnings("unchecked")//Safe as the list is guaranteed to be filtered beforehand
-    public @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException, NotPrimitiveNumberException {
+    public @NotNull Map<String, Map<String, Double>> createReportUsingMethods(@NotNull List<Method> methods) throws NoSuchColumnException, NotPrimitiveNumberException {
         Map<String, Map<String, Double>> res = new HashMap<>();
         List<Method> filteredMethods = filterMethodsForPrimitiveNumbers(methods);
         Map<Method, List<Object>> columns = extractColumnsUsingMethods(filteredMethods);

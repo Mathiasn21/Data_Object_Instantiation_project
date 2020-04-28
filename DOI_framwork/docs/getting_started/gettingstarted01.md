@@ -45,7 +45,7 @@ import doiframework.*;
 public class Main {
     public static void main(String[] args) {
         //Showcases how to collect dataSource from a json file
-        String path = System.getProperty("user.dir") + "/files/simpleCSV.csv";//Just a path
+        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv";//Just a path
         Resource dataSource = Resource.newResource().fromFile(path).build();
         ICollector collector = Collector.newCollector(dataSource, new CSVHandler()).build();
         collector.collectData();//Data tries to be collected

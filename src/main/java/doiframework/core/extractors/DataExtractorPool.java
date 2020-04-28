@@ -7,7 +7,6 @@ import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -114,7 +113,7 @@ public final class DataExtractorPool implements IDataExtractorPool {
         classListMap.keySet().forEach((o) -> {
             var extractor = dataExtractors.get(o);
             try {
-                res.put(o, extractor.extractReportUsingFields(classListMap.get(o)));
+                res.put(o, extractor.createReportUsingFields(classListMap.get(o)));
             } catch (ReflectiveOperationException | NotPrimitiveNumberException e) {
                 e.printStackTrace();
             }
@@ -129,7 +128,7 @@ public final class DataExtractorPool implements IDataExtractorPool {
         classListMap.keySet().forEach((o) -> {
             var extractor = dataExtractors.get(o);
             try {
-                res.put(o, extractor.extractReportUsingMethods(classListMap.get(o)));
+                res.put(o, extractor.createReportUsingMethods(classListMap.get(o)));
             } catch (ReflectiveOperationException | NoSuchColumnException | NotPrimitiveNumberException e) {
                 e.printStackTrace();
             }

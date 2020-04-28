@@ -56,11 +56,11 @@ public interface IDataExtractor {
 
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReport() throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException;
+    @NotNull Map<String, Map<String, Double>> createReport() throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, UnableToAccessDataException, NotPrimitiveNumberException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException, NotPrimitiveNumberException;
+    @NotNull Map<String, Map<String, Double>> createReportUsingFields(@NotNull List<Field> fields) throws ReflectiveOperationException, NotPrimitiveNumberException;
 
     @Contract(pure = true)
-    @NotNull Map<String, Map<String, Double>> extractReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, NotPrimitiveNumberException;
+    @NotNull Map<String, Map<String, Double>> createReportUsingMethods(@NotNull List<Method> methods) throws IllegalAccessException, NoSuchFieldException, NoSuchColumnException, NotPrimitiveNumberException;
 }
