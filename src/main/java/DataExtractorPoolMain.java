@@ -1,13 +1,11 @@
 import doiframework.core.collectors.DataCollectorPool;
 import doiframework.core.collectors.IDataCollectorPool;
 import doiframework.core.extractors.DataExtractorPool;
-import doiframework.core.extractors.IDataExtractor;
 import doiframework.core.extractors.IDataExtractorPool;
 import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.CSVHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.List;
 
 public class DataExtractorPoolMain {
