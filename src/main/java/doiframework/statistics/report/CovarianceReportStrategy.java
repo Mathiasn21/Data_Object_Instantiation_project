@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public enum CovarianceReport implements IAdvancedReport {
+public enum CovarianceReportStrategy implements IAdvancedReport {
     COVARIANCE_SAMPLE("Covariance - From sample", Covariance::calcCovarianceFromSample),
     COVARIANCE_POPULATION("Covariance - From population", Covariance::calcCovarianceFromPopulation);
 
@@ -16,18 +16,18 @@ public enum CovarianceReport implements IAdvancedReport {
     private static final Class<? extends AdvancedStatistics> clazz = Covariance.class;
 
     @Contract(pure = true)
-    CovarianceReport(String option, ICovarianceCalculate calculate) {
+    CovarianceReportStrategy(String option, ICovarianceCalculate calculate) {
         this.option = option;
         this.calculate = calculate;
     }
 
     /**
-     * @return {@link List}&lt;{@link CovarianceReport}&gt;
+     * @return {@link List}&lt;{@link CovarianceReportStrategy}&gt;
      */
     @Contract(pure = true)
     @NotNull
-    public static List<CovarianceReport> getStandardConfiguration(){
-        return Arrays.asList(CovarianceReport.values());
+    public static List<CovarianceReportStrategy> getStandardConfiguration(){
+        return Arrays.asList(CovarianceReportStrategy.values());
     }
 
     @Override

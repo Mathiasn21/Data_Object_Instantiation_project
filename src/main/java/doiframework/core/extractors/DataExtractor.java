@@ -11,7 +11,7 @@ import doiframework.core.observer.events.IEvent;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
 import doiframework.statistics.report.DataReport;
-import doiframework.statistics.report.Report;
+import doiframework.statistics.report.ReportCollection;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +31,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     private final Class<?> clazz;
     private final ObjectInformation objectInformation;
     private IDataCollector collector;
-    private Report[] reportOptions = Report.getFullAverageReport();
+    private ReportCollection[] reportCollectionOptions = ReportCollection.getFullAverageReport();
 
     public DataExtractor(@NotNull C collector) {
         this.columns = collector.getAllObjects();
@@ -47,19 +47,19 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
     }
 
     @Override
-    public void setReportOptions(@NotNull List<Report> reportOptions) {
-        this.reportOptions = reportOptions.toArray(new Report[0]);
+    public void setReportCollectionOptions(@NotNull List<ReportCollection> reportCollectionOptions) {
+        this.reportCollectionOptions = reportCollectionOptions.toArray(new ReportCollection[0]);
     }
 
     @Override
-    public void setReportOptions(@NotNull Report[] reportOptions) {
-        this.reportOptions = reportOptions;
+    public void setReportOptions(@NotNull ReportCollection[] reportCollectionOptions) {
+        this.reportCollectionOptions = reportCollectionOptions;
     }
 
     @Contract(pure = true)
     @Override
-    public @NotNull List<Report> getReportOptions() {
-        return Arrays.asList(reportOptions);
+    public @NotNull List<ReportCollection> getReportCollectionOptions() {
+        return Arrays.asList(reportCollectionOptions);
     }
 
     @Override
@@ -220,7 +220,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
         for (Field field : filteredFields) {
             List<Number> column = (List<Number>) (Object) columns.get(field);//Safe as this is ensured beforehand
-            DataReport centralCommand = new DataReport(reportOptions, column);
+            DataReport centralCommand = new DataReport(reportCollectionOptions, column);
             res.put(field.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));
@@ -237,7 +237,7 @@ public final class DataExtractor<C extends IDataCollector> implements IDataExtra
 
         for (Method method : filteredMethods) {
             List<Number> column = (List<Number>) (Object) columns.get(method);//Safe as this is ensured beforehand
-            DataReport centralCommand = new DataReport(reportOptions, column);
+            DataReport centralCommand = new DataReport(reportCollectionOptions, column);
             res.put(method.getName(), centralCommand.executeReport());
         }
         raise(new ExtractorFinishedEvent(this));
