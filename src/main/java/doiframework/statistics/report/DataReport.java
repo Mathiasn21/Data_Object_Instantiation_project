@@ -114,7 +114,7 @@ public class DataReport {
         TreeMap<String, Double> sorted = new TreeMap<>(report);
         Set<Map.Entry<String, Double>> mappings = sorted.entrySet();
 
-        System.out.println("---------------------------------ReportCollection---------------------------------\n");
+        System.out.println("----------------------------ReportCollection----------------------------\n");
         for(Map.Entry<String, Double> mapping : mappings){
             s = mapping.getKey();
             d = mapping.getValue();
@@ -124,4 +124,5 @@ public class DataReport {
         }
         System.out.println("------------------------------------------------------------------------");
     }
+
 }

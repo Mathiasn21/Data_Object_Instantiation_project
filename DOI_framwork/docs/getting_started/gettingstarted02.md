@@ -18,7 +18,7 @@ JSON:
 ```java
 import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         List<Resource> dataSources = Resource.newResource().fromFile(path).fromFile(path).buildAll();
@@ -33,7 +33,7 @@ Note the chained invocations of fromFile().
 ```java
 import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) { 
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
         String[] paths = {path, path, path}; //Multiple paths
