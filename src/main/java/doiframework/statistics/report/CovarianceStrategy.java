@@ -7,11 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/doiframework/statistics/report/CovarianceStrategy.java
 enum CovarianceStrategy implements IAdvancedReport {
-=======
-public enum CovarianceReportStrategy implements IAdvancedReportContext {
->>>>>>> c93a378d9018681eadedf57f02946dee8e8c2df5:src/main/java/doiframework/statistics/report/CovarianceReportStrategy.java
     COVARIANCE_SAMPLE("Covariance - From sample", Covariance::calcCovarianceFromSample),
     COVARIANCE_POPULATION("Covariance - From population", Covariance::calcCovarianceFromPopulation);
 
@@ -20,16 +16,11 @@ public enum CovarianceReportStrategy implements IAdvancedReportContext {
     private static final Class<? extends AdvancedStatistics> clazz = Covariance.class;
 
     @Contract(pure = true)
-<<<<<<< HEAD:src/main/java/doiframework/statistics/report/CovarianceStrategy.java
     CovarianceStrategy(String option, ICovarianceCalculate calculate) {
-=======
-    CovarianceReportStrategy(String option, ICovarianceCalculate calculate) {
->>>>>>> c93a378d9018681eadedf57f02946dee8e8c2df5:src/main/java/doiframework/statistics/report/CovarianceReportStrategy.java
         this.option = option;
         this.calculate = calculate;
     }
 
-<<<<<<< HEAD:src/main/java/doiframework/statistics/report/CovarianceStrategy.java
     /**
      * @return {@link List}&lt;{@link CovarianceStrategy}&gt;
      */
@@ -39,10 +30,8 @@ public enum CovarianceReportStrategy implements IAdvancedReportContext {
         return Arrays.asList(CovarianceStrategy.values());
     }
 
-=======
->>>>>>> c93a378d9018681eadedf57f02946dee8e8c2df5:src/main/java/doiframework/statistics/report/CovarianceReportStrategy.java
     @Override
-    public Class<? extends Statistics> getStatisticalClass() {
+    public Class<? extends Statistics> getMainClass() {
         return clazz;
     }
 

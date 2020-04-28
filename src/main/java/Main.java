@@ -1,12 +1,9 @@
 import DTOs.ComplexDTOCSV;
-import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.DataCollectorPool;
 import doiframework.core.collectors.IDataCollectorPool;
-import doiframework.core.extractors.DataExtractor;
 import doiframework.core.extractors.DataExtractorPool;
 import doiframework.core.resource.DataSource;
 import doiframework.exceptions.DatasetNotMatchingException;
-import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.statistics.calculations.Correlation;
 import doiframework.statistics.report.DataReport;
@@ -18,7 +15,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException, IOException, ReflectiveOperationException, NoSuchColumnException {
+    public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException, IOException, IllegalAccessException {
         Double[] data = new Double[]{1d,2d,3d,4d,5d,6d,6d,6d};
         Double [] data2 = new Double[]{2d,5d,6d,7d,7d,8d,9d,6d};
 
@@ -60,7 +57,7 @@ public class Main {
                 data, data2);
 
         c5.prettyPrintReport();
-
+        
         String path = System.getProperty("user.dir") + "/files/simpleCSV.csv" ;
         DataSource source = DataSource.newResource().fromFile(path).build();
         List<DataSource> list = new ArrayList<>();
@@ -74,34 +71,6 @@ public class Main {
         List<Field> ll = Arrays.asList(ComplexDTOCSV.class.getFields());
         map.put(ComplexDTOCSV.class, ll);
         var res = extractorPool.extractAllColumnsFromFields(map);
-
-        showcaseAPIDataExtractorFields();
-        showcaseAPIDataExtractorMethods();
-    }
-
-    private static void showcaseAPIDataExtractorFields() throws IOException, ReflectiveOperationException {
-        System.out.println("\n-------Showcasing API - DataExtractor - Fields ------");
-        var collector = genCollector();
-        var extractor = new DataExtractor<>(collector);
-        var columnMap = extractor.extractColumnsUsingFields();
-        columnMap.values().forEach(System.out::println);
-    }
-
-    private static void showcaseAPIDataExtractorMethods() throws IOException, NoSuchColumnException {
-        System.out.println("\n-------Showcasing API - DataExtractor - Methods ------");
-        var collector = genCollector();
-        var extractor = new DataExtractor<>(collector);
-        var columnMap = extractor.extractColumnsUsingMethods();
-        columnMap.values().forEach(System.out::println);
-    }
-
-    @NotNull
-    private static IDataCollector genCollector() throws IOException {
-        String path = System.getProperty("user.dir") + "/files/showcaseAPI.csv" ;
-        DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        IDataHandler handler = new CSVHandler();
-        IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
-        collector.collectData();
-        return collector;
+        System.out.println(res);
     }
 }

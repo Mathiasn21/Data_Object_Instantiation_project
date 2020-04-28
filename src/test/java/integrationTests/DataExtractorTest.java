@@ -168,10 +168,9 @@ public class DataExtractorTest {
 
     @Test
     void all_columns_using_fields() throws IOException, ReflectiveOperationException {
+        var collector = genCollector();
         var clazz = ComplexDTOCSV.class;
         var fields = Arrays.asList(clazz.getField("string"), clazz.getField("doubles"), clazz.getField("integer"));
-
-        var collector = genCollector();
         var extractor = new DataExtractor<>(collector);
         var columnMap = extractor.extractColumnsUsingFields();
         assertFalse(columnMap.isEmpty());

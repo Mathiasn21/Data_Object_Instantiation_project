@@ -12,13 +12,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Mathias Walter Nilsen - Mathiasn21 - https://github.com/Mathiasn21/
  */
-<<<<<<< HEAD:src/main/java/doiframework/statistics/report/AverageStrategy.java
 enum AverageStrategy implements IReport {
     AVERAGE_SUM("Total sum", Average::calcTotalSum),
-=======
-public enum AverageReportStrategy implements IReportContext {
-    AVERAGE_SUM("Total sum", Average::calcSum),
->>>>>>> c93a378d9018681eadedf57f02946dee8e8c2df5:src/main/java/doiframework/statistics/report/AverageReportStrategy.java
     AVERAGE_MEAN("Average", Average::calcMean),
     AVERAGE_MEDIAN("Median", Average::calcMedian),
     AVERAGE_MID_RANGE("Mid range", Average::calcMidRange),
@@ -29,11 +24,7 @@ public enum AverageReportStrategy implements IReportContext {
     private static final Class<? extends Statistics> clazz = Average.class;
 
     @Contract(pure = true)
-<<<<<<< HEAD:src/main/java/doiframework/statistics/report/AverageStrategy.java
     AverageStrategy(String option, IAverageCalculate calculate) {
-=======
-    AverageReportStrategy(String option, IAverageCalculate calculate) {
->>>>>>> c93a378d9018681eadedf57f02946dee8e8c2df5:src/main/java/doiframework/statistics/report/AverageReportStrategy.java
         this.option = option;
         this.calculate = calculate;
     }
@@ -45,7 +36,6 @@ public enum AverageReportStrategy implements IReportContext {
     @Override
     public String toString() { return option; }
 
-<<<<<<< HEAD:src/main/java/doiframework/statistics/report/AverageStrategy.java
     /**
      * @return {@link List}&lt;{@link AverageStrategy}&gt;
      */
@@ -55,10 +45,8 @@ public enum AverageReportStrategy implements IReportContext {
         return Arrays.asList(AverageStrategy.values());
     }
 
-=======
->>>>>>> c93a378d9018681eadedf57f02946dee8e8c2df5:src/main/java/doiframework/statistics/report/AverageReportStrategy.java
     @Override
-    public Class<? extends Statistics> getStatisticalClass() {
+    public Class<? extends Statistics> getMainClass() {
         return clazz;
     }
 

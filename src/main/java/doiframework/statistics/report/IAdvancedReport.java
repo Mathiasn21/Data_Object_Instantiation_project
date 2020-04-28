@@ -1,5 +1,5 @@
 package doiframework.statistics.report;
 
-public interface IAdvancedReportContext extends IReportContext {
+public interface IAdvancedReport extends IReport {
     int getNumbSupportedDataSets();
 }

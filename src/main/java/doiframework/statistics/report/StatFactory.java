@@ -22,9 +22,8 @@ final class StatFactory {
      * @param size short
      * @return class
      */
-    @Contract(pure = true)
     @SuppressWarnings("unchecked")//safe as it is controlled inside the method
-    private Class<Number[]> @NotNull [] genArguments(short size){
+    private Class<Number[]>[] genArguments(short size){
         Class<?>[] res = new Class[size];
         for(int i = 0; i < size; i++){
             res[i] = Number[].class;

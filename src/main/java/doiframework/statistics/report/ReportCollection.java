@@ -4,27 +4,27 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public enum ReportCollection {
-    AVERAGE_MEAN(AverageReportStrategy.AVERAGE_MEAN),
-    AVERAGE_MID_RANGE(AverageReportStrategy.AVERAGE_MID_RANGE),
-    AVERAGE_MEDIAN(AverageReportStrategy.AVERAGE_MEDIAN),
-    AVERAGE_MODE(AverageReportStrategy.AVERAGE_MODE),
-    TOTAL_SUM(AverageReportStrategy.AVERAGE_SUM),
+    AVERAGE_MEAN(AverageStrategy.AVERAGE_MEAN),
+    AVERAGE_MID_RANGE(AverageStrategy.AVERAGE_MID_RANGE),
+    AVERAGE_MEDIAN(AverageStrategy.AVERAGE_MEDIAN),
+    AVERAGE_MODE(AverageStrategy.AVERAGE_MODE),
+    TOTAL_SUM(AverageStrategy.AVERAGE_SUM),
 
-    POPULATION_VARIANCE(SimpleStatisticalReport.POPULATION_VARIANCE),
-    SAMPLE_VARIANCE(SimpleStatisticalReport.SAMPLE_VARIANCE),
-    STANDARD_DEVIATION_POPULATION(SimpleStatisticalReport.STANDARD_DEVIATION_POPULATION),
-    STANDARD_DEVIATION_SAMPLE(SimpleStatisticalReport.STANDARD_DEVIATION_SAMPLE),
-    STANDARD_ERROR_SAMPLE(SimpleStatisticalReport.STANDARD_ERROR_SAMPLE),
-    STANDARD_ERROR_POPULATION(SimpleStatisticalReport.STANDARD_ERROR_POPULATION),
+    POPULATION_VARIANCE(SimpleStatisticalStrategy.POPULATION_VARIANCE),
+    SAMPLE_VARIANCE(SimpleStatisticalStrategy.SAMPLE_VARIANCE),
+    STANDARD_DEVIATION_POPULATION(SimpleStatisticalStrategy.STANDARD_DEVIATION_POPULATION),
+    STANDARD_DEVIATION_SAMPLE(SimpleStatisticalStrategy.STANDARD_DEVIATION_SAMPLE),
+    STANDARD_ERROR_SAMPLE(SimpleStatisticalStrategy.STANDARD_ERROR_SAMPLE),
+    STANDARD_ERROR_POPULATION(SimpleStatisticalStrategy.STANDARD_ERROR_POPULATION),
 
-    COVARIANCE_SAMPLE(CovarianceReportStrategy.COVARIANCE_SAMPLE),
-    COVARIANCE_POPULATION(CovarianceReportStrategy.COVARIANCE_POPULATION),
-    CORRELATION_SAMPLE(CorrelationReportStrategy.CORRELATION_SAMPLE),
-    CORRELATION_POPULATION(CorrelationReportStrategy.CORRELATION_POPULATION);
+    COVARIANCE_SAMPLE(CovarianceStrategy.COVARIANCE_SAMPLE),
+    COVARIANCE_POPULATION(CovarianceStrategy.COVARIANCE_POPULATION),
+    CORRELATION_SAMPLE(CorrelationStrategy.CORRELATION_SAMPLE),
+    CORRELATION_POPULATION(CorrelationStrategy.CORRELATION_POPULATION);
 
-    private final IReportContext report;
+    private final IReport report;
 
-    ReportCollection(IReportContext report) {
+    ReportCollection(IReport report) {
         this.report = report;
     }
 
@@ -34,7 +34,7 @@ public enum ReportCollection {
         return this.report.getOption();
     }
 
-    public IReportContext getIReport(){
+    public IReport getIReport(){
         return report;
     }
 
