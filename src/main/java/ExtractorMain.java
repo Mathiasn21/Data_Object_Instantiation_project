@@ -1,4 +1,3 @@
-import DTOs.FinalCountdownDTO;
 import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.extractors.DataExtractor;
@@ -36,7 +35,6 @@ public class ExtractorMain {
         columnsUsingFieldsMap.values().forEach(System.out::println);
         System.out.println("\n");
     }
-
 
     @NotNull
     private static IDataCollector genCollector() throws IOException {
