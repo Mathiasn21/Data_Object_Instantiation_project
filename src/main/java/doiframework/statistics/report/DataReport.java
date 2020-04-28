@@ -57,7 +57,7 @@ public class DataReport {
         commands.forEach((command) -> {
             try {
                 var report = command.getIReport();
-                var mainClazz = report.getMainClass();
+                var mainClazz = report.getStatisticalClass();
 
                 for (int i = 0; i < data.size(); i++) {
                     Number[] number = data.get(i);
@@ -85,7 +85,7 @@ public class DataReport {
         advancedCommands.forEach((command) -> {
             try {
                 var report = command.getIReport();
-                var mainClazz = report.getMainClass();
+                var mainClazz = report.getStatisticalClass();
 
                 if(((IAdvancedReportContext) report).getNumbSupportedDataSets() != data.size()){
                     return;

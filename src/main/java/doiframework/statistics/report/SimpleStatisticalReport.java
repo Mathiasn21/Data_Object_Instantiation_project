@@ -16,7 +16,7 @@ public enum SimpleStatisticalReport implements IReportContext {
     STANDARD_ERROR_SAMPLE("Standard Error - From sample", SimpleStatistics::calcStandardErrorFromSample),
     STANDARD_ERROR_POPULATION("Standard Error - From population", SimpleStatistics::calcStandardErrorFromPopulation);
 
-    private static final Class<? extends Statistics> clazz = SimpleStatistics.class;
+    private static final Class<? extends Statistics> STATISTICS_CLASS = SimpleStatistics.class;
 
     public final String option;
     final IStatisticsCalculate calculate;
@@ -35,8 +35,8 @@ public enum SimpleStatisticalReport implements IReportContext {
     public String toString() { return option; }
 
     @Override
-    public Class<? extends Statistics> getMainClass() {
-        return clazz;
+    public Class<? extends Statistics> getStatisticalClass() {
+        return STATISTICS_CLASS;
     }
 
     @Override

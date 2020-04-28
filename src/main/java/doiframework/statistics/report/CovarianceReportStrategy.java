@@ -22,7 +22,7 @@ public enum CovarianceReportStrategy implements IAdvancedReportContext {
     }
 
     @Override
-    public Class<? extends Statistics> getMainClass() {
+    public Class<? extends Statistics> getStatisticalClass() {
         return clazz;
     }
 

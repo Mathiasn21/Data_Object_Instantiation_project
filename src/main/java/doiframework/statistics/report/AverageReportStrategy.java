@@ -37,7 +37,7 @@ public enum AverageReportStrategy implements IReportContext {
     public String toString() { return option; }
 
     @Override
-    public Class<? extends Statistics> getMainClass() {
+    public Class<? extends Statistics> getStatisticalClass() {
         return clazz;
     }
 
