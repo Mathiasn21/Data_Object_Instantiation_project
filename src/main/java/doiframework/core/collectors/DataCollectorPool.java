@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -75,5 +76,15 @@ public final class DataCollectorPool implements IDataCollectorPool {
     @Contract("_, _ -> new")
     public static DataCollectorPoolBuilder newCollectors(List<DataSource> dataSources, IDataHandler dataHandler) {
         return new DataCollectorPoolBuilder(dataSources, dataHandler);
+    }
+
+    /**
+     * @param dataSources {@link List}&lt;{@link DataSource}&gt;
+     * @param dataHandler {@link IDataHandler}
+     * @return {@link DataCollectorBuilder}
+     */
+    @NotNull
+    public static DataCollectorPoolBuilder newCollectors(Map<DataSource, IDataHandler> configuration) {
+        return new DataCollectorPoolBuilder(configuration);
     }
 }
