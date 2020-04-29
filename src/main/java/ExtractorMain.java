@@ -6,7 +6,6 @@ import doiframework.exceptions.NoSuchColumnException;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.IDataHandler;
 import org.jetbrains.annotations.NotNull;
-import showcaseAPI.ShowAPIDTO;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,7 +20,6 @@ public class ExtractorMain {
         System.out.println("\n");
 
         Class<?> clazz = extractor.getDataObjectClass();
-
 
         var methods = Arrays.asList(clazz.getMethod("getString"), clazz.getMethod("getAnInt"), clazz.getMethod("getaDouble"));
         var columnsUsingMethodsMap = extractor.extractColumnsUsingMethods(methods);
