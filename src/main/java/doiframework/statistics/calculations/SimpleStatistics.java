@@ -3,6 +3,8 @@ package doiframework.statistics.calculations;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Class for calculating statistics execute the resource {@link Statistics}
  * @author Maria Elinor Pedersen Github: https://github.com/marped
@@ -37,6 +39,15 @@ public final class SimpleStatistics extends Statistics {
         super(data);
         this.average = new Average(data);
     }
+    /**
+     * @param data {@link List}&lt;{@link Number}&gt;
+     */
+    @Contract(pure = true)
+    public SimpleStatistics(@NotNull List<Number> data){
+        super(data);
+        this.average = new Average(data);
+    }
+
 
     /**
      * @return double

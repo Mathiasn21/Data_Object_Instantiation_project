@@ -26,7 +26,7 @@ CSV - With **default delimiter(,)**:
 ```java
 import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         //Showcases how to collect dataSource from a json file
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
@@ -42,7 +42,7 @@ public class Main {
 ```java
 import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         //Showcases how to collect dataSource from a json file
         String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv";//Just a path
@@ -63,7 +63,7 @@ a simple URL connection. If one wishes to alter this behaviour then you must cre
 ```java
 import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         String url = "https://someAPI.com";
         Resource dataSource = Resource.newResource().fromURL(url).build();
@@ -77,7 +77,7 @@ public class Main {
 ```java
 import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         String url = "https://someAPI.com";
         Resource dataSource = Resource.newResource().fromURL(url).build();
