@@ -91,6 +91,18 @@ public class Main {
 
         System.out.println();
         var collector2 = genCollector();
+
+
+
+        CSVHandler handler = new CSVHandler();
+        handler.setDelimiter(";");
+        handler.setSampleEachLine(true);
+        handler.skipEmptyLines(true);
+        handler.removeDoubleQuotes(true);
+        handler.removeSingleQuotes(true);
+        handler.isSingleColumn(true);
+        handler.skipLineIndexes(0);
+
     }
 
     private static void showcaseAPIDataExtractorFields() throws IOException, ReflectiveOperationException {
