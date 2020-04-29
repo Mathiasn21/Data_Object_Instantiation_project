@@ -17,6 +17,7 @@ import static org.apache.commons.lang3.math.NumberUtils.*;
  */
 public class JSONHandler implements IDataHandler {
     private Class<?>[] primaryKeyTypes;
+    private boolean convertFloatToDouble = true;
 
     /**
      * @param bufferedReader {@link BufferedReader}
@@ -48,7 +49,9 @@ public class JSONHandler implements IDataHandler {
 
                 if(isCreatable(value)){
                     Number number = createNumber(value);
-                    arrayList.add(number);
+                    arrayList.add(convertFloatToDouble && number.getClass() == Float.class ?
+                            Double.valueOf(number.doubleValue()) : number);
+
                     continue;
                 }
                 arrayList.add(value);
@@ -149,5 +152,9 @@ public class JSONHandler implements IDataHandler {
     private String toJson(@NotNull List<String> list) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(list);
+    }
+
+    public void convertFloatToDouble(boolean convertFloatToDouble) {
+        this.convertFloatToDouble = convertFloatToDouble;
     }
 }

@@ -13,7 +13,7 @@ public class Read {
     @Test
     void from_file_using_file() {
         assertDoesNotThrow(() -> {
-            File path = new File(System.getProperty("user.dir") + "/files/DTOJson.json");
+            File path = new File(System.getProperty("user.dir") + "/files/showcaseAPI.json");
             DataSource dataSource = DataSource.newResource().fromFile(path).build();
 
             BufferedReader bufferedReader = dataSource.getData();
