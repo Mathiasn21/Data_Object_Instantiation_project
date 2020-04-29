@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
- * Class with the central command that excecutes the report
+ * Class with the central command that executes the report
  */
 public class DataReport {
     private final List<ReportCollection> commands = new ArrayList<>();

@@ -1,3 +1,8 @@
+import DTOs.FinalCountdownDTO;
+import doiframework.core.collectors.DataCollector;
+import doiframework.core.collectors.IDataCollector;
+import doiframework.core.extractors.DataExtractor;
+import doiframework.core.resource.DataSource;
 import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
@@ -8,9 +13,15 @@ import doiframework.statistics.calculations.Covariance;
 import doiframework.statistics.calculations.SimpleStatistics;
 import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.ReportCollection;
+import doiframework.utilities.handlers.CSVHandler;
+import doiframework.utilities.handlers.IDataHandler;
 
 import java.io.IOException;
+import java.io.ObjectStreamClass;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ReportMain {
@@ -32,8 +43,9 @@ public class ReportMain {
         }
 
 
-        System.out.println("\n-------Testing Full Average ReportCollection with Execute ReportCollection-------\n");
+        System.out.println("\n-------Full Average ReportCollection with executeReport Method applied-------\n");
         DataReport c1 = new DataReport(ReportCollection.getFullAverageReport(), dataset1);
+        System.out.println(c1.executeReport() + "\n");
         c1.prettyPrintReport();
 
         System.out.println("\n-------Testing Full Simple Statistics ReportCollection with pretty print------\n");
@@ -70,17 +82,38 @@ public class ReportMain {
 
         c5.prettyPrintReport();
 
+        System.out.println("\n-------Testing making my own report with the ReportCollection builder and pretty printing ------\n");
+        DataReport c2 = new DataReport(ReportCollection.getBuilder()
+                .calcAverageMean()
+                .calcSampleVariance()
+                .calcCovarianceFromSample()
+                .calcCorrelationFromSample()
+                .build(),
+                dataset1, dataset2);
+        c2.prettyPrintReport();
 
-        /*
+
+
+        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv" ;
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
+        CSVHandler handler = new CSVHandler();
+        handler.setDelimiter(";");
+        IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
+        collector.collectData();
+
+        System.out.println(collector.getDataClazz());
+
+        var extractor = new DataExtractor<>(collector);
+        Class<FinalCountdownDTO> clazz = FinalCountdownDTO.class;
+        var fields = Arrays.asList(clazz.getField("lyrics"), clazz.getField("data1"), clazz.getField("data2"));
         var columnsUsingFieldsMap = extractor.extractColumnsUsingFields(fields);
-        var thing = new ArrayList<>(columnsUsingFieldsMap.keySet());
-        System.out.println(thing.get(1));
+        var report = extractor.createReport();
+        System.out.println(report);
+
 
         System.out.println("\n\n\n\n\n");
         extractor.createReport().values().forEach(System.out::println);
 
-        List<Field> l = Collections.singletonList(thing.get(1));
-        System.out.println(extractor.createReportUsingFields(l));*/
     }
 
 }
