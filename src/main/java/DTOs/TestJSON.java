@@ -1,6 +1,8 @@
 package DTOs;
 
-import DOIFramework.core.annotations.DataObject;
+import doiframework.core.annotations.DataObject;
+
+import java.util.Arrays;
 
 @DataObject
 public class TestJSON {
@@ -14,5 +16,15 @@ public class TestJSON {
         this.itemName = itemName;
         this.thing = thing;
         this.array = array;
+    }
+
+    @Override
+    public String toString() {
+        return "TestJSON{" +
+                "item='" + item + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", thing='" + thing + '\'' +
+                ", array=" + Arrays.toString(array) +
+                '}';
     }
 }

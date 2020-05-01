@@ -1,13 +1,14 @@
 package unitTests;
 
-import DOIFramework.core.resource.Resource;
-import DOIFramework.utilities.collections.GraphNode;
-import DOIFramework.utilities.handlers.CSVHandler;
-import DOIFramework.utilities.collections.Graph;
+import doiframework.core.resource.DataSource;
+import doiframework.utilities.collections.GraphNode;
+import doiframework.utilities.handlers.CSVHandler;
+import doiframework.utilities.collections.Graph;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class GraphTest {
             for (int j = 0, argument = 3; j < connections.length; j++, argument++) {
                 connections[j] = (int) args[argument];
             }
-            graph.insert(uid, number, connections);
+            //graph.insert(uid, number, connections);
             assertTrue(graph.contains(uid));
             assertTrue(graph.contains(number));
         }
@@ -51,11 +52,11 @@ public class GraphTest {
 
         for(int i = 0; i < connections.length; i++){
             assertEquals(connections[i].length, graph.numConnections(i));
-            int[] conns = graph.getConnections(i);
-            assertTrue(conns.length != 0);
+            ArrayList<GraphNode> conns = graph.getConnections(i);
+            assertTrue(conns.size() != 0);
 
             for(int j = 0; j < connections[i].length; j++){
-                assertEquals(connections[i][j], conns[j]);
+                assertEquals(connections[i][j], conns.get(j));
             }
         }
     }
@@ -74,7 +75,7 @@ public class GraphTest {
             for (int j = 0, argument = 3; j < connections.length; j++, argument++) {
                 connections[j] = (int) args[argument];
             }
-            graph.insert(uid, str, connections);
+            //graph.insert(uid, str, connections);
         }
         assertEquals(8, graph.size());
 
@@ -90,11 +91,11 @@ public class GraphTest {
         };
         for(int i = 0; i < connections.length; i++){
             assertEquals(connections[i].length, graph.numConnections(i));
-            int[] conns = graph.getConnections(i);
-            assertTrue(conns.length != 0);
+            ArrayList<GraphNode> conns = graph.getConnections(i);
+            assertTrue(conns.size() != 0);
 
             for(int j = 0; j < connections[i].length; j++){
-                assertEquals(connections[i][j], conns[j]);
+                assertEquals(connections[i][j], conns.get(j));
             }
         }
     }
@@ -113,7 +114,7 @@ public class GraphTest {
             for (int j = 0, argument = 3; j < connections.length; j++, argument++) {
                 connections[j] = (int) args[argument];
             }
-            graph.insert(uid, number, connections);
+            //graph.insert(uid, number, connections);
             assertTrue(graph.contains(uid));
         }
         assertEquals(8, graph.size());
@@ -141,7 +142,7 @@ public class GraphTest {
             for (int j = 0, argument = 3; j < connections.length; j++, argument++) {
                 connections[j] = (int) args[argument];
             }
-            graph.insert(uid, str, connections);
+            //graph.insert(uid, str, connections);
             assertTrue(graph.contains(uid));
         }
         assertEquals(8, graph.size());
@@ -168,7 +169,7 @@ public class GraphTest {
             for (int j = 0, argument = 3; j < readConnections.length; j++, argument++) {
                 readConnections[j] = (int) args[argument];
             }
-            graph.insert(uid, str, readConnections);
+            //graph.insert(uid, str, readConnections);
             assertTrue(graph.contains(uid));
         }
         assertEquals(8, graph.size());
@@ -192,7 +193,7 @@ public class GraphTest {
             for (int j = 0, argument = 2; j < connections.length; j++, argument++) {
                 connections[j] = (int) args[argument];
             }
-            graph.insert(uid, str, connections);
+            //graph.insert(uid, str, connections);
             assertTrue(graph.contains(uid));
         }
         assertEquals(8, graph.size());
@@ -206,7 +207,7 @@ public class GraphTest {
         csvHandler.setSampleEachLine(true);
         csvHandler.setDelimiter("\\s+");
 
-        var resource = Resource.newResource().fromFile(path).build();
+        var resource = DataSource.newResource().fromFile(path).build();
         return csvHandler.handle(resource.getData());
     }
 }

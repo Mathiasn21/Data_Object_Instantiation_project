@@ -1,6 +1,6 @@
 # Scenarios
 
-## Collecting from a single resource:
+## Collecting from a single dataSource:
 
 ### Data used:
 Data used for this page.
@@ -24,14 +24,14 @@ CSV - With **default delimiter(,)**:
 
 #### Data formatted as JSON:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
-        //Showcases how to collect resource from a json file
+        //Showcases how to collect dataSource from a json file
         String path = System.getProperty("user.dir") + "/files/DTOJson.json";//Just a path
-        Resource resource = Resource.newResource().fromFile(path).build();
-        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        Resource dataSource = Resource.newResource().fromFile(path).build();
+        ICollector collector = Collector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();//Data tries to be collected
     }
 }
@@ -40,14 +40,14 @@ public class Main {
 
 #### Data formatted as CSV:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
-        //Showcases how to collect resource from a json file
-        String path = System.getProperty("user.dir") + "/files/simpleCSV.csv";//Just a path
-        Resource resource = Resource.newResource().fromFile(path).build();
-        ICollector collector = Collector.newCollector(resource, new CSVHandler()).build();
+        //Showcases how to collect dataSource from a json file
+        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv";//Just a path
+        Resource dataSource = Resource.newResource().fromFile(path).build();
+        ICollector collector = Collector.newCollector(dataSource, new CSVHandler()).build();
         collector.collectData();//Data tries to be collected
     }
 }
@@ -61,13 +61,13 @@ a simple URL connection. If one wishes to alter this behaviour then you must cre
 
 #### Data formatted as JSON:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         String url = "https://someAPI.com";
-        Resource resource = Resource.newResource().fromURL(url).build();
-        ICollector collector = Collector.newCollector(resource, new JSONHandler()).build();
+        Resource dataSource = Resource.newResource().fromURL(url).build();
+        ICollector collector = Collector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
     }
 }
@@ -75,13 +75,13 @@ public class Main {
 
 #### Data formatted as CSV:
 ```java
-import DOIFramework.*;
+import doiframework.*;
 
-public class Main {
+public class ReportMain {
     public static void main(String[] args) {
         String url = "https://someAPI.com";
-        Resource resource = Resource.newResource().fromURL(url).build();
-        ICollector collector = Collector.newCollector(resource, new CSVHandler()).build();
+        Resource dataSource = Resource.newResource().fromURL(url).build();
+        ICollector collector = Collector.newCollector(dataSource, new CSVHandler()).build();
         collector.collectData();
     }
 }

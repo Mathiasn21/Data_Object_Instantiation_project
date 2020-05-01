@@ -1,6 +1,6 @@
 package unitTests;
 
-import DOIFramework.statistics.SimpleStatistics;
+import doiframework.statistics.calculations.SimpleStatistics;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +42,7 @@ public class SimpleStatisticsTest {
     @Test
     public void standardErrorFromSampleTest(){
         double STE = simpleStatistics.calcStandardErrorFromSample();
-        assertEquals(0.692755883617, STE);
+        assertEquals(0.6927558836168151, STE);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package unitTests;
 
-import DOIFramework.statistics.Correlation;
+import doiframework.statistics.calculations.Correlation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -16,15 +16,14 @@ public class CorrelationTest {
     public void CorrelationCoefficientFromSampleTest(){
         assertDoesNotThrow(() -> {
             double r = corr.calcCorrelationCoefficientFromSample();
-            assertEquals(1, r);
+            assertEquals(0.8506397826736706, r);
         });
-
     }
     @Test
     public void CorrelationCoefficientFromPopulationTest(){
         assertDoesNotThrow(() -> {
             double r = corr.calcCorrelationCoefficientFromPopulation();
-            assertEquals(1, r);
+            assertEquals(0.8506397826736707, r);
         });
     }
 }

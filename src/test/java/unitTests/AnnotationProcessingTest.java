@@ -1,13 +1,13 @@
 package unitTests;
 
-import DTOs.ComplexDTO;
 import DTOs.DTO;
-import DTOs.DTONoFile;
-import DOIFramework.core.annotations.AnnotationsProcessor;
-import DOIFramework.core.annotations.ObjectInformation;
-import DOIFramework.core.resource.Resource;
-import DOIFramework.utilities.handlers.JSONHandler;
+import DTOs.TrumpWord;
+import doiframework.core.annotations.AnnotationsProcessor;
+import doiframework.core.annotations.ObjectInformation;
+import doiframework.core.resource.DataSource;
+import doiframework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
+import showcaseAPI.ShowAPIDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,11 +64,8 @@ public class AnnotationProcessingTest {
             ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "test");
             List<Object> complexDTO = objectInformation.data;
 
-            List<ComplexDTO> test = new ArrayList<>();
-
             for(Object o : complexDTO){
-                assertTrue(o instanceof ComplexDTO);
-                test.add((ComplexDTO) o);
+                assertTrue(o instanceof ShowAPIDTO);
             }
             assertEquals(complexDTO.size(), numObjects);
         } catch (ReflectiveOperationException e) {
@@ -93,7 +90,7 @@ public class AnnotationProcessingTest {
             List<Object> noFiles = objectInformation.data;
 
             for(Object o : noFiles){
-                assertTrue(o instanceof DTONoFile);
+                assertTrue(o instanceof TrumpWord);
             }
             assertEquals(noFiles.size(), numObjects);
         } catch (ReflectiveOperationException e) {
@@ -104,19 +101,20 @@ public class AnnotationProcessingTest {
 
     @Test
     void dataObject_instantiation_no_specified_test() throws IOException {
-        String path = System.getProperty("user.dir") + "/files/DTOJson.json";
-        Resource resource = Resource.newResource().fromFile(path).build();
+        String path = System.getProperty("user.dir") + "/files/showcaseAPI.json";
+        DataSource dataSource = DataSource.newResource().fromFile(path).build();
         JSONHandler jsonHandler = new JSONHandler();
-        List<Object[]> list = jsonHandler.handle(resource.getData());
+        List<Object[]> list = jsonHandler.handle(dataSource.getData());
 
         AnnotationsProcessor annotationsProcessor = new AnnotationsProcessor();
-        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "DTOJson.json"));
+        assertDoesNotThrow(() -> annotationsProcessor.initializeDataObjects(list, "showcaseAPI.json"));
 
         try {
-            ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "DTOJson.json");
+            ObjectInformation objectInformation= annotationsProcessor.initializeDataObjects(list, "showcaseAPI.json");
             List<Object> noFiles = objectInformation.data;
 
-            for(Object o : noFiles){ assertTrue(o instanceof DTONoFile); }
+            for(Object o : noFiles){ assertTrue(o instanceof ShowAPIDTO); }
         } catch (ReflectiveOperationException e) {e.printStackTrace();}
+
     }
 }
