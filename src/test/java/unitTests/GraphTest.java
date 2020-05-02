@@ -1,7 +1,6 @@
 package unitTests;
 
 import doiframework.core.resource.DataSource;
-import doiframework.utilities.collections.GraphNode;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.collections.Graph;
 import org.jetbrains.annotations.NotNull;
