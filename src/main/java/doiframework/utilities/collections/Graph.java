@@ -1,10 +1,7 @@
 package DOIFramework.utilities.collections;
 
-import com.google.gson.JsonArray;
 import org.jetbrains.annotations.NotNull;
-import DOIFramework.utilities.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /** Class for handling of generic graph
@@ -76,7 +73,7 @@ public class Graph<T> {
 
     public T[] getConnections(T t) {
         T[] neighbors = T;
-        if (neighbors.isEmpty()) {
+        if (neighbors != null) {
             return null;
         } else {
             return neighbors;
@@ -110,7 +107,7 @@ public class Graph<T> {
                     return (GraphNode) this.next;
                 } finally {
                     this.advance();
-                };
+                }
             }
 
             private void advance() {
