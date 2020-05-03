@@ -1,8 +1,10 @@
 package DOIFramework.utilities.collections;
 
+import com.google.gson.JsonArray;
 import org.jetbrains.annotations.NotNull;
 import DOIFramework.utilities.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /** Class for handling of generic graph
@@ -73,28 +75,63 @@ public class Graph<T> {
     }
 
     public T[] getConnections(T t) {
-        return nodes.get(t).getConnections(); //incorrect, but temporery pseudocode
+        T[] neighbors = T;
+        if (neighbors.isEmpty()) {
+            return null;
+        } else {
+            return neighbors;
+        } //incorrect, but temporery pseudocode
     }
 
     public T get(T inf102) {
-        return nodes.get(inf102); //incorrect, but temporery pseudocode
+        return DFS(inf102); //incorrect, but temporery pseudocode
     }
 
     @NotNull
     public Iterator<GraphNode> DFS() {
-        Iterator<GraphNode> iterator = new Iterator<GraphNode>() {
+        return new Iterator<GraphNode>() {
+            private final Set<T> visited = new HashSet<>();
+            private final Stack<Iterator<T>> stack = new Stack<>();
+            private T next;
+            private Graph<GraphNode> graph;
+
             @Override
             public boolean hasNext() {
-                return false;
+                return this.next() != null;
             }
 
             @Override
             public GraphNode next() {
-                return null;
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                try {
+                    this.visited.add(this.next);
+                    return (GraphNode) this.next;
+                } finally {
+                    this.advance();
+                };
+            }
+
+            private void advance() {
+                Iterator<T> neighbors = this.stack.peek();
+                do {
+                    while (!neighbors.hasNext()) {  // No more nodes -> back out a level
+                        this.stack.pop();
+                        if (this.stack.isEmpty()) { // All done!
+                            this.next = null;
+                            return;
+                        }
+                        neighbors = this.stack.peek();
+                    }
+
+                    this.next = neighbors.next();
+                } while (this.visited.contains(this.next));
+                this.stack.push(this.graph.getConnections(this.next).iterator());
             }
         };
-        return iterator;
     }
+
 }
 class GraphNode{
     private int uid;
