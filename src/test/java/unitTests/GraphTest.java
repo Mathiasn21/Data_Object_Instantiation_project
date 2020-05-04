@@ -51,7 +51,7 @@ public class GraphTest {
 
         for(int i = 0; i < connections.length; i++){
             assertEquals(connections[i].length, graph.numConnections(i));
-            ArrayList<GraphNode> conns = graph.getConnections(i);
+            ArrayList conns = graph.getConnections(i);
             assertTrue(conns.size() != 0);
 
             for(int j = 0; j < connections[i].length; j++){
@@ -90,7 +90,7 @@ public class GraphTest {
         };
         for(int i = 0; i < connections.length; i++){
             assertEquals(connections[i].length, graph.numConnections(i));
-            ArrayList<GraphNode> conns = graph.getConnections(i);
+            ArrayList conns = graph.getConnections(i);
             assertTrue(conns.size() != 0);
 
             for(int j = 0; j < connections[i].length; j++){
@@ -173,7 +173,7 @@ public class GraphTest {
         }
         assertEquals(8, graph.size());
 
-        Iterator<GraphNode> iterator = graph.DFS();
+        Iterator iterator = graph.DFS();
         assertNotNull(iterator);
     }
 
