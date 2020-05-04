@@ -13,7 +13,6 @@ public class Main {
         DataSource dataSource = DataSource.newResource().fromFile(path).build();
         IDataCollector collector = DataCollector.newCollector(dataSource, new JSONHandler()).build();
         collector.collectData();
-
         List<TrumpWord> list = collector.getAllObjects(TrumpWord.class);
     }
 }
