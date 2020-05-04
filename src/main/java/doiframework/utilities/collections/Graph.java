@@ -1,4 +1,4 @@
-package DOIFramework.utilities.collections;
+package doiframework.utilities.collections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +48,7 @@ public class Graph<T> {
     }
 
     public int numConnections(T t) {
-        return nodes.get(t).getConnections().size(); //incorrect, but temporery pseudocode
+        return 1;//nodes.get(t).getConnections().size(); //incorrect, but temporery pseudocode
     }
 
     public static void DFS(GraphNode startingNode) { //graph depth first search
@@ -72,16 +72,18 @@ public class Graph<T> {
     }
 
     public T[] getConnections(T t) {
-        T[] neighbors = T;
+        /*T[] neighbors = T;
         if (neighbors != null) {
             return null;
         } else {
             return neighbors;
         } //incorrect, but temporery pseudocode
+         */
+        return null;
     }
 
     public T get(T inf102) {
-        return DFS(inf102); //incorrect, but temporery pseudocode
+        return null; //DFS(inf102); //incorrect, but temporery pseudocode
     }
 
     @NotNull
@@ -124,7 +126,7 @@ public class Graph<T> {
 
                     this.next = neighbors.next();
                 } while (this.visited.contains(this.next));
-                this.stack.push(this.graph.getConnections(this.next).iterator());
+                //this.stack.push(this.graph.getConnections(this.next).iterator());
             }
         };
     }
