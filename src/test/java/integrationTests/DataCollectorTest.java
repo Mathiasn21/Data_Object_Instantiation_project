@@ -1,6 +1,5 @@
 package integrationTests;
 
-import DTOs.TrumpWord;
 import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.resource.DataSource;
