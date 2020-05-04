@@ -8,26 +8,26 @@ import java.util.*;
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class Graph<T> {
-    public static List<GraphNode> nodes;
+    public List<GraphNode<T>> nodes;
     int nmbrOfNodes;
 
-    public void insert(int uid, T number, ArrayList<GraphNode> connections) {
-        GraphNode node = new GraphNode(uid, connections);
+    public void insert(int uid, T number, ArrayList<GraphNode<T>> connections) {
+        GraphNode<T> node = new GraphNode<>(uid, number, connections);
         nodes.add(node);
         nmbrOfNodes++;
     }
 
     public boolean contains(T data) {
-        for (GraphNode gn : nodes) {
-            /*if (gn.getData() == data) { // temporary code
+        for (GraphNode<T> gn : nodes) {
+            if (gn.getData() == data) {
                 return true;
-            }*/
+            }
         }
         return false;
     }
 
     public boolean contains(int uid) {
-        for (GraphNode gn : nodes) {
+        for (GraphNode<T> gn : nodes) {
             if (gn.getUid() == uid) {
                 return true;
             }
@@ -48,18 +48,23 @@ public class Graph<T> {
     }
 
     public int numConnections(T t) {
-        return 1;//nodes.get(t).getConnections().size(); //incorrect, but temporery pseudocode
+        for (GraphNode<T> gn: nodes) {
+            if(gn.getData() == t){
+                return gn.getConnections().size();
+            }
+        }
+        return 1;
     }
 
-    public static void DFS(GraphNode startingNode) { //graph depth first search
-        ArrayList<GraphNode> visitedNodes = new ArrayList<GraphNode>();
-        Stack<GraphNode> stack= new Stack<GraphNode>();
+    public void DFS(GraphNode<T> startingNode) { //graph depth first search
+        ArrayList<GraphNode<T>> visitedNodes = new ArrayList<>();
+        Stack<GraphNode<T>> stack= new Stack<>();
         stack.push(startingNode);
         while (!stack.empty()){
-            GraphNode currentNode = stack.pop();
+            GraphNode<T> currentNode = stack.pop();
             if(!visitedNodes.contains(currentNode)){
                 visitedNodes.add(currentNode);
-                ArrayList<GraphNode> connections = currentNode.getConnections();
+                ArrayList<GraphNode<T>> connections = currentNode.getConnections();
                 for(int i = connections.size(); i >= 0; i--){
                     stack.push(nodes.get(i));
                 }
@@ -67,32 +72,36 @@ public class Graph<T> {
         }
     }
 
-    public ArrayList<GraphNode> getConnections(int i) {
+    public ArrayList<GraphNode<T>> getConnections(int i) {
         return nodes.get(i).getConnections();
     }
 
     public T[] getConnections(T t) {
-        /*T[] neighbors = T;
-        if (neighbors != null) {
-            return null;
-        } else {
-            return neighbors;
-        } //incorrect, but temporery pseudocode
-         */
+        for (GraphNode<T> gn: nodes) {
+            if(gn.getData() == t){
+                T[] connections = (T[]) gn.getConnections().toArray();
+                return connections;
+            }
+        }
         return null;
     }
 
     public T get(T inf102) {
-        return null; //DFS(inf102); //incorrect, but temporery pseudocode
+        for (GraphNode<T> gn: nodes) {
+            if(gn.getData() == inf102){
+                return gn.getData();
+            }
+        }
+        return null;
     }
 
     @NotNull
-    public Iterator<GraphNode> DFS() {
-        return new Iterator<GraphNode>() {
+    public Iterator<GraphNode<T>> DFS() {
+        return new Iterator<>() {
             private final Set<T> visited = new HashSet<>();
             private final Stack<Iterator<T>> stack = new Stack<>();
             private T next;
-            private Graph<GraphNode> graph;
+            private Graph<GraphNode<T>> graph;
 
             @Override
             public boolean hasNext() {
@@ -100,13 +109,13 @@ public class Graph<T> {
             }
 
             @Override
-            public GraphNode next() {
+            public GraphNode<T> next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 try {
                     this.visited.add(this.next);
-                    return (GraphNode) this.next;
+                    return (GraphNode<T>) this.next;
                 } finally {
                     this.advance();
                 }
@@ -132,12 +141,14 @@ public class Graph<T> {
     }
 
 }
-class GraphNode{
-    private int uid;
-    ArrayList<GraphNode> connections; //array list that contains the neighbours/edges of the node
+class GraphNode<T>{
+    private final int uid;
+    private final T data;
+    ArrayList<GraphNode<T>> connections; //array list that contains the neighbours/edges of the node
 
-    public GraphNode(int uid, ArrayList<GraphNode> connections){
+    public GraphNode(int uid, T number, ArrayList<GraphNode<T>> connections){
         this.uid = uid;
+        data = number;
         this.connections = connections;
     }
 
@@ -145,5 +156,7 @@ class GraphNode{
         return uid;
     }
 
-    public ArrayList<GraphNode> getConnections(){ return connections; }
+    public T getData() { return data; }
+
+    public ArrayList<GraphNode<T>> getConnections(){ return connections; }
 }
