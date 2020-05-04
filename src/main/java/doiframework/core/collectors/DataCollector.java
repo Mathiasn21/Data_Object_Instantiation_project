@@ -13,6 +13,7 @@ import doiframework.utilities.collections.Node;
 import doiframework.utilities.collections.RBTree;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.*;
@@ -93,6 +94,13 @@ public final class DataCollector implements IDataCollector {
     @Override
     public @NotNull ObjectInformation getDataObjectInformation() {
         return dataObjectInformation;
+    }
+
+    @Contract(pure = true)
+    @Override
+    @SuppressWarnings("unchecked")//Client decides whats best
+    public <T> @NotNull List<T> getAllObjects(Class<T> tClass) {
+        return (List<T>) getAllObjects();
     }
 
     private void raise(@NotNull IEvent event) { EventObserver.registerEventFrom(event); }

@@ -1,10 +1,8 @@
 package doiframework.core.collectors;
 
-import doiframework.core.annotations.DataObject;
 import doiframework.core.annotations.ObjectInformation;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.List;
 
 /** Interface describing contract for all collectors
@@ -35,4 +33,6 @@ public interface IDataCollector {
     List<Object> getAllObjects();
 
     ObjectInformation getDataObjectInformation();
+
+    <T> List<T>getAllObjects(Class<T> tClass);
 }
