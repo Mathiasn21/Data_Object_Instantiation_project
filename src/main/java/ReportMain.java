@@ -7,22 +7,13 @@ import doiframework.exceptions.DatasetNotMatchingException;
 import doiframework.exceptions.NoSuchColumnException;
 import doiframework.exceptions.NotPrimitiveNumberException;
 import doiframework.exceptions.UnableToAccessDataException;
-import doiframework.statistics.calculations.Average;
 import doiframework.statistics.calculations.Correlation;
-import doiframework.statistics.calculations.Covariance;
-import doiframework.statistics.calculations.SimpleStatistics;
 import doiframework.statistics.report.DataReport;
 import doiframework.statistics.report.ReportCollection;
 import doiframework.utilities.handlers.CSVHandler;
-import doiframework.utilities.handlers.IDataHandler;
 
 import java.io.IOException;
-import java.io.ObjectStreamClass;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class ReportMain {
     public static void main(String[] args) throws NotPrimitiveNumberException, DatasetNotMatchingException, IOException, ReflectiveOperationException, NoSuchColumnException, UnableToAccessDataException {
