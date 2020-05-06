@@ -34,7 +34,5 @@ public class ShowAPIDTO implements Comparable<ShowAPIDTO>{
         return anInt;
     }
 
-    public double getaDouble() {
-        return aDouble;
-    }
+    public double getaDouble() { return aDouble; }
 }
