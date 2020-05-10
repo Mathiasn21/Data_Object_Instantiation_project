@@ -124,9 +124,9 @@ public class Graph<T> {
             private void advance() {
                 Iterator<T> neighbors = this.stack.peek();
                 do {
-                    while (!neighbors.hasNext()) {  // No more nodes -> back out a level
+                    while (!neighbors.hasNext()) {
                         this.stack.pop();
-                        if (this.stack.isEmpty()) { // All done!
+                        if (this.stack.isEmpty()) {
                             this.next = null;
                             return;
                         }
@@ -135,7 +135,7 @@ public class Graph<T> {
 
                     this.next = neighbors.next();
                 } while (this.visited.contains(this.next));
-                //this.stack.push(this.graph.getConnections(this.next).iterator());
+                this.stack.push(this.graph.getConnections((GraphNode<T>) this.next).iterator()); // ???
             }
         };
     }
