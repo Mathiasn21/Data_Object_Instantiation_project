@@ -79,8 +79,7 @@ public class Graph<T> {
     public T[] getConnections(T t) {
         for (GraphNode<T> gn: nodes) {
             if(gn.getData() == t){
-                T[] connections = (T[]) gn.getConnections().toArray();
-                return connections;
+                return (T[]) gn.getConnections().toArray();
             }
         }
         return null;
@@ -105,7 +104,7 @@ public class Graph<T> {
 
             @Override
             public boolean hasNext() {
-                return this.next() != null;
+                    return this.next() != null;
             }
 
             @Override
@@ -132,10 +131,9 @@ public class Graph<T> {
                         }
                         neighbors = this.stack.peek();
                     }
-
                     this.next = neighbors.next();
                 } while (this.visited.contains(this.next));
-                this.stack.push(this.graph.getConnections((GraphNode<T>) this.next).iterator()); // ???
+                    this.stack.push(this.graph.getConnections((GraphNode<T>)this.next).iterator()); // ???
             }
         };
     }
