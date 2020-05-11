@@ -21,6 +21,7 @@ public class DataExtractorPoolMain {
 
         IDataExtractorPool dataExtractorPool = new DataExtractorPool(dataCollectorPool);
         var res = dataExtractorPool.extractAllColumnsFromFields();
+
         res.forEach((k, v) -> {
             System.out.println("key: " + k  + "\n\t\tValues: ");
             v.forEach((k1, v1) -> System.out.println("\t\t\t\t" + v1));
