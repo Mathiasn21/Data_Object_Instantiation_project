@@ -82,37 +82,8 @@ public class ReportMain {
 
         c5.prettyPrintReport();
 
-        System.out.println("\n-------Testing making my own report with the ReportCollection builder and pretty printing ------\n");
-        DataReport c2 = new DataReport(ReportCollection.getBuilder()
-                .calcAverageMean()
-                .calcSampleVariance()
-                .calcCovarianceFromSample()
-                .calcCorrelationFromSample()
-                .build(),
-                dataset1, dataset2);
-        c2.prettyPrintReport();
 
 
-
-        String path = System.getProperty("user.dir") + "/files/finalCountdownCSV.csv" ;
-        DataSource dataSource = DataSource.newResource().fromFile(path).build();
-        CSVHandler handler = new CSVHandler();
-        handler.setDelimiter(";");
-        IDataCollector collector = DataCollector.newCollector(dataSource, handler).build();
-        collector.collectData();
-
-        System.out.println(collector.getDataClazz());
-
-        var extractor = new DataExtractor<>(collector);
-        Class<FinalCountdownDTO> clazz = FinalCountdownDTO.class;
-        var fields = Arrays.asList(clazz.getField("lyrics"), clazz.getField("data1"), clazz.getField("data2"));
-        var columnsUsingFieldsMap = extractor.extractColumnsUsingFields(fields);
-        var report = extractor.createReport();
-        System.out.println(report);
-
-
-        System.out.println("\n\n\n\n\n");
-        extractor.createReport().values().forEach(System.out::println);
 
     }
 

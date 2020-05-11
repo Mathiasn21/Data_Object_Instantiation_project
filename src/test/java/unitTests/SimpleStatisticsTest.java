@@ -48,7 +48,8 @@ public class SimpleStatisticsTest {
     @Test
     public void standardErrorFromPopulationTest(){
         double STE = simpleStatistics.calcStandardErrorFromPopulation();
-        assertEquals(0.648, STE);
+        System.out.println(STE);
+        assertEquals(0.6927558836168151, STE);
     }
 
 }

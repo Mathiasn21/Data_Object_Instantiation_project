@@ -7,11 +7,13 @@ import java.util.List;
 public class AdvancedStatistics extends Statistics {
     protected final double[] data2;
     protected final double n;
+    protected final double n2;
 
     public AdvancedStatistics(@NotNull double[] data1, @NotNull double[] data2) {
         super(data1);
         this.data2 = data2;
         this.n = data1.length;
+        this.n2 = data2.length;
     }
     public AdvancedStatistics(@NotNull Double[] data1, @NotNull Double[] data2){
         super(data1);
@@ -20,6 +22,7 @@ public class AdvancedStatistics extends Statistics {
 
         this.data2 = doubles2;
         this.n = data1.length;
+        this.n2 = data2.length;
     }
     public AdvancedStatistics(@NotNull Number[] data1, @NotNull Number[] data2){
         super(data1);
@@ -28,6 +31,7 @@ public class AdvancedStatistics extends Statistics {
 
         this.data2 = doubles2;
         this.n = data1.length;
+        this.n2 = data2.length;
     }
     public AdvancedStatistics(@NotNull List<Number> data1, @NotNull List<Number> data2){
         super(data1);
@@ -36,5 +40,6 @@ public class AdvancedStatistics extends Statistics {
 
         this.data2 = doubles2;
         this.n = data1.size();
+        this.n2 = data2.size();
     }
 }

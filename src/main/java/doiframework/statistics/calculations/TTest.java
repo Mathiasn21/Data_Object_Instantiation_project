@@ -39,24 +39,29 @@ public final class TTest extends AdvancedStatistics  {
     }
 
     public double unpaired(){
-        double n1 = data.length;
-        double n2 = data2.length;
         double meansDiff = avg.calcMean() - avg2.calcMean();
-        double sP = Math.sqrt(unpairedVariance());
+        double sP = unpairedSTD();
+        System.out.println("SP: " + sP);
 
-        return meansDiff / (sP * Math.sqrt(1/n1 + 1/n2));
+        return meansDiff / Math.sqrt((unpairedSTD() * (1/n + 1/n2)));
     }
 
-    private double unpairedVariance(){
-        int n1 = data.length;
-        int n2 = data2.length;
-        double variance1 = s1.calcSampleVariance();
-        double variance2 = s2.calcSampleVariance();
+    private double unpairedSTD(){
+        double mean1 = avg.calcMean();
+        double mean2 = avg2.calcMean();
+        double sqDiff1 = 0, sqDiff2 = 0;
+        for (int i = 0; i < n; i++){
+            sqDiff1 += Math.pow(data[i] - mean1, 2);
+        }
+        System.out.println(sqDiff1);
+        for (int j = 0; j < n2; j++){
+            sqDiff2 += Math.pow(data2[j] - mean2, 2);
+        }
 
-        return ((n1 -1)*Math.pow(variance1, 2) + (n2 - 1)*Math.pow(variance2, 2))/(n1 + n2 -2);
+        return sqDiff1 + sqDiff2/(n + n2 -2);
     }
 
-    public double paired(){
+    public double paired(double significantLevel){
         //TODO: implemented method
         return 0;
     }
