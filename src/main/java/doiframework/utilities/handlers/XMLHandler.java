@@ -14,8 +14,10 @@ import org.xml.sax.SAXException;
  */
 public class XMLHandler {
     public Document document;
-    public void handle(String filepath){
-
+    public void handle(String filepath, String elementToRetrieve){
+        readDocument(filepath);
+        NodeList list = document.getElementsByTagName(elementToRetrieve);
+        
     }
     public void readDocument(String filepath){
         try {
@@ -28,8 +30,5 @@ public class XMLHandler {
         catch (SAXException | ParserConfigurationException | IOException e){
             System.err.println("exception" + e);
         }
-    }
-    public NodeList getListOfElements(String elementToRetrieve){
-        return document.getElementsByTagName(elementToRetrieve);
     }
 }
