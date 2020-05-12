@@ -29,7 +29,7 @@ public class XMLHandler {
             System.err.println("exception" + e);
         }
     }
-    public void getElement(String elementToRetrieve){
-        NodeList nodeList = document.getElementsByTagName(elementToRetrieve);
+    public NodeList getListOfElements(String elementToRetrieve){
+        return document.getElementsByTagName(elementToRetrieve);
     }
 }
