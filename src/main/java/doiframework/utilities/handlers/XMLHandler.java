@@ -31,4 +31,7 @@ public class XMLHandler {
             System.err.println("exception" + e);
         }
     }
+    public String getRootElement(){
+        return document.getDocumentElement().getNodeName();
+    }
 }
