@@ -6,22 +6,30 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
  * @author Robert Alexander Dankertsen: yeti-programing @ https://github.com/yeti-programing
  */
 public class XMLHandler {
+    public Document document;
     public void handle(String filepath){
+
+    }
+    public void readDocument(String filepath){
         try {
             File file = new File(filepath);
             DocumentBuilderFactory docBuildFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuildFactory.newDocumentBuilder();
-            Document document = docBuilder.parse(file);
+            document = docBuilder.parse(file);
             document.getDocumentElement().normalize();
         }
         catch (SAXException | ParserConfigurationException | IOException e){
             System.err.println("exception" + e);
         }
+    }
+    public void getElement(String elementToRetrieve){
+        NodeList nodeList = document.getElementsByTagName(elementToRetrieve);
     }
 }
