@@ -38,6 +38,7 @@ public enum ReportCollection {
         return report;
     }
 
+    @NotNull
     @Contract(value = " -> new", pure = true)
     public static ReportCollection @NotNull [] getFullAverageReport(){
         return new ReportCollection[]{
@@ -49,6 +50,7 @@ public enum ReportCollection {
         };
     }
 
+    @NotNull
     @Contract(value = " -> new", pure = true)
     public static ReportCollection @NotNull [] getFullSimpleStatisticsReport(){
         return new ReportCollection[]{
@@ -61,6 +63,7 @@ public enum ReportCollection {
         };
     }
 
+    @NotNull
     @Contract(value = " -> new", pure = true)
     public static ReportCollection @NotNull [] getFullCovarianceCorrelationReport(){
         return new ReportCollection[]{
@@ -71,6 +74,8 @@ public enum ReportCollection {
         };
     }
 
+    @NotNull
+    @Contract(value = " -> new", pure = true)
     public static ReportBuilder getBuilder(){
         return new ReportBuilder();
     }
