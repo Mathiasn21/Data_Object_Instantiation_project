@@ -58,16 +58,4 @@ public class HandleData {
             assertSame(sample[i].getClass(), classes[i]);
         }
     }
-
-    @Test
-    void handle_csv_with_only_primitives(){
-        //TODO: implement test cases for this
-        fail();
-    }
-
-    @Test
-    void handle_csv_with_primitive_arrays(){
-        //TODO: implement test cases for this
-        fail();
-    }
 }
