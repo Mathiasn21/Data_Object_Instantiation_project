@@ -5,7 +5,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 final class StatFactory {
-    @NotNull
     @Contract(pure = true)
     @SuppressWarnings("unchecked")//Safe due to being controlled by DataReport class
     public <T extends Statistics> @NotNull T create(@NotNull Class<? extends Statistics> statClass, @NotNull Number[] ...column) throws ReflectiveOperationException {
