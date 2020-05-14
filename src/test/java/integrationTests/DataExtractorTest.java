@@ -1,6 +1,5 @@
 package integrationTests;
 
-import DTOs.ComplexDTOCSV;
 import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.IDataCollector;
 import doiframework.core.extractors.DataExtractor;
@@ -11,14 +10,12 @@ import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.IDataHandler;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
-import showcaseAPI.ShowAPIDTO;
+import DTOs.ShowAPIDTO;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;

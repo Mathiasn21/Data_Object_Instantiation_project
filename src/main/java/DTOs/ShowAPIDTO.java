@@ -1,4 +1,4 @@
-package showcaseAPI;
+package DTOs;
 
 import doiframework.core.annotations.DataConstructor;
 import doiframework.core.annotations.DataField;

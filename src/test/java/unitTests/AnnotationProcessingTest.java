@@ -7,7 +7,7 @@ import doiframework.core.annotations.ObjectInformation;
 import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.JSONHandler;
 import org.junit.jupiter.api.Test;
-import showcaseAPI.ShowAPIDTO;
+import DTOs.ShowAPIDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
