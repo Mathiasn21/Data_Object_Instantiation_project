@@ -36,7 +36,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     private final static Map<Class<?>, Constructor<?>> objectMappedToConstructor = new HashMap<>();
     private final static Map<Constructor<?>, Class<?>[]> constructorToPrimaryTypes = new HashMap<>();
     private final static List<Class<?>> dataObjectsWithNoResources = new ArrayList<>();
-    private final static List<Class<?>> nameSpaceMappedToNameSpaces = new ArrayList<>();
     private String prefix = "";
 
     public AnnotationsProcessor() {
@@ -132,7 +131,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     // --------------------------------------------------//
     //                   4.Contract Methods              //
     // --------------------------------------------------//
-
     /**
      * Sets the prefix used for searching for annotated classes.
      * Defaults to "".

@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Class with the central command that executes the report
  */
-public class DataReport {
+public final class DataReport {
     private final List<ReportCollection> commands = new ArrayList<>();
     private final List<ReportCollection> advancedCommands = new ArrayList<>();
     private final List<Number[]> data;
