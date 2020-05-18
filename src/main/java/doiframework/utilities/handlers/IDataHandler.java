@@ -11,6 +11,11 @@ import java.util.List;
 @FunctionalInterface
 public interface IDataHandler {
     /**
+     * Handles the data format and separates that into
+     * a list that is used for instantiating objects.
+     * Each Object[] corresponds therefore to some class that has
+     * a constructor with matching params.
+     *
      * @param bufferedReader {@link BufferedReader}
      * @return {@link List}&lt;{@link List}&lt;{@link Object}&gt;&gt;
      * @throws IOException IOException

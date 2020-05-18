@@ -3,6 +3,7 @@ package doiframework.utilities.handlers;
 import com.google.gson.*;
 import doiframework.utilities.Parser;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,9 +79,15 @@ public class JSONHandler implements IDataHandler {
         return buildArray(array, primitiveType);
     }
 
-    private Object buildArray(@NotNull JsonArray array, Class<?> primitiveType) {
+    /**
+     * Builds an array given data and a primitive type.
+     * The array may be of n dimensions.
+     * @param array {@link JsonArray}
+     * @param primitiveType {@link Class}&lt;?&gt;
+     * @return {@link Object}
+     */
+    private Object buildArray(@NotNull JsonArray array, @NotNull Class<?> primitiveType) {
         Object res = null;
-
         int outerSize = array.size();
         for (int i = 0; i < outerSize; i++) {
             JsonElement element = array.get(i);
@@ -107,7 +114,7 @@ public class JSONHandler implements IDataHandler {
 
     private Class<?> findPrimitiveTypeFrom(@NotNull JsonElement firstElement, @NotNull JsonElement secondElement) {
         if(!(isCreatable(firstElement.toString()) && isCreatable(secondElement.toString()))){
-            throw new Error();//TODO: alter to a more descriptive error
+            throw new Error();
         }
         Number first = createNumber(firstElement.toString());
         Number second = createNumber(firstElement.toString());
