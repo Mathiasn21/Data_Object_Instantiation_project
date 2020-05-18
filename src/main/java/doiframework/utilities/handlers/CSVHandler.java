@@ -168,7 +168,7 @@ public class CSVHandler implements IDataHandler {
             //Find primary types if not already
             if(sampleEachLine || !foundTypes){
                 if(isSingleColumn){
-                    Class<?> type = r.length > 1 ? singleColumnPrimitiveTypeFrom(r[0], r[1]) : primitiveTypeFrom(r[0]);
+                    Class<?> type = r.length > 1 ? singleColumnPrimitiveTypeFrom(r[0], r[1]) : primitiveNumberTypeFrom(r[0]);
                     types.add(type);
                 }else{ types = findAllPrimitiveTypes(r); }
                 foundTypes = true;
@@ -213,7 +213,7 @@ public class CSVHandler implements IDataHandler {
     private List<Class<?>> findAllPrimitiveTypes(@NotNull String[] r) {
         List<Class<?>> types = new ArrayList<>(r.length);
         for (String str : r) {
-            types.add(primitiveTypeFrom(str));
+            types.add(primitiveNumberTypeFrom(str));
         }
         return types;
     }
@@ -232,7 +232,7 @@ public class CSVHandler implements IDataHandler {
      * @param element String
      * @return {@link Class}&lt;?&gt;
      */
-    private Class<?> primitiveTypeFrom(@NotNull String element) {
+    private Class<?> primitiveNumberTypeFrom(@NotNull String element) {
         if(isCreatable(element)){
             Number number = createNumber(element);
             Class<?> clazz = number.getClass();
