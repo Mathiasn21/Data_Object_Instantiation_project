@@ -409,7 +409,6 @@ public class Tree<T> implements ITree<T> {
      * @throws IllegalAccessException IllegalAccessException
      * @throws InvocationTargetException InvocationTargetException
      */
-    //FIXME: cleanup this sick method...
     @SuppressWarnings("unchecked")//All instances are of type Object - guaranteed
     private void tryToSetupComparator(@NotNull T thiz, @NotNull T that) throws IllegalAccessException, InvocationTargetException {
         Field[] fields = thiz.getClass().getFields();
