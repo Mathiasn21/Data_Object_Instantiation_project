@@ -150,7 +150,6 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
     @Override
     public final @NotNull ObjectInformation initializeDataObjects(@NotNull List<Object[]> listWithInitArgs, @NotNull String name)
             throws ReflectiveOperationException {
-
         List<Object> listOfDataObjects = new ArrayList<>();
         Class<?> clazz = resourceMappedToDataObject.containsKey(name) ?
                 resourceMappedToDataObject.get(name) : getDataObjectWithoutFile(listWithInitArgs.get(0));

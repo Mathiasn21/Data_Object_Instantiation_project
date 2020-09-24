@@ -8,6 +8,5 @@ public class TreeMain {
         for (int integer : arr) {
             tree.insert(integer);
         }
-
     }
 }
