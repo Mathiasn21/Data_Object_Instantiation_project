@@ -198,7 +198,7 @@ public final class AnnotationsProcessor implements IAnnotationsProcessor {
             int paramsUniqueHashCode = Arrays.hashCode(params);
             int paramsHashCode = calcHashcodeFrom(params);
 
-            if(params.length == types.length ){
+            if(params.length == types.length){
                 if (paramsUniqueHashCode == typesUniqueHashCode) { return clazz;
                 }else if (paramsHashCode == typesHashCode) { partialMatch = clazz; }
             }
