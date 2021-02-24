@@ -3,9 +3,11 @@ package doiframework.core.resource;
 import doiframework.core.resource.commands.read.IReadCommand;
 import doiframework.core.resource.commands.read.ReadToFile;
 import doiframework.core.resource.commands.read.ReadToURL;
+
 import doiframework.core.resource.commands.write.IWriteCommand;
 import doiframework.core.resource.commands.write.WriteToFile;
 import doiframework.core.resource.commands.write.WriteToURL;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -174,7 +176,6 @@ public final class DataSourceBuilder {
         }
         return this;
     }
-
 
 
     /**

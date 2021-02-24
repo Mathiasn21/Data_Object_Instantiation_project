@@ -31,9 +31,7 @@ public class ExtractorMain {
         //Alternative by only utilizing a single field
         // Class<FinalCountdownDTO> clazz = FinalCountdownDTO.class;
 
-        var columnUsingField = extractor.extractColumnFrom(clazz.getField("lyrics"));
-        columnsUsingFieldsMap.values().forEach(System.out::println);
-        System.out.println("\n");
+
     }
 
     @NotNull

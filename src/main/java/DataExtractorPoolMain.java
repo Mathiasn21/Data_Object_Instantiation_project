@@ -1,7 +1,11 @@
+import doiframework.core.collectors.DataCollector;
 import doiframework.core.collectors.DataCollectorPool;
 import doiframework.core.collectors.IDataCollectorPool;
 import doiframework.core.extractors.DataExtractorPool;
 import doiframework.core.extractors.IDataExtractorPool;
+import doiframework.core.observer.EventObserver;
+import doiframework.core.observer.events.DataCollectorFinishedEvent;
+import doiframework.core.observer.events.IEvent;
 import doiframework.core.resource.DataSource;
 import doiframework.utilities.handlers.CSVHandler;
 import doiframework.utilities.handlers.IDataHandler;
@@ -16,6 +20,8 @@ import java.util.Map;
 public class DataExtractorPoolMain {
     public static void main(String[] args) throws IOException {
         var dataCollectorPool = genCollectorPool();
+        EventObserver.subscribeToEvent(DataExtractorPoolMain::update, DataCollectorFinishedEvent.class);
+
         dataCollectorPool.collectAllData();
         dataCollectorPool.iterator().forEachRemaining((collector) -> System.out.println("Collector: " + collector.getAllObjects() + "\n"));
 
@@ -26,6 +32,12 @@ public class DataExtractorPoolMain {
             System.out.println("key: " + k  + "\n\t\tValues: ");
             v.forEach((k1, v1) -> System.out.println("\t\t\t\t" + v1));
         });
+    }
+
+    private static void update(@NotNull IEvent t) {
+        System.out.println("Finished collecting event");
+        System.out.println(((DataCollector)t.raisedBy()).getAllObjects());
+        System.out.println("\n\n");
     }
 
     @NotNull
